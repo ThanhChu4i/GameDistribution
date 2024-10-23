@@ -18,8 +18,6 @@ const UserManagementPage = () => {
 
   return (
     <div className="UserManagementPage">
-      <h1>Quản lý người dùng</h1>
-
       {!editingUser ? (
         <>
           <ViewUser onEdit={setEditingUser} />
