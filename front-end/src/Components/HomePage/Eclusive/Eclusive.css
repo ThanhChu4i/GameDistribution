@@ -1,0 +1,27 @@
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* 4 cột */
+    gap: 25px; /* Khoảng cách giữa các thẻ */
+    padding: 20px;
+}
+
+.grid-item {
+    cursor: pointer; /* Con trỏ khi rê chuột vào thẻ */
+    border: 5px solid #ffff
+    ;
+    border-radius: 10%;
+    overflow: hidden;
+    transition: border-color 0.3s ease; /* Thêm chuyển động mượt */
+}
+
+.grid-item:hover {
+    border-color: #00f; /* Thay đổi viền thành màu xanh khi hover */
+    box-shadow: 0 0 15px rgba(79, 186, 249, 0.5); /* Hiệu ứng sáng viền */
+    border-radius: 10%;
+}
+
+.image {
+    width: 100%;
+    height: auto;
+    border-radius: 10%;
+}

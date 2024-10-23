@@ -1,0 +1,63 @@
+CREATE TABLE user (
+    id_user INT AUTO_INCREMENT PRIMARY KEY,
+    email VARCHAR(255) NOT NULL,
+    password VARCHAR(100) NOT NULL,
+    first_name VARCHAR(100),
+    last_name VARCHAR(100),
+    country VARCHAR(100),
+    company VARCHAR(100),
+    website VARCHAR(255),
+    created_in DATETIME,
+    update_in DATETIME,
+    publisher BOOLEAN,
+    developer BOOLEAN,
+    admin BOOLEAN
+);
+CREATE TABLE game (
+    id_game INT AUTO_INCREMENT PRIMARY KEY,
+    id_user INT,
+    game_name VARCHAR(255),
+    game_discription TEXT,
+    instruction TEXT,
+    date_release DATETIME,
+    play_count INT,
+    play_number INT,
+    FOREIGN KEY (id_user) REFERENCES user(id_user) ON DELETE CASCADE
+);
+CREATE TABLE game_history (
+    id_history INT AUTO_INCREMENT PRIMARY KEY,
+    id_user INT,
+    id_game INT,
+    play_time DATETIME,
+    FOREIGN KEY (id_user) REFERENCES user(id_user) ON DELETE CASCADE,
+    FOREIGN KEY (id_game) REFERENCES game(id_game) ON DELETE CASCADE
+);
+CREATE TABLE like_tab (
+    id_like_tab INT AUTO_INCREMENT PRIMARY KEY,
+    id_user INT,
+    id_game INT,
+    like_check BOOLEAN,
+    FOREIGN KEY (id_user) REFERENCES user(id_user) ON DELETE CASCADE,
+    FOREIGN KEY (id_game) REFERENCES game(id_game) ON DELETE CASCADE
+);
+CREATE TABLE review (
+    id_review INT AUTO_INCREMENT PRIMARY KEY,
+    id_user INT,
+    id_game INT,
+    created_in DATETIME,
+    comment TEXT,
+    FOREIGN KEY (id_user) REFERENCES user(id_user) ON DELETE CASCADE,
+    FOREIGN KEY (id_game) REFERENCES game(id_game) ON DELETE CASCADE
+);
+CREATE TABLE genres (
+    id_genres INT AUTO_INCREMENT PRIMARY KEY,
+    name_genres VARCHAR(100),
+    decription TEXT
+);
+CREATE TABLE game_genres (
+    id_game_genres INT AUTO_INCREMENT PRIMARY KEY,
+    id_game INT,
+    id_genres INT,
+    FOREIGN KEY (id_game) REFERENCES game(id_game) ON DELETE CASCADE,
+    FOREIGN KEY (id_genres) REFERENCES genres(id_genres) ON DELETE CASCADE
+);

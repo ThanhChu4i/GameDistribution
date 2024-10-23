@@ -1,0 +1,165 @@
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
+import './UserManagementPage.css'; // Thêm styles của bạn
+import { useNavigate } from 'react-router-dom';
+import Cookies from 'js-cookie';
+const UserManagementPage = () => {
+  const [users, setUsers] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const [editingUser, setEditingUser] = useState(null);
+  const navigate = useNavigate();
+useEffect(() => {
+  const fetchUsers = async () => {
+    try {
+      const token = Cookies.get('token'); // Lấy token từ cookie
+      if (!token) {
+        throw new Error('No token found');
+      }
+      const response = await axios.get('http://localhost:8081/users', {
+        headers: {
+          Authorization: `Bearer ${token}` // Đính kèm token vào header
+        }
+      });
+      setUsers(response.data);
+    } catch (err) {
+      console.error('Error fetching user data:', err);
+      setError('Failed to fetch users');
+      if (err.response && err.response.status === 401) {
+        // Điều hướng về trang khác nếu không có quyền truy cập
+        navigate('/'); 
+      }
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  fetchUsers();
+}, [navigate]);
+
+  // Xóa người dùng
+  const handleDeleteUser = async (id_user) => {
+    try {
+      await axios.delete(`/users/${id_user}`);
+      setUsers(users.filter(user => user.id_user !== id_user)); // Loại bỏ người dùng khỏi danh sách
+    } catch (err) {
+      alert('Failed to delete user');
+    }
+  };
+
+  // Xử lý khi chỉnh sửa người dùng
+  const handleEditSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      await axios.put(`/users/${editingUser.id_user}`, editingUser); // Sử dụng id_user
+      setUsers(users.map(user => (user.id_user === editingUser.id_user ? editingUser : user))); // Cập nhật người dùng trong state
+      setEditingUser(null); // Đóng form chỉnh sửa
+    } catch (err) {
+      alert('Failed to update user');
+    }
+  };
+
+  // Thay đổi giá trị trong form chỉnh sửa
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setEditingUser(prev => ({ ...prev, [name]: value }));
+  };
+
+  if (loading) return <div>Loading...</div>;
+  if (error) return <div>{error}</div>;
+
+  return (
+    <div className="UserManagementPage">
+      <h1>Quản lý người dùng</h1>
+      
+      {/* Danh sách người dùng */}
+      <table>
+        <thead>
+          <tr>
+            <th>Email</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Country</th>
+            <th>Company</th>
+            <th>Hành động</th>
+          </tr>
+        </thead>
+        <tbody>
+          {users.map(user => (
+            <tr key={user.id_user}>
+              <td>{user.email}</td>
+              <td>{user.first_name}</td>
+              <td>{user.last_name}</td>
+              <td>{user.country}</td>
+              <td>{user.company}</td>
+              <td>
+                <button onClick={() => setEditingUser(user)}>Sửa</button>
+                <button onClick={() => handleDeleteUser(user.id_user)}>Xóa</button>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+
+      {/* Form chỉnh sửa người dùng */}
+      {editingUser && (
+        <form onSubmit={handleEditSubmit} className="edit-form">
+          <h2>Chỉnh sửa người dùng</h2>
+          <label>
+            Email:
+            <input
+              type="email"
+              name="email"
+              value={editingUser.email}
+              onChange={handleInputChange}
+              required
+            />
+          </label>
+          <label>
+            First Name:
+            <input
+              type="text"
+              name="first_name"
+              value={editingUser.first_name}
+              onChange={handleInputChange}
+              required
+            />
+          </label>
+          <label>
+            Last Name:
+            <input
+              type="text"
+              name="last_name"
+              value={editingUser.last_name}
+              onChange={handleInputChange}
+              required
+            />
+          </label>
+          <label>
+            Country:
+            <input
+              type="text"
+              name="country"
+              value={editingUser.country}
+              onChange={handleInputChange}
+              required
+            />
+          </label>
+          <label>
+            Company:
+            <input
+              type="text"
+              name="company"
+              value={editingUser.company}
+              onChange={handleInputChange}
+            />
+          </label>
+          <button type="submit">Lưu thay đổi</button>
+          <button type="button" onClick={() => setEditingUser(null)}>Hủy</button>
+        </form>
+      )}
+    </div>
+  );
+};
+
+export default UserManagementPage;

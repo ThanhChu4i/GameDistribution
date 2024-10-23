@@ -1,0 +1,72 @@
+.tab-container {
+    width: 100%;
+    margin: 20px auto;
+    background-color: #f0f0f0;
+    
+}
+.butt {
+    background-color: #ffffff;
+    border-radius: 25%;
+}
+.tab-header {
+    display: flex;
+    margin-bottom: 0px;
+    justify-content: space-between;
+}
+.nav-links {
+    padding-left: 20px;
+}
+.nav-links  a { 
+    text-decoration: none;
+}
+.tab-button {
+    padding: 10px 20px;
+    margin: 0px;
+    border: none;
+    background-color: #ffffff;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    border-radius: 20px;
+}
+.tab-buttonn{
+    padding: 10px 20px;
+    margin: 0px;
+    border: none;
+    background-color: #007bff;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    border-radius: 20px;
+}
+.tab-button.active {
+    background-color: #007bff;
+    color: white;
+}
+
+.tab-button:hover {
+    background-color: #ddd;
+}
+
+.tab-content {
+    text-align: center;
+    font-size: 18px;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+}
+/* Thêm vào TabComponent.css */
+
+.progress-bar-container {
+    width: 237px;
+    background-color: #ffffff; /* Màu nền của thanh tiến trình */
+    height: 2px; /* Độ cao của thanh */
+    float: right;
+    margin-right: 70px;
+}
+
+.progress-bar {
+    height: 100%;
+    background-color: #007bff; /* Màu của thanh tiến trình */
+    transition: width 1s linear; /* Hiệu ứng chuyển động mượt mà */
+}
+

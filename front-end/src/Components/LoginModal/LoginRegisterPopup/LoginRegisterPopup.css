@@ -1,0 +1,102 @@
+/* LoginRegisterPopup.css */
+
+.modal-overlay {
+  background: rgba(0, 0, 0, 0.7); /* Làm mờ nền khi popup hiện */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1000;
+}
+
+.modal-popup {
+  background-color: white;
+  width: 400px;
+  padding: 20px;
+  border-radius: 10px;
+  z-index: 1001;
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+}
+
+.tab {
+  cursor: pointer;
+  padding: 10px;
+  font-size: 18px;
+  text-align: center;
+  width: 50%;
+  border-bottom: 2px solid transparent;
+}
+
+.tab.active {
+  border-bottom: 2px solid blue;
+  color: blue;
+}
+
+.modal-body {
+  padding-top: 20px;
+}
+
+.input-group {
+  margin-bottom: 15px;
+}
+
+.input-group label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+.input-group input,
+.input-group select {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.login-options {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.forgot-password {
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.btn-login,
+.btn-register {
+  background-color: blue;
+  color: white;
+  padding: 10px;
+  border: none;
+  width: 100%;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.btn-google-login {
+  background-color: white;
+  border: 1px solid #ccc;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 10px;
+  cursor: pointer;
+}
+
+.checkbox label {
+  font-size: 14px;
+}
+
+.checkbox input {
+  margin-right: 5px;
+}
