@@ -29,7 +29,7 @@ const loginUser = async (req, res) => {
 
         // Tạo JWT sau khi đăng nhập thành công
         const token = jwt.sign(
-            { email: user.email, password: user.password, isAdmin: user.admin, first_name: user.first_name, last_name:user.last_name, company: user.company, country:user.country, created_in: user.created_in, website: user.website },
+            { _id: user._id , email: user.email, password: user.password, isAdmin: user.admin},
             process.env.JWT_SECRET,
             { expiresIn: '2h' }
         );
