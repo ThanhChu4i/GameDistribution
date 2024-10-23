@@ -1,0 +1,45 @@
+.game-page {
+    display: flex;
+    flex-direction: row;
+    height: 100vh;
+  }
+  
+  .game-display {
+    flex: 3;
+    padding: 20px;
+    background-color: #f0f0f0;
+    border-right: 2px solid #ccc;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .game-list {
+    flex: 1;
+    padding: 20px;
+    background-color: #fff;
+    overflow-y: auto; /* Cho phép cuộn nếu danh sách game dài */
+  }
+  
+  .game-list h2 {
+    font-size: 1.8rem;
+  }
+  
+  .game-list ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .game-list li {
+    padding: 15px;
+    margin-bottom: 15px;
+    background-color: #f9f9f9;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .game-list li:hover {
+    background-color: #e0e0e0;
+  }
+  

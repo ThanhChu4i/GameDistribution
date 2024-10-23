@@ -1,0 +1,4 @@
+db: mysql root: thanh1234
+aws 
+Thanhct2108
+chutienthanh314@gmail.com
