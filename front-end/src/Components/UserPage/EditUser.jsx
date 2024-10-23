@@ -109,7 +109,7 @@ const ViewUser = ({ onEdit }) => {
           <p><strong>Company:</strong> {user.company || 'Not provided'}</p>
           <p>Created_in: {user.created_in}</p>
           <p>Update_in: {user.update_in}</p>
-          <button onClick={() => setIsEditing(true)}>Sửa thông tin</button>
+          <button onClick={() => setIsEditing(true)}>Changes Infomation</button>
         </div>
       )}
     </div>
