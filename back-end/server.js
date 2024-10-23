@@ -7,7 +7,7 @@ const db = require('./controllers/connectdb.js');  // Make sure the database con
 const app = express();
 const bodyParser = require('body-parser');
 const { User, Game, GameHistory, LikeTab, Review, Genre, GameGenre } = require('./collection/collection.js');
-const gameRoutes = require('./routes/');
+const gameRoutes = require('./routes/gameRoutes.js');
 // Import controllers
 const { signupUser } = require('./controllers/signupController.js');
 const { loginUser } = require('./controllers/loginController.js');
@@ -52,7 +52,7 @@ app.get('/games/tab/:tabNumber', (req, res) => {
         res.json(games); // Trả về danh sách game
     });
 });
-app.use('/me', require('./routes/userRoutes'));
+app.use('/me', require('./routes/userRoutes.js'));
 // Listen on port 8081
 app.listen(8081, () => {
     console.log("Server listening on port 8081");
