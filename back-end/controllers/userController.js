@@ -1,5 +1,5 @@
 const { User } = require('../collection/collection'); // Import model User  
-
+const bcrypt = require('bcrypt'); // Thư viện mã hóa mật khẩu
 // Lấy danh sách người dùng
 exports.getUsers = async (req, res) => {
   try {
@@ -51,5 +51,37 @@ exports.deleteUser = async (req, res) => {
     res.json({ message: 'Người dùng đã bị xóa' });
   } catch (err) { 
     res.status(500).json({ message: 'Lỗi server' });
+  }
+};
+// UserController.js
+
+// Hàm đổi mật khẩu
+exports.changePassword = async (req, res) => {
+  const { oldPassword, newPassword } = req.body;
+
+  try {
+    // Tìm người dùng theo ID từ token
+    const user = await User.findById(req.user._id);
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+
+    // So sánh mật khẩu cũ
+    const isMatch = await bcrypt.compare(oldPassword, user.password);
+    if (!isMatch) {
+      return res.status(400).json({ message: 'Old password is incorrect' });
+    }
+
+    // Mã hóa mật khẩu mới
+    const salt = await bcrypt.genSalt(10);
+    user.password = await bcrypt.hash(newPassword, salt);
+
+    // Lưu người dùng với mật khẩu mới
+    await user.save();
+
+    res.json({ message: 'Password updated successfully' });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Server error' });
   }
 };
