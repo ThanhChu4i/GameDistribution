@@ -48,12 +48,14 @@ const ViewUser = ({ onEdit }) => {
     <div>
       {user ? (
         <div>
-          <p>Email: {user.email}</p>
-          <p>First Name: {user.first_name}</p>
-          <p>Last Name: {user.last_name}</p>
-          <p>Country: {user.country || 'Not provided'}</p> {/* Hiển thị mặc định nếu không có */}
-          <p>Company: {user.company || 'Not provided'}</p> {/* Hiển thị mặc định nếu không có */}
+          <h2>User Details</h2>
+          <p><strong>Email:</strong> {user.email}</p>
+          <p><strong>First Name:</strong> {user.first_name || 'Not provided'}</p>
+          <p><strong>Last Name:</strong> {user.last_name || 'Not provided'}</p>
+          <p><strong>Country:</strong> {user.country || 'Not provided'}</p>
+          <p><strong>Company:</strong> {user.company || 'Not provided'}</p>
           <p>Created_in: {user.created_in}</p>
+          <p>Update_in: {user.update_in}</p>
           <button onClick={() => onEdit(user)}>Sửa thông tin</button>
         </div>
       ) : (
