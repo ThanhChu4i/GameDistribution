@@ -96,7 +96,7 @@ const ViewUser = ({ onEdit }) => {
             Company:
             <input type="text" name="company" value={formData.company} onChange={handleInputChange} />
           </label>
-          <button onClick={handleSave}>Lưu thông tin</button>
+          <button onClick={handleSave}>Save</button>
           <button onClick={() => setIsEditing(false)}>Hủy</button>
         </div>
       ) : (
