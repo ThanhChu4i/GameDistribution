@@ -1,4 +1,3 @@
-// ViewUser.js
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import Cookies from 'js-cookie';
@@ -27,6 +26,7 @@ const ViewUser = ({ onEdit }) => {
         console.error('Error fetching user data:', err);
         setError('Failed to fetch user data');
         if (err.response && err.response.status === 401) {
+          alert('Session expired. Please log in again.');
           navigate('/');
         }
       } finally {
@@ -34,10 +34,15 @@ const ViewUser = ({ onEdit }) => {
       }
     };
     fetchUserData();
-  }, []);
+  }, [navigate]); // Thêm `navigate` vào dependency array
 
   if (loading) return <div>Loading...</div>;
-  if (error) return <div>{error}</div>;
+  if (error) return (
+    <div>
+      <p>{error}</p>
+      <button onClick={() => window.location.reload()}>Try again</button> {/* Nút thử lại */}
+    </div>
+  );
 
   return (
     <div>
@@ -46,8 +51,9 @@ const ViewUser = ({ onEdit }) => {
           <p>Email: {user.email}</p>
           <p>First Name: {user.first_name}</p>
           <p>Last Name: {user.last_name}</p>
-          <p>Country: {user.country}</p>
-          <p>Company: {user.company}</p>
+          <p>Country: {user.country || 'Not provided'}</p> {/* Hiển thị mặc định nếu không có */}
+          <p>Company: {user.company || 'Not provided'}</p> {/* Hiển thị mặc định nếu không có */}
+          <p>Created_in: {user.created_in}</p>
           <button onClick={() => onEdit(user)}>Sửa thông tin</button>
         </div>
       ) : (
