@@ -13,5 +13,6 @@ router.put('/', auth, userController.updateUser);
 
 // Route xóa người dùng
 router.delete('/', auth, userController.deleteUser);
-
+// roure đổi mật khẩu
+router.post('/change-password', auth, userController.changePassword);
 module.exports = router;
