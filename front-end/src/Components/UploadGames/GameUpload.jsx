@@ -1,4 +1,3 @@
-// front-end/src/GameUpload.js
 import React, { useState } from 'react';
 import axios from 'axios';
 
@@ -7,9 +6,16 @@ const GameUpload = () => {
     const [imageFile, setImageFile] = useState(null);
     const [filePath, setFilePath] = useState('');
     const [error, setError] = useState('');
+    const [loading, setLoading] = useState(false);
 
     const handleImageFileChange = (e) => {
-        setImageFile(e.target.files[0]);
+        const file = e.target.files[0];
+        if (file && file.type.startsWith('image/')) {
+            setImageFile(file);
+            setError('');
+        } else {
+            setError('Chỉ chấp nhận file ảnh!');
+        }
     };
 
     const handleSubmit = async (e) => {
@@ -21,22 +27,20 @@ const GameUpload = () => {
 
         const formData = new FormData();
         formData.append('image', imageFile);
-        formData.append('name', gameName); // Thêm tên game vào formData
+        formData.append('name', gameName);
 
+        setLoading(true);
         try {
-            const response = await axios.post('http://localhost:5000/upload', formData, {
-                headers: {
-                    'Content-Type': 'multipart/form-data',
-                },
-            });
+            const response = await axios.post('http://localhost:8081/api/games/upload', formData);
             setFilePath(response.data.filePath);
             setError('');
-            // Reset fields after submit if necessary
             setGameName('');
             setImageFile(null);
         } catch (error) {
             setError('Có lỗi xảy ra khi upload file.');
             console.error(error);
+        } finally {
+            setLoading(false);
         }
     };
 
@@ -63,7 +67,9 @@ const GameUpload = () => {
                         required 
                     />
                 </div>
-                <button type="submit">Upload</button>
+                <button type="submit" disabled={loading}>
+                    {loading ? 'Đang upload...' : 'Upload'}
+                </button>
             </form>
             {filePath && (
                 <div>
