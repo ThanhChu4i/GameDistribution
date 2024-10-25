@@ -4,7 +4,7 @@ const path = require('path');
 const fs = require('fs');
 
 // Kiểm tra thư mục lưu trữ và tạo nếu cần thiết
-const storagePath = process.env.STORAGE_PATH || path.join(__dirname, '../../storage');
+const storagePath =  path.join(__dirname, '../../storage');
 if (!fs.existsSync(storagePath)) {
     fs.mkdirSync(storagePath, { recursive: true });
 }
