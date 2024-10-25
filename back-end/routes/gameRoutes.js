@@ -1,6 +1,6 @@
-// back-end/routes/gameRoutes.js
 const express = require('express');
 const { uploadGameImage } = require('../controllers/uploadgame');
+const auth = require('../middleware/auth');
 
 const router = express.Router();
 

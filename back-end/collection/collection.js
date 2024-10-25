@@ -20,7 +20,7 @@ const User = mongoose.model('User', userSchema);
 
 // Định nghĩa Schema cho bảng (collection) Game
 const gameSchema = new mongoose.Schema({
-  id_user: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
+  id_user: { type: mongoose.Schema.Types.ObjectId, ref: 'User', /*required: true*/ },
   game_name: { type: String, required: true },
   game_description: { type: String },
   instruction: { type: String },
@@ -29,7 +29,7 @@ const gameSchema = new mongoose.Schema({
   play_number: { type: Number, default: 0 },
   no_blood: { type:Boolean },
   child_friendly: { type: Boolean },
-  img: { type: String },
+  imagePath: { type: String, require :true },
   ingame_purchases: { type: Boolean }
 });
 
