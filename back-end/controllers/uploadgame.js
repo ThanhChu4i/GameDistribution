@@ -1,11 +1,18 @@
-const Game = require('../collection/collection');
+const { Game } = require('../collection/collection'); // Nhập mô hình Game
 const multer = require('multer');
 const path = require('path');
+const fs = require('fs');
 
-// Thiết lập multer với thư mục lưu trữ từ biến môi trường
+// Kiểm tra thư mục lưu trữ và tạo nếu cần thiết
+const storagePath = process.env.STORAGE_PATH || path.join(__dirname, '../../storage');
+if (!fs.existsSync(storagePath)) {
+    fs.mkdirSync(storagePath, { recursive: true });
+}
+
+// Thiết lập multer với thư mục lưu trữ
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
-        cb(null, process.env.STORAGE_PATH || '../../storage');
+        cb(null, storagePath);
     },
     filename: (req, file, cb) => {
         cb(null, Date.now() + path.extname(file.originalname));
@@ -21,7 +28,7 @@ const fileFilter = (req, file, cb) => {
     if (mimetype && extname) {
         cb(null, true);
     } else {
-        cb(new Error('Chỉ chấp nhận file ảnh!'));
+        cb(new Error('Chỉ chấp nhận file ảnh có định dạng jpeg, jpg, png, hoặc gif!'));
     }
 };
 
@@ -39,9 +46,10 @@ const uploadGameImage = async (req, res) => {
             return res.status(400).json({ error: 'Không có file nào được upload.' });
         }
 
-        const imagePath = path.join(__dirname, '../../storage/', req.file.filename);
+        const imagePath = path.join(storagePath, req.file.filename);
         const game = new Game({
-            name: req.body.name,
+            id_user: req.body.id_user, // Thêm id_user nếu cần
+            game_name: req.body.name,
             imagePath,
         });
 
@@ -49,6 +57,7 @@ const uploadGameImage = async (req, res) => {
             await game.save();
             res.json({ message: 'File uploaded successfully!', filePath: imagePath });
         } catch (error) {
+            console.error("Database Error: ", error);
             res.status(500).json({ error: 'Lỗi khi lưu vào cơ sở dữ liệu.' });
         }
     });
