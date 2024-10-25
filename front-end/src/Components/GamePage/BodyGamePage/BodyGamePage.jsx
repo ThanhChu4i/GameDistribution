@@ -218,7 +218,7 @@ function BodyGamePage() {
           {!loading && !error && games.map((game) => (
             <div key={game.id_game} className="game-card">
               <Link to={`/Games/${game.game_name}`}> {/* Thêm Link để chuyển trang chi tiết */}
-            <img src={`${__dirname}${game.imagePath}`} alt={game.game_name} />
+            <img src={game.imagePath} alt={game.game_name} />
                 <h4>{game.game_name}</h4>
               </Link>
               <p>{game.company}</p>
