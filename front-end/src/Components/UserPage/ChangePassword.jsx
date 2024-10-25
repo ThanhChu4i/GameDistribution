@@ -1,7 +1,8 @@
 // ChangePassword.jsx
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import axios from 'axios';
 import Cookies from 'js-cookie';
+import { AuthContext } from '../AuthContext/AuthContext'; // Nhập AuthContext
 
 const ChangePassword = () => {
   const [oldPassword, setOldPassword] = useState('');
@@ -9,6 +10,8 @@ const ChangePassword = () => {
   const [confirmPassword, setConfirmPassword] = useState('');
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(null);
+  
+  const { logout } = useContext(AuthContext); // Lấy hàm logout từ AuthContext
 
   const handleChangePassword = async (e) => {
     e.preventDefault();
@@ -38,6 +41,9 @@ const ChangePassword = () => {
       setNewPassword('');
       setConfirmPassword('');
       setError(null);
+
+      // Đăng xuất người dùng
+      logout(); // Gọi hàm logout sau khi đổi mật khẩu thành công
     } catch (err) {
       console.error('Error changing password:', err);
       setError(err.response ? err.response.data.message : 'Failed to update password. Please try again later.');
@@ -82,7 +88,12 @@ const ChangePassword = () => {
         <button type="submit">Change Password</button>
       </form>
       {error && <div style={{ color: 'red' }}>{error}</div>}
-      {success && <div style={{ color: 'green' }}>{success}</div>}
+      {success && (
+        <div style={{ color: 'green' }}>
+          {success}
+          <p>Please log in again</p>
+        </div>
+      )}
     </div>
   );
 };
