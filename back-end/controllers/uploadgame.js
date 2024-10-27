@@ -4,7 +4,7 @@ const path = require('path');
 const fs = require('fs');
 
 // Kiểm tra thư mục lưu trữ và tạo nếu cần thiết
-const storagePath =  path.join(__dirname, '../../storage');// Loi git 
+const storagePath = path.resolve(__dirname, '../../storage'); // Dùng path.resolve để tránh lỗi đường dẫn
 if (!fs.existsSync(storagePath)) {
     fs.mkdirSync(storagePath, { recursive: true });
 }
@@ -34,6 +34,7 @@ const fileFilter = (req, file, cb) => {
 
 const upload = multer({ storage, fileFilter }).single('image');
 
+// Hàm xử lý upload ảnh
 const uploadGameImage = async (req, res) => {
     upload(req, res, async (err) => {
         if (err instanceof multer.MulterError) {
@@ -46,7 +47,8 @@ const uploadGameImage = async (req, res) => {
             return res.status(400).json({ error: 'Không có file nào được upload.' });
         }
 
-        const imagePath = path.join(storagePath, req.file.filename);
+        // Lưu đường dẫn ảnh vào game.imagePath
+        const imagePath = `/storage/${req.file.filename}`; // Đường dẫn công khai
         const game = new Game({
             id_user: req.body.id_user, // Thêm id_user nếu cần
             game_name: req.body.name,
