@@ -1,6 +1,7 @@
 const { Game } = require('../collection/collection'); // Đường dẫn tới model collection MongoDB
 const path = require('path');
 const fs = require('fs');
+
 const getGameImage = (req, res) => {
     const imageName = req.params.imageName;
     const imagePath = path.join(__dirname, '../../storage', imageName);
@@ -16,7 +17,8 @@ const getGameImage = (req, res) => {
     });
 };
 
-const getGames = async (req, res) => {
+// Tìm kiếm game theo bộ lọc và populate thông tin user
+const getGamesWithUserInfo = async (req, res) => {
     try {
         const filters = {};
 
@@ -31,20 +33,22 @@ const getGames = async (req, res) => {
         if (req.query.ingame_purchases !== undefined) filters.ingame_purchases = req.query.ingame_purchases === 'true';
 
         // Tìm kiếm game theo bộ lọc và populate thông tin user
-        const games = await Game.find(filters).populate('id_user', 'company email');
+        const games = await Game.find(filters).populate('id_user', 'company'); // Populate với trường company
 
-        // Tạo URL hình ảnh dựa trên tên file ảnh trong storage
-        const gamesWithImageURLs = games.map((game) => ({
-            ...game.toObject(),
-            imageUrl: game.imagePath ? `http://localhost:8081/api/games/image/${path.basename(game.imagePath)}` : null
+        if (!games.length) {
+            return res.status(404).json({ message: "No games found." });
+        }
+
+        const formattedGames = games.map(game => ({
+            ...game._doc, // Sao chép tất cả các trường của game
+            company: game.id_user ? game.id_user.company : null, // Lấy company từ user
         }));
-        
-        res.json(gamesWithImageURLs);
-    } catch (error) {
-        console.error('Error fetching games:', error);
-        res.status(500).json({ error: 'Server error' });
+
+        return res.status(200).json(formattedGames);
+    } catch (err) {
+        console.error('Error retrieving games:', err);
+        return res.status(500).json({ message: "Server error." });
     }
 };
 
-module.exports = { getGames, getGameImage };
-
+module.exports = { getGamesWithUserInfo, getGameImage };
