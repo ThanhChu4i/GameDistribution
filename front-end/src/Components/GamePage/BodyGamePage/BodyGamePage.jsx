@@ -1,4 +1,3 @@
-// BodyGamePage.js
 import React, { useEffect, useState } from 'react';
 import './BodyGamePage.css';
 import axios from 'axios';
@@ -53,9 +52,7 @@ function BodyGamePage() {
       setLoading(true);
       setError(null);
       try {
-        // Tạo các tham số truy vấn dựa trên các bộ lọc
         const params = {};
-
         if (filters.genres) params.genres = filters.genres;
         if (filters.development) params.development = filters.development;
         if (filters.languages) params.languages = filters.languages;
@@ -65,10 +62,11 @@ function BodyGamePage() {
         if (filters.child_friendly) params.child_friendly = filters.child_friendly;
         if (filters.ingame_purchases) params.ingame_purchases = filters.ingame_purchases;
 
-        const response = await axios.get('http://localhost:8081/games', { params }); // Sửa đường dẫn API
+        const response = await axios.get('http://localhost:8081/api/games', { params });
         setGames(response.data);
+        console.log(response.data);
       } catch (err) {
-        setError(err.response?.data?.error || err.message); // Cải thiện xử lý lỗi
+        setError(err.response?.data?.error || err.message);
       } finally {
         setLoading(false);
       }
@@ -217,12 +215,13 @@ function BodyGamePage() {
           {!loading && !error && games.length === 0 && <p>No games found.</p>}
           {!loading && !error && games.map((game) => (
             <div key={game.id_game} className="game-card">
-              <Link to={`/Games/${game.game_name}`}> {/* Thêm Link để chuyển trang chi tiết */}
-            <img src={game.imagePath} alt={game.game_name} />
+              <Link to={`/Games/${game.game_name}`}>
+                {game.imageUrl && (  // Kiểm tra game.imageUrl có tồn tại
+                  <img src={game.imageUrl} alt="Game Image" /> // Sửa lại đây
+                )}
                 <h4>{game.game_name}</h4>
               </Link>
               <p>{game.company}</p>
-              {/* Nếu bạn muốn hiển thị thêm thông tin từ user, đảm bảo rằng dữ liệu trả về có cấu trúc phù hợp */}
             </div>
           ))}
         </div>

@@ -1,4 +1,20 @@
 const { Game } = require('../collection/collection'); // Đường dẫn tới model collection MongoDB
+const path = require('path');
+const fs = require('fs');
+const getGameImage = (req, res) => {
+    const imageName = req.params.imageName;
+    const imagePath = path.join(__dirname, '../../storage', imageName);
+
+    // Kiểm tra xem file có tồn tại không
+    fs.access(imagePath, fs.constants.F_OK, (err) => {
+        if (err) {
+            console.error('Image not found:', imageName);
+            return res.status(404).json({ error: 'Image not found' });
+        }
+        // Gửi file ảnh nếu tồn tại
+        res.sendFile(imagePath);
+    });
+};
 
 const getGames = async (req, res) => {
     try {
@@ -16,12 +32,19 @@ const getGames = async (req, res) => {
 
         // Tìm kiếm game theo bộ lọc và populate thông tin user
         const games = await Game.find(filters).populate('id_user', 'company email');
+
+        // Tạo URL hình ảnh dựa trên tên file ảnh trong storage
+        const gamesWithImageURLs = games.map((game) => ({
+            ...game.toObject(),
+            imageUrl: game.imagePath ? `http://localhost:8081/api/games/image/${path.basename(game.imagePath)}` : null
+        }));
         
-        res.json(games);
+        res.json(gamesWithImageURLs);
     } catch (error) {
         console.error('Error fetching games:', error);
         res.status(500).json({ error: 'Server error' });
     }
 };
 
-module.exports = { getGames };
+module.exports = { getGames, getGameImage };
+

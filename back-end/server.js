@@ -11,7 +11,7 @@ const gameRoutes = require('./routes/gameRoutes.js');
 // Import controllers
 const { signupUser } = require('./controllers/signupController.js');
 const { loginUser } = require('./controllers/loginController.js');
-const { getGames } = require('./controllers/getGames.js');
+const routes = require('./routes/routes.js');
 const { getGamesByTab } = require('./controllers/getGameTab.js'); 
 const authenticateAdmin = require('./middleware/authenticateAdmin/authenticateAdmin.js');
 const authenticateToken = require('./middleware/authenticateToken/authenticateToken.js');
@@ -28,7 +28,7 @@ app.use(express.json());  // To handle JSON requests
 // Routes
 app.post('/signup', signupUser); // Route for user signup
 app.post('/login', loginUser);   // Route for user login
-app.get('/games', getGames);     // Route to fetch games
+//app.get('/games', getGames);     // Route to fetch games
 app.get('/admin', authenticateToken, authenticateAdmin, (req, res) => {
     res.json({ message: 'Welcome to the admin panel!', user: req.user });
 });
@@ -36,6 +36,7 @@ app.use('/storage', express.static('storage')); // Để phục vụ file upload
 
 // Sử dụng routes
 app.use('/api/games',gameRoutes);
+app.use('/api',routes);
 app.get('/games/tab/:tabNumber', (req, res) => {
     const tabNumber = parseInt(req.params.tabNumber);
 
