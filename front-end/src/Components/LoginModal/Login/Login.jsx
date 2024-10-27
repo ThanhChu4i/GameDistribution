@@ -40,8 +40,9 @@ const LoginPopup = ({ onRequestClose }) => {
         console.log(res);
         // Lưu token vào cookie
         const token = res.data.token;
+        const id = res.data._id;
         const expiresIn = values.remember_me ? 30 : 1; // 30 ngày nếu "Nhớ tôi", 1 ngày nếu không
-        login(token);
+        login(token, id);
 
         // Điều hướng
         if (res.data.isAdmin) {

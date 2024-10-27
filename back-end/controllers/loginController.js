@@ -29,7 +29,7 @@ const loginUser = async (req, res) => {
 
         // Tạo JWT sau khi đăng nhập thành công
         const token = jwt.sign(
-            { _id: user._id , email: user.email, password: user.password, isAdmin: user.admin},
+            { _id: user._id , email: user.email, isAdmin: user.admin},
             process.env.JWT_SECRET,
             { expiresIn: '2h' }
         );
@@ -39,12 +39,14 @@ const loginUser = async (req, res) => {
                 message: "Login successful! Redirect to admin page.",
                 isAdmin: true,
                 token,
+                _id: user._id
             });
         } else {
             return res.status(200).json({
                 message: "Login successful! Redirect to user page.",
                 isAdmin: false,
                 token,
+                _id: user._id
             });
         }
 

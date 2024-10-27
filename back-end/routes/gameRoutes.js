@@ -4,6 +4,6 @@ const auth = require('../middleware/auth');
 
 const router = express.Router();
 
-router.post('/upload', uploadGameImage);
+router.post('/upload', auth, uploadGameImage);
 
 module.exports = router;
