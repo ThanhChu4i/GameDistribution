@@ -4,7 +4,7 @@ const path = require('path');
 const fs = require('fs');
 
 // Kiểm tra thư mục lưu trữ và tạo nếu cần thiết
-const storagePath =  path.join(__dirname, '../../storage');
+const storagePath =  path.join(__dirname, '../../storage');// Loi git 
 if (!fs.existsSync(storagePath)) {
     fs.mkdirSync(storagePath, { recursive: true });
 }
