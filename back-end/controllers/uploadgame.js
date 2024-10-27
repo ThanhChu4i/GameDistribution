@@ -37,6 +37,7 @@ const upload = multer({ storage, fileFilter }).single('image');
 // Hàm xử lý upload ảnh
 const uploadGameImage = async (req, res) => {
     upload(req, res, async (err) => {
+
         if (err instanceof multer.MulterError) {
             return res.status(400).json({ error: 'Lỗi khi upload file.' });
         } else if (err) {
@@ -52,6 +53,9 @@ const uploadGameImage = async (req, res) => {
         const game = new Game({
             id_user: req.body.id_user, // Thêm id_user nếu cần
             game_name: req.body.name,
+            no_blood: req.body.no_blood,
+            ingame_purchases: req.body.ingame_purchases,
+            child_friendly: req.body.child_friendly,
             imagePath,
         });
 
