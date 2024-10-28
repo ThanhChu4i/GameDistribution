@@ -11,7 +11,7 @@ const GameUpload = () => {
     const [ingame_purchases, setIngame_purchases] = useState(false);
     const [error, setError] = useState('');
     const [loading, setLoading] = useState(false);
-    const tokenUpload = Cookies.get('tokenUpload'); // Token riêng cho upload
+    const token = Cookies.get('token'); // Token riêng cho upload
 
     const handleImageFileChange = (e) => {
         const file = e.target.files[0];
@@ -41,7 +41,7 @@ const GameUpload = () => {
         
         try {
             await axios.post('http://localhost:8081/api/games/upload', formData, {
-                headers: { Authorization: `Bearer ${tokenUpload}` },
+                headers: { Authorization: `Bearer ${token}` },
             });
             setError('');
             setGameName('');
