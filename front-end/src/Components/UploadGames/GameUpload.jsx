@@ -115,8 +115,7 @@ const GameUpload = () => {
             {filePath && (
                 <div>
                     <h3>Upload Complete</h3>
-                    {/* <p>File path: {filePath}</p> */}
-                </div>
+                    </div>
             )}
         </div>
     );

@@ -1,52 +1,101 @@
 import React from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
-
-// Danh sách game mẫu
-const gameList = [
-  { id: 1, name: "Game 1", description: "This is Game 1", content: "Welcome to Game 1!" },
-  { id: 2, name: "Game 2", description: "This is Game 2", content: "Welcome to Game 2!" },
-  { id: 3, name: "Game 3", description: "This is Game 3", content: "Welcome to Game 3!" },
-];
+import './GameDetails.css';
+//import { Link } from 'react-router-dom';
 
 const GameDetails = () => {
-  const { id } = useParams(); // Lấy id game từ URL
-  const navigate = useNavigate(); // Điều hướng người dùng khi chọn game
-  const game = gameList.find((g) => g.id === parseInt(id)); // Tìm game tương ứng với id
+    return (
+        <div className="game-details-container">
+            {/* Phần bên trái */}
+            <div className="left-section">
+                {/* Phần xem trước Game */}
+                <div className="game-preview">
+                    <img src="game_image_url_here" alt="Game Preview" className="game-main-image" />
+                    <h1>Sort Resort</h1>
+                    <p>by Aversion Casual Games</p>
+                    <button className="play-button">Play Now</button>
+                </div>
+                <div className='Share-and-open-in-new-tab'>
+                    <button className='SaOp'><strong>Share</strong></button>
+                    <button className='SaOp'><strong>Open in new tab</strong></button>
+                </div>
+                {/* Thông tin chi tiết về Game */}
+                <div className="game-details">
+                    <div className='gameinfor'><strong>Game Title:</strong></div>
+                    <div className='gameinfor'><strong>Publisher by:</strong></div>
+                    <div className='gameinfor'><strong>Platfom:</strong></div>
+                    <div className='gameinfor'><strong>Language:</strong></div>
+                    <div className='gameinfor'><strong>Gender:</strong></div>
+                    <div className='gameinfor'><strong>Age Group</strong></div>
+                </div>
 
-  // Xử lý khi người dùng chọn một game từ danh sách
-  const handleGameSelect = (gameId) => {
-    navigate(`/Games/${gameId}`);
-  };
+                {/* Mô tả và Hướng dẫn */}
+                <div className="description-section">
+                    <h3>Description</h3>
+                    <p>Unleash your creativity and puzzle-solving skills in this unique game!...</p>
+                </div>
+                <div className="description-section">
+                    <h3>Instructions</h3>
+                    <p>Your task is to sort the liquids into the correct flasks...</p>
+                </div>
 
-  return (
-    <div className="game-page">
-      {/* Khung bên trái hiển thị nội dung game */}
-      <div className="game-display">
-        {game ? (
-          <>
-            <h1>{game.name}</h1>
-            <p>{game.content}</p>
-            <p>{game.description}</p>
-          </>
-        ) : (
-          <h2>Select a game from the list.</h2>
-        )}
-      </div>
+                {/* Mã nhúng và URL ví dụ */}
+                <div className="embed-section">
+                    <h3>Embed</h3>
+                    <textarea readOnly value="<iframe src='embed_code_here'></iframe>" />
+                    <button>Copy</button>
+                </div>
+                <div className="embed-section">
+                    <h3>Example URL</h3>
+                    <textarea readOnly value="example_url_here" />
+                    <button>Copy</button>
+                </div>
+            </div>
 
-      {/* Khung bên phải là danh sách các trò chơi */}
-      <div className="game-list">
-        <h2>Games List</h2>
-        <ul>
-          {gameList.map((game) => (
-            <li key={game.id} onClick={() => handleGameSelect(game.id)}>
-              <h3>{game.name}</h3>
-              <p>{game.description}</p>
-            </li>
-          ))}
-        </ul>
-      </div>
-    </div>
-  );
+            {/* Phần bên phải */}
+            <div className="right-section">
+                {/* Game tương tự */}
+                <div className="similar-games">
+                    <h3>Similar Games</h3>
+                    <div className="similar-games-grid">
+                        <div className="similar-game-card">
+                            <img src="similar_game_image_url" alt="Similar Game" />
+                            <p>Color Sort Puzzle</p>
+                        </div>
+                        {/* Thêm các game tương tự */}
+                    </div>
+                </div>
+
+                {/* Thông tin bổ sung */}
+                <div className="additional-info">
+                    <h3>Additional Information</h3>
+                    <p><strong>Last Updated:</strong> Sep 16, 2024</p>
+                    <p><strong>Type:</strong> HTML5</p>
+                    <p><strong>Screen Orientation:</strong> Landscape</p>
+                    <p><strong>Dimensions:</strong> 800x600</p>
+                    <p><strong>Publisher:</strong> Aversion Casual Games</p>
+                </div>
+
+                {/* Tags và Biểu tượng */}
+                <div className="tags-icons">
+                    <h3>Tags</h3>
+                    <p>Color, Sort, Casual</p>
+                    <button>Download Thumbnails & Icons</button>
+                </div>
+
+                {/* Bộ sưu tập */}
+                <div className="collections-carousel">
+                    <h3>Collections</h3>
+                    <div className="carousel">
+                        <div className="collection-item">
+                            <img src="collection_image_url" alt="Collection" />
+                            <p>Exclusive</p>
+                        </div>
+                        {/* Thêm các bộ sưu tập */}
+                    </div>
+                </div>
+            </div>
+        </div>
+    );
 };
 
 export default GameDetails;

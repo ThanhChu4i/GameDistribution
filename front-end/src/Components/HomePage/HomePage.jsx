@@ -2,7 +2,7 @@ import React from 'react';
 import './HomePage.css';
 //import {Link} from "react-router-dom";
 import image from '../Assets/image_.webp';
-import TabComponent from './TabComponent/TabComponent';
+ import TabComponent from './TabComponent/TabComponent';
 const HomePage = () => {
   return (
   
