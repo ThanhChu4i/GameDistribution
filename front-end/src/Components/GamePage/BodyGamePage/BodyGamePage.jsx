@@ -215,7 +215,7 @@ function BodyGamePage() {
           {!loading && !error && games.length === 0 && <p>No games found.</p>}
           {!loading && !error && games.map((game) => (
             <div key={game.id_game} className="game-card">
-              <Link to={`/Games/${game.game_name}`}>
+              <Link to={`/Games/${game._id}`}>
                 {game.imageUrl && (  // Kiểm tra game.imageUrl có tồn tại
                   <img src={game.imageUrl} alt="Game Image" /> // Sửa lại đây
                 )}

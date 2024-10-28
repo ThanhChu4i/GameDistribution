@@ -1,43 +1,23 @@
-// controllers/getGameById.js
-const db = require('./connectdb.js');
+// controllers/gameController.js
 
-const getGameById = (req, res) => {
-    const id_game = req.params.id; // Lấy id_game từ params (đường dẫn)
-    console.log(`Fetching game with ID: ${id_game}`);
+const {Game} = require('../collection/collection'); // Import model Game (đảm bảo bạn đã định nghĩa model Game)
 
-    // Câu truy vấn SQL với placeholders để truyền tham số an toàn
-    const sqlQuery = `
-        SELECT 
-            game.id_game,
-            game.game_name,
-            game.no_blood,
-            game.child_friend AS child_friendly,
-            game.ingame_purchases AS ingame_purchases, -- Sửa tên cột
-            game.file_path,
-            user.id_user,
-            user.company
-        FROM game 
-        INNER JOIN user ON game.id_user = user.id_user
-        WHERE game.id_game = ?
-    `;
+const getGameById = async (req, res) => {
+    try {
+        const { id } = req.params; // Lấy id từ URL
 
-    console.log('Executing SQL Query:', sqlQuery);
-    console.log('With Parameters:', [id_game]);
-
-    // Thực hiện truy vấn với id_game
-    db.query(sqlQuery, [id_game], (err, results) => {
-        if (err) {
-            console.error('Error fetching game by ID:', err);
-            return res.status(500).json({ error: err.message });
+        // Tìm game bằng id
+        const game = await Game.findById(id).populate('id_user'); // populate để lấy thông tin company từ user liên quan nếu có
+         console.log(game);
+        if (!game) {
+            return res.status(404).json({ message: 'Game không tồn tại' });
         }
-        if (results.length > 0) {
-            console.log('Game found:', results[0]);
-            res.json(results[0]); // Trả về thông tin trò chơi dưới dạng JSON
-        } else {
-            console.log('Game not found');
-            res.status(404).json({ message: 'Game not found' });
-        }
-    });
+
+        res.status(200).json(game); // Trả về thông tin game
+    } catch (error) {
+        console.error("Error in getGameById:", error);
+        res.status(500).json({ message: 'Có lỗi xảy ra khi lấy thông tin game' });
+    }
 };
 
 module.exports = { getGameById };
