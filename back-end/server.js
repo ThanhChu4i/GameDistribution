@@ -34,22 +34,22 @@ app.use('/storage', express.static('storage')); // Để phục vụ file upload
 // Sử dụng routes
 app.use('/api/games',gameRoutes);
 app.use('/api',routes);
-app.get('/games/tab/:tabNumber', (req, res) => {
+app.get('/games/tab/:tabNumber', async (req, res) => {
     const tabNumber = parseInt(req.params.tabNumber);
 
-    // Gọi hàm getGamesByTab và xử lý kết quả qua callback
-    getGamesByTab(tabNumber, (err, games) => {
-        if (err) {
-            return res.status(500).json({ error: 'Failed to fetch games' });
-        }
-
+    try {
+        const games = await getGamesByTab(tabNumber);
         if (games.length === 0) {
             return res.status(404).json({ message: 'No games found for this tab.' });
         }
-
-        res.json(games); // Trả về danh sách game
-    });
+        res.json(games);
+    } catch (err) {
+        console.error('Error querying the database:', err);
+        return res.status(500).json({ error: 'Failed to fetch games' });
+    }
 });
+
+
 app.use('/me', require('./routes/userRoutes.js'));
 // Listen on port 8081
 app.listen(8081, () => {
