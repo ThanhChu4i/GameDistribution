@@ -39,7 +39,7 @@ const Yourgames = () => {
                     <div key={game._id} className="game-card">
                         <Link to={`/Games/${game.name}`}>
                             {game.imageUrl && <img src={game.imageUrl} alt="Game" />}
-                            <h4>{game.name}</h4>
+                            <h4>{game.game_name}</h4>
                         </Link>
                         <p>{game.company}</p>
                     </div>
