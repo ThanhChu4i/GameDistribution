@@ -15,25 +15,22 @@ const routes = require('./routes/routes.js');
 const { getGamesByTab } = require('./controllers/getGameTab.js'); 
 const authenticateAdmin = require('./middleware/authenticateAdmin/authenticateAdmin.js');
 const authenticateToken = require('./middleware/authenticateToken/authenticateToken.js');
-//const { usercontroller } = require('./controllers/usercontroller.js');
+const userRoutes = require('./routes/userRoutes.js');
 
 // Middleware
 app.use(cors({
     origin: 'http://localhost:3000', // Địa chỉ frontend của bạn
     credentials: true // Để gửi cookie
 }));
-//app.use(cookieParser());
 app.use(express.json());  // To handle JSON requests
-//app.use('/api', userRoutes);
+app.use('/api', userRoutes);
 // Routes
 app.post('/signup', signupUser); // Route for user signup
 app.post('/login', loginUser);   // Route for user login
-//app.get('/games', getGames);     // Route to fetch games
 app.get('/admin', authenticateToken, authenticateAdmin, (req, res) => {
     res.json({ message: 'Welcome to the admin panel!', user: req.user });
 });
 app.use('/storage', express.static('storage')); // Để phục vụ file upload
-
 // Sử dụng routes
 app.use('/api/games',gameRoutes);
 app.use('/api',routes);
