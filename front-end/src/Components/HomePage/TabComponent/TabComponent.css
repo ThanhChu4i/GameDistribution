@@ -69,4 +69,40 @@
     background-color: #007bff; /* Màu của thanh tiến trình */
     transition: width 1s linear; /* Hiệu ứng chuyển động mượt mà */
 }
-
+.game-list {
+    display: flex;
+  }
+  .games-grid {
+    display: flex;
+    flex-wrap: wrap;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); /* Tạo lưới cho các game */
+    gap: 20px; /* Khoảng cách giữa các game */
+    flex-grow: 1; /* Lưới game sẽ mở rộng ra khi có thêm không gian */
+    padding: 50px;
+  }
+  
+  .game-card {
+    background-color: white;
+    padding: 15px;
+    border-radius: 8px;
+    text-align: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Hiệu ứng shadow */
+    width: 250px;
+    height: 250px;
+  }
+  
+  .game-card h4 {
+    margin: 10px 0;
+    font-size: 1.2em;
+  }
+  
+  .game-card p {
+    color: gray;
+  }
+  
+  .game-card img {
+    width: 100%;
+    height: 75%;
+    border-radius: 8px;
+  }
+  
