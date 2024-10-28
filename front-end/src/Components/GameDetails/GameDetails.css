@@ -1,45 +1,153 @@
-.game-page {
-    display: flex;
-    flex-direction: row;
-    height: 100vh;
-  }
-  
-  .game-display {
-    flex: 3;
-    padding: 20px;
-    background-color: #f0f0f0;
-    border-right: 2px solid #ccc;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-  }
-  
-  .game-list {
-    flex: 1;
-    padding: 20px;
-    background-color: #fff;
-    overflow-y: auto; /* Cho phép cuộn nếu danh sách game dài */
-  }
-  
-  .game-list h2 {
-    font-size: 1.8rem;
-  }
-  
-  .game-list ul {
-    list-style-type: none;
-    padding: 0;
-  }
-  
-  .game-list li {
-    padding: 15px;
-    margin-bottom: 15px;
-    background-color: #f9f9f9;
-    border-radius: 5px;
-    cursor: pointer;
-  }
-  
-  .game-list li:hover {
-    background-color: #e0e0e0;
-  }
-  
+.game-details-container {
+  display: flex;
+  gap: 24px;
+  padding: 20px;
+}
+
+.left-section {
+  flex: 3;
+  background: #f9f9f9;
+  padding: 20px;
+  border-radius: 10px;
+  width:60%;
+  height:auto;
+}
+.Share-and-open-in-new-tab{
+  margin: 20px;
+}
+.SaOp {
+  padding: 20px;
+  color: blue;
+  font-size: medium;
+  border-radius: 30px;
+  margin-right: 20px;
+  border-color: blue;
+  box-sizing: 5px;
+  transition: 0.3s;
+}
+.SaOp:hover {
+  background-color: blue;
+  color: white;
+  border-color: white;
+}
+.game-details{
+  background-color: white;
+  float: left;
+  width: 100%; /* Chiếm hết chiều rộng của container */
+  border:2px;
+  border-color: black;
+  margin: 20px;
+}
+.gameinfor{
+  width: 100%;
+  float:left;
+  flex-direction: column;
+  height: 75px;
+  border: 10px;
+  border-color: black;
+  background-color: white;
+  font-size: large;
+}
+.gameinfor strong {
+  float: left;
+}
+.description-section{
+  font-size: medium;  
+}
+.description-section h3{
+  font-size: larger;
+}
+.right-section {
+  flex: 2;
+  background: #ffffff;
+  padding: 20px;
+  border-radius: 10px;
+  width:20%;
+}
+
+.game-preview {
+  text-align: center;
+  margin-bottom: 20px;
+  width :4/3*height;
+  height: 800px;
+  background-color: #4CAF50;
+  border-radius: 10px;
+}
+
+.game-main-image {
+  width: 100%;
+  max-width: 300px;
+  border-radius: 10px;
+  margin-bottom: 10px;
+}
+
+.play-button {
+  background-color: #6200ea;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.embed-section textarea {
+  width: 100%;
+  height: 50px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  resize: none;
+  padding: 5px;
+}
+
+.similar-games {
+  margin-bottom: 20px;
+}
+.similar-games h3 {
+  font-size: 25px;
+}
+
+.similar-games-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.similar-game-card {
+  flex: 1 0 48%;
+  text-align: center;
+}
+
+.additional-info p, .tags-icons p {
+  margin: 5px 0;
+}
+
+.tags-icons button {
+  background-color: #4CAF50;
+  color: white;
+  padding: 5px 10px;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+.collections-carousel {
+  margin-top: 20px;
+}
+
+.carousel {
+  display: flex;
+  gap: 10px;
+  overflow-x: auto;
+}
+
+.collection-item {
+  text-align: center;
+  min-width: 80px;
+}
+
+.collection-item img {
+  width: 100%;
+  border-radius: 5px;
+}
