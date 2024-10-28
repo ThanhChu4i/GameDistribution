@@ -1,8 +1,29 @@
-import React from 'react';
+
 import './GameDetails.css';
-//import { Link } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
+import axios from 'axios';
 
 const GameDetails = () => {
+        const { id } = useParams(); // Lấy id từ URL
+        const [game, setGame] = useState(null);
+        const [loading, setLoading] = useState(true);
+        const [error, setError] = useState(null);
+    
+        useEffect(() => {
+            const fetchGameDetails = async () => {
+                setLoading(true);
+                try {
+                    const response = await axios.get(`http://localhost:8081/api/games/${id}`);
+                    setGame(response.data);
+                } catch (err) {
+                    setError("Không thể tải thông tin game.");
+                } finally {
+                    setLoading(false);
+                }
+            };
+            fetchGameDetails();
+        }, [id]);
     return (
         <div className="game-details-container">
             {/* Phần bên trái */}

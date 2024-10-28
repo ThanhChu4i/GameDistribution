@@ -37,7 +37,7 @@ const Yourgames = () => {
                 {!loading && !error && games.length === 0 && <p>No games found.</p>}
                 {!loading && !error && games.map((game) => (
                     <div key={game._id} className="game-card">
-                        <Link to={`/Games/${game.name}`}>
+                        <Link to={`/Games/${game._id}`}>
                             {game.imageUrl && <img src={game.imageUrl} alt="Game" />}
                             <h4>{game.game_name}</h4>
                         </Link>
