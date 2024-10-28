@@ -16,7 +16,7 @@ const HomePage = () => {
       <h2>partnering with GameDistribution</h2>
       </div>
       <div className='ShowMore'>
-      <button type="button"><strong>Show More -></strong></button>
+      <button type="button"><strong>Show More</strong></button>
       </div>
       <img src = {image} alt="No"></img>
     </div>
