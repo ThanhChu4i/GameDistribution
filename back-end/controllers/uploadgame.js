@@ -4,30 +4,34 @@ const path = require('path');
 const fs = require('fs');
 const sharp = require('sharp');
 
-// Kiểm tra thư mục lưu trữ và tạo nếu cần thiết
-const storagePath = path.resolve(__dirname, '../../front-end/public/images'); // Thay đổi đường dẫn tới thư mục public
-if (!fs.existsSync(storagePath)) {
-    fs.mkdirSync(storagePath, { recursive: true });
+const storagePathImages = path.resolve(__dirname, '../../front-end/public/images');
+const storagePathZip = path.resolve(__dirname, '../../front-end/public/games');
+
+if (!fs.existsSync(storagePathImages)) {
+    fs.mkdirSync(storagePathImages, { recursive: true });
+}
+if (!fs.existsSync(storagePathZip)) {
+    fs.mkdirSync(storagePathZip, { recursive: true });
 }
 
 // Kiểm tra định dạng file
 const fileFilter = (req, file, cb) => {
-    const fileTypes = /jpeg|jpg|png|gif/;
+    const fileTypes = /jpeg|jpg|png|gif|zip/;
     const extname = fileTypes.test(path.extname(file.originalname).toLowerCase());
     const mimetype = fileTypes.test(file.mimetype);
-    
+
     if (mimetype && extname) {
         cb(null, true);
     } else {
-        cb(new Error('Chỉ chấp nhận file ảnh có định dạng jpeg, jpg, png, hoặc gif!'));
+        cb(new Error('Chỉ chấp nhận file ảnh (jpeg, jpg, png, gif) hoặc file .zip!'));
     }
 };
 
-// Thiết lập multer với thư mục lưu trữ
-const storage = multer.memoryStorage(); // Sử dụng memoryStorage để nén ảnh trước khi lưu
-const upload = multer({ storage, fileFilter }).single('image');
+// Thiết lập multer
+const storage = multer.memoryStorage();
+const upload = multer({ storage, fileFilter }).fields([{ name: 'image' }, { name: 'zipFile' }]);
 
-// Hàm xử lý upload ảnh
+// Hàm xử lý upload ảnh và file .zip
 const uploadGameImage = async (req, res) => {
     upload(req, res, async (err) => {
         if (err instanceof multer.MulterError) {
@@ -36,40 +40,46 @@ const uploadGameImage = async (req, res) => {
             return res.status(400).json({ error: err.message });
         }
 
-        if (!req.file) {
-            return res.status(400).json({ error: 'Không có file nào được upload.' });
+        const { image, zipFile } = req.files;
+        if (!image || !zipFile) {
+            return res.status(400).json({ error: 'Yêu cầu tải lên cả ảnh và file .zip.' });
         }
 
-        // Xử lý nén ảnh với sharp
-        const compressedImageBuffer = await sharp(req.file.buffer)
-            .resize(1024) // Giới hạn kích thước ảnh
-            .toFormat('jpeg', { quality: 80 }) // Định dạng và chất lượng
-            .toBuffer();
-
-        // Lưu file đã nén vào hệ thống
-        const filename = Date.now() + path.extname(req.file.originalname);
-        const filePath = path.join(storagePath, filename);
-
-        fs.writeFile(filePath, compressedImageBuffer, (err) => {
-            if (err) {
-                return res.status(500).json({ error: 'Lỗi khi lưu file.' });
-            }
-        });
-
-        // Lưu đường dẫn ảnh vào game.imagePath
-        const imagePath = `/images/${filename}`; // Đường dẫn công khai
-        const game = new Game({
-            id_user: req.body.id_user, // Thêm id_user nếu cần
-            game_name: req.body.name,
-            no_blood: req.body.no_blood,
-            ingame_purchases: req.body.ingame_purchases,
-            child_friendly: req.body.child_friendly,
-            imagePath,
-        });
-
         try {
+            // Xử lý nén ảnh
+            const compressedImageBuffer = await sharp(image[0].buffer)
+                .resize(1024)
+                .toFormat('jpeg', { quality: 80 })
+                .toBuffer();
+
+            const imageFilename = Date.now() + path.extname(image[0].originalname);
+            const imagePath = path.join(storagePathImages, imageFilename);
+
+            // Lưu ảnh
+            fs.writeFileSync(imagePath, compressedImageBuffer);
+
+            // Lưu file .zip
+            const zipFilename = Date.now() + path.extname(zipFile[0].originalname);
+            const zipFilePath = path.join(storagePathZip, zipFilename);
+            fs.writeFileSync(zipFilePath, zipFile[0].buffer);
+
+            // Đường dẫn công khai
+            const publicImagePath = `/images/${imageFilename}`;
+            const publicZipPath = `/games/${zipFilename}`;
+
+            // Lưu vào cơ sở dữ liệu
+            const game = new Game({
+                id_user: req.body.id_user,
+                game_name: req.body.name,
+                no_blood: req.body.no_blood,
+                ingame_purchases: req.body.ingame_purchases,
+                child_friendly: req.body.child_friendly,
+                imagePath: publicImagePath,
+                gamePath: publicZipPath,
+            });
+
             await game.save();
-            res.json({ message: 'File uploaded successfully!', filePath: imagePath });
+            res.json({ message: 'File uploaded successfully!', imagePath: publicImagePath, zipPath: publicZipPath });
         } catch (error) {
             console.error("Database Error: ", error);
             res.status(500).json({ error: 'Lỗi khi lưu vào cơ sở dữ liệu.' });

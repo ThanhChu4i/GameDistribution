@@ -53,7 +53,7 @@ const GameDetails = () => {
                 {/* Phần xem trước Game */}
                 <div className="game-preview">
                     <div className='jtfct'>
-                    {game.imageUrl && <img className ='imgforGdtai' src={game.imageUrl} alt={game.game_name} />}
+                    {game.imagePath && <img className ='imgforGdtai' src={game.imagePath} alt={game.game_name} />}
                     <h1>{game.game_name}</h1>
                     <p>by {game.company}</p>
                     <button className="play-button">Play Now</button>
