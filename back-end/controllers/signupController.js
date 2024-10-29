@@ -10,9 +10,15 @@ const signupUser = async (req, res) => {
         return res.status(400).json({ message: "Please fill in all information." });
     }
 
-    const saltRounds = 10;
     try {
+        // Kiểm tra nếu email đã tồn tại
+        const existingUser = await User.findOne({ email });
+        if (existingUser) {
+            return res.status(409).json({ message: "Email already exists." });
+        }
+
         // Mã hóa mật khẩu
+        const saltRounds = 10;
         const hashedPassword = await bcrypt.hash(password, saltRounds);
 
         // Tạo một người dùng mới
@@ -33,11 +39,6 @@ const signupUser = async (req, res) => {
 
     } catch (err) {
         console.error('Error during registration:', err);
-        
-        // Kiểm tra nếu lỗi là do email đã tồn tại
-        if (err.code === 11000) { // Mã lỗi cho email đã tồn tại
-            return res.status(409).json({ message: "Email already exists." });
-        }
         return res.status(500).json({ message: "Server error." });
     }
 };

@@ -24,13 +24,14 @@
     game_name: { type: String, required: true },
     game_description: { type: String },
     instruction: { type: String },
-    date_release: { type: Date },
+    date_release: { type: Date, default: Date.now },
     play_count: { type: Number, default: 0 },
     play_number: { type: Number, default: 0 },
     no_blood: { type:Boolean },
     child_friendly: { type: Boolean },
     imagePath: { type: String, require :true },
-    ingame_purchases: { type: Boolean }
+    ingame_purchases: { type: Boolean },
+    gamePath: {type:String, require: true }
   });
 
   const Game = mongoose.model('Game', gameSchema);
