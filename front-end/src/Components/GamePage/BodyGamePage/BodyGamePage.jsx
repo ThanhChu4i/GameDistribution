@@ -216,9 +216,7 @@ function BodyGamePage() {
           {!loading && !error && games.map((game) => (
             <div key={game.id_game} className="game-card">
               <Link to={`/Games/${game._id}`}>
-                {game.imageUrl && (  // Kiểm tra game.imageUrl có tồn tại
-                  <img src={game.imageUrl} alt="Game Image" /> // Sửa lại đây
-                )}
+                {game.imagePath && <img src={game.imagePath} alt={game.game_name} />}
                 <h4>{game.game_name}</h4>
               </Link>
               <p>{game.company}</p>
