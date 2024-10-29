@@ -16,6 +16,7 @@ const { getGamesByTab } = require('./controllers/getGameTab.js');
 const authenticateAdmin = require('./middleware/authenticateAdmin/authenticateAdmin.js');
 const authenticateToken = require('./middleware/authenticateToken/authenticateToken.js');
 const userRoutes = require('./routes/userRoutes.js');
+const adminRoutes = require('./routes/adminRoutes.js');
 
 // Middleware
 app.use(cors({
@@ -34,6 +35,7 @@ app.use('/storage', express.static('storage')); // Để phục vụ file upload
 // Sử dụng routes
 app.use('/api/games',gameRoutes);
 app.use('/api',routes);
+app.use('/admin',adminRoutes);
 app.get('/games/tab/:tabNumber', async (req, res) => {
     const tabNumber = parseInt(req.params.tabNumber);
 
