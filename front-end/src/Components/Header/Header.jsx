@@ -2,6 +2,7 @@ import React, { useContext, useState } from 'react';
 import './Header.css';  
 import { Link } from "react-router-dom";
 import logo from '../Assets/GD-FullLogo-2Line.png';
+<<<<<<< HEAD
 import searchlogo from '../Assets/icons8-search-48.png';
 import userAvatar from '../Assets/avatar_default.webp'; // Đường dẫn tới ảnh avatar mặc định
 import { AuthContext } from '../AuthContext/AuthContext'; // Nhập AuthContext
@@ -15,6 +16,16 @@ const Header = ({ openLoginModal }) => {
     setSearchVisible(!isSearchVisible);
   };
 
+=======
+import userAvatar from '../Assets/avatar_default.webp'; // Đường dẫn tới ảnh avatar mặc định
+import { AuthContext } from '../AuthContext/AuthContext'; // Nhập AuthContext
+import Search from '../Search/Search';
+const Header = ({ openLoginModal }) => {
+ // State cho việc hiển thị thanh tìm kiếm
+  const { isLoggedIn, logout } = useContext(AuthContext); // Lấy trạng thái đăng nhập và hàm logout
+  const [showDropdown, setShowDropdown] = useState(false); // State cho dropdown user
+
+>>>>>>> b8848db95fa5191de8f646da59eee0cd2224d318
   const toggleDropdown = () => {
     setShowDropdown(!showDropdown);
   };
@@ -71,6 +82,7 @@ const Header = ({ openLoginModal }) => {
         <Link to="/Support">Support</Link>
       </nav>
 
+<<<<<<< HEAD
       <div className="header-actions">
         <div className="search-header">
           {isSearchVisible && (
@@ -83,6 +95,10 @@ const Header = ({ openLoginModal }) => {
           </div> 
         </div>
 
+=======
+      <div className="header-actions"> 
+              <Search/>   
+>>>>>>> b8848db95fa5191de8f646da59eee0cd2224d318
         {isLoggedIn ? (
           <div className="user-section">
             <img

@@ -11,16 +11,28 @@
     max-width: 1200px;
     margin: 0 auto;
     padding: 0 20px;
+<<<<<<< HEAD
+=======
+    background-color: #ffff;
+>>>>>>> b8848db95fa5191de8f646da59eee0cd2224d318
 }
 .f
 .left-section {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
+<<<<<<< HEAD
+=======
+    background-color: #ffff;
+>>>>>>> b8848db95fa5191de8f646da59eee0cd2224d318
 }
 
 .footer-logo {
     height: 50px;
+<<<<<<< HEAD
+=======
+    background-color: #ffff;
+>>>>>>> b8848db95fa5191de8f646da59eee0cd2224d318
 }
 
 .footer-bottom {

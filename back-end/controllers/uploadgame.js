@@ -74,6 +74,11 @@ const uploadGameImage = async (req, res) => {
                 no_blood: req.body.no_blood,
                 ingame_purchases: req.body.ingame_purchases,
                 child_friendly: req.body.child_friendly,
+<<<<<<< HEAD
+=======
+                game_description: req.body.descripton,
+                instruction: req.body.instruction,
+>>>>>>> b8848db95fa5191de8f646da59eee0cd2224d318
                 imagePath: publicImagePath,
                 gamePath: publicZipPath,
             });

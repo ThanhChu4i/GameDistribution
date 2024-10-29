@@ -16,12 +16,23 @@ const handleOpenInNewTab = () => {
     const url = window.location.href; // Lấy URL hiện tại
     window.open(url, '_blank'); // Mở URL trong tab mới
 };
+<<<<<<< HEAD
+=======
+
+>>>>>>> b8848db95fa5191de8f646da59eee0cd2224d318
 const GameDetails = () => {
     const { id } = useParams(); // Lấy id từ URL
     const [game, setGame] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
+<<<<<<< HEAD
     
+=======
+    const [isPlaying,setIsPlaying] = useState(false);
+    const setPlay =() => {
+        setIsPlaying(true);
+    }
+>>>>>>> b8848db95fa5191de8f646da59eee0cd2224d318
     useEffect(() => {
         const fetchGameDetails = async () => {
             setLoading(true);
@@ -51,14 +62,31 @@ const GameDetails = () => {
             <title>{game.game_name}</title>
             <div className="left-section">
                 {/* Phần xem trước Game */}
+<<<<<<< HEAD
                 <div className="game-preview">
+=======
+            {isPlaying ?( <div className="game-preview">
+>>>>>>> b8848db95fa5191de8f646da59eee0cd2224d318
                     <div className='jtfct'>
                     {game.imagePath && <img className ='imgforGdtai' src={game.imagePath} alt={game.game_name} />}
                     <h1>{game.game_name}</h1>
                     <p>by {game.company}</p>
+<<<<<<< HEAD
                     <button className="play-button">Play Now</button>
                     </div>
                 </div>
+=======
+                    <button className="play-button">Playddd Now</button>
+                    </div>
+                </div>):(  <div className="game-preview">
+                    <div className='jtfct'>
+                    {game.imagePath && <img className ='imgforGdtai' src={game.imagePath} alt={game.game_name} />}
+                    <h1>{game.game_name}</h1>
+                    <p>by {game.company}</p>
+                    <button onClick={setPlay} className="play-button">Play Now</button>
+                    </div>
+                </div>) }
+>>>>>>> b8848db95fa5191de8f646da59eee0cd2224d318
                 <div className='Share-and-open-in-new-tab'>
                 <button className= 'SaOp' onClick={handleShare}><strong>Share</strong></button>
                 <button className= 'SaOp' onClick={handleOpenInNewTab}><strong>Open in New Tab</strong></button>

@@ -16,6 +16,10 @@ const { getGamesByTab } = require('./controllers/getGameTab.js');
 const authenticateAdmin = require('./middleware/authenticateAdmin/authenticateAdmin.js');
 const authenticateToken = require('./middleware/authenticateToken/authenticateToken.js');
 const userRoutes = require('./routes/userRoutes.js');
+<<<<<<< HEAD
+=======
+const adminRoutes = require('./routes/adminRoutes.js');
+>>>>>>> b8848db95fa5191de8f646da59eee0cd2224d318
 
 // Middleware
 app.use(cors({
@@ -34,6 +38,10 @@ app.use('/storage', express.static('storage')); // Để phục vụ file upload
 // Sử dụng routes
 app.use('/api/games',gameRoutes);
 app.use('/api',routes);
+<<<<<<< HEAD
+=======
+app.use('/admin',adminRoutes);
+>>>>>>> b8848db95fa5191de8f646da59eee0cd2224d318
 app.get('/games/tab/:tabNumber', async (req, res) => {
     const tabNumber = parseInt(req.params.tabNumber);
 

@@ -6,7 +6,11 @@ const getGameById = async (req, res) => {
 
         // Tìm game bằng id và populate user liên quan
         const game = await Game.findById(id).populate('id_user', 'company'); // Chỉ lấy trường company từ User
+<<<<<<< HEAD
 
+=======
+        console.log(game);
+>>>>>>> b8848db95fa5191de8f646da59eee0cd2224d318
         if (!game) {
             return res.status(404).json({ message: 'Game không tồn tại' });
         }

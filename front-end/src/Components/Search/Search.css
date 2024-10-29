@@ -1,0 +1,86 @@
+/* Overlay cho popup */
+.popup-overlay {
+    position: absolute; /* Đặt vị trí là absolute */
+    top: 100%; /* Đưa nó xuống dưới ô tìm kiếm */
+    left: 0;
+    right: 0;
+    background-color: none; /* Màu nền trắng với độ trong suốt */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Bóng đổ */
+    z-index: 1000; /* Đảm bảo popup nổi bật hơn các phần tử khác */
+    margin-top: 5px; /* Khoảng cách giữa ô tìm kiếm và popup */
+    
+}
+
+/* Nội dung của popup */
+.popup-content {
+    padding: 20px; /* Khoảng cách bên trong */
+    border-radius: 8px; /* Làm tròn các góc */
+    width: 400px; /* Chiều rộng của popup */
+    text-align: center; /* Canh giữa nội dung văn bản */
+    background-color: none;
+}
+
+/* Các lớp còn lại không thay đổi */
+.search {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: white;
+    border-radius: 0px;
+    padding: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    width: 240px;
+}
+
+.link {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 5px;
+    text-decoration: none;
+    transition: 0.3s;
+    width: 100%;
+    border: 1px solid transparent;
+    border-radius: 5px;
+}
+
+.link:hover {
+    background-color: aqua;
+    border-color: blue;
+}
+
+.searchimg {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    border: 2px solid blue;
+}
+
+.searchinfo {
+    display: grid;
+    color: black;
+    margin-left: 10px;
+}
+
+.searchinfo p {
+    font-size: 16px;
+}
+
+.searchinfo strong {
+    font-size: 12px;
+}
+
+.Searchtext {
+    font-size: 15px;
+    padding: 15px;
+    margin-bottom: 5px;
+}
+
+/* Thêm CSS cho nút đóng */
+.popup-content button {
+    margin-top: 10px; /* Khoảng cách trên nút đóng */
+}
+.search-icon {
+    width: 30px;
+    height: 30px;  
+}

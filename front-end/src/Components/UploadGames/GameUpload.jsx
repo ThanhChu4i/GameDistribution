@@ -7,6 +7,11 @@ const GameUpload = () => {
     const [imageFile, setImageFile] = useState(null);
     const [zipFile, setZipFile] = useState(null);
     const [no_blood, setNo_blood] = useState(false);
+<<<<<<< HEAD
+=======
+    const [description, setDescription] = useState('');
+    const [instruction, setInstruction] = useState('');
+>>>>>>> b8848db95fa5191de8f646da59eee0cd2224d318
     const [child_friendly, setChild_friendly] = useState(false);
     const [ingame_purchases, setIngame_purchases] = useState(false);
     const [error, setError] = useState('');
@@ -52,6 +57,11 @@ const GameUpload = () => {
         formData.append('zipFile', zipFile);
         formData.append('name', gameName);
         formData.append('no_blood', no_blood);
+<<<<<<< HEAD
+=======
+        formData.append('decriptron',description);
+        formData.append('instruction',instruction);
+>>>>>>> b8848db95fa5191de8f646da59eee0cd2224d318
         formData.append('child_friendly', child_friendly);
         formData.append('ingame_purchases', ingame_purchases);
 
@@ -69,6 +79,11 @@ const GameUpload = () => {
             setImageFile(null);
             setZipFile(null);
             setNo_blood(false);
+<<<<<<< HEAD
+=======
+            setDescription(null);
+            setInstruction(null);
+>>>>>>> b8848db95fa5191de8f646da59eee0cd2224d318
             setChild_friendly(false);
             setIngame_purchases(false);
         } catch (error) {
@@ -136,6 +151,27 @@ const GameUpload = () => {
                         required
                     />
                 </div>
+<<<<<<< HEAD
+=======
+                <div>
+                    <label>Description</label>
+                    <input
+                        type="text"
+                        value={description}
+                        onChange={(e) => setDescription(e.target.value)}
+                        required
+                    />
+                </div>
+                <div>
+                    <label>Instruction:</label>
+                    <input
+                        type="text"
+                        value={instruction}
+                        onChange={(e) => setInstruction(e.target.value)}
+                        required
+                    />
+                </div>
+>>>>>>> b8848db95fa5191de8f646da59eee0cd2224d318
                 <button type="submit" disabled={loading}>
                     {loading ? 'Đang upload...' : 'Upload'}
                 </button>
