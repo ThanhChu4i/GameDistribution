@@ -4,7 +4,6 @@ import logo from '../Assets/GD-FullLogo-2Line.png'
 import location from '../Assets/location.svg'
 import linkin from '../Assets/social-link.svg'
 const Footer = () => {
-    // con me may con cho 
     return (
         <footer className="footer">
             <div className="footer-container">
