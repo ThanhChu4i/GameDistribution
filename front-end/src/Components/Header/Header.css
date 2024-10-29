@@ -7,10 +7,7 @@
     background-color: #fefffe;
     padding: 10px 20px; /* Thêm padding cho header */
     color: rgb(0, 0, 0); /* Màu chữ trắng */
-<<<<<<< HEAD
-=======
     height: 75px;
->>>>>>> b8848db95fa5191de8f646da59eee0cd2224d318
 }
 
 .logo {
@@ -38,34 +35,24 @@
 .header-actions {
     display: flex;
     justify-content:flex-end;
-<<<<<<< HEAD
     gap: 0px; /* Khoảng cách giữa các nút */
-=======
     gap: 10px; /* Khoảng cách giữa các nút */
     height: 50px;
->>>>>>> b8848db95fa5191de8f646da59eee0cd2224d318
 }
 .search-header {
     display: flex;
     justify-content: flex-end;
     margin-right: 10px;
 }
-
-<<<<<<< HEAD
 .search-logo {
 }
-=======
->>>>>>> b8848db95fa5191de8f646da59eee0cd2224d318
 .login-button {
     background-color: #3b21cc;; /* Màu nền cho nút */
     color: white;
     border: none;
     border-radius: 10px;
     padding: 10px 15px; /* Padding cho nút */
-<<<<<<< HEAD
-=======
     height: 50px;
->>>>>>> b8848db95fa5191de8f646da59eee0cd2224d318
     cursor: pointer;
     transition: background-color 0.3s; /* Hiệu ứng chuyển màu nền */
 }

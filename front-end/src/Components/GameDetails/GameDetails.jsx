@@ -2,6 +2,7 @@ import './GameDetails.css';
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
+
 const handleShare = () => {
     const url = window.location.href; // Lấy URL hiện tại
     navigator.clipboard.writeText(url) // Sao chép vào clipboard
@@ -12,27 +13,23 @@ const handleShare = () => {
             console.error('Failed to copy: ', err);
         });
 };
+
 const handleOpenInNewTab = () => {
     const url = window.location.href; // Lấy URL hiện tại
     window.open(url, '_blank'); // Mở URL trong tab mới
 };
-<<<<<<< HEAD
-=======
 
->>>>>>> b8848db95fa5191de8f646da59eee0cd2224d318
 const GameDetails = () => {
     const { id } = useParams(); // Lấy id từ URL
     const [game, setGame] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
-<<<<<<< HEAD
-    
-=======
-    const [isPlaying,setIsPlaying] = useState(false);
-    const setPlay =() => {
+    const [isPlaying, setIsPlaying] = useState(false);
+
+    const setPlay = () => {
         setIsPlaying(true);
-    }
->>>>>>> b8848db95fa5191de8f646da59eee0cd2224d318
+    };
+
     useEffect(() => {
         const fetchGameDetails = async () => {
             setLoading(true);
@@ -62,53 +59,47 @@ const GameDetails = () => {
             <title>{game.game_name}</title>
             <div className="left-section">
                 {/* Phần xem trước Game */}
-<<<<<<< HEAD
                 <div className="game-preview">
-=======
-            {isPlaying ?( <div className="game-preview">
->>>>>>> b8848db95fa5191de8f646da59eee0cd2224d318
-                    <div className='jtfct'>
-                    {game.imagePath && <img className ='imgforGdtai' src={game.imagePath} alt={game.game_name} />}
-                    <h1>{game.game_name}</h1>
-                    <p>by {game.company}</p>
-<<<<<<< HEAD
-                    <button className="play-button">Play Now</button>
-                    </div>
+                    {isPlaying ? (
+                        <div className='jtfct'>
+                            {game.imagePath && <img className='imgforGdtai' src={game.imagePath} alt={game.game_name} />}
+                            <h1>{game.game_name}</h1>
+                            <p>by {game.company}</p>
+                            <button className="play-button">Play Now</button>
+                        </div>
+                    ) : (
+                        <div className='jtfct'>
+                            {game.imagePath && <img className='imgforGdtai' src={game.imagePath} alt={game.game_name} />}
+                            <h1>{game.game_name}</h1>
+                            <p>by {game.company}</p>
+                            <button onClick={setPlay} className="play-button">Play Now</button>
+                        </div>
+                    )}
                 </div>
-=======
-                    <button className="play-button">Playddd Now</button>
-                    </div>
-                </div>):(  <div className="game-preview">
-                    <div className='jtfct'>
-                    {game.imagePath && <img className ='imgforGdtai' src={game.imagePath} alt={game.game_name} />}
-                    <h1>{game.game_name}</h1>
-                    <p>by {game.company}</p>
-                    <button onClick={setPlay} className="play-button">Play Now</button>
-                    </div>
-                </div>) }
->>>>>>> b8848db95fa5191de8f646da59eee0cd2224d318
+
                 <div className='Share-and-open-in-new-tab'>
-                <button className= 'SaOp' onClick={handleShare}><strong>Share</strong></button>
-                <button className= 'SaOp' onClick={handleOpenInNewTab}><strong>Open in New Tab</strong></button>
+                    <button className='SaOp' onClick={handleShare}><strong>Share</strong></button>
+                    <button className='SaOp' onClick={handleOpenInNewTab}><strong>Open in New Tab</strong></button>
                 </div>
+
                 {/* Thông tin chi tiết về Game */}
                 <div className="game-details">
                     <div className='gameinfor'><strong>Game Title:</strong> {game.game_name}</div>
                     <div className='gameinfor'><strong>Publisher by:</strong> {game.company}</div>
-                    <div className='gameinfor'><strong>Platform:</strong> Web</div> {/* Cập nhật thông tin đúng */}
-                    <div className='gameinfor'><strong>Language:</strong> English</div> {/* Cập nhật thông tin đúng */}
-                    <div className='gameinfor'><strong>Genre:</strong> Casual</div> {/* Cập nhật thông tin đúng */}
-                    <div className='gameinfor'><strong>Age Group:</strong> All Ages</div> {/* Cập nhật thông tin đúng */}
+                    <div className='gameinfor'><strong>Platform:</strong> Web</div>
+                    <div className='gameinfor'><strong>Language:</strong> English</div>
+                    <div className='gameinfor'><strong>Genre:</strong> Casual</div>
+                    <div className='gameinfor'><strong>Age Group:</strong> All Ages</div>
                 </div>
 
                 {/* Mô tả và Hướng dẫn */}
                 <div className="description-section">
                     <h3>Description</h3>
-                    <p>{game.game_description}</p> {/* Hiển thị mô tả game */}
+                    <p>{game.game_description}</p>
                 </div>
                 <div className="description-section">
                     <h3>Instructions</h3>
-                    <p>{game.instruction}</p> {/* Hiển thị hướng dẫn */}
+                    <p>{game.instruction}</p>
                 </div>
 
                 {/* Mã nhúng và URL ví dụ */}
@@ -141,7 +132,7 @@ const GameDetails = () => {
                 {/* Thông tin bổ sung */}
                 <div className="additional-info">
                     <h3>Additional Information</h3>
-                    <p><strong>Last Updated:</strong>{game.date_release}</p>
+                    <p><strong>Last Updated:</strong> {game.date_release}</p>
                     <p><strong>Type:</strong> HTML5</p>
                     <p><strong>Screen Orientation:</strong> Landscape</p>
                     <p><strong>Dimensions:</strong> 800x600</p>
