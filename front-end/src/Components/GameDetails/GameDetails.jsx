@@ -1,39 +1,49 @@
-
 import './GameDetails.css';
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
 
 const GameDetails = () => {
-        const { id } = useParams(); // Lấy id từ URL
-        const [game, setGame] = useState(null);
-        const [loading, setLoading] = useState(true);
-        const [error, setError] = useState(null);
-    
-        useEffect(() => {
-            const fetchGameDetails = async () => {
-                setLoading(true);
-                try {
-                    const response = await axios.get(`http://localhost:8081/api/games/${id}`);
-                    setGame(response.data);
-                } catch (err) {
-                    setError("Không thể tải thông tin game.");
-                } finally {
-                    setLoading(false);
-                }
-            };
-            fetchGameDetails();
-        }, [id]);
+    const { id } = useParams(); // Lấy id từ URL
+    const [game, setGame] = useState(null);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
+
+    useEffect(() => {
+        const fetchGameDetails = async () => {
+            setLoading(true);
+            try {
+                const response = await axios.get(`http://localhost:8081/api/games/${id}`);
+                setGame(response.data);
+            } catch (err) {
+                setError("Không thể tải thông tin game.");
+            } finally {
+                setLoading(false);
+            }
+        };
+        fetchGameDetails();
+    }, [id]);
+
+    if (loading) {
+        return <div>Loading...</div>; // Hiển thị thông báo tải
+    }
+
+    if (error) {
+        return <div>{error}</div>; // Hiển thị thông báo lỗi
+    }
+
     return (
         <div className="game-details-container">
             {/* Phần bên trái */}
             <div className="left-section">
                 {/* Phần xem trước Game */}
                 <div className="game-preview">
-                    <img src="game_image_url_here" alt="Game Preview" className="game-main-image" />
-                    <h1>Sort Resort</h1>
-                    <p>by Aversion Casual Games</p>
+                    <div className='jtfct'>
+                    {game.imageUrl && <img className ='imgforGdtai' src={game.imageUrl} alt={game.game_name} />}
+                    <h1>{game.game_name}</h1>
+                    <p>by {game.company}</p>
                     <button className="play-button">Play Now</button>
+                    </div>
                 </div>
                 <div className='Share-and-open-in-new-tab'>
                     <button className='SaOp'><strong>Share</strong></button>
@@ -41,22 +51,22 @@ const GameDetails = () => {
                 </div>
                 {/* Thông tin chi tiết về Game */}
                 <div className="game-details">
-                    <div className='gameinfor'><strong>Game Title:</strong></div>
-                    <div className='gameinfor'><strong>Publisher by:</strong></div>
-                    <div className='gameinfor'><strong>Platfom:</strong></div>
-                    <div className='gameinfor'><strong>Language:</strong></div>
-                    <div className='gameinfor'><strong>Gender:</strong></div>
-                    <div className='gameinfor'><strong>Age Group</strong></div>
+                    <div className='gameinfor'><strong>Game Title:</strong> {game.game_name}</div>
+                    <div className='gameinfor'><strong>Publisher by:</strong> {game.company}</div>
+                    <div className='gameinfor'><strong>Platform:</strong> Web</div> {/* Cập nhật thông tin đúng */}
+                    <div className='gameinfor'><strong>Language:</strong> English</div> {/* Cập nhật thông tin đúng */}
+                    <div className='gameinfor'><strong>Genre:</strong> Casual</div> {/* Cập nhật thông tin đúng */}
+                    <div className='gameinfor'><strong>Age Group:</strong> All Ages</div> {/* Cập nhật thông tin đúng */}
                 </div>
 
                 {/* Mô tả và Hướng dẫn */}
                 <div className="description-section">
                     <h3>Description</h3>
-                    <p>Unleash your creativity and puzzle-solving skills in this unique game!...</p>
+                    <p>{game.game_description}</p> {/* Hiển thị mô tả game */}
                 </div>
                 <div className="description-section">
                     <h3>Instructions</h3>
-                    <p>Your task is to sort the liquids into the correct flasks...</p>
+                    <p>{game.instruction}</p> {/* Hiển thị hướng dẫn */}
                 </div>
 
                 {/* Mã nhúng và URL ví dụ */}
@@ -67,7 +77,7 @@ const GameDetails = () => {
                 </div>
                 <div className="embed-section">
                     <h3>Example URL</h3>
-                    <textarea readOnly value="example_url_here" />
+                    <textarea readOnly value={`http://localhost:8081/games/${id}`} />
                     <button>Copy</button>
                 </div>
             </div>
