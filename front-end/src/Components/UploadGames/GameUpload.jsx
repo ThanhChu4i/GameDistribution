@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import Cookies from 'js-cookie';
-import imageCompression from 'browser-image-compression';
+
 const GameUpload = () => {
     const [gameName, setGameName] = useState('');
     const [imageFile, setImageFile] = useState(null);
+    const [zipFile, setZipFile] = useState(null);
     const [no_blood, setNo_blood] = useState(false);
     const [child_friendly, setChild_friendly] = useState(false);
     const [ingame_purchases, setIngame_purchases] = useState(false);
@@ -18,40 +19,37 @@ const GameUpload = () => {
     const handleImageFileChange = (e) => {
         const file = e.target.files[0];
         const validImageTypes = ['image/jpeg', 'image/jpg', 'image/png', 'image/gif'];
-        const validExtensions = ['.jpeg', '.jpg', '.png', '.gif'];
-
-        // Kiểm tra loại file
-        if (file) {
-            const isValidType = validImageTypes.includes(file.type);
-            const fileExtension = file.name.slice(((file.name.lastIndexOf(".") - 1) >>> 0) + 2);
-            const isValidExtension = validExtensions.includes(`.${fileExtension.toLowerCase()}`);
-
-            if (isValidType && isValidExtension) {
-                setImageFile(file);
-                setError('');
-            } else {
-                setError('Chỉ chấp nhận file ảnh có định dạng JPEG, JPG, PNG hoặc GIF!');
-            }
+        
+        if (file && validImageTypes.includes(file.type)) {
+            setImageFile(file);
+            setError('');
         } else {
-            setError('Chưa chọn file ảnh!');
+            setError('Chỉ chấp nhận file ảnh có định dạng JPEG, JPG, PNG hoặc GIF!');
+        }
+    };
+
+    // Xử lý thay đổi file .zip
+    const handleZipFileChange = (e) => {
+        const file = e.target.files[0];
+        if (file && file.type === 'application/zip') {
+            setZipFile(file);
+            setError('');
+        } else {
+            setError('Chỉ chấp nhận file .zip cho dữ liệu game!');
         }
     };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        if (!gameName || !imageFile) {
-            setError('Vui lòng điền đầy đủ thông tin!');
+        if (!gameName || !imageFile || !zipFile) {
+            setError('Vui lòng điền đầy đủ thông tin và tải lên cả ảnh và file .zip!');
             return;
         }
-        const options = {
-            maxSizeMB: 1, // Giới hạn kích thước tối đa của file (1MB)
-            maxWidthOrHeight: 1024, // Giới hạn chiều rộng hoặc chiều cao tối đa
-            useWebWorker: true // Sử dụng Web Worker để xử lý
-        };
-        const compressedFile = await imageCompression(imageFile, options);
+
         const formData = new FormData();
         formData.append('id_user', id_user);
-        formData.append('image', compressedFile);
+        formData.append('image', imageFile);
+        formData.append('zipFile', zipFile);
         formData.append('name', gameName);
         formData.append('no_blood', no_blood);
         formData.append('child_friendly', child_friendly);
@@ -65,16 +63,16 @@ const GameUpload = () => {
                 },
             });
 
-            // Xử lý phản hồi từ server
             setSuccessMessage('Tải lên thành công!');
             setError('');
             setGameName('');
             setImageFile(null);
+            setZipFile(null);
             setNo_blood(false);
             setChild_friendly(false);
             setIngame_purchases(false);
         } catch (error) {
-            setError('Có lỗi xảy ra khi upload file.');
+            setError(error.response?.data?.error || 'Có lỗi xảy ra khi upload file.');
             console.error(error);
         } finally {
             setLoading(false);
@@ -126,6 +124,15 @@ const GameUpload = () => {
                         type="file"
                         accept="image/*"
                         onChange={handleImageFileChange}
+                        required
+                    />
+                </div>
+                <div>
+                    <label>Chọn file .zip cho dữ liệu game:</label>
+                    <input
+                        type="file"
+                        accept=".zip"
+                        onChange={handleZipFileChange}
                         required
                     />
                 </div>
