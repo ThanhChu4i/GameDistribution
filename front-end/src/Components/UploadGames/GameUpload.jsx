@@ -7,6 +7,8 @@ const GameUpload = () => {
     const [imageFile, setImageFile] = useState(null);
     const [zipFile, setZipFile] = useState(null);
     const [no_blood, setNo_blood] = useState(false);
+    const [description, setDescription] = useState('');
+    const [instruction, setInstruction] = useState('');
     const [child_friendly, setChild_friendly] = useState(false);
     const [ingame_purchases, setIngame_purchases] = useState(false);
     const [error, setError] = useState('');
@@ -52,6 +54,8 @@ const GameUpload = () => {
         formData.append('zipFile', zipFile);
         formData.append('name', gameName);
         formData.append('no_blood', no_blood);
+        formData.append('decriptron',description);
+        formData.append('instruction',instruction);
         formData.append('child_friendly', child_friendly);
         formData.append('ingame_purchases', ingame_purchases);
 
@@ -69,6 +73,8 @@ const GameUpload = () => {
             setImageFile(null);
             setZipFile(null);
             setNo_blood(false);
+            setDescription(null);
+            setInstruction(null);
             setChild_friendly(false);
             setIngame_purchases(false);
         } catch (error) {
@@ -133,6 +139,24 @@ const GameUpload = () => {
                         type="file"
                         accept=".zip"
                         onChange={handleZipFileChange}
+                        required
+                    />
+                </div>
+                <div>
+                    <label>Description</label>
+                    <input
+                        type="text"
+                        value={description}
+                        onChange={(e) => setDescription(e.target.value)}
+                        required
+                    />
+                </div>
+                <div>
+                    <label>Instruction:</label>
+                    <input
+                        type="text"
+                        value={instruction}
+                        onChange={(e) => setInstruction(e.target.value)}
                         required
                     />
                 </div>

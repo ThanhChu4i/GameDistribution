@@ -16,12 +16,16 @@ const handleOpenInNewTab = () => {
     const url = window.location.href; // Lấy URL hiện tại
     window.open(url, '_blank'); // Mở URL trong tab mới
 };
+
 const GameDetails = () => {
     const { id } = useParams(); // Lấy id từ URL
     const [game, setGame] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
-    
+    const [isPlaying,setIsPlaying] = useState(false);
+    const setPlay =() => {
+        setIsPlaying(true);
+    }
     useEffect(() => {
         const fetchGameDetails = async () => {
             setLoading(true);
@@ -51,14 +55,21 @@ const GameDetails = () => {
             <title>{game.game_name}</title>
             <div className="left-section">
                 {/* Phần xem trước Game */}
-                <div className="game-preview">
+            {isPlaying ?( <div className="game-preview">
                     <div className='jtfct'>
                     {game.imagePath && <img className ='imgforGdtai' src={game.imagePath} alt={game.game_name} />}
                     <h1>{game.game_name}</h1>
                     <p>by {game.company}</p>
-                    <button className="play-button">Play Now</button>
+                    <button className="play-button">Playddd Now</button>
                     </div>
-                </div>
+                </div>):(  <div className="game-preview">
+                    <div className='jtfct'>
+                    {game.imagePath && <img className ='imgforGdtai' src={game.imagePath} alt={game.game_name} />}
+                    <h1>{game.game_name}</h1>
+                    <p>by {game.company}</p>
+                    <button onClick={setPlay} className="play-button">Play Now</button>
+                    </div>
+                </div>) }
                 <div className='Share-and-open-in-new-tab'>
                 <button className= 'SaOp' onClick={handleShare}><strong>Share</strong></button>
                 <button className= 'SaOp' onClick={handleOpenInNewTab}><strong>Open in New Tab</strong></button>
