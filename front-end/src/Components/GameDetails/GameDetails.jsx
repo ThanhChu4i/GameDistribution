@@ -2,13 +2,26 @@ import './GameDetails.css';
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
-
+const handleShare = () => {
+    const url = window.location.href; // Lấy URL hiện tại
+    navigator.clipboard.writeText(url) // Sao chép vào clipboard
+        .then(() => {
+            alert('Link copied to clipboard!');
+        })
+        .catch(err => {
+            console.error('Failed to copy: ', err);
+        });
+};
+const handleOpenInNewTab = () => {
+    const url = window.location.href; // Lấy URL hiện tại
+    window.open(url, '_blank'); // Mở URL trong tab mới
+};
 const GameDetails = () => {
     const { id } = useParams(); // Lấy id từ URL
     const [game, setGame] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
-
+    
     useEffect(() => {
         const fetchGameDetails = async () => {
             setLoading(true);
@@ -35,6 +48,7 @@ const GameDetails = () => {
     return (
         <div className="game-details-container">
             {/* Phần bên trái */}
+            <title>{game.game_name}</title>
             <div className="left-section">
                 {/* Phần xem trước Game */}
                 <div className="game-preview">
@@ -46,8 +60,8 @@ const GameDetails = () => {
                     </div>
                 </div>
                 <div className='Share-and-open-in-new-tab'>
-                    <button className='SaOp'><strong>Share</strong></button>
-                    <button className='SaOp'><strong>Open in new tab</strong></button>
+                <button className= 'SaOp' onClick={handleShare}><strong>Share</strong></button>
+                <button className= 'SaOp' onClick={handleOpenInNewTab}><strong>Open in New Tab</strong></button>
                 </div>
                 {/* Thông tin chi tiết về Game */}
                 <div className="game-details">
@@ -99,11 +113,11 @@ const GameDetails = () => {
                 {/* Thông tin bổ sung */}
                 <div className="additional-info">
                     <h3>Additional Information</h3>
-                    <p><strong>Last Updated:</strong> Sep 16, 2024</p>
+                    <p><strong>Last Updated:</strong>{game.date_release}</p>
                     <p><strong>Type:</strong> HTML5</p>
                     <p><strong>Screen Orientation:</strong> Landscape</p>
                     <p><strong>Dimensions:</strong> 800x600</p>
-                    <p><strong>Publisher:</strong> Aversion Casual Games</p>
+                    <p><strong>Publisher:</strong> {game.company}</p>
                 </div>
 
                 {/* Tags và Biểu tượng */}
