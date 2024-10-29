@@ -56,6 +56,7 @@ const GameUpload = () => {
         formData.append('no_blood', no_blood);
         formData.append('decriptron',description);
         formData.append('instruction',instruction);
+
         formData.append('child_friendly', child_friendly);
         formData.append('ingame_purchases', ingame_purchases);
 
@@ -73,6 +74,7 @@ const GameUpload = () => {
             setImageFile(null);
             setZipFile(null);
             setNo_blood(false);
+
             setDescription(null);
             setInstruction(null);
             setChild_friendly(false);

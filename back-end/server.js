@@ -17,7 +17,6 @@ const authenticateAdmin = require('./middleware/authenticateAdmin/authenticateAd
 const authenticateToken = require('./middleware/authenticateToken/authenticateToken.js');
 const userRoutes = require('./routes/userRoutes.js');
 const adminRoutes = require('./routes/adminRoutes.js');
-
 // Middleware
 app.use(cors({
     origin: 'http://localhost:3000', // Địa chỉ frontend của bạn

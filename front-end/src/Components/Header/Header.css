@@ -35,6 +35,7 @@
 .header-actions {
     display: flex;
     justify-content:flex-end;
+    gap: 0px; /* Khoảng cách giữa các nút */
     gap: 10px; /* Khoảng cách giữa các nút */
     height: 50px;
 }
@@ -43,7 +44,8 @@
     justify-content: flex-end;
     margin-right: 10px;
 }
-
+.search-logo {
+}
 .login-button {
     background-color: #3b21cc;; /* Màu nền cho nút */
     color: white;
