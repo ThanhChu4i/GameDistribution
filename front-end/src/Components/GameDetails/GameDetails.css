@@ -72,6 +72,9 @@
   height: 800px;
   background-color: #4CAF50;
   border-radius: 10px;
+  display: flex;
+  justify-content: center; /* Căn giữa theo chiều ngang */
+  align-items: center; 
 }
 
 .game-main-image {
@@ -150,4 +153,8 @@
 .collection-item img {
   width: 100%;
   border-radius: 5px;
+}
+.imgforGdtai {
+  width: 200px;
+  height:150px;
 }
