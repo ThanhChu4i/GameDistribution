@@ -1,4 +1,4 @@
-import { useState } from "react";
+
 import { Box } from "@mui/material";
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
@@ -6,14 +6,12 @@ import { Routes, Route } from "react-router-dom";
 import Cookies from 'js-cookie';
 import axios from 'axios';
 import Topbar from "./scenes/global/Topbar";
-import Sidebar from "./scenes/gltobal/Sidebar";
 import Dashboard from "./scenes/dashboard";
 import { CssBaseline, ThemeProvider } from "@mui/material";
 import { ColorModeContext, useMode } from "./theme";
 
 function AdminPage() {
   const [theme, colorMode] = useMode();
-  const [isSidebar, setIsSidebar] = useState(true);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -40,9 +38,8 @@ function AdminPage() {
         <ThemeProvider theme={theme}>
           <CssBaseline />
           <div className="app">
-            <Sidebar isSidebar={isSidebar} />
             <main className="content">
-              <Topbar setIsSidebar={setIsSidebar} />
+              <Topbar />
               <Routes>
                 <Route path="/" element={<Dashboard />} />
 

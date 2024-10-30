@@ -21,7 +21,7 @@ const GameUpload = () => {
     const handleImageFileChange = (e) => {
         const file = e.target.files[0];
         const validImageTypes = ['image/jpeg', 'image/jpg', 'image/png', 'image/gif'];
-        
+
         if (file && validImageTypes.includes(file.type)) {
             setImageFile(file);
             setError('');
@@ -54,9 +54,8 @@ const GameUpload = () => {
         formData.append('zipFile', zipFile);
         formData.append('name', gameName);
         formData.append('no_blood', no_blood);
-        formData.append('description',description);
-        formData.append('instruction',instruction);
-
+        formData.append('description', description);
+        formData.append('instruction', instruction);
         formData.append('child_friendly', child_friendly);
         formData.append('ingame_purchases', ingame_purchases);
 
@@ -74,7 +73,6 @@ const GameUpload = () => {
             setImageFile(null);
             setZipFile(null);
             setNo_blood(false);
-
             setDescription(null);
             setInstruction(null);
             setChild_friendly(false);
@@ -144,17 +142,17 @@ const GameUpload = () => {
                         required
                     />
                 </div>
-                <div classname ='ack'>
+                <div classname='ack'>
                     <label for="destruction-title">Description:</label>
                     <input
-                        type="text" id ="destruction-title"
+                        type="text" id="destruction-title"
                         value={description}
                         onChange={(e) => setDescription(e.target.value)}
                         required
                     />
                 </div>
                 <div classname='ack'>
-                    <label for ="destruction-title">Instruction:</label>
+                    <label for="destruction-title">Instruction:</label>
                     <input
                         type="text" id="destruction-title"
                         value={instruction}
