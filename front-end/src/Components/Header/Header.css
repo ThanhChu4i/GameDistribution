@@ -164,7 +164,10 @@
     color: #000;
     font-size: medium;
   }
-
+  .btnbtn {
+    font-size: medium ;
+    color: #001aff;
+  }
   .btn :hover {
     background-color: rgba(0, 0, 0, 0.1);;
   }

@@ -78,10 +78,10 @@ const Header = ({ openLoginModal }) => { // State cho việc hiển thị thanh 
             />
             {showDropdown && (
               <div className="user-dropdown">
-                <Link to="/profile">Account Setting</Link>
-                <Link to="/Upload">Upload Game</Link>
-                <Link to="/change-password">Password Setting</Link>
-                <button onClick={handleLogout}>Log out</button>
+                <button className='btnbtn'><Link to="/profile">Account Setting</Link></button>
+                <button className='btnbtn'><Link to="/Upload">Upload Game</Link></button>
+                <button className='btnbtn'><Link to="/change-password">Password Setting</Link></button>
+                <button className='btnbtn' onClick={handleLogout}>Log out</button>
               </div>
             )}
           </div>

@@ -203,7 +203,7 @@ const Dashboard = () => {
           p="30px"
         >
           <Typography variant="h5" fontWeight="600">
-            Campaign
+            User play game last 30 day
           </Typography>
           <Box
             display="flex"
@@ -211,13 +211,15 @@ const Dashboard = () => {
             alignItems="center"
             mt="25px"
           >
-            <ProgressCircle size="125" />
+            <ProgressCircle size="125" 
+            progress={stats?.recentHistory && stats?.totalHistory ? stats.recentHistory / stats.totalHistory : 0}/>
             <Typography
               variant="h5"
               color={colors.greenAccent[500]}
               sx={{ mt: "15px" }}
+              progress={stats?.recentGames && stats?.totalGames ? stats.recentGames / stats.totalGames : 0}
             >
-              $48,352 revenue generated
+              {(stats.recentHistory ?? 0).toLocaleString()} / {(stats.totalHistory ?? 0).toLocaleString()}
             </Typography>
             <Typography>Includes extra misc expenditures and costs</Typography>
           </Box>
