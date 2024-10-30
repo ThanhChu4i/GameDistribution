@@ -67,10 +67,10 @@ const GameDetails = () => {
                             <button onClick={setPlay} className="play-button">Play Now</button>
                         </div>
                     ) : (           
-                        <iframe src= "../../../public/games/1730177168993/super_racer/index.html" width="1066" height="800" title="Game"/>
+                        <iframe src={game.gamePath} width="1066" height="800" title="Game"/>
                     )}
                 </div>
-
+                
                 <div className='Share-and-open-in-new-tab'>
                     <button className='action-button' onClick={handleShare}><strong>Share</strong></button>
                     <button className='action-button' onClick={handleOpenInNewTab}><strong>Open in New Tab</strong></button>

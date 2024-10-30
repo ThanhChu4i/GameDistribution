@@ -3,6 +3,7 @@ const multer = require('multer');
 const path = require('path');
 const fs = require('fs');
 const sharp = require('sharp');
+const unzipper = require('unzipper');
 
 const storagePathImages = path.resolve(__dirname, '../../front-end/public/images');
 const storagePathZip = path.resolve(__dirname, '../../front-end/public/games');
@@ -62,26 +63,38 @@ const uploadGameImage = async (req, res) => {
             const zipFilename = Date.now() + path.extname(zipFile[0].originalname);
             const zipFilePath = path.join(storagePathZip, zipFilename);
             fs.writeFileSync(zipFilePath, zipFile[0].buffer);
+             
+            // Giải nén file ZIP
+            const gameFolder = path.join(storagePathZip, path.basename(zipFilePath, '.zip'));
+            fs.mkdirSync(gameFolder, { recursive: true });
 
-            // Đường dẫn công khai
-            const publicImagePath = `/images/${imageFilename}`;
-            const publicZipPath = `/games/${zipFilename}`;
+            fs.createReadStream(zipFilePath)
+                .pipe(unzipper.Extract({ path: gameFolder }))
+                .on('close', async () => {
+                    // Đường dẫn công khai
+                    const publicImagePath = `/images/${imageFilename}`;
+                    const publicGamePath = `/games/${path.basename(gameFolder)}/${zipFile[0].originalname.replace('.zip', '')}/index.html`;
 
-            // Lưu vào cơ sở dữ liệu
-            const game = new Game({
-                id_user: req.body.id_user,
-                game_name: req.body.name,
-                no_blood: req.body.no_blood,
-                ingame_purchases: req.body.ingame_purchases,
-                child_friendly: req.body.child_friendly,
-                game_description: req.body.descripton,
-                instruction: req.body.instruction,
-                imagePath: publicImagePath,
-                gamePath: publicZipPath,
-            });
+                    // Lưu vào cơ sở dữ liệu
+                    const game = new Game({
+                        id_user: req.body.id_user,
+                        game_name: req.body.name,
+                        no_blood: req.body.no_blood,
+                        ingame_purchases: req.body.ingame_purchases,
+                        child_friendly: req.body.child_friendly,
+                        game_description: req.body.description, // Đã sửa lại từ 'descripton' thành 'description'
+                        instruction: req.body.instruction,
+                        imagePath: publicImagePath,
+                        gamePath: publicGamePath,
+                    });
 
-            await game.save();
-            res.json({ message: 'File uploaded successfully!', imagePath: publicImagePath, zipPath: publicZipPath });
+                    await game.save();
+                    res.json({ message: 'File uploaded and extracted successfully!', imagePath: publicImagePath, gamePath: publicGamePath });
+                })
+                .on('error', (err) => {
+                    console.error("Unzip Error: ", err);
+                    res.status(500).json({ error: 'Lỗi khi giải nén file ZIP.' });
+                });
         } catch (error) {
             console.error("Database Error: ", error);
             res.status(500).json({ error: 'Lỗi khi lưu vào cơ sở dữ liệu.' });
