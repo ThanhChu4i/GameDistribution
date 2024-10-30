@@ -144,19 +144,19 @@ const GameUpload = () => {
                         required
                     />
                 </div>
-                <div>
-                    <label>Description</label>
+                <div classname ='ack'>
+                    <label for="destruction-title">Description:</label>
                     <input
-                        type="text"
+                        type="text" id ="destruction-title"
                         value={description}
                         onChange={(e) => setDescription(e.target.value)}
                         required
                     />
                 </div>
-                <div>
-                    <label>Instruction:</label>
+                <div classname='ack'>
+                    <label for ="destruction-title">Instruction:</label>
                     <input
-                        type="text"
+                        type="text" id="destruction-title"
                         value={instruction}
                         onChange={(e) => setInstruction(e.target.value)}
                         required

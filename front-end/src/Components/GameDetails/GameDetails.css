@@ -15,7 +15,7 @@
 .Share-and-open-in-new-tab{
   margin: 20px;
 }
-.SaOp {
+.action-button {
   padding: 20px;
   color: blue;
   font-size: medium;
@@ -25,7 +25,7 @@
   box-sizing: 5px;
   transition: 0.3s;
 }
-.SaOp:hover {
+.action-button:hover {
   background-color: blue;
   color: white;
   border-color: white;
@@ -154,7 +154,8 @@
   width: 100%;
   border-radius: 5px;
 }
-.imgforGdtai {
+.game-thumbnail {
   width: 200px;
   height:150px;
+  border: 5px;
 }

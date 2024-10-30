@@ -14,16 +14,15 @@
     background-color: #ffff;
 }
 .f
-.left-section {
+.left-sectionn {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
     background-color: #ffff;
-
 }
 .footer-logo {
     height: 50px;
-
+    margin-right: 200px;
     background-color: #ffff;
 }
 .footer-bottom {

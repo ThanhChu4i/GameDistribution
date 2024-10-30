@@ -3,22 +3,6 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
 
-const handleShare = () => {
-    const url = window.location.href; // Lấy URL hiện tại
-    navigator.clipboard.writeText(url) // Sao chép vào clipboard
-        .then(() => {
-            alert('Link copied to clipboard!');
-        })
-        .catch(err => {
-            console.error('Failed to copy: ', err);
-        });
-};
-
-const handleOpenInNewTab = () => {
-    const url = window.location.href; // Lấy URL hiện tại
-    window.open(url, '_blank'); // Mở URL trong tab mới
-};
-
 const GameDetails = () => {
     const { id } = useParams(); // Lấy id từ URL
     const [game, setGame] = useState(null);
@@ -28,6 +12,23 @@ const GameDetails = () => {
 
     const setPlay = () => {
         setIsPlaying(true);
+    };
+
+    const handleShare = () => {
+        const url = window.location.href; // Lấy URL hiện tại
+        navigator.clipboard.writeText(url)
+            .then(() => alert('Link copied to clipboard!'))
+            .catch(err => console.error('Failed to copy: ', err));
+    };
+
+    const handleOpenInNewTab = () => {
+        window.open(window.location.href, '_blank'); // Mở URL trong tab mới
+    };
+
+    const handleCopyEmbed = (content) => {
+        navigator.clipboard.writeText(content)
+            .then(() => alert('Embed code copied!'))
+            .catch(err => console.error('Failed to copy: ', err));
     };
 
     useEffect(() => {
@@ -46,53 +47,44 @@ const GameDetails = () => {
     }, [id]);
 
     if (loading) {
-        return <div>Loading...</div>; // Hiển thị thông báo tải
+        return <div>Loading...</div>;
     }
 
     if (error) {
-        return <div>{error}</div>; // Hiển thị thông báo lỗi
+        return <div>{error}</div>;
     }
 
     return (
         <div className="game-details-container">
-            {/* Phần bên trái */}
             <title>{game.game_name}</title>
             <div className="left-section">
-                {/* Phần xem trước Game */}
                 <div className="game-preview">
-                    {isPlaying ? (
-                        <div className='jtfct'>
-                            {game.imagePath && <img className='imgforGdtai' src={game.imagePath} alt={game.game_name} />}
-                            <h1>{game.game_name}</h1>
-                            <p>by {game.company}</p>
-                            <button className="play-button">Play Now</button>
-                        </div>
-                    ) : (
-                        <div className='jtfct'>
-                            {game.imagePath && <img className='imgforGdtai' src={game.imagePath} alt={game.game_name} />}
+                    {!isPlaying ? (
+                        <div className='preview-info'>
+                            {game.imagePath && <img className='game-thumbnail' src={game.imagePath} alt={game.game_name} />}
                             <h1>{game.game_name}</h1>
                             <p>by {game.company}</p>
                             <button onClick={setPlay} className="play-button">Play Now</button>
                         </div>
+                    ) : (           
+                        <iframe src={"../../../public/games/1730177168993/super_racer/index.html"} width="1066" height="800" title="Game"></iframe>
                     )}
                 </div>
 
                 <div className='Share-and-open-in-new-tab'>
-                    <button className='SaOp' onClick={handleShare}><strong>Share</strong></button>
-                    <button className='SaOp' onClick={handleOpenInNewTab}><strong>Open in New Tab</strong></button>
+                    <button className='action-button' onClick={handleShare}><strong>Share</strong></button>
+                    <button className='action-button' onClick={handleOpenInNewTab}><strong>Open in New Tab</strong></button>
                 </div>
 
-                {/* Thông tin chi tiết về Game */}
                 <div className="game-details">
-                    <div className='gameinfor'><strong>Game Title:</strong> {game.game_name}</div>
-                    <div className='gameinfor'><strong>Publisher by:</strong> {game.company}</div>
-                    <div className='gameinfor'><strong>Platform:</strong> Web</div>
-                    <div className='gameinfor'><strong>Language:</strong> English</div>
-                    <div className='gameinfor'><strong>Genre:</strong> Casual</div>
-                    <div className='gameinfor'><strong>Age Group:</strong> All Ages</div>
+                    <div className='game-info'><strong>Game Title:</strong> {game.game_name}</div>
+                    <div className='game-info'><strong>Publisher:</strong> {game.company}</div>
+                    <div className='game-info'><strong>Platform:</strong> Web</div>
+                    <div className='game-info'><strong>Language:</strong> English</div>
+                    <div className='game-info'><strong>Genre:</strong> Casual</div>
+                    <div className='game-info'><strong>Age Group:</strong> All Ages</div>
                 </div>
 
-                {/* Mô tả và Hướng dẫn */}
                 <div className="description-section">
                     <h3>Description</h3>
                     <p>{game.game_description}</p>
@@ -102,22 +94,19 @@ const GameDetails = () => {
                     <p>{game.instruction}</p>
                 </div>
 
-                {/* Mã nhúng và URL ví dụ */}
                 <div className="embed-section">
                     <h3>Embed</h3>
-                    <textarea readOnly value="<iframe src='embed_code_here'></iframe>" />
-                    <button>Copy</button>
+                    <textarea readOnly value={`<iframe src="http://localhost:8081/games/${id}/embed" width="800" height="600"></iframe>`} />
+                    <button onClick={() => handleCopyEmbed(`<iframe src="http://localhost:8081/games/${id}/embed" width="800" height="600"></iframe>`)}>Copy</button>
                 </div>
                 <div className="embed-section">
                     <h3>Example URL</h3>
                     <textarea readOnly value={`http://localhost:8081/games/${id}`} />
-                    <button>Copy</button>
+                    <button onClick={() => handleCopyEmbed(`http://localhost:8081/games/${id}`)}>Copy</button>
                 </div>
             </div>
 
-            {/* Phần bên phải */}
             <div className="right-section">
-                {/* Game tương tự */}
                 <div className="similar-games">
                     <h3>Similar Games</h3>
                     <div className="similar-games-grid">
@@ -125,11 +114,9 @@ const GameDetails = () => {
                             <img src="similar_game_image_url" alt="Similar Game" />
                             <p>Color Sort Puzzle</p>
                         </div>
-                        {/* Thêm các game tương tự */}
                     </div>
                 </div>
 
-                {/* Thông tin bổ sung */}
                 <div className="additional-info">
                     <h3>Additional Information</h3>
                     <p><strong>Last Updated:</strong> {game.date_release}</p>
@@ -139,14 +126,12 @@ const GameDetails = () => {
                     <p><strong>Publisher:</strong> {game.company}</p>
                 </div>
 
-                {/* Tags và Biểu tượng */}
                 <div className="tags-icons">
                     <h3>Tags</h3>
                     <p>Color, Sort, Casual</p>
                     <button>Download Thumbnails & Icons</button>
                 </div>
 
-                {/* Bộ sưu tập */}
                 <div className="collections-carousel">
                     <h3>Collections</h3>
                     <div className="carousel">
@@ -154,7 +139,6 @@ const GameDetails = () => {
                             <img src="collection_image_url" alt="Collection" />
                             <p>Exclusive</p>
                         </div>
-                        {/* Thêm các bộ sưu tập */}
                     </div>
                 </div>
             </div>
