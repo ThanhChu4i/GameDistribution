@@ -90,7 +90,7 @@ const GameDetails = () => {
                     <button className='action-button' onClick={handleShare}><strong>Share</strong></button>
                     <button className='action-button' onClick={handleOpenInNewTab}><strong>Open in New Tab</strong></button>
                 </div>
-
+                
                 <div className="game-details">
                     <div className='game-info'><strong>Game Title:</strong> {game.game_name}</div>
                     <div className='game-info'><strong>Publisher:</strong> {game.company}</div>
@@ -111,7 +111,7 @@ const GameDetails = () => {
 
                 <div className="embed-section">
                     <h3>Embed</h3>
-                    <textarea readOnly value={"http://localhost:3000/games/${id}/"} />
+                    <textarea readOnly value={'http://localhost:3000/games/${id}/'} />
                     <button onClick={() => handleCopyEmbed(`http://localhost:3000/games/${id}/`)}>Copy</button>
                 </div>
                 <div className="embed-section">
