@@ -54,7 +54,7 @@ const GameUpload = () => {
         formData.append('zipFile', zipFile);
         formData.append('name', gameName);
         formData.append('no_blood', no_blood);
-        formData.append('decriptron',description);
+        formData.append('description',description);
         formData.append('instruction',instruction);
 
         formData.append('child_friendly', child_friendly);

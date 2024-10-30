@@ -96,8 +96,8 @@ const GameDetails = () => {
 
                 <div className="embed-section">
                     <h3>Embed</h3>
-                    <textarea readOnly value={`<iframe src="http://localhost:8081/games/${id}/embed" width="800" height="600"></iframe>`} />
-                    <button onClick={() => handleCopyEmbed(`<iframe src="http://localhost:8081/games/${id}/embed" width="800" height="600"></iframe>`)}>Copy</button>
+                    <textarea readOnly value={"http://localhost:3000/games/${id}/"} />
+                    <button onClick={() => handleCopyEmbed(`http://localhost:3000/games/${id}/`)}>Copy</button>
                 </div>
                 <div className="embed-section">
                     <h3>Example URL</h3>

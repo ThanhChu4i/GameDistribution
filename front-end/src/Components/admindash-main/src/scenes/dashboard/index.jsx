@@ -76,7 +76,7 @@ const Dashboard = () => {
           <StatBox
             title={(stats.totalUsers ?? 0).toLocaleString()}
             subtitle="Total Users"
-            progress="0.8"
+            progress={stats?.recentUsers && stats?.totalUsers ? 1- stats.recentUsers / stats.totalUsers : 0}
             increase="+14%"
             icon={
               <PersonIcon
@@ -114,7 +114,7 @@ const Dashboard = () => {
           <StatBox
             title={(stats.totalGames ?? 0).toLocaleString()}
             subtitle="Total Games"
-            progress="0.10"
+            progress={stats?.recentGames && stats?.totalGames ? 1- stats.recentGames / stats.totalGames : 0}
             increase="+5%"
             icon={
               <SportsEsportsIcon
@@ -133,7 +133,7 @@ const Dashboard = () => {
           <StatBox
             title={(stats.recentGames ?? 0).toLocaleString()}
             subtitle="New Games"
-            progress="0.80"
+            progress={stats?.recentGames && stats?.totalGames ? stats.recentGames / stats.totalGames : 0}
             increase="+43%"
             icon={
               <SportsEsportsIcon
