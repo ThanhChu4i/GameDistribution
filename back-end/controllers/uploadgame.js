@@ -8,6 +8,10 @@ const unzipper = require('unzipper');
 const storagePathImages = path.resolve(__dirname, '../../front-end/public/images');
 const storagePathZip = path.resolve(__dirname, '../../front-end/public/games');
 
+
+
+
+
 if (!fs.existsSync(storagePathImages)) {
     fs.mkdirSync(storagePathImages, { recursive: true });
 }
@@ -63,7 +67,7 @@ const uploadGameImage = async (req, res) => {
             const zipFilename = Date.now() + path.extname(zipFile[0].originalname);
             const zipFilePath = path.join(storagePathZip, zipFilename);
             fs.writeFileSync(zipFilePath, zipFile[0].buffer);
-             
+
             // Giải nén file ZIP
             const gameFolder = path.join(storagePathZip, path.basename(zipFilePath, '.zip'));
             fs.mkdirSync(gameFolder, { recursive: true });

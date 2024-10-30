@@ -26,50 +26,50 @@ function AdminPage() {
   const [isSidebar, setIsSidebar] = useState(true);
   const navigate = useNavigate();
 
-    useEffect(() => {
-        const fetchAdminData = async () => {
-            try {
-                const token = Cookies.get('token'); // Lấy token từ cookie
-                await axios.get('http://localhost:8081/admin', {
-                    headers: {
-                        Authorization: `Bearer ${token}` // Đính kèm token vào header
-                    }
-                });
-            } catch (error) {
-                console.error('Error fetching admin data:', error);
-                // Chuyển hướng về trang khác nếu không có quyền truy cập
-                navigate('/'); // Hoặc chuyển hướng đến một trang khác phù hợp
-            }
-        };
+  useEffect(() => {
+    const fetchAdminData = async () => {
+      try {
+        const token = Cookies.get('token'); // Lấy token từ cookie
+        await axios.get('http://localhost:8081/admin', {
+          headers: {
+            Authorization: `Bearer ${token}` // Đính kèm token vào header
+          }
+        });
+      } catch (error) {
+        console.error('Error fetching admin data:', error);
+        // Chuyển hướng về trang khác nếu không có quyền truy cập
+        navigate('/'); // Hoặc chuyển hướng đến một trang khác phù hợp
+      }
+    };
 
-        fetchAdminData();
-    }, [navigate]);
+    fetchAdminData();
+  }, [navigate]);
   return (
-    <Box Display = "flex" >
-    <ColorModeContext.Provider value={colorMode}>
-      <ThemeProvider theme={theme}>
-        <CssBaseline />
-        <div className="app">
-          <Sidebar isSidebar={isSidebar} />
-          <main className="content">
-            <Topbar setIsSidebar={setIsSidebar} />
-            <Routes>
-              <Route path="/Admin" element={<Dashboard />} />
-              <Route path="/team" element={<Team />} />
-              <Route path="/contacts" element={<Contacts />} />
-              <Route path="/invoices" element={<Invoices />} />
-              <Route path="/form" element={<Form />} />
-              <Route path="/bar" element={<Bar />} />
-              <Route path="/pie" element={<Pie />} />
-              <Route path="/line" element={<Line />} />
-              <Route path="/faq" element={<FAQ />} />
-              <Route path="/calendar" element={<Calendar />} />
-              <Route path="/geography" element={<Geography />} />
-            </Routes>
-          </main>
-        </div>
-      </ThemeProvider>
-    </ColorModeContext.Provider>
+    <Box Display="flex" >
+      <ColorModeContext.Provider value={colorMode}>
+        <ThemeProvider theme={theme}>
+          <CssBaseline />
+          <div className="app">
+            <Sidebar isSidebar={isSidebar} />
+            <main className="content">
+              <Topbar setIsSidebar={setIsSidebar} />
+              <Routes>
+                <Route path="/" element={<Dashboard />} />
+                <Route path="/team" element={<Team />} />
+                <Route path="/contacts" element={<Contacts />} />
+                <Route path="/invoices" element={<Invoices />} />
+                <Route path="/form" element={<Form />} />
+                <Route path="/bar" element={<Bar />} />
+                <Route path="/pie" element={<Pie />} />
+                <Route path="/line" element={<Line />} />
+                <Route path="/faq" element={<FAQ />} />
+                <Route path="/calendar" element={<Calendar />} />
+                <Route path="/geography" element={<Geography />} />
+              </Routes>
+            </main>
+          </div>
+        </ThemeProvider>
+      </ColorModeContext.Provider>
     </Box>
   );
 }
