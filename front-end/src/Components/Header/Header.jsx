@@ -2,20 +2,13 @@ import React, { useContext, useState } from 'react';
 import './Header.css';  
 import { Link } from "react-router-dom";
 import logo from '../Assets/GD-FullLogo-2Line.png';
-import searchlogo from '../Assets/icons8-search-48.png';
 import userAvatar from '../Assets/avatar_default.webp'; // Đường dẫn tới ảnh avatar mặc định
 import { AuthContext } from '../AuthContext/AuthContext'; // Nhập AuthContext
 import Search from '../Search/Search';
 
-const Header = ({ openLoginModal }) => {
-  const [isSearchVisible, setSearchVisible] = useState(false); // State cho việc hiển thị thanh tìm kiếm
+const Header = ({ openLoginModal }) => { // State cho việc hiển thị thanh tìm kiếm
   const { isLoggedIn, logout } = useContext(AuthContext); // Lấy trạng thái đăng nhập và hàm logout
   const [showDropdown, setShowDropdown] = useState(false); // State cho dropdown user
-
-  const toggleSearch = () => {
-    setSearchVisible(!isSearchVisible);
-  };
-
   const toggleDropdown = () => {
     setShowDropdown(!showDropdown);
   };
@@ -39,7 +32,7 @@ const Header = ({ openLoginModal }) => {
           <div className="dropdown-content">
             <div className="for-Publishers">
               <button className='btn'>Partnerships     
-                <p>Discover GameDistribution’s partnership models</p> 
+                <p>Discover GameDistribution's partnership models</p> 
               </button> 
               <button className='btn'>Direct Game Integration 
                 <p>Experience the simple efficiency of Direct Game Integration</p>
@@ -72,18 +65,7 @@ const Header = ({ openLoginModal }) => {
         <Link to="/Support">Support</Link>
       </nav>
 
-      <div className="header-actions">
-        <div className="search-header">
-          {isSearchVisible && (
-            <div className="search-container">
-              <input type="text" placeholder="Search..." className="search-input" />
-            </div>
-          )}
-          <div className="search-icon-container" onClick={toggleSearch}>
-            <img className="search-logo" src={searchlogo} alt="Search Icon" />
-          </div> 
-        </div>
-        
+      <div className="header-actions">       
         <Search />
         
         {isLoggedIn ? (

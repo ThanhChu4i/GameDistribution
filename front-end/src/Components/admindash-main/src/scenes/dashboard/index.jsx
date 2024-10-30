@@ -6,7 +6,6 @@ import DownloadOutlinedIcon from "@mui/icons-material/DownloadOutlined";
 import PersonIcon from '@mui/icons-material/Person';
 import SportsEsportsIcon from "@mui/icons-material/SportsEsports";
 import PersonAddIcon from "@mui/icons-material/PersonAdd";
-import TrafficIcon from "@mui/icons-material/Traffic";
 import Header from "../../components/Header";
 import LineChart from "../../components/LineChart";
 import GeographyChart from "../../components/GeographyChart";
@@ -77,7 +76,9 @@ const Dashboard = () => {
             title={(stats.totalUsers ?? 0).toLocaleString()}
             subtitle="Total Users"
             progress={stats?.recentUsers && stats?.totalUsers ? 1- stats.recentUsers / stats.totalUsers : 0}
-            increase="+14%"
+            increase={stats?.recentUsers && stats?.totalUsers 
+              ? ((1 - stats.recentUsers / stats.totalUsers) * 100).toFixed(2) + "%" 
+              : "0%"}
             icon={
               <PersonIcon
                 sx={{ color: colors.greenAccent[600], fontSize: "26px" }}
@@ -96,7 +97,10 @@ const Dashboard = () => {
             title={(stats.recentUsers ?? 0).toLocaleString()}
             subtitle="New Users"
             progress={stats?.recentUsers && stats?.totalUsers ? stats.recentUsers / stats.totalUsers : 0}
-            increase="+21%"
+            increase={stats?.recentUsers && stats?.totalUsers 
+              ? ((stats.recentUsers / stats.totalUsers) * 100).toFixed(2) + "%" 
+              : "0%"}
+            
             icon={
               <PersonAddIcon
                 sx={{ color: colors.greenAccent[600], fontSize: "26px" }}
@@ -115,7 +119,10 @@ const Dashboard = () => {
             title={(stats.totalGames ?? 0).toLocaleString()}
             subtitle="Total Games"
             progress={stats?.recentGames && stats?.totalGames ? 1- stats.recentGames / stats.totalGames : 0}
-            increase="+5%"
+            increase={stats?.recentGames && stats?.totalGames 
+              ? ((1 - stats.recentGames / stats.totalGames) * 100).toFixed(2) + "%" 
+              : "0%"}
+            
             icon={
               <SportsEsportsIcon
                 sx={{ color: colors.greenAccent[600], fontSize: "26px" }}
@@ -134,7 +141,10 @@ const Dashboard = () => {
             title={(stats.recentGames ?? 0).toLocaleString()}
             subtitle="New Games"
             progress={stats?.recentGames && stats?.totalGames ? stats.recentGames / stats.totalGames : 0}
-            increase="+43%"
+            increase={stats?.recentGames && stats?.totalGames 
+              ? ((stats.recentGames / stats.totalGames) * 100).toFixed(2) + "%" 
+              : "0%"}
+            
             icon={
               <SportsEsportsIcon
                 sx={{ color: colors.greenAccent[600], fontSize: "26px" }}

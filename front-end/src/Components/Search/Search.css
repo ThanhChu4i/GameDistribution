@@ -56,10 +56,11 @@
     border: 2px solid blue;
 }
 
-.searchinfo {
+.Searchtext{
     display: grid;
     color: black;
     margin-left: 10px;
+    margin-right: 10px;
 }
 
 .searchinfo p {
