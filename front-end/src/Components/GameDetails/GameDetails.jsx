@@ -2,7 +2,8 @@ import './GameDetails.css';
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
-
+import Cookies from 'js-cookie';
+const userid = Cookies.get('id_user')
 const GameDetails = () => {
     const { id } = useParams(); // Lấy id từ URL
     const [game, setGame] = useState(null);
@@ -10,8 +11,22 @@ const GameDetails = () => {
     const [error, setError] = useState(null);
     const [isPlaying, setIsPlaying] = useState(false);
 
-    const setPlay = () => {
+    const setPlay = async () => {
         setIsPlaying(true);
+        try {
+            // Tạo lịch sử game mới
+            const gameHistory = {
+                userId: userid,
+                gameId: id
+            };
+    
+            // Gửi yêu cầu POST tới server để lưu lịch sử game
+            await axios.post('http://localhost:8081/api/gameHistory', gameHistory);
+    
+            console.log('Game history saved successfully');
+        } catch (error) {
+            console.error('Error saving game history:', error);
+        }
     };
 
     const handleShare = () => {

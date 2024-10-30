@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import ViewUser from './ViewUser';
 import EditUser from './EditUser';
 import DeleteUser from './DeleteUser';
-
+import MyGameHistory from './MyHistory';
 const UserManagementPage = () => {
   const [editingUser, setEditingUser] = useState(null);
 
@@ -30,6 +30,7 @@ const UserManagementPage = () => {
           onUpdate={handleUpdateUser}
         />
       )}
+      <MyGameHistory/>
     </div>
   );
 };

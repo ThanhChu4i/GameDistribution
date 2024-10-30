@@ -1,5 +1,7 @@
 const express = require('express');
 const userController = require('../controllers/userController');
+const {gameHistory} = require ('../controllers/gameHistory');
+const {yourHistory} = require ('../controllers/yourHistory');
 const auth = require('../middleware/auth');
 
 const router = express.Router();
@@ -15,4 +17,7 @@ router.put('/', auth, userController.updateUser);
 router.delete('/', auth, userController.deleteUser);
 // roure đổi mật khẩu
 router.post('/change-password', auth, userController.changePassword);
+
+router.post('/gameHistory',gameHistory);
+router.get('/gameHistory/:id',yourHistory);
 module.exports = router;
