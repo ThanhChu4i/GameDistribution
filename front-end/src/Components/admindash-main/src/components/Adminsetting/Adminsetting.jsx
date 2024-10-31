@@ -17,7 +17,7 @@ const AdminSetting = () => {
         if (!token) {
           throw new Error('No token found');
         }
-        const response = await axios.get('http://localhost:8081/admin/setting', {
+        const response = await axios.get('http://localhost:8081/admin/settinguser', {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -38,7 +38,7 @@ const AdminSetting = () => {
 
   const handleEditUser = async (userId, updatedData) => {
     try {
-      const response = await axios.put(`http://localhost:8081/admin/setting/${userId}`, updatedData, {
+      const response = await axios.put(`http://localhost:8081/admin/settinguser/${userId}`, updatedData, {
         headers: {
           Authorization: `Bearer ${Cookies.get('token')}`,
         },
@@ -53,7 +53,7 @@ const AdminSetting = () => {
 
   const handleDeleteUser = async (userId) => {
     try {
-      await axios.delete(`http://localhost:8081/admin/setting/${userId}`, {
+      await axios.delete(`http://localhost:8081/admin/settinguser/${userId}`, {
         headers: {
           Authorization: `Bearer ${Cookies.get('token')}`,
         },
