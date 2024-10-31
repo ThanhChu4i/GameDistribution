@@ -16,7 +16,7 @@ const AdminSetting = () => {
         if (!token) {
           throw new Error('No token found');
         }
-        const response = await axios.get('http://localhost:8081/admin', {
+        const response = await axios.get('http://localhost:8081/admin/setting', {
           headers: {
             Authorization: `Bearer ${token}`,
           },
