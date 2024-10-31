@@ -16,7 +16,7 @@ import UserManagementPage from './Components/UserPage/UsermanagementPage.jsx';
 import GameDetails from './Components/GameDetails/GameDetails.jsx';
 import GameUploadPage from './Components/UploadGames/GameUploadPage.jsx';
 import ChangePassword from './Components/UserPage/ChangePassword.jsx';
-import AdminSetting from './Components/admindash-main/src/components/Adminsetting.jsx';
+import AdminSetting from './Components/admindash-main/src/components/Adminsetting/Adminsetting.jsx';
 function App() {
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false); // State để quản lý modal login
   return (

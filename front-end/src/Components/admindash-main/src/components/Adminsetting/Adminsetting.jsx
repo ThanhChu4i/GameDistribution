@@ -2,9 +2,10 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Cookies from 'js-cookie';
 import { useNavigate } from 'react-router-dom';
+import './Adminsetting.css';
 
 const AdminSetting = () => {
-  const [user, setUser] = useState(null);
+  const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const navigate = useNavigate();
@@ -21,12 +22,12 @@ const AdminSetting = () => {
             Authorization: `Bearer ${token}`,
           },
         });
-        setUser(response.data);
+        setUsers(response.data);
       } catch (err) {
         console.error('Error fetching user data:', err);
         setError('Failed to fetch user data');
         if (err.response && err.response.status === 401) {
-          navigate('/'); // Redirect if unauthorized
+          navigate('/');
         }
       } finally {
         setLoading(false);
@@ -37,12 +38,12 @@ const AdminSetting = () => {
 
   const handleEditUser = async (userId, updatedData) => {
     try {
-      const response = await axios.put(`http://localhost:8081/admin/${userId}`, updatedData, {
+      const response = await axios.put(`http://localhost:8081/admin/setting/${userId}`, updatedData, {
         headers: {
           Authorization: `Bearer ${Cookies.get('token')}`,
         },
       });
-      setUser((prevUser) => prevUser.map(u => u.id === userId ? response.data : u));
+      setUsers((prevUsers) => prevUsers.map(u => u._id === userId ? response.data : u));
       alert("User updated successfully!");
     } catch (err) {
       console.error("Error updating user:", err);
@@ -52,12 +53,12 @@ const AdminSetting = () => {
 
   const handleDeleteUser = async (userId) => {
     try {
-      await axios.delete(`http://localhost:8081/admin/${userId}`, {
+      await axios.delete(`http://localhost:8081/admin/setting/${userId}`, {
         headers: {
           Authorization: `Bearer ${Cookies.get('token')}`,
         },
       });
-      setUser((prevUser) => prevUser.filter(u => u.id !== userId));
+      setUsers((prevUsers) => prevUsers.filter(u => u._id !== userId));
       alert("User deleted successfully!");
     } catch (err) {
       console.error("Error deleting user:", err);
@@ -69,24 +70,26 @@ const AdminSetting = () => {
   if (error) return <p>{error}</p>;
 
   return (
-    <div>
-      <h1>Admin Settings</h1>
-      {user ? (
-        <div>
-          <h2>Users</h2>
-          <ul>
-            {user.map((u) => (
-              <li key={u.id}>
-                <p>Name: {u.name}</p>
-                <p>Email: {u.email}</p>
-                <button onClick={() => handleEditUser(u.id, { name: "New Name" })}>Edit</button>
-                <button onClick={() => handleDeleteUser(u.id)}>Delete</button>
-              </li>
-            ))}
-          </ul>
+    <div className="admin-settings-container">
+      <h1>Admin Settings User</h1>
+      {users.length > 0 ? (
+        <div className="users-list">
+          {users.map((u) => (
+            <div key={u._id} className="user-card">
+              <p>First name: {u.first_name}</p>
+              <p>Last name: {u.last_name}</p>  
+              <p>Email: {u.email}</p>
+              <p>Country: {u.country}</p>
+              <p>Company:{u.company}</p>
+              <p>Created_at:{u.created_in}</p>
+              <p>Update_at:{u.update_in}</p>
+              <button onClick={() => handleEditUser(u._id, { name: "New Name" })}>Edit</button>
+              <button className="delete-btn" onClick={() => handleDeleteUser(u._id)}>Delete</button>
+            </div>
+          ))}
         </div>
       ) : (
-        <p>No users found.</p>
+        <p className="no-users-message">No users found.</p>
       )}
     </div>
   );
