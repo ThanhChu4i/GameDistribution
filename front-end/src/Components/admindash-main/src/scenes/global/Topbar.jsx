@@ -33,7 +33,7 @@ const Topbar = () => {
         <IconButton>
           <NotificationsOutlinedIcon />
         </IconButton>
-       <Link to = '/Admin/Setting'><IconButton>
+       <Link to = '/Admin/Setting/User'><IconButton>
           <SettingsOutlinedIcon /> 
         </IconButton> </Link> 
       </Box>

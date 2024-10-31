@@ -4,7 +4,7 @@ import Cookies from 'js-cookie';
 import { useNavigate } from 'react-router-dom';
 import './Adminsetting.css';
 
-const AdminSetting = () => {
+const AdminSettinguser = () => {
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -95,4 +95,4 @@ const AdminSetting = () => {
   );
 };
 
-export default AdminSetting;
+export default AdminSettinguser;
