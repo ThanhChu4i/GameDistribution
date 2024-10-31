@@ -1,10 +1,10 @@
-// ViewUser.js
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import Cookies from 'js-cookie';
 import { useNavigate } from 'react-router-dom';
+import './EditUser.css';
 
-const ViewUser = ({ onEdit }) => {
+const EditUser = ({ onEdit }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -68,13 +68,13 @@ const ViewUser = ({ onEdit }) => {
     }
   };
 
-  if (loading) return <div>Loading...</div>;
-  if (error) return <div>{error}</div>;
+  if (loading) return <div className="loading-message">Loading...</div>;
+  if (error) return <div className="error-message">{error}</div>;
 
   return (
-    <div>
+    <div className="view-user-container">
       {isEditing ? (
-        <div>
+        <div className="user-info">
           <h2>Edit User Details</h2>
           <label>
             Email:
@@ -96,24 +96,26 @@ const ViewUser = ({ onEdit }) => {
             Company:
             <input type="text" name="company" value={formData.company} onChange={handleInputChange} />
           </label>
-          <button onClick={handleSave}>Save</button>
-          <button onClick={() => setIsEditing(false)}>Hủy</button>
+          <div className="action-buttons">
+            <button className="save-button" onClick={handleSave}>Save</button>
+            <button className="cancel-button" onClick={() => setIsEditing(false)}>Hủy</button>
+          </div>
         </div>
       ) : (
-        <div>
+        <div className="user-info">
           <h2>User Details</h2>
           <p><strong>Email:</strong> {user.email}</p>
           <p><strong>First Name:</strong> {user.first_name || 'Not provided'}</p>
           <p><strong>Last Name:</strong> {user.last_name || 'Not provided'}</p>
           <p><strong>Country:</strong> {user.country || 'Not provided'}</p>
           <p><strong>Company:</strong> {user.company || 'Not provided'}</p>
-          <p>Created_in: {user.created_in}</p>
-          <p>Update_in: {user.update_in}</p>
-          <button onClick={() => setIsEditing(true)}>Changes Infomation</button>
+          <p><strong>Created in:</strong> {user.created_in}</p>
+          <p><strong>Updated in:</strong> {user.update_in}</p>
+          <button className="save-button" onClick={() => setIsEditing(true)}>Change Information</button>
         </div>
       )}
     </div>
   );
 };
 
-export default ViewUser;
+export default EditUser;

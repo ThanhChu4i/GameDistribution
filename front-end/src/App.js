@@ -15,7 +15,7 @@ import AdminPage from './Components/admindash-main/src/AdminPage.jsx';
 import UserManagementPage from './Components/UserPage/UsermanagementPage.jsx';
 import GameDetails from './Components/GameDetails/GameDetails.jsx';
 import GameUploadPage from './Components/UploadGames/GameUploadPage.jsx';
-import ChangePassword from './Components/UserPage/ChangePassword.jsx';
+import ChangePassword from './Components/UserPage/ChangePassword/ChangePassword.jsx';
 import Adminsettinguser from './Components/admindash-main/src/components/Adminsetting/Adminsettinguser.jsx';
 import AdminSettinggame from './Components/admindash-main/src/components/Adminsetting/Adminsettinggame.jsx';
 function App() {

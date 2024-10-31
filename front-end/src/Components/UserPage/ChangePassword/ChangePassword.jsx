@@ -2,7 +2,7 @@
 import React, { useState, useContext } from 'react';
 import axios from 'axios';
 import Cookies from 'js-cookie';
-import { AuthContext } from '../AuthContext/AuthContext'; // Nhập AuthContext
+import { AuthContext } from '../../AuthContext/AuthContext'; // Nhập AuthContext
 
 const ChangePassword = () => {
   const [oldPassword, setOldPassword] = useState('');

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import Cookies from 'js-cookie';
+import './GameUpload.css';
 
 const GameUpload = () => {
     const [gameName, setGameName] = useState('');
@@ -17,7 +18,6 @@ const GameUpload = () => {
     const token = Cookies.get('token');
     const id_user = Cookies.get('id_user');
 
-    // Xử lý thay đổi ảnh
     const handleImageFileChange = (e) => {
         const file = e.target.files[0];
         const validImageTypes = ['image/jpeg', 'image/jpg', 'image/png', 'image/gif'];
@@ -30,7 +30,6 @@ const GameUpload = () => {
         }
     };
 
-    // Xử lý thay đổi file .zip
     const handleZipFileChange = (e) => {
         const file = e.target.files[0];
         if (file && file.type === 'application/zip') {
@@ -73,8 +72,8 @@ const GameUpload = () => {
             setImageFile(null);
             setZipFile(null);
             setNo_blood(false);
-            setDescription(null);
-            setInstruction(null);
+            setDescription('');
+            setInstruction('');
             setChild_friendly(false);
             setIngame_purchases(false);
         } catch (error) {
@@ -86,12 +85,12 @@ const GameUpload = () => {
     };
 
     return (
-        <div>
+        <div className="game-upload-container">
             <h2>Upload Game</h2>
-            {error && <p style={{ color: 'red' }}>{error}</p>}
-            {successMessage && <p style={{ color: 'green' }}>{successMessage}</p>}
+            {error && <p className="error-message">{error}</p>}
+            {successMessage && <p className="success-message">{successMessage}</p>}
             <form onSubmit={handleSubmit}>
-                <div>
+                <div className="form-group">
                     <label>Name:</label>
                     <input
                         type="text"
@@ -100,31 +99,31 @@ const GameUpload = () => {
                         required
                     />
                 </div>
-                <div>
-                    <label>No_Blood ?:</label>
+                <div className="form-group">
+                    <label>No Blood?</label>
                     <input
                         type="checkbox"
                         checked={no_blood}
                         onChange={(e) => setNo_blood(e.target.checked)}
                     />
                 </div>
-                <div>
-                    <label>Child Friendly ?:</label>
+                <div className="form-group">
+                    <label>Child Friendly?</label>
                     <input
                         type="checkbox"
                         checked={child_friendly}
                         onChange={(e) => setChild_friendly(e.target.checked)}
                     />
                 </div>
-                <div>
-                    <label>Ingame Purchases ?:</label>
+                <div className="form-group">
+                    <label>Ingame Purchases?</label>
                     <input
                         type="checkbox"
                         checked={ingame_purchases}
                         onChange={(e) => setIngame_purchases(e.target.checked)}
                     />
                 </div>
-                <div>
+                <div className="form-group">
                     <label>Chọn Ảnh:</label>
                     <input
                         type="file"
@@ -133,7 +132,7 @@ const GameUpload = () => {
                         required
                     />
                 </div>
-                <div>
+                <div className="form-group">
                     <label>Chọn file .zip cho dữ liệu game:</label>
                     <input
                         type="file"
@@ -142,19 +141,19 @@ const GameUpload = () => {
                         required
                     />
                 </div>
-                <div classname='ack'>
-                    <label for="destruction-title">Description:</label>
+                <div className="form-group">
+                    <label>Description:</label>
                     <input
-                        type="text" id="destruction-title"
+                        type="text"
                         value={description}
                         onChange={(e) => setDescription(e.target.value)}
                         required
                     />
                 </div>
-                <div classname='ack'>
-                    <label for="destruction-title">Instruction:</label>
+                <div className="form-group">
+                    <label>Instruction:</label>
                     <input
-                        type="text" id="destruction-title"
+                        type="text"
                         value={instruction}
                         onChange={(e) => setInstruction(e.target.value)}
                         required

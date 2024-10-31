@@ -1,4 +1,4 @@
-import GameUpload from "./GameUpload";
+import GameUpload from "./GameUpload/GameUpload";
 import Yourgames from "./Yourgame";
 import React from 'react';
 import './GameUploadPage.css';

@@ -1,7 +1,7 @@
 // UserManagementPage.js
 import React, { useState } from 'react';
-import ViewUser from './ViewUser';
-import EditUser from './EditUser';
+import ViewUser from './ViewUser/ViewUser';
+import EditUser from './EditUser/EditUser';
 import DeleteUser from './DeleteUser';
 import MyGameHistory from './MyHistory';
 const UserManagementPage = () => {

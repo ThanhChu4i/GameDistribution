@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import Cookies from 'js-cookie';
 import { useNavigate } from 'react-router-dom';
+import './ViewUser.css';
 
 const ViewUser = ({ onEdit }) => {
   const [user, setUser] = useState(null);
@@ -18,8 +19,8 @@ const ViewUser = ({ onEdit }) => {
         }
         const response = await axios.get('http://localhost:8081/me', {
           headers: {
-            Authorization: `Bearer ${token}`
-          }
+            Authorization: `Bearer ${token}`,
+          },
         });
         setUser(response.data);
       } catch (err) {
@@ -34,29 +35,32 @@ const ViewUser = ({ onEdit }) => {
       }
     };
     fetchUserData();
-  }, [navigate]); // Thêm `navigate` vào dependency array
+  }, [navigate]);
 
-  if (loading) return <div>Loading...</div>;
-  if (error) return (
-    <div>
-      <p>{error}</p>
-      <button onClick={() => window.location.reload()}>Try again</button> {/* Nút thử lại */}
-    </div>
-  );
+  if (loading) return <div className="loading-message">Loading...</div>;
+  if (error)
+    return (
+      <div className="error-message">
+        <p>{error}</p>
+        <button onClick={() => window.location.reload()}>Try again</button>
+      </div>
+    );
 
   return (
-    <div>
+    <div className="view-user-container">
       {user ? (
-        <div>
+        <div className="user-info">
           <h2>User Details</h2>
           <p><strong>Email:</strong> {user.email}</p>
           <p><strong>First Name:</strong> {user.first_name || 'Not provided'}</p>
           <p><strong>Last Name:</strong> {user.last_name || 'Not provided'}</p>
           <p><strong>Country:</strong> {user.country || 'Not provided'}</p>
           <p><strong>Company:</strong> {user.company || 'Not provided'}</p>
-          <p>Created_in: {user.created_in}</p>
-          <p>Update_in: {user.update_in}</p>
-          <button onClick={() => onEdit(user)}>Changes Infomation</button>
+          <p><strong>Created in:</strong> {user.created_in}</p>
+          <p><strong>Updated in:</strong> {user.update_in}</p>
+          <div className="action-buttons">
+            <button onClick={() => onEdit(user)}>Change Information</button>
+          </div>
         </div>
       ) : (
         <p>No user data available</p>
