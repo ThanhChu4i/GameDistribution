@@ -4,7 +4,7 @@ const { verifyToken } = require('../middleware/auth');
 const User = require('../models/User'); // Assuming you have a User model
 
 // Get all users
-router.get('/', verifyToken, async (req, res) => {
+router.get('/setting', verifyToken, async (req, res) => {
   try {
     const users = await User.find();
     res.json(users);
@@ -15,7 +15,7 @@ router.get('/', verifyToken, async (req, res) => {
 });
 
 // Update a user by ID
-router.put('/:id', verifyToken, async (req, res) => {
+router.put('/setting/:id', verifyToken, async (req, res) => {
   try {
     const { id } = req.params;
     const updatedUser = await User.findByIdAndUpdate(id, req.body, { new: true });
@@ -28,7 +28,7 @@ router.put('/:id', verifyToken, async (req, res) => {
 });
 
 // Delete a user by ID
-router.delete('/:id', verifyToken, async (req, res) => {
+router.delete('/setting/:id', verifyToken, async (req, res) => {
   try {
     const { id } = req.params;
     const deletedUser = await User.findByIdAndDelete(id);
