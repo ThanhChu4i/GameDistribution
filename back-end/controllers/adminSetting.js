@@ -1,10 +1,8 @@
 const express = require('express');
-const router = express.Router();
-const { verifyToken } = require('../middleware/auth');
-const User = require('../models/User'); // Assuming you have a User model
+const {User} = require('../collection/collection'); // Assuming you have a User model
 
 // Get all users
-router.get('/setting', verifyToken, async (req, res) => {
+  const getUser =  async (req, res) => {
   try {
     const users = await User.find();
     res.json(users);
@@ -12,10 +10,10 @@ router.get('/setting', verifyToken, async (req, res) => {
     console.error(err);
     res.status(500).json({ message: 'Failed to fetch users' });
   }
-});
+};
 
 // Update a user by ID
-router.put('/setting/:id', verifyToken, async (req, res) => {
+    const updateUser = async (req, res) => {
   try {
     const { id } = req.params;
     const updatedUser = await User.findByIdAndUpdate(id, req.body, { new: true });
@@ -25,10 +23,10 @@ router.put('/setting/:id', verifyToken, async (req, res) => {
     console.error(err);
     res.status(500).json({ message: 'Failed to update user' });
   }
-});
+};
 
 // Delete a user by ID
-router.delete('/setting/:id', verifyToken, async (req, res) => {
+ const deleteUser = async (req, res) => {
   try {
     const { id } = req.params;
     const deletedUser = await User.findByIdAndDelete(id);
@@ -38,6 +36,5 @@ router.delete('/setting/:id', verifyToken, async (req, res) => {
     console.error(err);
     res.status(500).json({ message: 'Failed to delete user' });
   }
-});
-
-module.exports = router;
+};
+ module.exports = {getUser, updateUser, deleteUser}

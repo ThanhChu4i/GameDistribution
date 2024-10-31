@@ -12,7 +12,7 @@ import GeographyChart from "../../components/GeographyChart";
 import BarChart from "../../components/BarChart";
 import StatBox from "../../components/StatBox";
 import ProgressCircle from "../../components/ProgressCircle";
-
+import Cookies from 'js-cookie';
 const Dashboard = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
@@ -22,7 +22,15 @@ const Dashboard = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get("http://localhost:8081/admin/stats");
+          const token = Cookies.get('token');
+          if (!token) {
+            throw new Error('No token found');
+          }
+          const response = await axios.get('http://localhost:8081/admin/stats', {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          });
         setStats(response.data);
       } catch (error) {
         console.error("Error fetching data:", error);
