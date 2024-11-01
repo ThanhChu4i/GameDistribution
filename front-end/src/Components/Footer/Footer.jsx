@@ -14,7 +14,7 @@ const Footer = () => {
                 <div className="mid-section">
                 <img src={location} alt="Logo" className="location-logo" />
                     <a href='https://maps.app.goo.gl/4cWBFyxXYX1U2pJw9' target="_blank" rel="noopener noreferrer">
-                    9 Đ. Phạm Văn Đồng, Mai Dịch, Cầu Giấy, Hà Nội 10000, Việt Nam
+                    9 Đ. Phạm Văn Đồng, Mai Dịch, Cầu Giấy, Hà Nội, Việt Nam
 </a></div>
                 <div className="right-section">
                     <p>Follow us</p>
