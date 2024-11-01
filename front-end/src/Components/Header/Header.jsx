@@ -1,7 +1,7 @@
 import React, { useContext, useState } from 'react';
 import './Header.css';  
 import { Link } from "react-router-dom";
-import logo from '../Assets/GD-FullLogo-2Line.png';
+import logo from '../Assets/Logo_XGame-011.png';
 import userAvatar from '../Assets/avatar_default.webp'; // Đường dẫn tới ảnh avatar mặc định
 import { AuthContext } from '../AuthContext/AuthContext'; // Nhập AuthContext
 import Search from '../Search/Search';

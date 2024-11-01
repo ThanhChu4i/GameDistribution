@@ -85,7 +85,7 @@ const ChangePassword = () => {
             required
           />
         </div>
-        <button type="submit">Change Password</button>
+        <button className="codae"type="submit">Change Password</button>
       </form>
       {error && <div style={{ color: 'red' }}>{error}</div>}
       {success && (
