@@ -111,7 +111,7 @@ const EditUser = ({ onEdit }) => {
           <p><strong>Company:</strong> {user.company || 'Not provided'}</p>
           <p><strong>Created in:</strong> {user.created_in}</p>
           <p><strong>Updated in:</strong> {user.update_in}</p>
-          <button className="save-button" onClick={() => setIsEditing(true)}>Change Information</button>
+          <div className='action-buttons'><button className="action-buttons" onClick={() => setIsEditing(true)}>Change Information</button></div>
         </div>
       )}
     </div>
