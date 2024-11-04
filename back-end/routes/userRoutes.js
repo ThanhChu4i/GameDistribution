@@ -2,6 +2,7 @@ const express = require('express');
 const userController = require('../controllers/userController');
 const {gameHistory} = require ('../controllers/gameHistory');
 const {getRecentGameHistory} = require ('../controllers/yourHistory');
+const {getGamesWithUser, updateGame, deleteGame} =require('../controllers/userSettinggame');
 const auth = require('../middleware/auth');
 
 const router = express.Router();
@@ -18,4 +19,8 @@ router.post('/change-password', auth, userController.changePassword);
 
 router.post('/gameHistory',gameHistory);
 router.get('/gameHistory/:id',getRecentGameHistory);
+router.get('/mygame',auth, getGamesWithUser);
+router.put('/updategame/:id',auth, updateGame);
+router.delete('/deletegame/:id',auth, deleteGame)
+
 module.exports = router;

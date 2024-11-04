@@ -8,8 +8,6 @@ const { getGameById } = require('../controllers/getGameById');
 router.get('/games', getGames);
 router.get('/yourgames', auth, getGamesWithUserInfo);
 router.get('/games/:id', getGameById);
-router.get('/yourgames', auth, getGamesWithUserInfo);
-router.get('/games/:id', getGameById);
 router.get('/search-games', searchGames);
 
 module.exports = router;

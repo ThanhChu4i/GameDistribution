@@ -18,6 +18,7 @@ import GameUploadPage from './Components/UploadGames/GameUploadPage.jsx';
 import ChangePassword from './Components/UserPage/ChangePassword/ChangePassword.jsx';
 import Adminsettinguser from './Components/admindash-main/src/components/Adminsetting/Adminsettinguser.jsx';
 import AdminSettinggame from './Components/admindash-main/src/components/Adminsetting/Adminsettinggame.jsx';
+import UserSettinggame from './Components/UserPage/UserSettingGame/UserSettingGame.jsx';
 function App() {
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false); // State để quản lý modal login
   return (
@@ -37,6 +38,7 @@ function App() {
           <Route path="change-password" element={<ChangePassword/>} />
           <Route path='/Admin/Setting/User' element={<Adminsettinguser/>} />
           <Route path='/Admin/Setting/Game' element={<AdminSettinggame/>} />
+          <Route path='/User/Setting/Game' element= {<UserSettinggame/>} />
         </Routes>
         <LoginRegisterModal
           isOpen={isLoginModalOpen} // Truyền state vào modal
