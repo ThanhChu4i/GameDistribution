@@ -44,7 +44,7 @@ const MyGameHistory = () => {
                                 )}
                                 <h4>{item.id_game.game_name}</h4>
                             </Link>
-                            <p>{item.id_game.company || 'Unknown Company'}</p>
+                            <p>{item.id_game.id_user.company || 'Unknown Company'}</p>
                         </div>
                     ))
                 ) : (

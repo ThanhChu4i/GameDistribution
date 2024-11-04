@@ -8,17 +8,14 @@ const getRecentGameHistory = async (req, res) => {
         
         // Populate id_game and id_user within id_game to get uploader info
         const history = await GameHistory.find({ iduser: userId })
-            .populate({
-                path: 'id_game',
-                populate: {
-                    path: 'id_user', // Populate id_user within id_game to get uploader details
-                    select: 'company' // Chỉ lấy thuộc tính company
-                }
-            })
-            .sort({ play_time: -1 })
-            .lean();
-
-        // Lọc 5 game gần nhất không trùng lặp
+            .populate( 
+                { path : 'id_game',
+                populate:{
+                    path: 'id_user', 
+                    select: 'company'}}
+            )
+            .sort({ play_time: -1 })    
+        // Lọc 5 game gần nhất không trùng lặp  
         const uniqueGames = {};
         const recentGames = [];
 
