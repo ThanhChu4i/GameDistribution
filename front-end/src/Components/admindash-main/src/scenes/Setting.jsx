@@ -5,7 +5,7 @@ import { Button } from '@mui/material'; // Import Button if using Material-UI
 
 const Setting = () => {
     return (
-        <div className='Setting'>
+        <div className='Settingf'>
             <Button className='btu' variant="contained" color="primary">
                 <Link to='/Admin/Setting/User' style={{ textDecoration: 'none', color: 'white' }}>
                     User
