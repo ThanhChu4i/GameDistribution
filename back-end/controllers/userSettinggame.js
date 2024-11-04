@@ -6,7 +6,6 @@ const getGamesWithUser = async (req, res) => {
     try {
         // Lấy id_user từ token đã được giải mã
         const id_user = req.user._id;
-        console.log(id_user);
         // Lọc game theo id_user
         const games = await Game.find({ id_user }).populate('id_user', 'company'); // populate với trường company
 

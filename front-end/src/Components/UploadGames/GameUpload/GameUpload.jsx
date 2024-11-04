@@ -19,7 +19,6 @@ const GameUpload = () => {
     const [loading, setLoading] = useState(false);
     const [successMessage, setSuccessMessage] = useState('');
     const token = Cookies.get('token');
-    const id_user = Cookies.get('id_user');
 
     const [dropdownOpen, setDropdownOpen] = useState({
         genres: false,
@@ -72,7 +71,6 @@ const GameUpload = () => {
         }
 
         const formData = new FormData();
-        formData.append('id_user', id_user);
         formData.append('image', imageFile);
         formData.append('zipFile', zipFile);
         formData.append('name', gameName);

@@ -78,10 +78,11 @@ const uploadGameImage = async (req, res) => {
                     // Đường dẫn công khai
                     const publicImagePath = `/images/${imageFilename}`;
                     const publicGamePath = `/games/${path.basename(gameFolder)}/${zipFile[0].originalname.replace('.zip', '')}/index.html`;
-
+        const id_user = req.user._id;
+        console.log(id_user);
                     // Lưu vào cơ sở dữ liệu
                     const game = new Game({
-                        id_user: req.body.id_user,
+                        id_user: id_user,
                         game_name: req.body.name,
                         no_blood: req.body.no_blood,
                         ingame_purchases: req.body.ingame_purchases,

@@ -13,16 +13,15 @@ export const AuthContextProvider = ({ children }) => {
 
   const navigate = useNavigate(); // Khởi tạo useNavigate
 
-  const login = (token, id) => {
+  const login = (token) => {
     // Lưu token vào cookie khi đăng nhập
-    Cookies.set('id_user',id,{ expires: 2 });
     Cookies.set('token', token, { expires: 2 }); // Lưu token trong 2 ngày
     setIsLoggedIn(true); // Cập nhật trạng thái đăng nhập
   };
 
   const logout = () => {
     // Xóa cookie token khi đăng xuất
-    Cookies.remove('token','id_user');
+    Cookies.remove('token');
     setIsLoggedIn(false); // Cập nhật trạng thái đăng xuất
     navigate('/'); // Điều hướng về trang chính sau khi đăng xuất
   };
