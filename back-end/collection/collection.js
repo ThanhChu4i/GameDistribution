@@ -31,6 +31,9 @@
     child_friendly: { type: Boolean },
     imagePath: { type: String, require :true },
     ingame_purchases: { type: Boolean },
+    language: {type:String},
+    player: {type:String},
+    genres: {type:String},
     gamePath: {type:String, require: true }
   });
 

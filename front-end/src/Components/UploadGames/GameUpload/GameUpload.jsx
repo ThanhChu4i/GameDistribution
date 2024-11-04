@@ -11,12 +11,22 @@ const GameUpload = () => {
     const [description, setDescription] = useState('');
     const [instruction, setInstruction] = useState('');
     const [child_friendly, setChild_friendly] = useState(false);
+    const [languages, setLanguages] = useState('');
+    const [players, setPlayers] = useState('');
+    const [genres, setGenres] = useState('');
     const [ingame_purchases, setIngame_purchases] = useState(false);
     const [error, setError] = useState('');
     const [loading, setLoading] = useState(false);
     const [successMessage, setSuccessMessage] = useState('');
     const token = Cookies.get('token');
     const id_user = Cookies.get('id_user');
+
+    const [dropdownOpen, setDropdownOpen] = useState({
+        genres: false,
+        languages: false,
+        players: false,
+        mobile: false,
+    });
 
     const handleImageFileChange = (e) => {
         const file = e.target.files[0];
@@ -30,6 +40,13 @@ const GameUpload = () => {
         }
     };
 
+    const toggleDropdown = (dropdown) => {
+        setDropdownOpen((prev) => ({
+            ...prev,
+            [dropdown]: !prev[dropdown],
+        }));
+    };
+
     const handleZipFileChange = (e) => {
         const file = e.target.files[0];
         if (file && file.type === 'application/zip') {
@@ -38,6 +55,13 @@ const GameUpload = () => {
         } else {
             setError('Chỉ chấp nhận file .zip cho dữ liệu game!');
         }
+    };
+
+    const handleFilterChange = (e) => {
+        const { name, value } = e.target;
+        if (name === 'genres') setGenres(value);
+        else if (name === 'languages') setLanguages(value);
+        else if (name === 'players') setPlayers(value);
     };
 
     const handleSubmit = async (e) => {
@@ -57,6 +81,9 @@ const GameUpload = () => {
         formData.append('instruction', instruction);
         formData.append('child_friendly', child_friendly);
         formData.append('ingame_purchases', ingame_purchases);
+        formData.append('languages', languages);
+        formData.append('genres', genres);
+        formData.append('players', players);
 
         setLoading(true);
         try {
@@ -131,6 +158,67 @@ const GameUpload = () => {
                         onChange={handleImageFileChange}
                         required
                     />
+                </div>
+                <div className="filter-options">
+                    {/* Dropdown Genres */}
+                    <div className="dropdown">
+                        <button type="button" className="dropdown-button" onClick={() => toggleDropdown('genres')}>
+                            Genres
+                        </button>
+                        {dropdownOpen.genres && (
+                            <select name="genres" value={genres} onChange={handleFilterChange}>
+                                <option value="">All Genres</option>
+                                <option value="action">Action</option>
+                                <option value="adventure">Adventure</option>
+                                <option value="strategy">Strategy</option>
+                            </select>
+                        )}
+                    </div>
+
+                    {/* Dropdown Languages */}
+                    <div className="dropdown">
+                        <button type="button" className="dropdown-button" onClick={() => toggleDropdown('languages')}>
+                            Languages
+                        </button>
+                        {dropdownOpen.languages && (
+                            <select name="languages" value={languages} onChange={handleFilterChange}>
+                                <option value="">All Languages</option>
+                                <option value="vietnamese">Vietnamese</option>
+                                <option value="japanese">Japanese</option>
+                                <option value="korean">Korean</option>
+                                <option value="english">English</option>
+                            </select>
+                        )}
+                    </div>
+
+                    {/* Dropdown Players */}
+                    <div className="dropdown">
+                        <button type="button" className="dropdown-button" onClick={() => toggleDropdown('players')}>
+                            Players
+                        </button>
+                        {dropdownOpen.players && (
+                            <select name="players" value={players} onChange={handleFilterChange}>
+                                <option value="">All Players</option>
+                                <option value="single">Single Player</option>
+                                <option value="multi">Multiplayer</option>
+                                <option value="coop">Co-op</option>
+                            </select>
+                        )}
+                    </div>
+
+                    {/* Dropdown Mobile Compatible */}
+                    <div className="dropdown">
+                        <button type="button" className="dropdown-button" onClick={() => toggleDropdown('mobile')}>
+                            Mobile Compatible
+                        </button>
+                        {dropdownOpen.mobile && (
+                            <select name="mobile" value={''} onChange={handleFilterChange}>
+                                <option value="">All Compatibility</option>
+                                <option value="yes">Yes</option>
+                                <option value="no">No</option>
+                            </select>
+                        )}
+                    </div>
                 </div>
                 <div className="form-group">
                     <label>Chọn file .zip cho dữ liệu game:</label>

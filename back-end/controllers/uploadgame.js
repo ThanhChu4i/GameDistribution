@@ -90,6 +90,9 @@ const uploadGameImage = async (req, res) => {
                         instruction: req.body.instruction,
                         imagePath: publicImagePath,
                         gamePath: publicGamePath,
+                        language: req.body.languages,
+                        player: req.body.players,
+                        genres: req.body.genres
                     });
 
                     await game.save();

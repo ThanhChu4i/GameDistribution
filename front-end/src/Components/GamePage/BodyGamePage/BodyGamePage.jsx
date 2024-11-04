@@ -55,7 +55,7 @@ function BodyGamePage() {
         const params = {};
         if (filters.genres) params.genres = filters.genres;
         if (filters.development) params.development = filters.development;
-        if (filters.languages) params.languages = filters.languages;
+        if (filters.languages) params.languages = filters.language;
         if (filters.players) params.players = filters.players;
         if (filters.mobile) params.mobile = filters.mobile;
         if (filters.no_blood) params.no_blood = filters.no_blood;
@@ -119,15 +119,16 @@ function BodyGamePage() {
           {/* Dropdown Languages */}
           <div className="dropdownn">
             <button className="dropdownn-button" onClick={() => toggleDropdown('languages')}>
-              Languages
+              Language
             </button>
             {dropdownOpen.languages && (
               <div className="dropdownn-content">
                 <select name="languages" value={filters.languages} onChange={handleFilterChange}>
                   <option value="">All Languages</option>
-                  <option value="english">Vietnam</option>
+                  <option value="vietnamese">Vietnamese</option>
                   <option value="japanese">Japanese</option>
                   <option value="korean">Korean</option>
+                  <option value="english">English</option>
                   {/* Thêm các ngôn ngữ khác tùy ý */}
                 </select>
               </div>
