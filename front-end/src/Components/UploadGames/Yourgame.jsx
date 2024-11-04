@@ -31,6 +31,9 @@ const Yourgames = () => {
     return (
         <div className='Your_Game'>
             <h3>Your Games</h3>
+            <div className="action-buttons">
+            <button className ='save-button'><Link to='/User/Setting/Game'>Edit</Link></button>
+            </div>
             <div className="games-grid">
                 {loading && <p>Loading games...</p>}
                 {error && <p style={{ color: 'red' }}>{error}</p>}
