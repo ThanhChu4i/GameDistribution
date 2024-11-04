@@ -12,7 +12,7 @@ function BodyGamePage() {
   const [filters, setFilters] = useState({
     genres: '',
     development: '',
-    languages: '',
+    language: '',
     players: '',
     mobile: '', 
     no_blood: false,
@@ -24,7 +24,7 @@ function BodyGamePage() {
   const [dropdownOpen, setDropdownOpen] = useState({
     genres: false,
     development: false,
-    languages: false,
+    language: false,
     players: false,
     mobile: false,
   });
@@ -55,7 +55,7 @@ function BodyGamePage() {
         const params = {};
         if (filters.genres) params.genres = filters.genres;
         if (filters.development) params.development = filters.development;
-        if (filters.languages) params.languages = filters.language;
+        if (filters.language) params.language = filters.language;
         if (filters.players) params.players = filters.players;
         if (filters.mobile) params.mobile = filters.mobile;
         if (filters.no_blood) params.no_blood = filters.no_blood;
@@ -118,12 +118,12 @@ function BodyGamePage() {
 
           {/* Dropdown Languages */}
           <div className="dropdownn">
-            <button className="dropdownn-button" onClick={() => toggleDropdown('languages')}>
+            <button className="dropdownn-button" onClick={() => toggleDropdown('language')}>
               Language
             </button>
-            {dropdownOpen.languages && (
+            {dropdownOpen.language && (
               <div className="dropdownn-content">
-                <select name="languages" value={filters.languages} onChange={handleFilterChange}>
+                <select name="language" value={filters.language} onChange={handleFilterChange}>
     <option value="">All Languages</option>
     <option value="vietnamese">Vietnamese</option>
     <option value="japanese">Japanese</option>

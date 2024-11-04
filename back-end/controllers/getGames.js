@@ -25,7 +25,7 @@ const getGames = async (req, res) => {
         // Áp dụng các bộ lọc dựa trên query parameters
         if (req.query.genres) filters.genres = req.query.genres;
         if (req.query.development) filters.development = req.query.development;
-        if (req.query.languages) filters.languages = req.query.languages;
+        if (req.query.language) filters.language = req.query.language;
         if (req.query.players) filters.players = req.query.players;
         if (req.query.mobile) filters.mobile = req.query.mobile === 'yes';
         if (req.query.no_blood !== undefined) filters.no_blood = req.query.no_blood === 'true';

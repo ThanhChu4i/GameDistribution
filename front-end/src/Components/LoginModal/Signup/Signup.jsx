@@ -68,7 +68,7 @@ const SignupPopup = ({ onRequestClose }) => {
 
   return (
     <form className="register-form" onSubmit={handleSubmit}>
-      <h2>Đăng Ký</h2>
+      <h2>Register</h2>
       {submitSuccess && <div className="success-message">{submitSuccess}</div>}
       {submitError && <div className="error-message">{submitError}</div>}
       <div className="input-group">
@@ -128,8 +128,35 @@ const SignupPopup = ({ onRequestClose }) => {
           required
         >
           <option value="">Select a country</option>
-          <option value="VN">Vietnam</option>
-          <option value="US">United States</option>
+          <option value="vietnam">Vietnam</option>
+          <option value="japan">Japan</option>
+          <option value="south-korea">South Korea</option>
+          <option value="usa">United States</option>
+          <option value="france">France</option>
+          <option value="germany">Germany</option>
+          <option value="spain">Spain</option>
+          <option value="china">China</option>
+          <option value="italy">Italy</option>
+          <option value="portugal">Portugal</option>
+          <option value="russia">Russia</option>
+          <option value="saudi-arabia">Saudi Arabia</option>
+          <option value="india">India</option>
+          <option value="thailand">Thailand</option>
+          <option value="indonesia">Indonesia</option>
+          <option value="turkey">Turkey</option>
+          <option value="netherlands">Netherlands</option>
+          <option value="sweden">Sweden</option>
+          <option value="poland">Poland</option>
+          <option value="denmark">Denmark</option>
+          <option value="norway">Norway</option>
+          <option value="finland">Finland</option>
+          <option value="greece">Greece</option>
+          <option value="israel">Israel</option>
+          <option value="hungary">Hungary</option>
+          <option value="czech-republic">Czech Republic</option>
+          <option value="slovakia">Slovakia</option>
+          <option value="romania">Romania</option>
+          <option value="ukraine">Ukraine</option>
           {/* Thêm các tùy chọn quốc gia khác */}
         </select>
         {errors.country && <span className="text-danger">{errors.country}</span>}
