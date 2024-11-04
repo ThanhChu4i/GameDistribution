@@ -86,4 +86,19 @@
     background-color: #aaa;
     cursor: not-allowed;
   }
-  
+  .dropdown-button {
+    padding: 10px;
+    margin: 5px;
+    background-color: #ffffff;
+    color: blue;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    width: 150px;
+    height: 60px;
+    font-size: medium;
+  }
+  .dropdown-button:hover {
+    background-color: blue;
+    color: #ffffff;}

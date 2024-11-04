@@ -182,12 +182,39 @@ const GameUpload = () => {
                         </button>
                         {dropdownOpen.languages && (
                             <select name="languages" value={languages} onChange={handleFilterChange}>
-                                <option value="">All Languages</option>
-                                <option value="vietnamese">Vietnamese</option>
-                                <option value="japanese">Japanese</option>
-                                <option value="korean">Korean</option>
-                                <option value="english">English</option>
-                            </select>
+                            <option value="">All Languages</option>
+                            <option value="vietnamese">Vietnamese</option>
+                            <option value="japanese">Japanese</option>
+                            <option value="korean">Korean</option>
+                            <option value="english">English</option>
+                            <option value="french">French</option>
+                            <option value="german">German</option>
+                            <option value="spanish">Spanish</option>
+                            <option value="chinese">Chinese</option>
+                            <option value="italian">Italian</option>
+                            <option value="portuguese">Portuguese</option>
+                            <option value="russian">Russian</option>
+                            <option value="arabic">Arabic</option>
+                            <option value="hindi">Hindi</option>
+                            <option value="thai">Thai</option>
+                            <option value="indonesian">Indonesian</option>
+                            <option value="turkish">Turkish</option>
+                            <option value="dutch">Dutch</option>
+                            <option value="swedish">Swedish</option>
+                            <option value="polish">Polish</option>
+                            <option value="danish">Danish</option>
+                            <option value="norwegian">Norwegian</option>
+                            <option value="finnish">Finnish</option>
+                            <option value="greek">Greek</option>
+                            <option value="hebrew">Hebrew</option>
+                            <option value="hungarian">Hungarian</option>
+                            <option value="czech">Czech</option>
+                            <option value="slovak">Slovak</option>
+                            <option value="romanian">Romanian</option>
+                            <option value="ukrainian">Ukrainian</option>
+                            {/* Add more languages as needed */}
+                        </select>
+                        
                         )}
                     </div>
 
