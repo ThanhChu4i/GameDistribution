@@ -18,7 +18,7 @@ router.put('/', auth, userController.updateUser);
 router.post('/change-password', auth, userController.changePassword);
 
 router.post('/gameHistory',gameHistory);
-router.get('/gameHistory/:id',getRecentGameHistory);
+router.get('/gameHistory/History', auth, getRecentGameHistory);
 router.get('/mygame',auth, getGamesWithUser);
 router.put('/updategame/:id',auth, updateGame);
 router.delete('/deletegame/:id',auth, deleteGame)

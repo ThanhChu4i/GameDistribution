@@ -50,7 +50,7 @@
 
   // Định nghĩa Schema cho bảng (collection) Like Tab
   const likeTabSchema = new mongoose.Schema({
-    id_user: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
+    iduser: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
     id_game: { type: mongoose.Schema.Types.ObjectId, ref: 'Game', required: true },
     like_check: { type: Boolean, default: false }
   });

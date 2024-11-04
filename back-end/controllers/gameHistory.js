@@ -12,7 +12,7 @@ const gameHistory = async (req, res) => {
 
         // Tạo dữ liệu lịch sử game từ request body
         const newGameHistory = new GameHistory({
-            id_user: userId,
+            iduser: userId,
             id_game: gameId,
             play_time: new Date() // Tạo thời gian lưu lịch sử
         });

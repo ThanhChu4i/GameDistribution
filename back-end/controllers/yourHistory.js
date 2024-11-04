@@ -1,36 +1,40 @@
 const { GameHistory } = require('../collection/collection');
 
-// Hàm lấy 5 lịch sử chơi game gần nhất mà không trùng lặp
+// Function to get the 5 most recent unique game histories with uploader's company info
 const getRecentGameHistory = async (req, res) => {
     try {
-        // Lấy id_user từ request parameters hoặc token
-        const userId = req.params.id || req.body.userId;
+        const userId = req.user._id;
+        if (!userId) return res.status(400).json({ message: 'User ID is missing in the request.' });
+        
+        // Populate id_game and id_user within id_game to get uploader info
+        const history = await GameHistory.find({ iduser: userId })
+            .populate({
+                path: 'id_game',
+                populate: {
+                    path: 'id_user', // Populate id_user within id_game to get uploader details
+                    select: 'company' // Chỉ lấy thuộc tính company
+                }
+            })
+            .sort({ play_time: -1 })
+            .lean();
 
-        // Tìm tất cả lịch sử chơi game của người dùng theo id_user, sắp xếp theo play_time giảm dần
-        const history = await GameHistory.find({ id_user: userId })
-            .populate('id_game')
-            .sort({ play_time: -1 }); // Sắp xếp giảm dần theo thời gian chơi
-
-        // Sử dụng một đối tượng để theo dõi các game đã gặp
+        // Lọc 5 game gần nhất không trùng lặp
         const uniqueGames = {};
         const recentGames = [];
 
-        // Lọc ra 5 game gần nhất mà không trùng lặp
         for (const record of history) {
             if (!uniqueGames[record.id_game._id]) {
-                uniqueGames[record.id_game._id] = true; // Đánh dấu game là đã gặp
+                uniqueGames[record.id_game._id] = true;
                 recentGames.push(record);
             }
-            if (recentGames.length === 5) break; // Dừng lại khi đã có 5 game
+            if (recentGames.length === 5) break;
         }
-
-        // Nếu không tìm thấy lịch sử nào
+           console.log(recentGames);
         if (recentGames.length === 0) {
             return res.status(404).json({ message: 'No game history found for this user.' });
         }
 
-        // Trả về danh sách 5 game gần nhất
-        res.status(200).json(recentGames);
+        res.status(200).json({ data: recentGames });
     } catch (error) {
         console.error('Error retrieving recent game history:', error);
         res.status(500).json({ error: 'Failed to retrieve game history' });
