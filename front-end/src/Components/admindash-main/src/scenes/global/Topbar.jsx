@@ -6,6 +6,7 @@ import DarkModeOutlinedIcon from "@mui/icons-material/DarkModeOutlined";
 import NotificationsOutlinedIcon from "@mui/icons-material/NotificationsOutlined";
 import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
 import { Link } from "react-router-dom";
+import Setting from "../Setting";
 const Topbar = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
@@ -33,9 +34,10 @@ const Topbar = () => {
         <IconButton>
           <NotificationsOutlinedIcon />
         </IconButton>
-       <Link to = '/Admin/Setting/User'><IconButton>
+        <IconButton>
           <SettingsOutlinedIcon /> 
-        </IconButton> </Link> 
+          <Setting/>
+        </IconButton> 
       </Box>
     </Box>
   );
