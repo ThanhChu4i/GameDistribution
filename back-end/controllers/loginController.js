@@ -38,12 +38,13 @@ const loginUser = async (req, res) => {
             return res.status(200).json({
                 message: "Login successful! Redirect to admin page.",
                 isAdmin: true,
-                token,         
+                token,
             });
         } else {
             return res.status(200).json({
                 message: "Login successful! Redirect to user page.",
                 isAdmin: false,
+                token,
             });
         }
 
