@@ -18,8 +18,6 @@ const getGamesByTab = async (tabNumber) => {
             .limit(gamesPerPage)
             .select('id_game game_name imagePath company'); // Thêm trường 'img' và 'company' nếu cần
 
-        console.log(games);
-
         const formattedGames = games.map(game => ({
             ...game._doc, // Sao chép tất cả các trường của game
             company: game.id_user ? game.id_user.company : null, // Lấy company từ user
