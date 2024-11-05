@@ -21,7 +21,7 @@ const getGameById = async (req, res) => {
         };
 
         // Find similar games based on genres, excluding the current game
-        const similarGames = await Game.find({ genres: { $in: similarGenres }, _id: { $ne: id } }).populate('id_user', 'company');
+        const similarGames = await Game.find({ genres: { $in: similarGenres }, _id: { $ne: id } }).populate('id_user', 'company').limit(6);
 
         // Format similar games data
         const formattedSimilarGames = similarGames.map(similarGame => ({
