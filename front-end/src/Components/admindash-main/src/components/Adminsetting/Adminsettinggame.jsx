@@ -2,13 +2,17 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Cookies from 'js-cookie';
 import { useNavigate } from 'react-router-dom';
+import { Link } from "react-router-dom";
 import './AdminsettingGame.css';
 
 const AdminSettingGame = () => {
   const [games, setGames] = useState([]);
+  const [activeGames, setActiveGames] = useState([]);
+  const [lockedGames, setLockedGames] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [editingGameId, setEditingGameId] = useState(null);
+  const [deleteGameId, setDeleteGameId] = useState(null);
   const [updatedData, setUpdatedData] = useState({ game_name: '', game_description: '', instruction: '', isActive: false });
   const navigate = useNavigate();
 
@@ -37,6 +41,13 @@ const AdminSettingGame = () => {
     };
     fetchGameData();
   }, [navigate]);
+  useEffect(() => {
+    const active = games.filter(game => game.isActive);
+    const locked = games.filter(game => !game.isActive);
+
+    setActiveGames(active);
+    setLockedGames(locked);
+  }, [games]);
 
   const startEditingGame = (game) => {
     setEditingGameId(game._id);
@@ -87,17 +98,34 @@ const AdminSettingGame = () => {
 
   return (
     <div className="admin-settings-container">
+      <button className="backtoadmin"><Link to = "/Admin">Back</Link></button>
       <h1>Admin Settings Game</h1>
       {games.length > 0 ? (
+        <div className= "full-list">
+          <h2>Game Active</h2>
         <div className="game-list">
-          {games.map((game) => (
+          {activeGames.map((game) => (
             <div key={game._id} className="game-card">
               <p>{game.game_name}</p>
               <img className="game-avatar" src={game.imagePath} alt="Game" />
               <button className="edit-button" onClick={() => startEditingGame(game)}>Edit</button>
               <button className="delete-button" onClick={() => handleDeleteGame(game._id)}>Delete</button>
             </div>
+            
           ))}
+          </div>
+          <h2>Game Locked</h2>
+        <div className="game-list">
+          {lockedGames.map((game) => (
+            <div key={game._id} className="game-card">
+              <p>{game.game_name}</p>
+              <img className="game-avatar" src={game.imagePath} alt="Game" />
+              <button className="edit-button" onClick={() => startEditingGame(game)}>Edit</button>
+              <button className="delete-button" onClick={() => handleDeleteGame(game._id)}>Delete</button>
+            </div>
+            
+          ))}
+          </div>
         </div>
       ) : (
         <p className="no-games-message">No games found.</p>

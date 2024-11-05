@@ -1,31 +1,57 @@
 /* Adminsetting.css */
 .admin-settings-container {
   padding: 20px;
+  font-family: Arial, sans-serif;
+}
+
+.backtoadmin {
+  margin-bottom: 20px;
+  padding: 10px 15px;
+  background-color: #3498db;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  text-decoration: none;
+}
+
+.backtoadmin:hover {
+  background-color: #2980b9;
 }
 
 .users-list {
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); /* Bố trí lưới động */
   gap: 20px;
 }
 
 .user-card {
   border: 1px solid #ddd;
   padding: 15px;
-  width: 300px;
   border-radius: 8px;
   background-color: #f9f9f9;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s;
+}
+
+.user-card:hover {
+  transform: translateY(-5px);
 }
 
 .user-card button {
   margin-top: 10px;
   padding: 8px 12px;
   cursor: pointer;
+  border: none;
+  border-radius: 5px;
 }
 
 .delete-btn {
   background-color: #e74c3c;
   color: white;
+}
+
+.delete-btn:hover {
+  background-color: #c0392b;
 }
 
 .edit-modal-overlay {
@@ -47,15 +73,18 @@
   border-radius: 8px;
   max-width: 500px;
   width: 100%;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
 }
 
 .edit-modal h2 {
   margin-top: 0;
+  color: #333;
 }
 
 .edit-modal label {
   display: block;
   margin: 10px 0 5px;
+  color: #555;
 }
 
 .edit-modal input[type="text"],
@@ -63,6 +92,14 @@
   width: 100%;
   padding: 8px;
   margin-bottom: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+.edit-modal input[type="text"]:focus,
+.edit-modal input[type="email"]:focus {
+  border-color: #3498db;
+  outline: none;
 }
 
 .edit-modal input[type="checkbox"] {
@@ -73,6 +110,7 @@
   margin-top: 10px;
   padding: 10px;
   cursor: pointer;
+  border-radius: 5px;
 }
 
 .edit-modal .cancel-btn {
@@ -80,7 +118,40 @@
   margin-right: 10px;
 }
 
+.edit-modal .cancel-btn:hover {
+  background-color: #b3b3b3;
+}
+
 .edit-modal .save-btn {
   background-color: #2ecc71;
   color: white;
+}
+
+.edit-modal .save-btn:hover {
+  background-color: #27ae60;
+}
+
+.no-users-message {
+  text-align: center;
+  font-style: italic;
+  color: #888;
+}
+.modal-buttons button {
+  margin-top: 10px;
+  padding: 8px 12px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.edit-modal .cancel-btn {
+  background-color: #ccc;
+  margin-right: 10px;
+}
+
+.edit-modal .delete-btn {
+  background-color: #e74c3c;
+  color: white;
+}
+h2 {
+  color: #2980b9;
 }
