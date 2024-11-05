@@ -17,7 +17,7 @@ router.put('/', auth, userController.updateUser);
 // roure đổi mật khẩu
 router.post('/change-password', auth, userController.changePassword);
 
-router.post('/gameHistory',gameHistory);
+router.post('/gameHistory',auth, gameHistory);
 router.get('/gameHistory/History', auth, getRecentGameHistory);
 router.get('/mygame',auth, getGamesWithUser);
 router.put('/updategame/:id',auth, updateGame);

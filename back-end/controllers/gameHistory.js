@@ -3,8 +3,8 @@ const { GameHistory } = require('../collection/collection');
 // Hàm lưu lịch sử chơi game mới
 const gameHistory = async (req, res) => {
     try {
-        const { userId, gameId } = req.body; // Destructure userId and gameId from the request body
-
+        const { gameId } = req.body; // Destructure userId and gameId from the request body
+        const userId = req.user._id;
         // Kiểm tra xem userId và gameId có tồn tại không
         if (!userId || !gameId) {
             return res.status(400).json({ error: 'userId and gameId are required' });
