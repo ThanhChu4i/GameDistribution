@@ -4,7 +4,7 @@ const {gameHistory} = require ('../controllers/gameHistory');
 const {getRecentGameHistory} = require ('../controllers/yourHistory');
 const {getGamesWithUser, updateGame, deleteGame} =require('../controllers/userSettinggame');
 const auth = require('../middleware/auth');
-
+const {getGamesWithUserInfo } = require('../controllers/getGames');
 const router = express.Router();
 
 //router.use(auth);
@@ -16,7 +16,7 @@ router.put('/', auth, userController.updateUser);
 
 // roure đổi mật khẩu
 router.post('/change-password', auth, userController.changePassword);
-
+router.get('/yourgames', auth, getGamesWithUserInfo);
 router.post('/gameHistory',auth, gameHistory);
 router.get('/gameHistory/History', auth, getRecentGameHistory);
 router.get('/mygame',auth, getGamesWithUser);
