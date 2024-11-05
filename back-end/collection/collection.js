@@ -13,7 +13,8 @@
     update_in: { type: Date, default: Date.now },
     publisher: { type: Boolean, default: false },
     developer: { type: Boolean, default: false },
-    admin: { type: Boolean, default: false }
+    admin: { type: Boolean, default: false },
+    isActive: {type: Boolean, default: true}
   });
 
   const User = mongoose.model('User', userSchema);
@@ -34,7 +35,8 @@
     language: {type:String},
     player: {type:String},
     genres: {type:String},
-    gamePath: {type:String, require: true }
+    gamePath: {type:String, require: true },
+    isActive: {type: Boolean, default: true}
   });
 
   const Game = mongoose.model('Game', gameSchema);

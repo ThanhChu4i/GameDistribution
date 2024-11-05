@@ -20,7 +20,9 @@ const loginUser = async (req, res) => {
         if (!user) {
             return res.status(401).json({ message: "Email or password is incorrect." });
         }
-
+        if (!user.isActive) {
+            return res.status(401).json({message:"Account locked"});
+        }
         // Kiểm tra mật khẩu
         const match = await bcrypt.compare(password, user.password);
         if (!match) {
