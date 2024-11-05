@@ -10,7 +10,7 @@ const searchGames = async (req, res) => {
         }
 
         // Filter for games by name or user by company name
-        const gameFilter = { game_name: { $regex: searchTerm, $options: "i" } };
+        const gameFilter = { game_name: { $regex: searchTerm, $options: "i" }, isActive: true };
         const userFilter = { company: { $regex: searchTerm, $options: "i" } };
 
         // Find all users that match the company name condition

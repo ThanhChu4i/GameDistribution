@@ -10,23 +10,28 @@ const getRecentGameHistory = async (req, res) => {
         const history = await GameHistory.find({ iduser: userId })
             .populate( 
                 { path : 'id_game',
+                    match: {isActive: true},
                 populate:{
                     path: 'id_user', 
                     select: 'company'}}
             )
-            .sort({ play_time: -1 })    
+            .sort({ play_time: -1 }); 
+
         // Lọc 5 game gần nhất không trùng lặp  
         const uniqueGames = {};
         const recentGames = [];
 
         for (const record of history) {
-            if (!uniqueGames[record.id_game._id]) {
+            // Kiểm tra xem record.id_game có null hay không
+            if (record.id_game && !uniqueGames[record.id_game._id]) {
                 uniqueGames[record.id_game._id] = true;
                 recentGames.push(record);
             }
             if (recentGames.length === 5) break;
         }
-           console.log(recentGames);
+        
+        console.log(recentGames);
+
         if (recentGames.length === 0) {
             return res.status(404).json({ message: 'No game history found for this user.' });
         }

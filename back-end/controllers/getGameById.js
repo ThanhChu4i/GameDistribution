@@ -6,7 +6,7 @@ const getGameById = async (req, res) => {
         const { id } = req.params;
 
         // Find game by id and populate related user (fetch only 'company' field)
-        const game = await Game.findById(id).populate('id_user', 'company');
+        const game = await Game.findOne({_id: id, isActive: true }).populate('id_user', 'company');
         if (!game) {
             return res.status(404).json({ message: 'Game không tồn tại' });
         }
@@ -21,7 +21,7 @@ const getGameById = async (req, res) => {
         };
 
         // Find similar games based on genres, excluding the current game
-        const similarGames = await Game.find({ genres: { $in: similarGenres }, _id: { $ne: id } }).populate('id_user', 'company').limit(6);
+        const similarGames = await Game.find({ genres: { $in: similarGenres }, _id: { $ne: id }, isActive: true }).populate('id_user', 'company').limit(6);
 
         // Format similar games data
         const formattedSimilarGames = similarGames.map(similarGame => ({

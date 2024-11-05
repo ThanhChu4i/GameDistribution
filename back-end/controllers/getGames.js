@@ -31,7 +31,7 @@ const getGames = async (req, res) => {
         if (req.query.no_blood !== undefined) filters.no_blood = req.query.no_blood === 'true';
         if (req.query.child_friendly !== undefined) filters.child_friendly = req.query.child_friendly === 'true';
         if (req.query.ingame_purchases !== undefined) filters.ingame_purchases = req.query.ingame_purchases === 'true';
-
+          filters.isActive = true;
         // Tìm kiếm game theo bộ lọc và populate thông tin user
         const games = await Game.find(filters).populate('id_user', 'company'); // Populate với trường company
               // Tạo URL hình ảnh dựa trên tên file ảnh trong storage

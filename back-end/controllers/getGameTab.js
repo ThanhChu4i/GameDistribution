@@ -12,7 +12,7 @@ const getGamesByTab = async (tabNumber) => {
     }
 
     try {
-        const games = await Game.find()
+        const games = await Game.find({isActive : true})
             .populate('id_user', 'id_user company')
             .skip(offset)
             .limit(gamesPerPage)
