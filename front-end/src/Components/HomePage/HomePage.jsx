@@ -21,7 +21,6 @@ const HomePage = () => {
       <img src = {image} alt="No"></img>
     </div>
     <div className='EclGame'>
-
             <TabComponent/>
             </div>
     </div>
