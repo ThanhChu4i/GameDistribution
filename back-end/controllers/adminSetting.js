@@ -44,7 +44,7 @@ const getGames =  async (req, res) => {
       res.json(games);
     } catch (err) {
       console.error(err);
-      res.status(500).json({ message: 'Failed to fetch users' });
+      res.status(500).json({ message: 'Failed to fetch games' });
     }
   };
   
@@ -52,12 +52,12 @@ const getGames =  async (req, res) => {
       const updateGame = async (req, res) => {
     try {
       const { id } = req.params;
-      const updatedGame = await User.findByIdAndUpdate(id, req.body, { new: true });
-      if (!updatedGame) return res.status(404).json({ message: 'User not found' });
+      const updatedGame = await Game.findByIdAndUpdate(id, req.body, { new: true });
+      if (!updatedGame) return res.status(404).json({ message: 'Game not found' });
       res.json(updatedGame);
     } catch (err) {
       console.error(err);
-      res.status(500).json({ message: 'Failed to update user' });
+      res.status(500).json({ message: 'Failed to update game' });
     }
   };
   
@@ -66,11 +66,11 @@ const getGames =  async (req, res) => {
     try {
       const { id } = req.params;
       const deletedGame = await Game.findByIdAndDelete(id);
-      if (!deletedGame) return res.status(404).json({ message: 'User not found' });
-      res.json({ message: 'User deleted successfully' });
+      if (!deletedGame) return res.status(404).json({ message: 'Game not found' });
+      res.json({ message: 'Game deleted successfully' });
     } catch (err) {
       console.error(err);
-      res.status(500).json({ message: 'Failed to delete user' });
+      res.status(500).json({ message: 'Failed to delete game' });
     }
   };
  module.exports = {getUser, updateUser, deleteUser, getGames, updateGame, deleteGame}

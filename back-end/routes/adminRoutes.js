@@ -11,6 +11,6 @@ router.get('/settinguser',authenlicateToken, authenlicateAdmin, getUser);
 router.put('/settinguser/:id', authenlicateToken, authenlicateAdmin, updateUser);
 router.delete('/settinguser/:id', authenlicateToken, authenlicateAdmin, deleteUser);
 router.get('/settinggame',authenlicateToken, authenlicateAdmin, getGames);
-router.put('/settinggame/:id', authenlicateToken, authenlicateAdmin, updateGame);
+router.put('/updategame/:id', authenlicateToken, authenlicateAdmin, updateGame);
 router.delete('/settinggame/:id', authenlicateToken, authenlicateAdmin, deleteGame);
 module.exports = router;

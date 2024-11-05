@@ -37,7 +37,6 @@ const LoginPopup = ({ onRequestClose }) => {
       try {
         // Gửi dữ liệu đăng nhập đến máy chủ
         const res = await axios.post('http://localhost:8081/login', values);
-        console.log(res);
         // Lưu token vào cookie
         const token = res.data.token;
         //const expiresIn = values.remember_me ? 30 : 1; // 30 ngày nếu "Nhớ tôi", 1 ngày nếu không
@@ -54,7 +53,7 @@ const LoginPopup = ({ onRequestClose }) => {
         onRequestClose();
       } catch (err) {
         console.error(err);
-        setSubmitError('Login failed. Please check your credentials.');
+        setSubmitError(err.response?.data?.message || 'Login failed');
         setSubmitSuccess('');
       } finally {
         setIsLoading(false);
