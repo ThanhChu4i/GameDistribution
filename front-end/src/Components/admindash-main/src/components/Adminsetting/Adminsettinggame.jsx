@@ -12,6 +12,7 @@ const AdminSettingGame = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [editingGameId, setEditingGameId] = useState(null);
+  const [showDeleteModal, setShowDeleteModal] = useState(false); // New state for delete modal
   const [deleteGameId, setDeleteGameId] = useState(null);
   const [updatedData, setUpdatedData] = useState({ game_name: '', game_description: '', instruction: '', isActive: false });
   const navigate = useNavigate();
@@ -41,6 +42,7 @@ const AdminSettingGame = () => {
     };
     fetchGameData();
   }, [navigate]);
+  
   useEffect(() => {
     const active = games.filter(game => game.isActive);
     const locked = games.filter(game => !game.isActive);
@@ -78,19 +80,26 @@ const AdminSettingGame = () => {
     }
   };
 
-  const handleDeleteGame = async (gameId) => {
+  const handleDeleteGame = async () => {
     try {
-      await axios.delete(`http://localhost:8081/admin/settinggame/${gameId}`, {
+      await axios.delete(`http://localhost:8081/admin/settinggame/${deleteGameId}`, {
         headers: {
           Authorization: `Bearer ${Cookies.get('token')}`,
         },
       });
-      setGames((prevGames) => prevGames.filter(game => game._id !== gameId));
+      setGames((prevGames) => prevGames.filter(game => game._id !== deleteGameId));
       alert("Game deleted successfully!");
+      setShowDeleteModal(false); // Close the modal after delete
+      setDeleteGameId(null);
     } catch (err) {
       console.error("Error deleting game:", err);
       alert("Failed to delete game");
     }
+  };
+
+  const confirmDeleteGame = (gameId) => {
+    setShowDeleteModal(true); // Show the delete confirmation modal
+    setDeleteGameId(gameId);
   };
 
   if (loading) return <p>Loading...</p>;
@@ -103,28 +112,26 @@ const AdminSettingGame = () => {
       {games.length > 0 ? (
         <div className= "full-list">
           <h2>Game Active</h2>
-        <div className="game-list">
-          {activeGames.map((game) => (
-            <div key={game._id} className="game-card">
-              <p>{game.game_name}</p>
-              <img className="game-avatar" src={game.imagePath} alt="Game" />
-              <button className="edit-button" onClick={() => startEditingGame(game)}>Edit</button>
-              <button className="delete-button" onClick={() => handleDeleteGame(game._id)}>Delete</button>
-            </div>
-            
-          ))}
+          <div className="game-list">
+            {activeGames.map((game) => (
+              <div key={game._id} className="game-card">
+                <p>{game.game_name}</p>
+                <img className="game-avatar" src={game.imagePath} alt="Game" />
+                <button className="edit-button" onClick={() => startEditingGame(game)}>Edit</button>
+                <button className="delete-button" onClick={() => confirmDeleteGame(game._id)}>Delete</button>
+              </div>
+            ))}
           </div>
           <h2>Game Locked</h2>
-        <div className="game-list">
-          {lockedGames.map((game) => (
-            <div key={game._id} className="game-card">
-              <p>{game.game_name}</p>
-              <img className="game-avatar" src={game.imagePath} alt="Game" />
-              <button className="edit-button" onClick={() => startEditingGame(game)}>Edit</button>
-              <button className="delete-button" onClick={() => handleDeleteGame(game._id)}>Delete</button>
-            </div>
-            
-          ))}
+          <div className="game-list">
+            {lockedGames.map((game) => (
+              <div key={game._id} className="game-card">
+                <p>{game.game_name}</p>
+                <img className="game-avatar" src={game.imagePath} alt="Game" />
+                <button className="edit-button" onClick={() => startEditingGame(game)}>Edit</button>
+                <button className="delete-button" onClick={() => confirmDeleteGame(game._id)}>Delete</button>
+              </div>
+            ))}
           </div>
         </div>
       ) : (
@@ -168,6 +175,17 @@ const AdminSettingGame = () => {
             />
             <button className="save-button" onClick={handleEditGame}>Save</button>
             <button className="cancel-button" onClick={() => setEditingGameId(null)}>Cancel</button>
+          </div>
+        </div>
+      )}
+
+      {showDeleteModal && (
+        <div className="modal-overlay">
+          <div className="modal">
+            <h2>Confirm Deletion</h2>
+            <p>Are you sure you want to delete this game?</p>
+            <button className="save-button" onClick={handleDeleteGame}>Yes, Delete</button>
+            <button className="cancel-button" onClick={() => setShowDeleteModal(false)}>Cancel</button>
           </div>
         </div>
       )}
