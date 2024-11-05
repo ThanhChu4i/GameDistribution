@@ -241,7 +241,7 @@ function BodyGamePage() {
           {error && <p>Error loading games: {error}</p>}
           {!loading && !error && games.length === 0 && <p>No games found.</p>}
           {!loading && !error && games.map((game) => (
-            <div key={game.id_game} className="game-card">
+            <div key={game.id_game} className="game-cardi">
               <Link to={`/Games/${game._id}`}>
                 {game.imagePath && <img src={game.imagePath} alt={game.game_name} />}
                 <h4>{game.game_name}</h4>

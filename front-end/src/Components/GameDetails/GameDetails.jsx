@@ -68,7 +68,7 @@ const GameDetails = () => {
                 <div className="game-preview">
                     {!isPlaying ? (
                         <div className='preview-info'>
-                            {game.imagePath && <img className='game-thumbnail' src={game.imagePath} alt={game.game_name} />}
+                            {game.imagePath && <img className='game-thumbnaili' src={game.imagePath} alt={game.game_name} />}
                             <h1>{game.game_name}</h1>
                             <p>by {game.company}</p>
                             <button onClick={setPlay} className="play-button">Play Now</button>

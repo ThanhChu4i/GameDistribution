@@ -119,6 +119,7 @@
 .similar-game-card {
   flex: 1 0 48%;
   text-align: center;
+  transition: 0.3s;
 }
 
 .tags-icons {
@@ -196,8 +197,8 @@
   width: 100%;
   border-radius: 5px;
 }
-.game-thumbnail {
+.game-thumbnaili {
   width: 200px;
   height:150px;
-  border: 5px;
+  border-radius: 5px;
 }
