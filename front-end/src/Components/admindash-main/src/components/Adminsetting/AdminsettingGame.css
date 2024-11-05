@@ -10,14 +10,14 @@ h1 {
   color: red;
 }
 
-.game-list {
+.game-listt {
   display: flex;
   flex-wrap: wrap;
   gap: 20px;
   justify-content: center;
 }
 
-.game-card {
+.game-cardt {
   border: 1px solid #ddd;
   border-radius: 8px;
   padding: 20px;

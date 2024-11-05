@@ -27,9 +27,9 @@ const Header = ({ openLoginModal }) => { // State cho việc hiển thị thanh 
       </div>
       <nav className="nav-linkss">
         <Link to="/Games">Games</Link>
-        <div className="dropdown">
-          <button className="custom-button">For Business</button>
-          <div className="dropdown-content">
+        <div className="dropdownn">
+          <button className="custom-buttonn">For Business</button>
+          <div className="dropdown-contentn">
             <div className="for-Publishers">
               <button className='btn'>Partnerships     
                 <p>Discover GameDistribution's partnership models</p> 

@@ -110,11 +110,11 @@ const AdminSettingGame = () => {
       <button className="backtoadmin"><Link to = "/Admin">Back</Link></button>
       <h1>Admin Settings Game</h1>
       {games.length > 0 ? (
-        <div className= "full-list">
+        <div className= "full-listt">
           <h2>Game Active</h2>
-          <div className="game-list">
+          <div className="game-listt">
             {activeGames.map((game) => (
-              <div key={game._id} className="game-card">
+              <div key={game._id} className="game-cardt">
                 <p>{game.game_name}</p>
                 <img className="game-avatar" src={game.imagePath} alt="Game" />
                 <button className="edit-button" onClick={() => startEditingGame(game)}>Edit</button>
@@ -123,9 +123,9 @@ const AdminSettingGame = () => {
             ))}
           </div>
           <h2>Game Locked</h2>
-          <div className="game-list">
+          <div className="game-listt">
             {lockedGames.map((game) => (
-              <div key={game._id} className="game-card">
+              <div key={game._id} className="game-cardt">
                 <p>{game.game_name}</p>
                 <img className="game-avatar" src={game.imagePath} alt="Game" />
                 <button className="edit-button" onClick={() => startEditingGame(game)}>Edit</button>
