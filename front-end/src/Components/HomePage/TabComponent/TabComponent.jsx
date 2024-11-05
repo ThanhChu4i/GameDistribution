@@ -101,7 +101,7 @@ const TabComponent = () => {
                             {error && <p>Error loading games: {error}</p>}
                             {!loading && gamesData[activeTab] && gamesData[activeTab].length === 0 && <p>No games found.</p>}
                             {!loading && gamesData[activeTab] && gamesData[activeTab].map((game) => (
-                                <div key={game._id} className="game-card">
+                                <div key={game._id} className="game-cardd">
                                 <Link to={`/Games/${game._id}`}>
                                 {game.imagePath && <img src={game.imagePath} alt={game.game_name} />}
                                     <h4>{game.game_name}</h4>
