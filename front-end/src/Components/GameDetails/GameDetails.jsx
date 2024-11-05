@@ -105,6 +105,11 @@ const GameDetails = () => {
                     <textarea readOnly value={`http://localhost:3000/games/${id}`} />
                     <button onClick={() => handleCopyEmbed(`http://localhost:3000/games/${id}`)}>Copy</button>
                 </div>
+                <div className="embed-section">
+                    <h3>Example URL</h3>
+                    <textarea readOnly value={`http://localhost:8081/games/${id}`} />
+                    <button onClick={() => handleCopyEmbed(`http://localhost:8081/games/${id}`)}>Copy</button>
+                </div>
             </div>
 
             <div className="right-section">
