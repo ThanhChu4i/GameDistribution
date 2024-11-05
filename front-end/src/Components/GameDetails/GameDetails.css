@@ -121,9 +121,51 @@
   text-align: center;
 }
 
-.additional-info p, .tags-icons p {
-  margin: 5px 0;
+.tags-icons {
+  background-color: white;
+  color: black;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
+
+.tags-icons h3 {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.tags-icons p {
+  margin: 0;
+}
+
+.info-table {
+  display: table;
+  width: 100%;
+}
+
+.info-row {
+  display: table-row;
+}
+
+.info-cell {
+  display: table-cell;
+  padding: 8px 15px;
+  border-bottom: 1px solid #ddd;
+}
+
+.info-title {
+  font-weight: bold;
+  text-align: left;
+  width: 50%;
+}
+
+.info-value {
+  text-align: right;
+}
+
 
 .tags-icons button {
   background-color: #4CAF50;

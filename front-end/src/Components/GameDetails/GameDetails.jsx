@@ -131,12 +131,36 @@ const GameDetails = () => {
                         )}
                     </div>
                 </div>
-                export default MyGameHistory;
-                    <div className="tags-icons">
-                    <h3>Tags</h3>
-                    <p>{game.genres}</p>
-                    <button>Download Thumbnails & Icons</button>
-                    </div>
+                <div className="tags-icons">
+    <div className="info-table">
+        <div className="info-row">
+            <div className="info-cell info-title">Published:</div>
+            <div className="info-cell info-value">{game.date_release}</div>
+        </div>
+        <div className="info-row">
+            <div className="info-cell info-title">Last Updated:</div>
+            <div className="info-cell info-value">{game.date_release}</div>
+        </div>
+        <div className="info-row">
+            <div className="info-cell info-title">Dimensions:</div>
+            <div className="info-cell info-value">600x800</div>
+        </div>
+        <div className="info-row">
+            <div className="info-cell info-title">Company:</div>
+            <div className="info-cell info-value">{game.company}</div>
+        </div>
+        <div className="info-row">
+            <div className="info-cell info-title">Genres:</div>
+            <div className="info-cell info-value">{game.genres}</div>
+        </div>
+        <div className="info-row">
+            <div className="info-cell info-title">Tags:</div>
+            <div className="info-cell info-value">{game.genres}</div>
+        </div>
+    </div>
+    <button>Download Thumbnails & Icons</button>
+</div>
+
 
                     <div className="collections-carousel">
                     <h3>Collections</h3>
