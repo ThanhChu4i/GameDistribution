@@ -30,21 +30,21 @@ const Yourgames = () => {
 
     return (
         <div className='Your_Game'>
-            <h3>Your Games</h3>
+            <div className='titles'><strong>Your Games</strong></div>
             <div className="action-buttons">
             <button className ='save-button'><Link to='/User/Setting/Game'>Edit</Link></button>
             </div>
-            <div className="games-grid">
+            <div className="games-gridq">
                 {loading && <p>Loading games...</p>}
                 {error && <p style={{ color: 'red' }}>{error}</p>}
                 {!loading && !error && games.length === 0 && <p>No games found.</p>}
                 {!loading && !error && games.map((game) => (
-                    <div key={game._id} className="game-card">
+                    <div key={game._id} className="game-cardq">
                         <Link to={`/Games/${game._id}`}>
                             {game.imagePath && <img src={game.imagePath} alt={game.game_name} />}
-                            <h4>{game.game_name}</h4>
-                        </Link>
-                        <p>{game.company}</p>
+                            <div className= "namegame"><strong>{game.game_name}</strong></div>
+                            <p>{game.company}</p>
+                        </Link>                       
                     </div>
                 ))}
             </div>

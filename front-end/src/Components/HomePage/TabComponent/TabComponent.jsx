@@ -95,8 +95,8 @@ const TabComponent = () => {
             </div>
             <div className="tab-content">
                 {activeTab >= 0 && (
-                    <div className="game-list">
-                        <div className="games-grid">
+                    <div className="game-listt">
+                        <div className="games-gridd">
                             {loading && <p>Loading games...</p>}
                             {error && <p>Error loading games: {error}</p>}
                             {!loading && gamesData[activeTab] && gamesData[activeTab].length === 0 && <p>No games found.</p>}
@@ -108,6 +108,7 @@ const TabComponent = () => {
                                 </Link>
                                 <p>{game.company}</p>
                             </div>
+                            
                             ))}
                         </div>
                     </div>

@@ -32,10 +32,10 @@ const MyGameHistory = () => {
     return (
         <div className='Your_Game'>
             <h1>My Game History</h1>
-            <div className='games-grid'>
+            <div className='games-grids'>
                 {history.length > 0 ? (
                     history.map((item) => (
-                        <div key={item._id} className="game-card">
+                        <div key={item._id} className="game-cards">
                             <Link to={`/Games/${item.id_game._id}`}>
                                 {item.id_game.imagePath ? (
                                     <img src={item.id_game.imagePath} alt={item.id_game.game_name} />

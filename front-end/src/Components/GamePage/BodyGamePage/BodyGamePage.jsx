@@ -41,10 +41,15 @@ function BodyGamePage() {
   const handleFilterChange = (event) => {
     const { name, value, type, checked } = event.target;
     setFilters((prev) => ({
-      ...prev,
-      [name]: type === 'checkbox' ? checked : value,
+        ...prev,
+        [name]: type === 'checkbox' ? checked : value,
     }));
-  };
+    // Đóng dropdown sau khi chọn
+    setDropdownOpen((prev) => ({
+        ...prev,
+        [name]: false,
+    }));
+};
 
   // Hàm để lấy danh sách game dựa trên các bộ lọc
   useEffect(() => {
@@ -235,8 +240,8 @@ function BodyGamePage() {
       </div>
 
       {/* Hiển thị danh sách game */}
-      <div className='game-list'>
-        <div className="games-grid">
+       <div className='game-list'>
+        <div className="games-gridk">
           {loading && <p>Loading games...</p>}
           {error && <p>Error loading games: {error}</p>}
           {!loading && !error && games.length === 0 && <p>No games found.</p>}
@@ -244,13 +249,13 @@ function BodyGamePage() {
             <div key={game.id_game} className="game-cardi">
               <Link to={`/Games/${game._id}`}>
                 {game.imagePath && <img src={game.imagePath} alt={game.game_name} />}
-                <h4>{game.game_name}</h4>
-              </Link>
-              <p>{game.company}</p>
+                <div className='namegame'><strong>{game.game_name}</strong></div>
+                <p>{game.company}</p>
+              </Link>          
             </div>
           ))}
         </div>
-      </div>
+      </div> 
     </div>
   );
 }

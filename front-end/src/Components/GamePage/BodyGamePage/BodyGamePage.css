@@ -1,16 +1,21 @@
 /* BodyGamePage.css*/
 .container {
+    margin-top: 50px;
     display: flex; /* Đặt flexbox để chia layout làm 2 phần: bộ lọc và lưới game */
     padding: 20px;
     gap: 20px; /* Khoảng cách giữa bộ lọc và lưới game */
     background-color: #f0f0f0;
+    justify-content: center;
   }
-  
   .filters {
-    width: 200px; /* Độ rộng của khung bộ lọc */
+    width: 150px; /* Độ rộng của khung bộ lọc */
+    height: 650px;
     display: flex;
     flex-direction: column;
     gap: 10px; /* Khoảng cách giữa các button */
+    border-radius: 15px;
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+    justify-content: center;
   }
   
   .filters h3 {
@@ -18,18 +23,20 @@
     font-size: 1.5em;
   }
   .filters div {
+    justify-content: center;
     display: grid;
     margin-bottom: 20px;
   }
   .filters button {
     padding: 10px;
     margin: 5px;
+    width: 120px;
     background-color: #ffffff;
     color: blue;
     border: none;
     border-radius: 30px;
     cursor: pointer;
-    transition: background-color 0.3s;
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
   }
   
   .filters button:hover {
@@ -41,31 +48,40 @@
   }
   .game-list {
     display: flex;
+    width: 1450px;
+    justify-content: center;
   }
-  .games-grid {
+  .games-gridk {
+    border-radius: 50px;
     display: flex;
+    justify-content: center;
     flex-wrap: wrap;
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
     grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); /* Tạo lưới cho các game */
     gap: 20px; /* Khoảng cách giữa các game */
     flex-grow: 1; /* Lưới game sẽ mở rộng ra khi có thêm không gian */
     padding: 50px;
   }
-  
   .game-cardi {
     background-color: white;
     padding: 15px;
     border-radius: 8px;
     text-align: center;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Hiệu ứng shadow */
+    box-shadow: 0 4px 8px rgba(0, 123, 255, 0.3); /* Viền sáng mặc định */
     width: 250px;
     height: 250px;
- 
   }
-  .game-cardi h4 {
+  .game-cardi:hover {
+    box-shadow: 0 6px 12px rgba(0, 123, 255, 0.6); /* Viền sáng hơn khi hover */
+}
+  .namegame {
     margin: 10px 0;
     font-size: 1.2em;
+    color: black;
   }
-  
+  .game-cardi a {
+    text-decoration: none;
+  }
   .game-cardi p {
     color: gray;
   }
@@ -76,11 +92,54 @@
     border-radius: 8px;
   }
   .dropdownn {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdownn-button {
+    background-color: #007bff;
+    color: white;
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.dropdownn-button:hover {
+    background-color: #0056b3;
+}
+
+.dropdownn-content {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 150px; /* Điều chỉnh kích thước tùy ý */
+    background-color: white;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+    padding: 10px;
+    margin-top: 5px;
+    z-index: 1;
+    /* Bỏ các thuộc tính hover */
+    display: none;
+}
+
+.dropdownn-content select {
     width: 150px;
-    height: 60px;
-    border-radius: 30px;
-  }
-  .dropdownn-button {
-    font-size: medium;
-  }
-  
+    padding: 8px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #ffffff;
+    border: none;
+}
+
+/* Hiển thị dropdown khi `dropdownOpen` ở trạng thái mở */
+.dropdownn.show .dropdownn-content {
+    display: block;
+    border-radius: 5px;
+    width: 150px;
+}

@@ -2,8 +2,13 @@
 .GamePage {
     align-items: center; /* Căn giữa theo chiều dọc */
     justify-content: center; /* Căn giữa các phần tử theo chiều ngang */
-    display: blox;
+    display: block;
     background-color: #f0f0f0;
+}
+.top-pick {
+    width: 100%;
+    justify-content: center;
+    display: flex;
 }
 .top-section {
     display: flex;
@@ -37,6 +42,7 @@
     left: 50%;
     width: 100%;
     height: 100%;
+    border-radius: 15px;
     object-fit: cover; /* Giữ tỷ lệ ảnh */
     transform: translate(-50%, -50%); /* Căn giữa ảnh */
 }

@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Cookies from 'js-cookie';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
+import './UserSettingGame.css'
 const UserSettinggame = () => {
   const [games, setGames] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -69,15 +70,18 @@ const UserSettinggame = () => {
 
   return (
     <div className="admin-settings-container">
+     <Link to= '/upload'> <button className="backtouser">Back</button></Link>
       <h1>User Settings Game</h1>
       {games.length > 0 ? (
-        <div className="users-list">
+        <div className="users-lista">
           {games.map((u) => (
-            <div key={u._id} className="user-card">
+            <div key={u._id} className="user-carda">
               <p> {u.game_name}</p>
               <img className = "avtgame" src = {u.imagePath} alt='none'/>
-              <button onClick={() => handleEditGame(u._id, { name: "New Name" })}>Edit</button>
-              <button className="delete-btn" onClick={() => handleDeleteGame(u._id)}>Delete</button>
+              <div className="button-container"> {/* Thêm div này để chứa các nút */}
+        <button onClick={() => handleEditGame(u._id, { name: "New Name" })}>Edit</button>
+        <button className="delete-btn" onClick={() => handleDeleteGame(u._id)}>Delete</button>
+    </div>
             </div>
           ))}
         </div>

@@ -105,6 +105,9 @@
 
 .similar-games {
   margin-bottom: 20px;
+  box-shadow: 0 4px 8px rgba(0, 123, 255, 0.3);
+  border-radius: 15px;
+  justify-content: center;
 }
 .similar-games h3 {
   font-size: 25px;
@@ -113,13 +116,22 @@
 .similar-games-grid {
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
   gap: 10px;
 }
 
-.similar-game-card {
-  flex: 1 0 48%;
-  text-align: center;
-  transition: 0.3s;
+.game-card {
+  background-color: white;
+    padding: 15px;
+    border-radius: 8px;
+    text-align: center;
+    width: 300px;
+    height: 300px;
+    box-shadow: 0 4px 8px rgba(0, 123, 255, 0.3); /* Viền sáng mặc định */
+    transition: box-shadow 0.3s ease; /* Hiệu ứng mượt khi hover */
+}
+.game-card:hover {
+  box-shadow: 0 6px 12px rgba(0, 123, 255, 0.6); /* Viền sáng hơn khi hover */
 }
 
 .tags-icons {

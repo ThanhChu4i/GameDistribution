@@ -1,0 +1,99 @@
+.admin-settings-container {
+    max-width: 100%; /* Chiều rộng tối đa của container */
+    margin: 0 auto; /* Căn giữa */
+    padding: 20px;
+    border-radius: 10px; /* Bo góc cho container */
+    background-color: #f9f9f9; /* Màu nền sáng */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Hiệu ứng bóng */
+}
+
+.admin-settings-container h1 {
+    text-align: center; /* Căn giữa tiêu đề */
+    color: #333; /* Màu chữ tối */
+}
+.button {
+    color: #ffffff;
+}
+.users-lista {
+    margin-top: 20px;
+    display: flex;
+    flex-wrap: wrap; /* Bọc nhiều dòng */
+    justify-content: space-between; /* Khoảng cách đều giữa các thẻ game */
+    gap: 20px; /* Khoảng cách giữa các thẻ */
+}
+
+.user-carda {
+    width: 300px; /* Chiều rộng cố định cho thẻ game */
+    height: 300px; /* Chiều cao cố định cho thẻ game */
+    background-color: white; /* Màu nền cho mỗi thẻ game */
+    border: 1px solid #e0e0e0; /* Viền nhẹ */
+    border-radius: 8px; /* Bo góc cho thẻ game */
+    padding: 15px; /* Khoảng cách bên trong thẻ game */
+    text-align: center; /* Căn giữa nội dung */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Hiệu ứng bóng cho thẻ game */
+    transition: transform 0.3s; /* Hiệu ứng chuyển tiếp khi hover */
+}
+
+.user-carda:hover {
+    transform: scale(1.05); /* Phóng to thẻ khi hover */
+}
+
+.avtgame {
+    width: 240px; /* Hình ảnh chiếm toàn bộ chiều rộng của thẻ game */
+    height: 160px; /* Chiều cao tự động để giữ tỉ lệ */
+    border-radius: 5px; /* Bo góc cho hình ảnh */
+    margin-bottom: 10px; /* Khoảng cách dưới hình ảnh */
+}
+
+button {
+    background-color: #007bff; /* Màu nền cho nút */
+    color: white; /* Màu chữ */
+    border: none; /* Không viền */
+    border-radius: 5px; /* Bo góc cho nút */
+    padding: 10px 15px; /* Khoảng cách bên trong nút */
+    cursor: pointer; /* Con trỏ khi hover */
+    transition: background-color 0.3s; /* Hiệu ứng chuyển tiếp khi hover */
+    margin-right: 5px; /* Khoảng cách giữa các nút */
+}
+
+button:hover {
+    background-color: #0056b3; /* Màu nền khi hover */
+}
+
+.delete-btn {
+    background-color: #dc3545; /* Màu nền cho nút xóa */
+}
+
+.delete-btn:hover {
+    background-color: #c82333; /* Màu nền khi hover cho nút xóa */
+}
+
+.no-games-message {
+    text-align: center; /* Căn giữa thông báo không có game */
+    color: #666; /* Màu chữ nhạt */
+    font-style: italic; /* In nghiêng */
+}
+.button-container {
+    display: flex; /* Sử dụng flexbox để căn giữa */
+    justify-content: center; /* Căn giữa các nút */
+    margin-top: 10px; /* Khoảng cách trên giữa hình ảnh và nút */
+}
+
+button {
+    background-color: #007bff; /* Màu nền cho nút */
+    color: white; /* Màu chữ */
+    border: none; /* Không viền */
+    border-radius: 5px; /* Bo góc cho nút */
+    padding: 10px 15px; /* Khoảng cách bên trong nút */
+    cursor: pointer; /* Con trỏ khi hover */
+    transition: background-color 0.3s; /* Hiệu ứng chuyển tiếp khi hover */
+    margin: 0 5px; /* Khoảng cách bên trái và bên phải giữa các nút */
+}
+
+.delete-btn {
+    background-color: #dc3545; /* Màu nền cho nút xóa */
+}
+
+.delete-btn:hover {
+    background-color: #c82333; /* Màu nền khi hover cho nút xóa */
+}
