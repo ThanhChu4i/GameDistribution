@@ -9,8 +9,8 @@ const HomePage = () => {
     <div className='HomePage'>
         <title>HTML5 Games for Websites and Messengers</title>
     <div className='Home'>
-      <div className ='h1'>High-Yield Solutions</div>
-      <div className ='h1'>For Publishers</div>
+      <div className ='h1'><strong>High-Yield Solutions</strong></div>
+      <div className ='h1'><strong>For Publishers</strong></div>
       <div className='HH2'>
       <div className='h2'>Discover the advantages of</div>
       <div className='h2'>partnering with GameDistribution</div>
