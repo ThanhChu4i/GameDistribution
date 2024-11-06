@@ -171,15 +171,15 @@ const GameDetails = () => {
                 </div>
 
 
-                <div className="collections-carousel">
+                {/* <div className="collections-carousel">
                     <h3>Collections</h3>
                     <div className="carousel">
                         <div className="collection-item">
                             <img src="collection_image_url" alt="Collection" />
-                            <p>Exclusive</p>
+                            <p>Exclusive</p> 
                         </div>
                     </div>
-                </div>
+                </div> */}
             </div>
         </div>
     );
