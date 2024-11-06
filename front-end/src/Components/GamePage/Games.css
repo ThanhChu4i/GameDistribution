@@ -4,6 +4,7 @@
     justify-content: center; /* Căn giữa các phần tử theo chiều ngang */
     display: block;
     background-color: #f0f0f0;
+    padding-top: 30px;
 }
 .top-pick {
     width: 100%;

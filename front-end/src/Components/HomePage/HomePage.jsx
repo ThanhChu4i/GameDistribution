@@ -9,11 +9,11 @@ const HomePage = () => {
     <div className='HomePage'>
         <title>HTML5 Games for Websites and Messengers</title>
     <div className='Home'>
-      <h1>High-Yield Solutions</h1>
-      <h1>For Publishers</h1>
+      <div className ='h1'>High-Yield Solutions</div>
+      <div className ='h1'>For Publishers</div>
       <div className='HH2'>
-      <h2>Discover the advantages of</h2>
-      <h2>partnering with GameDistribution</h2>
+      <div className='h2'>Discover the advantages of</div>
+      <div className='h2'>partnering with GameDistribution</div>
       </div>
       <div className='ShowMore'>
       <button type="button"><strong>Show More</strong></button>
