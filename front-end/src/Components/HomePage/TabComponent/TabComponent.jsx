@@ -82,7 +82,7 @@ const TabComponent = () => {
                     {[...Array(totalTabs)].map((_, index) => (
                         <button
                             key={index}
-                            className={`tab-button ${activeTab === index ? 'active' : ''}`}
+                            className={`tab-buttone ${activeTab === index ? 'active' : ''}`}
                             onClick={() => handleTabClick(index)}
                         >
                             {index + 1}
