@@ -78,17 +78,21 @@ const GameDetails = () => {
                     )}
                 </div>
                 <div className='Share-and-open-in-new-tab'>
-                    <button className='action-button' onClick={handleShare}><strong>Share</strong></button>
-                    <button className='action-button' onClick={handleOpenInNewTab}><strong>Open in New Tab</strong></button>
+                    <button className='action-buttonc' onClick={handleShare}><strong>Share</strong></button>
+                    <button className='action-buttonc' onClick={handleOpenInNewTab}><strong>Open in New Tab</strong></button>
                 </div>
 
                 <div className="game-details">
-                    <div className='game-info'><strong>Game Title:</strong> {game.game_name}</div>
-                    <div className='game-info'><strong>Publisher:</strong> {game.company}</div>
-                    <div className='game-info'><strong>Platform:</strong> Web</div>
-                    <div className='game-info'><strong>Language:</strong> English</div>
-                    <div className='game-info'><strong>Genre:</strong> Casual</div>
-                    <div className='game-info'><strong>Age Group:</strong> All Ages</div>
+                    <div className="game-info"><strong>Game Title:</strong> {game.game_name}</div>
+
+                    <div className="game-info-row">
+                        <div className="game-info"><strong>Published by:</strong> {game.company}</div>
+                        <div className="game-info"><strong>Platform:</strong> Web</div>
+                    </div>
+
+                    <div className="game-info"><strong>Language:</strong> English</div>
+                    <div className="game-info"><strong>Genre:</strong> Casual</div>
+                    <div className="game-info"><strong>Age Group:</strong> All Ages</div>
                 </div>
 
                 <div className="description-section">
@@ -115,10 +119,10 @@ const GameDetails = () => {
             <div className="right-section">
                 <div className="similar-games">
                     <h3>Similar Games</h3>
-                    <div className='games-grid'>
+                    <div className='games-gridt'>
                         {Array.isArray(similarGames) && similarGames.length > 0 ? (
                             similarGames.map((item) => (
-                                <div key={item._id} className="game-card">
+                                <div key={item._id} className="game-cardt">
                                     <Link to={`/Games/${item._id}`}>
                                         {item.imagePath ? (
                                             <img src={item.imagePath} alt={item.game_name} />
@@ -137,37 +141,37 @@ const GameDetails = () => {
                     </div>
                 </div>
                 <div className="tags-icons">
-    <div className="info-table">
-        <div className="info-row">
-            <div className="info-cell info-title">Published:</div>
-            <div className="info-cell info-value">{game.date_release}</div>
-        </div>
-        <div className="info-row">
-            <div className="info-cell info-title">Last Updated:</div>
-            <div className="info-cell info-value">{game.date_release}</div>
-        </div>
-        <div className="info-row">
-            <div className="info-cell info-title">Dimensions:</div>
-            <div className="info-cell info-value">600x800</div>
-        </div>
-        <div className="info-row">
-            <div className="info-cell info-title">Company:</div>
-            <div className="info-cell info-value">{game.company}</div>
-        </div>
-        <div className="info-row">
-            <div className="info-cell info-title">Genres:</div>
-            <div className="info-cell info-value">{game.genres}</div>
-        </div>
-        <div className="info-row">
-            <div className="info-cell info-title">Tags:</div>
-            <div className="info-cell info-value">{game.genres}</div>
-        </div>
-    </div>
-    <button>Download Thumbnails & Icons</button>
-</div>
+                    <div className="info-table">
+                        <div className="info-row">
+                            <div className="info-cell info-title">Published:</div>
+                            <div className="info-cell info-value">{game.date_release}</div>
+                        </div>
+                        <div className="info-row">
+                            <div className="info-cell info-title">Last Updated:</div>
+                            <div className="info-cell info-value">{game.date_release}</div>
+                        </div>
+                        <div className="info-row">
+                            <div className="info-cell info-title">Dimensions:</div>
+                            <div className="info-cell info-value">600x800</div>
+                        </div>
+                        <div className="info-row">
+                            <div className="info-cell info-title">Company:</div>
+                            <div className="info-cell info-value">{game.company}</div>
+                        </div>
+                        <div className="info-row">
+                            <div className="info-cell info-title">Genres:</div>
+                            <div className="info-cell info-value">{game.genres}</div>
+                        </div>
+                        <div className="info-row">
+                            <div className="info-cell info-title">Tags:</div>
+                            <div className="info-cell info-value">{game.genres}</div>
+                        </div>
+                    </div>
+                    <button>Download Thumbnails & Icons</button>
+                </div>
 
 
-                    <div className="collections-carousel">
+                <div className="collections-carousel">
                     <h3>Collections</h3>
                     <div className="carousel">
                         <div className="collection-item">
@@ -175,7 +179,7 @@ const GameDetails = () => {
                             <p>Exclusive</p>
                         </div>
                     </div>
-                    </div>
+                </div>
             </div>
         </div>
     );

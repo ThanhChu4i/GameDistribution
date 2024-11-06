@@ -8,17 +8,24 @@
     padding: 10px 20px; /* Thêm padding cho header */
     color: rgb(0, 0, 0); /* Màu chữ trắng */
     height: 75px;
+
 }
 
 .logo {
     font-size: 24px; /* Kích thước logo */
     font-weight: bold; /* Chữ đậm */
 }
-
+.Linksd {
+  justify-content: center;
+  align-items: center;
+}
 .nav-linkss {
+  justify-content: center;
+  align-items: center;
+  position: absolute;
     margin: 10px;
     display: flex; /* Sử dụng flexbox cho nav */
-    gap: 15px; /* Khoảng cách giữa các liên kết */
+    gap: 20px; /* Khoảng cách giữa các liên kết */
     color: rgb(0, 0, 0); 
 }
 

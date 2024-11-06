@@ -25,10 +25,11 @@ const Header = ({ openLoginModal }) => { // State cho việc hiển thị thanh 
           <img src={logo} alt="Logo" style={{ height: '50px' }} />
         </Link>
       </div>
+      <div className='Linksd'>
       <nav className="nav-linkss">
         <Link to="/Games">Games</Link>
         <div className="dropdownn">
-          <button className="custom-buttonn">For Business</button>
+          <Link>For Business</Link>
           <div className="dropdown-contentn">
             <div className="for-Publishers">
               <button className='btn'>Partnerships     
@@ -64,7 +65,7 @@ const Header = ({ openLoginModal }) => { // State cho việc hiển thị thanh 
         <Link to="/News">News</Link>
         <Link to="/Support">Support</Link>
       </nav>
-
+      </div>
       <div className="header-actions">       
         <Search />
         
