@@ -61,9 +61,7 @@
     transition: background-color 0.3s; /* Hiệu ứng chuyển màu nền */
 }
 
-.login-button:hover{
-  
-}
+
 .search-button:hover {
     background-color: #ffffff; /* Màu khi hover */
 }
