@@ -76,6 +76,7 @@ const TabComponent = () => {
                 <nav className="nav-links">
                     <Link to="/Games"><strong>Exclusive Games</strong></Link>
                 </nav>
+                <div className='tabandprogess'>
                 <div className="butt">
                     <button className="tab-buttonn" onClick={handlePrevTab}>Prev</button>
                     {[...Array(totalTabs)].map((_, index) => (
@@ -89,9 +90,10 @@ const TabComponent = () => {
                     ))}
                     <button className="tab-buttonn" onClick={handleNextTab}>Next</button>
                 </div>
-            </div>
-            <div className="progress-bar-container">
+                <div className="progress-bar-container">
                 <div className="progress-bar" style={{ width: `${progress}%` }}></div>
+            </div>
+            </div>
             </div>
             <div className="tab-content">
                 {activeTab >= 0 && (
