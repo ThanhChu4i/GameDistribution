@@ -61,7 +61,6 @@
     transition: background-color 0.3s; /* Hiệu ứng chuyển màu nền */
 }
 
-
 .search-button:hover {
     background-color: #ffffff; /* Màu khi hover */
 }
@@ -74,10 +73,12 @@
     height: 40px;
     background-color: white;
 }
+
 .search-input {
     padding: 10px;
     border: 1 px;
 }
+
 .user-avatar {
     height: 40px;
     width: 40px;
