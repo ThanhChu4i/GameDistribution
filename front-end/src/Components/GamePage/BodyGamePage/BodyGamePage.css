@@ -52,7 +52,7 @@
     justify-content: center;
   }
   .games-gridk {
-    border-radius: 50px;
+    border-radius: 8px;
     display: flex;
     justify-content: center;
     flex-wrap: wrap;

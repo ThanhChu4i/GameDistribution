@@ -80,16 +80,17 @@
 }
 
 .user-avatar {
-    height: 40px;
-    width: 40px;
+    height: 50px;
+    width: 50px;
     border-radius: 50%;
     cursor: pointer;
+    border: 2px solid #001aff;
   }
   
   .user-dropdown {
     position: absolute;
     right: 0;
-    top: 60px;
+    top: 65px;
     background-color: white;
     border: 1px solid #ddd;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
