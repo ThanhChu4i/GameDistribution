@@ -3,7 +3,7 @@ const bcrypt = require("bcrypt");
 
 // Xử lý đăng ký người dùng
 const signupUser = async (req, res) => {
-    const { email, password, first_name, last_name, country, website, company, expected_traffic } = req.body;
+    const { email, password, first_name, last_name, country, website, company, expected_traffic, wanttodev, wanttopub } = req.body;
 
     // Kiểm tra xem các trường thông tin có đầy đủ không
     if (!email || !password || !first_name || !last_name || !country || !website || !company || !expected_traffic) {
@@ -30,7 +30,9 @@ const signupUser = async (req, res) => {
             country,
             website,
             company,
-            expected_traffic
+            expected_traffic,
+            wanttodev,
+            wanttopub
         });
 
         // Lưu người dùng vào MongoDB

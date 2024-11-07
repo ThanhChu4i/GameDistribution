@@ -9,6 +9,8 @@ const AdminSettinguser = () => {
   const [users, setUsers] = useState([]);
   const [activeUsers, setActiveUsers] = useState([]);
   const [lockedUsers, setLockedUsers] = useState([]);
+  const [wtdevUsers, setwtdevUsers] = useState([]);
+  const [wtpubUsers, setwtpubUsers] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [editUser, setEditUser] = useState(null);
@@ -44,9 +46,12 @@ const AdminSettinguser = () => {
   useEffect(() => {
     const active = users.filter(user => user.isActive);
     const locked = users.filter(user => !user.isActive);
-
+    const wanttodev = users.filter(user => user.wanttodev);
+    const wanttopub = users.filter(user => user.wanttopub);
     setActiveUsers(active);
     setLockedUsers(locked);
+    setwtdevUsers(wanttodev);
+    setwtpubUsers(wanttopub);
   }, [users]);
 
   const openEditModal = (user) => {
@@ -114,6 +119,44 @@ const AdminSettinguser = () => {
       <h1>Admin Settings User</h1>
       {users.length > 0 ? (
         <div className="userd">
+             <h2>Users want to Developer</h2>
+          <div className="users-list">
+            {wtdevUsers.map((u) => (
+              <div key={u._id} className="user-card">
+                <p>First name: {u.first_name}</p>
+                <p>Last name: {u.last_name}</p>
+                <p>Email: {u.email}</p>
+                <p>Country: {u.country}</p>
+                <p>Company: {u.company}</p>
+                <p>Created_at: {u.created_in}</p>
+                <p>Update_at: {u.update_in}</p>
+                <p>Developer? : {u.developer ? "Yes" : "No"} </p>
+                <p>Publisher? : {u.publisher ? "Yes" : "No"} </p>
+                <p>Active? : {u.isActive ? "Yes" : "No"} </p>
+                <button onClick={() => openEditModal(u)}>Edit</button>
+                <button className="delete-btn" onClick={() => openDeleteModal(u._id)}>Delete</button>
+              </div>
+            ))}
+          </div>
+             <h2>Users want to Publisher</h2>
+          <div className="users-list">
+            {wtpubUsers.map((u) => (
+              <div key={u._id} className="user-card">
+                <p>First name: {u.first_name}</p>
+                <p>Last name: {u.last_name}</p>
+                <p>Email: {u.email}</p>
+                <p>Country: {u.country}</p>
+                <p>Company: {u.company}</p>
+                <p>Created_at: {u.created_in}</p>
+                <p>Update_at: {u.update_in}</p>
+                <p>Developer? : {u.developer ? "Yes" : "No"} </p>
+                <p>Publisher? : {u.publisher ? "Yes" : "No"} </p>
+                <p>Active? : {u.isActive ? "Yes" : "No"} </p>
+                <button onClick={() => openEditModal(u)}>Edit</button>
+                <button className="delete-btn" onClick={() => openDeleteModal(u._id)}>Delete</button>
+              </div>
+            ))}
+          </div>
           <h2>Users Active</h2>
           <div className="users-list">
             {activeUsers.map((u) => (

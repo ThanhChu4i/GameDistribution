@@ -12,6 +12,8 @@
     created_in: { type: Date, default: Date.now },
     update_in: { type: Date, default: Date.now },
     publisher: { type: Boolean, default: false },
+    wanttodev: { type: Boolean, default: null },
+    wanttopub: { type: Boolean, default: false },
     developer: { type: Boolean, default: false },
     admin: { type: Boolean, default: false },
     isActive: {type: Boolean, default: true}

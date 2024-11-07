@@ -13,11 +13,20 @@ const {User, Game } = require('../collection/collection'); // Assuming you have 
 };
 
 // Update a user by ID
-    const updateUser = async (req, res) => {
+const updateUser = async (req, res) => {
   try {
     const { id } = req.params;
+
+    // Nếu developer = true trong req.body, thì đặt wanttodev = false
+    if (req.body.developer === true) {
+      req.body.wanttodev = false;
+    }
+    if (req.body.publisher === true) {
+      req.body.wanttopub = false;
+    }
     const updatedUser = await User.findByIdAndUpdate(id, req.body, { new: true });
     if (!updatedUser) return res.status(404).json({ message: 'User not found' });
+    
     res.json(updatedUser);
   } catch (err) {
     console.error(err);

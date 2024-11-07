@@ -16,6 +16,8 @@ const SignupPopup = ({ onRequestClose }) => {
     expected_traffic: '',
     accept_terms: false,
     accept_privacy: false,
+    wanttodev: false,
+    wanttopub: false
   });
   const [errors, setErrors] = useState({});
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -71,6 +73,28 @@ const SignupPopup = ({ onRequestClose }) => {
       <h2>Register</h2>
       {submitSuccess && <div className="success-message">{submitSuccess}</div>}
       {submitError && <div className="error-message">{submitError}</div>}
+      <div className= "check-dev-pub">
+      <div className="input-group checkbox">
+        <label>
+          <input
+            type="checkbox"
+            name="wanttodev"
+            checked={values.wanttodev}
+            onChange={handleInput}
+          /> Developer
+        </label>
+      </div>
+      <div className="input-group checkbox">
+        <label>
+          <input
+            type="checkbox"
+            name="wanttopub"
+            checked={values.wanttopub}
+            onChange={handleInput}
+          /> Publisher
+        </label>
+      </div>
+      </div>
       <div className="input-group">
         <label><strong>First Name</strong></label>
         <input

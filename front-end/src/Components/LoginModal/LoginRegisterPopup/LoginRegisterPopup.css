@@ -58,7 +58,7 @@
   width: 100%;
   padding: 8px;
   border: 1px solid #ccc;
-  border-radius: 5px;
+  border-radius: 20px;
 }
 
 .login-options {
@@ -95,8 +95,15 @@
 
 .checkbox label {
   font-size: 14px;
+  justify-content: center;
+  display: grid;
+  margin: 5px;
 }
 
 .checkbox input {
   margin-right: 5px;
+}
+.check-dev-pub{
+  display: flex   ;
+  justify-content: center;
 }
