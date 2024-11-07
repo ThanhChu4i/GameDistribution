@@ -1,8 +1,9 @@
 //loginController.js
+const express = require('express');
 const jwt = require('jsonwebtoken');
 const { User } = require('../collection/collection'); // Import model User
 const bcrypt = require("bcrypt");
-
+const app = express();
 // Xử lý đăng nhập người dùng
 const loginUser = async (req, res) => {
     const { email, password } = req.body;
@@ -21,7 +22,7 @@ const loginUser = async (req, res) => {
             return res.status(401).json({ message: "Email or password is incorrect." });
         }
         if (!user.isActive) {
-            return res.status(401).json({message:"Account locked"});
+            return res.status(401).json({ message: "Account locked" });
         }
         // Kiểm tra mật khẩu
         const match = await bcrypt.compare(password, user.password);
@@ -31,7 +32,7 @@ const loginUser = async (req, res) => {
 
         // Tạo JWT sau khi đăng nhập thành công
         const token = jwt.sign(
-            { _id: user._id , email: user.email, isAdmin: user.admin , isPublisher: user.publisher, isDeveloper : user.developer},
+            { _id: user._id, email: user.email, isAdmin: user.admin, isPublisher: user.publisher, isDeveloper: user.developer },
             process.env.JWT_SECRET,
             { expiresIn: '2h' }
         );
