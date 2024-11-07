@@ -125,6 +125,8 @@ const AdminSettinguser = () => {
                 <p>Company: {u.company}</p>
                 <p>Created_at: {u.created_in}</p>
                 <p>Update_at: {u.update_in}</p>
+                <p>Developer? : {u.developer ? "Yes" : "No"} </p>
+                <p>Publisher? : {u.publisher ? "Yes" : "No"} </p>
                 <p>Active? : {u.isActive ? "Yes" : "No"} </p>
                 <button onClick={() => openEditModal(u)}>Edit</button>
                 <button className="delete-btn" onClick={() => openDeleteModal(u._id)}>Delete</button>
@@ -142,6 +144,8 @@ const AdminSettinguser = () => {
                 <p>Company: {u.company}</p>
                 <p>Created_at: {u.created_in}</p>
                 <p>Update_at: {u.update_in}</p>
+                <p>Developer? : {u.developer ? "Yes" : "No"} </p>
+                <p>Publisher? : {u.publisher ? "Yes" : "No"} </p>
                 <p>Active? : {u.isActive ? "Yes" : "No"} </p>
                 <button onClick={() => openEditModal(u)}>Edit</button>
                 <button className="delete-btn" onClick={() => openDeleteModal(u._id)}>Delete</button>
@@ -171,6 +175,12 @@ const AdminSettinguser = () => {
 
             <label>Company</label>
             <input type="text" name="company" value={editUser.company || ""} onChange={handleInputChange} />
+
+            <label>Developer</label>
+            <input type="checkbox" name="developer" checked={editUser.developer} onChange={handleInputChange} />
+
+            <label>Publisher</label>
+            <input type="checkbox" name="publisher" checked={editUser.publisher} onChange={handleInputChange} />
 
             <label>Active</label>
             <input type="checkbox" name="isActive" checked={editUser.isActive} onChange={handleInputChange} />
