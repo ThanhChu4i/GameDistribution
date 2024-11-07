@@ -16,11 +16,11 @@ router.put('/', auth, userController.updateUser);
 
 // roure đổi mật khẩu
 router.post('/change-password', auth, userController.changePassword);
-router.get('/yourgames', auth, getGamesWithUserInfo);
+//router.get('/yourgames', auth, getGamesWithUserInfo);
 router.post('/gameHistory',auth, gameHistory);
 router.get('/gameHistory/History', auth, getRecentGameHistory);
-router.get('/mygame',auth, getGamesWithUser);
-router.put('/updategame/:id',auth, updateGame);
-router.delete('/deletegame/:id',auth, deleteGame)
+//router.get('/mygame',auth, getGamesWithUser);
+//router.put('/updategame/:id',auth, updateGame);
+//router.delete('/deletegame/:id',auth, deleteGame)
 
 module.exports = router;
