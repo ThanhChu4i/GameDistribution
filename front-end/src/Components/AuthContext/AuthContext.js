@@ -13,7 +13,7 @@ export const AuthContextProvider = ({ children }) => {
 
   const navigate = useNavigate(); // Khởi tạo useNavigate
 
-  const login = (token) => {
+  const login = (token, isAdmin , isDevPub) => {
     // Lưu token vào cookie khi đăng nhập
     Cookies.set('token', token, { expires: 2 }); // Lưu token trong 2 ngày
     setIsLoggedIn(true); // Cập nhật trạng thái đăng nhập
