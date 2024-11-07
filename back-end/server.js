@@ -14,7 +14,6 @@ const { loginUser } = require('./controllers/loginController.js');
 const routes = require('./routes/routes.js');
 const { getGamesByTab } = require('./controllers/getGameTab.js'); 
 const authenticateAdmin = require('./middleware/authenticateAdmin/authenticateAdmin.js');
-const authenticateToken = require('./middleware/authenticateToken/authenticateToken.js');
 const userRoutes = require('./routes/userRoutes.js');
 const adminRoutes = require('./routes/adminRoutes.js');
 // Middleware
@@ -27,7 +26,7 @@ app.use('/api', userRoutes);
 // Routes
 app.post('/signup', signupUser); // Route for user signup
 app.post('/login', loginUser);   // Route for user login
-app.get('/admin', authenticateToken, authenticateAdmin, (req, res) => {
+app.get('/admin', authenticateAdmin, (req, res) => {
     res.json({ message: 'Welcome to the admin panel!', user: req.user });
 });
 app.use('/storage', express.static('storage')); // Để phục vụ file upload
