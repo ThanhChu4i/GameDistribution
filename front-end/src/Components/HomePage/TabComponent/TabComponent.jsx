@@ -24,7 +24,7 @@ const TabComponent = () => {
             setLoading(true);
             try {
                 const requests = Array.from({ length: totalTabs }, (_, i) =>
-                    axios.get(`http://localhost:8081/games/tab/${i + 1}`)
+                    axios.get(`http://localhost:8081/api/games/tab/${i + 1}`)
                 );
                 const responses = await Promise.all(requests);
                 setGamesData(responses.map((response) => response.data));

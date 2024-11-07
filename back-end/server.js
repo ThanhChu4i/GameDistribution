@@ -7,16 +7,15 @@ const db = require('./controllers/connectdb.js');  // Make sure the database con
 const app = express();
 const bodyParser = require('body-parser');
 const { User, Game, GameHistory, LikeTab, Review, Genre, GameGenre } = require('./collection/collection.js');
-const gameRoutes = require('./routes/gameRoutes.js');
 // Import controllers
 const { signupUser } = require('./controllers/signupController.js');
 const { loginUser } = require('./controllers/loginController.js');
-const routes = require('./routes/routes.js');
 const { getGamesByTab } = require('./controllers/getGameTab.js'); 
 const authenticateAdmin = require('./middleware/authenticateAdmin/authenticateAdmin.js');
 const userRoutes = require('./routes/userRoutes.js');
 const adminRoutes = require('./routes/adminRoutes.js');
 const DevRoutes = require ('./routes/DevRoutes.js');
+const routes = require('./routes/routes.js');
 // Middleware
 app.use(cors({
     origin: 'http://localhost:3000', // Địa chỉ frontend của bạn
@@ -32,26 +31,9 @@ app.get('/admin', authenticateAdmin, (req, res) => {
 });
 app.use('/storage', express.static('storage')); // Để phục vụ file upload
 // Sử dụng routes
-app.use('/api/games',gameRoutes);
 app.use('/api',routes);
 app.use('/admin',adminRoutes);
 app.use('/api',DevRoutes);
-app.get('/games/tab/:tabNumber', async (req, res) => {
-    const tabNumber = parseInt(req.params.tabNumber);
-
-    try {
-        const games = await getGamesByTab(tabNumber);
-        if (games.length === 0) {
-            return res.status(404).json({ message: 'No games found for this tab.' });
-        }
-        res.json(games);
-    } catch (err) {
-        console.error('Error querying the database:', err);
-        return res.status(500).json({ error: 'Failed to fetch games' });
-    }
-});
-
-
 app.use('/me', require('./routes/userRoutes.js'));
 // Listen on port 8081
 app.listen(8081, () => {
