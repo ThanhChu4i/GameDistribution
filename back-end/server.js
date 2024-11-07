@@ -1,12 +1,8 @@
 require('dotenv').config();
 const express = require("express");
 const cors = require("cors");
-const path = require('path');
-const jwt = require('jsonwebtoken');
 const db = require('./controllers/connectdb.js');  // Make sure the database connection is imported
 const app = express();
-const bodyParser = require('body-parser');
-const { User, Game, GameHistory, LikeTab, Review, Genre, GameGenre } = require('./collection/collection.js');
 // Import controllers
 const { signupUser } = require('./controllers/signupController.js');
 const { loginUser } = require('./controllers/loginController.js');
