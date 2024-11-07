@@ -10,7 +10,6 @@ const { User, Game, GameHistory, LikeTab, Review, Genre, GameGenre } = require('
 // Import controllers
 const { signupUser } = require('./controllers/signupController.js');
 const { loginUser } = require('./controllers/loginController.js');
-const { getGamesByTab } = require('./controllers/getGameTab.js'); 
 const authenticateAdmin = require('./middleware/authenticateAdmin/authenticateAdmin.js');
 const userRoutes = require('./routes/userRoutes.js');
 const adminRoutes = require('./routes/adminRoutes.js');
