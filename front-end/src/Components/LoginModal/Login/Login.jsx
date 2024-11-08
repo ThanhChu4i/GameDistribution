@@ -39,10 +39,8 @@ const LoginPopup = ({ onRequestClose }) => {
         const res = await axios.post('http://localhost:8081/login', values);
         // Lưu token vào cookie
         const token = res.data.token;
-        const isAdmin = res.data.isAdmin;
-        const isDevPub = res.data.isDevPub;
         //const expiresIn = values.remember_me ? 30 : 1; // 30 ngày nếu "Nhớ tôi", 1 ngày nếu không
-        login(token, isAdmin, isDevPub);
+        login(token);
 
         // Điều hướng
         if (res.data.isAdmin) {
