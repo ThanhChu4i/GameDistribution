@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import './BodyGamePage.css';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
-
+import SearchIcon from '@mui/icons-material/Search';
 function BodyGamePage() {
   const [games, setGames] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -90,16 +90,11 @@ function BodyGamePage() {
 
   return (
     <div className="container">
-      <div className="filters">
-        <h3>Filters</h3>
-        <div className="filter-options">
-          <div className="search-bar">
-            <input
-              type="text"
-              placeholder="Search games..."
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)} // Cập nhật searchQuery khi người dùng nhập
-            />
+      <div className="bottom-section">
+        <div className="filters">
+          <h3>Filters</h3>
+          <div className="filter-options">
+
             <div className="filter-options">
               {/* Dropdown Genres */}
               <div className="dropdownn">
@@ -255,23 +250,39 @@ function BodyGamePage() {
             </div>
           </div>
         </div>
-      </div>
+        {/* Hiển thị danh sách game */}
 
-      {/* Hiển thị danh sách game */}
-      <div className='game-list'>
-        <div className="games-gridk">
-          {loading && <p>Loading games...</p>}
-          {error && <p>Error loading games: {error}</p>}
-          {!loading && !error && games.length === 0 && <p>No games found.</p>}
-          {!loading && !error && games.map((game) => (
-            <div key={game.id_game} className="game-cardi">
-              <Link to={`/Games/${game._id}`}>
-                {game.imagePath && <img src={game.imagePath} alt={game.game_name} />}
-                <div className='namegame'><strong>{game.game_name}</strong></div>
-                <p>{game.company}</p>
-              </Link>
+        <div className='game-listt'>
+          <div className='top-game-list'>
+            <h3>Games</h3>
+            <div className="search-bar-for-game-page">
+              <div className="search-bar">
+                <input
+                  type="text"
+                  placeholder="Search games..."
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)} // Cập nhật searchQuery khi người dùng nhập
+                />
+                <div className='icon'>
+                  <SearchIcon />
+                </div>
+              </div>
             </div>
-          ))}
+          </div>
+          <div className="games-gridk">
+            {loading && <p>Loading games...</p>}
+            {error && <p>Error loading games: {error}</p>}
+            {!loading && !error && games.length === 0 && <p>No games found.</p>}
+            {!loading && !error && games.map((game) => (
+              <div key={game.id_game} className="game-cardi">
+                <Link to={`/Games/${game._id}`}>
+                  {game.imagePath && <img src={game.imagePath} alt={game.game_name} />}
+                  <div className='namegame'><strong>{game.game_name}</strong></div>
+                  <p>{game.company}</p>
+                </Link>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </div>
