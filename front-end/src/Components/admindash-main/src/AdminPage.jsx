@@ -26,7 +26,7 @@ function AdminPage() {
       } catch (error) {
         console.error('Error fetching admin data:', error);
         // Chuyển hướng về trang khác nếu không có quyền truy cập
-        navigate('/'); // Hoặc chuyển hướng đến một trang khác phù hợp
+        navigate('/404/NotFound'); // Hoặc chuyển hướng đến một trang khác phù hợp
       }
     };
 

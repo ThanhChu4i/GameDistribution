@@ -15,13 +15,15 @@ export const AuthContextProvider = ({ children }) => {
 
   const login = (token, isAdmin , isDevPub) => {
     // Lưu token vào cookie khi đăng nhập
-    Cookies.set('token', token, { expires: 2 }); // Lưu token trong 2 ngày
+    Cookies.set('token', token, { expires: 2 });
+    Cookies.set('isAdmin',isAdmin, {expires: 2});
+    Cookies.set('isDevPub', isDevPub,{expires: 2}); // Lưu token trong 2 ngày
     setIsLoggedIn(true); // Cập nhật trạng thái đăng nhập
   };
 
   const logout = () => {
     // Xóa cookie token khi đăng xuất
-    Cookies.remove('token');
+    Cookies.remove('token','isAdmin','isDevPub');
     setIsLoggedIn(false); // Cập nhật trạng thái đăng xuất
     navigate('/'); // Điều hướng về trang chính sau khi đăng xuất
   };

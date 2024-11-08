@@ -31,11 +31,11 @@ const AdminSettingGame = () => {
         });
         setGames(response.data);
       } catch (err) {
-        console.error('Error fetching game data:', err);
-        setError('Failed to fetch game data');
-        if (err.response && err.response.status === 401) {
-          navigate('/');
-        }
+        console.error('Error fetching user data:', err);
+        setError('Failed to fetch user data');
+        if (err.response && (err.response.status === 401 || err.response.status === 403)) {
+          navigate('/404/Notfound');
+      }
       } finally {
         setLoading(false);
       }
@@ -63,7 +63,6 @@ const AdminSettingGame = () => {
       [name]: type === 'checkbox' ? checked : value,
     }));
   };
-
   const handleEditGame = async () => {
     try {
       const response = await axios.put(`http://localhost:8081/admin/updategame/${editingGameId}`, updatedData, {

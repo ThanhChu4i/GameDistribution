@@ -3,7 +3,6 @@ const express = require('express');
 const jwt = require('jsonwebtoken');
 const { User } = require('../collection/collection'); // Import model User
 const bcrypt = require("bcrypt");
-const app = express();
 
 // Xử lý đăng nhập người dùng
 const loginUser = async (req, res) => {

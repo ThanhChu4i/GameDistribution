@@ -19,6 +19,7 @@ import ChangePassword from './Components/UserPage/ChangePassword/ChangePassword.
 import Adminsettinguser from './Components/admindash-main/src/components/Adminsetting/Adminsettinguser.jsx';
 import AdminSettinggame from './Components/admindash-main/src/components/Adminsetting/Adminsettinggame.jsx';
 import UserSettinggame from './Components/UserPage/UserSettingGame/UserSettingGame.jsx';
+import NotFound404 from './Components/404notfound/NotFound404.jsx';
 function App() {
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false); // State để quản lý modal login
   return (
@@ -39,6 +40,7 @@ function App() {
           <Route path='/Admin/Setting/User' element={<Adminsettinguser/>} />
           <Route path='/Admin/Setting/Game' element={<AdminSettinggame/>} />
           <Route path='/User/Setting/Game' element= {<UserSettinggame/>} />
+          <Route path='/404/Notfound'  element= {<NotFound404/>} />
         </Routes>
         <LoginRegisterModal
           isOpen={isLoginModalOpen} // Truyền state vào modal
