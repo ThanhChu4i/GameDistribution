@@ -96,7 +96,6 @@ const LoginPopup = ({ onRequestClose }) => {
         />
         {errors.password && <span className="text-danger">{errors.password}</span>}
       </div>
-
       <div className="login-options">
         <label>
           <input
