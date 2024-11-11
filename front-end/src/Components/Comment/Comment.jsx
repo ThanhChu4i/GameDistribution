@@ -36,8 +36,8 @@ export default function CommentSection() {
         try {
             const token = Cookies.get('token');
             await axios.post(
-                'http://localhost:8081/me/comment', 
-                { id_game: id, comment: newComment }, 
+                'http://localhost:8081/me/comment',
+                { id_game: id, comment: newComment },
                 { headers: { Authorization: `Bearer ${token}` } }
             );
             setNewComment('');
@@ -76,8 +76,15 @@ export default function CommentSection() {
             <Box sx={{ mb: 3 }}>
                 {oldComments.map((comment, index) => (
                     <Card key={index} variant="outlined" sx={{ mb: 2, p: 2 }}>
-                        <Typography level="body1">{comment.comment}</Typography>
-                    </Card>
+                    <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+                        <Typography component="label" className='username' sx={{ fontWeight: 'bold' }}>
+                            {comment.id_user.first_name} {comment.id_user.last_name}
+                        </Typography>
+                        <Typography level="body1" sx={{ ml: 1 }}>
+                            {comment.comment}
+                        </Typography>
+                    </Box>
+                </Card>
                 ))}
             </Box>
         </Box>
