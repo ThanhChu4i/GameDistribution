@@ -73,18 +73,24 @@ export default function CommentSection() {
             <Typography level="h2" sx={{ mb: 2 }}>Comments</Typography>
 
             {/* Old Comments Display */}
-            <Box sx={{ mb: 3 }}>
+            <Box sx={{
+                mb: 3, maxHeight: 500, 
+                overflowY: 'auto',    // Enable vertical scrolling
+                border: '1px solid #ccc',
+                padding: 2
+            }}
+            >
                 {oldComments.map((comment, index) => (
                     <Card key={index} variant="outlined" sx={{ mb: 2, p: 2 }}>
-                    <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-                        <Typography component="label" className='username' sx={{ fontWeight: 'bold' }}>
-                            {comment.id_user.first_name} {comment.id_user.last_name}
-                        </Typography>
-                        <Typography level="body1" sx={{ ml: 1 }}>
-                            {comment.comment}
-                        </Typography>
-                    </Box>
-                </Card>
+                        <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+                            <Typography component="label" className='username' sx={{ fontWeight: 'bold' }}>
+                                {comment.id_user.first_name} {comment.id_user.last_name}
+                            </Typography>
+                            <Typography level="body1" sx={{ ml: 1 }}>
+                                {comment.comment}
+                            </Typography>
+                        </Box>
+                    </Card>
                 ))}
             </Box>
         </Box>
