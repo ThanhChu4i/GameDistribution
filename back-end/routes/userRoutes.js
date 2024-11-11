@@ -3,7 +3,8 @@ const userController = require('../controllers/userController');
 const {gameHistory} = require ('../controllers/gameHistory');
 const {getRecentGameHistory} = require ('../controllers/yourHistory');
 const auth = require('../middleware/authenticateUser/auth');
-const {getOldComment, newComment} = require('../controllers/comment')
+const {getOldComment, newComment} = require('../controllers/comment');
+const {getLikeStatus, toggleLike} = require("../controllers/likeController");
 const router = express.Router();
 
 //router.use(auth);
@@ -17,4 +18,6 @@ router.post('/gameHistory',auth, gameHistory);
 router.get('/gameHistory/History', auth, getRecentGameHistory);
 router.get('/comment/:gameId', getOldComment);
 router.post('/comment', auth , newComment);
+router.get('/likeStatus/:gameId', auth, getLikeStatus);
+router.post('/toggleLike', auth,toggleLike);
 module.exports = router;

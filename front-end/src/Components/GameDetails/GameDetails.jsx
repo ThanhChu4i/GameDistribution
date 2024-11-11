@@ -4,6 +4,7 @@ import { useParams, Link } from 'react-router-dom';
 import axios from 'axios';
 import Cookies from 'js-cookie';
 import Comment from '../Comment/Comment';
+import LikeButton from '../Like/Like';
 const GameDetails = () => {
     const { id } = useParams();
     const [game, setGame] = useState(null);
@@ -80,6 +81,7 @@ const GameDetails = () => {
                 <div className='Share-and-open-in-new-tab'>
                     <button className='action-buttonc' onClick={handleShare}><strong>Share</strong></button>
                     <button className='action-buttonc' onClick={handleOpenInNewTab}><strong>Open in New Tab</strong></button>
+                    <LikeButton/>
                 </div>
 
                 <div className="game-details">
