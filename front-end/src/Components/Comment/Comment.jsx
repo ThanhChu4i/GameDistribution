@@ -51,48 +51,50 @@ export default function CommentSection() {
 
     return (
         <Box sx={{ maxWidth: 1000, mx: 'auto', mt: 4 }}>
-            {/* New Comment Input */}
-            <FormControl>
-                <FormLabel>New Comment</FormLabel>
-                <Textarea
-                    placeholder="Type something here…"
-                    minRows={3}
-                    value={newComment}
-                    onChange={(e) => setNewComment(e.target.value)}
-                    sx={{ minWidth: 300 }}
-                />
-                {error && (
-                    <Typography color="danger" sx={{ mt: 1 }}>
-                        {error}
-                    </Typography>
-                )}
-                <Button onClick={handleCommentSubmit} sx={{ mt: 2 }}>
-                    Submit
-                </Button>
-            </FormControl>
-            <Typography level="h2" sx={{ mb: 2 }}>Comments</Typography>
+    {/* New Comment Input */}
+    <FormControl>
+        <FormLabel>New Comment</FormLabel>
+        <Textarea
+            placeholder="Type something here…"
+            minRows={3}
+            value={newComment}
+            onChange={(e) => setNewComment(e.target.value)}
+            sx={{ minWidth: 300 }}
+        />
+        {error && (
+            <Typography color="danger" sx={{ mt: 1 }}>
+                {error}
+            </Typography>
+        )}
+        <Button onClick={handleCommentSubmit} sx={{ mt: 2 }}>
+            Submit
+        </Button>
+    </FormControl>
+    <Typography level="h2" sx={{ mb: 2 }}>Comments</Typography>
 
-            {/* Old Comments Display */}
-            <Box sx={{
-                mb: 3, maxHeight: 500, 
-                overflowY: 'auto',    // Enable vertical scrolling
-                border: '1px solid #ccc',
-                padding: 2
-            }}
-            >
-                {oldComments.map((comment, index) => (
-                    <Card key={index} variant="outlined" sx={{ mb: 2, p: 2 }}>
-                        <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-                            <Typography component="label" className='username' sx={{ fontWeight: 'bold' }}>
-                                {comment.id_user.first_name} {comment.id_user.last_name}
-                            </Typography>
-                            <Typography level="body1" sx={{ ml: 1 }}>
-                                {comment.comment}
-                            </Typography>
-                        </Box>
-                    </Card>
-                ))}
-            </Box>
-        </Box>
+    {/* Old Comments Display */}
+    <Box
+        sx={{
+            mb: 3, maxHeight: 500,
+            overflowY: 'auto', // Enable vertical scrolling
+            border: '1px solid #ccc',
+            padding: 2
+        }}
+    >
+        {oldComments.map((comment, index) => (
+            <Card key={index} variant="outlined" sx={{ mb: 2, p: 2 }}>
+                <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+                    <Typography component="label" className='username' sx={{ fontWeight: 'bold' }}>
+                        {comment.id_user ? `${comment.id_user.first_name} ${comment.id_user.last_name}` : "Anonymous"}
+                    </Typography>
+                    <Typography level="body1" sx={{ ml: 1 }}>
+                        {comment.comment}
+                    </Typography>
+                </Box>
+            </Card>
+        ))}
+    </Box>
+</Box>
+
     );
 }

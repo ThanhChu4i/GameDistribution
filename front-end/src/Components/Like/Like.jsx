@@ -4,27 +4,30 @@ import Like from "../Assets/like (1).png";
 import noLike from "../Assets/like.png";
 import Cookies from 'js-cookie';
 import { useParams } from 'react-router-dom';
+
 const LikeButton = () => {
     const [liked, setLiked] = useState(false);
-    const { gameId } = useParams();
-    // Fetch the current like status from the database on component mount
+    const { id } = useParams(); // Lấy id từ URL
+
+    // Fetch the current like status from the database when component mounts
     useEffect(() => {
         const fetchLikeStatus = async () => {
-            try {
-                const token = Cookies.get('token');
-                const response = await axios.get(`http://localhost:8081/me/likeStatus/${gameId}`, {
-                    headers: { Authorization: `Bearer ${token}` }
-                });
-                setLiked(response.data.liked); // Set the initial like status
-            } catch (error) {
-                console.error('Error fetching like status:', error);
-            };
-            console.log(gameId);
-
+            if (id) {
+                try {
+                    const token = Cookies.get('token');
+                    const response = await axios.get('http://localhost:8081/me/likeStatus', { 
+                        params: { id },
+                        headers: { Authorization: `Bearer ${token}` }
+                    });
+                    setLiked(response.data.liked); // Set the initial like status
+                } catch (error) {
+                    console.error('Error fetching like status:', error);
+                }
+            }
         };
-        
+
         fetchLikeStatus();
-    }, [gameId]);
+    }, [id]);
 
     // Toggle like status and update it in the database
     const handleLikeToggle = async () => {
@@ -32,7 +35,7 @@ const LikeButton = () => {
             const token = Cookies.get('token');
             await axios.post(
                 'http://localhost:8081/me/toggleLike',
-                { gameId, liked: !liked },
+                { id, liked: !liked },
                 { headers: { Authorization: `Bearer ${token}` } }
             );
             setLiked(!liked); // Update the UI to reflect the new status

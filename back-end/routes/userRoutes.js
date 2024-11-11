@@ -18,6 +18,6 @@ router.post('/gameHistory',auth, gameHistory);
 router.get('/gameHistory/History', auth, getRecentGameHistory);
 router.get('/comment/:gameId', getOldComment);
 router.post('/comment', auth , newComment);
-router.get('/likeStatus/:gameId', auth, getLikeStatus);
-router.post('/toggleLike', auth,toggleLike);
+router.get('/likeStatus', auth, getLikeStatus);
+router.post('/toggleLike', auth, toggleLike);
 module.exports = router;

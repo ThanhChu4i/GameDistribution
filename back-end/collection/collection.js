@@ -57,7 +57,7 @@
   const likeTabSchema = new mongoose.Schema({
     id_user: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
     id_game: { type: mongoose.Schema.Types.ObjectId, ref: 'Game', required: true },
-    like_check: { type: Boolean, default: null }
+    liked: { type: Boolean, default: null }
   });
 
   const LikeTab = mongoose.model('LikeTab', likeTabSchema);
