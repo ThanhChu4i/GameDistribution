@@ -57,7 +57,7 @@ export default function CommentSection() {
     };
 
     return (
-        <Box sx={{ maxWidth: 600, mx: 'auto', mt: 4 }}>
+        <Box sx={{ maxWidth: 1000, mx: 'auto', mt: 4 }}>
             {/* New Comment Input */}
             <FormControl>
                 <FormLabel>New Comment</FormLabel>
@@ -140,7 +140,7 @@ export default function CommentSection() {
                     <Card key={index} variant="outlined" sx={{ mb: 2, p: 2 }}>
                         <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
                             <Typography component="label" className='username' sx={{ fontWeight: 'bold' }}>
-                                {comment.id_user.first_name} {comment.id_user.last_name}
+                                {comment.id_user.first_name} {comment.id_user.last_name}:   
                             </Typography>
                             <Typography level="body1" sx={{ ml: 1 }}>
                                 {comment.comment}
