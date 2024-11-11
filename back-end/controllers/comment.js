@@ -7,7 +7,6 @@ const getOldComment = async (req, res) => {
     const { gameId } = req.params;
     try {
         const comments = await Comment.find({ id_game: gameId }).populate('id_user', 'last_name first_name avatar'  ); // Populates username of the user
-        console.log(comments);
         res.status(200).json(comments);
     } catch (error) {
         console.error('Error fetching comments:', error);
