@@ -62,14 +62,14 @@
   const LikeTab = mongoose.model('LikeTab', likeTabSchema);
 
   // Định nghĩa Schema cho bảng (collection) Review
-  const reviewSchema = new mongoose.Schema({
+  const commentSchema = new mongoose.Schema({
     id_user: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
     id_game: { type: mongoose.Schema.Types.ObjectId, ref: 'Game', required: true },
     created_in: { type: Date, default: Date.now },
     comment: { type: String }
   });
 
-  const Review = mongoose.model('Review', reviewSchema);
+  const Comment = mongoose.model('Comment', commentSchema);
 
   // Định nghĩa Schema cho bảng (collection) Genre
   const genreSchema = new mongoose.Schema({
@@ -93,7 +93,7 @@
     Game,
     GameHistory,
     LikeTab,
-    Review,
+    Comment,
     Genre,
     GameGenre
   };

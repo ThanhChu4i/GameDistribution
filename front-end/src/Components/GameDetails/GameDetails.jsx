@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import axios from 'axios';
 import Cookies from 'js-cookie';
-
+import Comment from '../Comment/Comment';
 const GameDetails = () => {
     const { id } = useParams();
     const [game, setGame] = useState(null);
@@ -114,6 +114,7 @@ const GameDetails = () => {
                     <textarea readOnly value={`http://localhost:8081/games/${id}`} />
                     <button onClick={() => handleCopyEmbed(`http://localhost:8081/games/${id}`)}>Copy</button>
                 </div>
+                <Comment/>
             </div>
 
             <div className="right-section">
