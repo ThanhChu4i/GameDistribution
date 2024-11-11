@@ -16,6 +16,7 @@
     wanttopub: { type: Boolean, default: false },
     developer: { type: Boolean, default: false },
     admin: { type: Boolean, default: false },
+    avatarPath: {type:String, default: ''},
     isActive: {type: Boolean, default: true}
   });
 

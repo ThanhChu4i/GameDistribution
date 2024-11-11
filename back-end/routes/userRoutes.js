@@ -15,6 +15,6 @@ router.put('/', auth, userController.updateUser);
 router.post('/change-password', auth, userController.changePassword);
 router.post('/gameHistory',auth, gameHistory);
 router.get('/gameHistory/History', auth, getRecentGameHistory);
-router.get('/comment/:gameId', auth , getOldComment);
+router.get('/comment/:gameId', getOldComment);
 router.post('/comment', auth , newComment);
 module.exports = router;
