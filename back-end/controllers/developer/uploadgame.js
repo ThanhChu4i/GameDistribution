@@ -97,6 +97,7 @@ const uploadGameImage = async (req, res) => {
                     });
 
                     await game.save();
+                    fs.unlinkSync(zipFilePath);
                     res.json({ message: 'File uploaded and extracted successfully!', imagePath: publicImagePath, gamePath: publicGamePath });
                 })
                 .on('error', (err) => {

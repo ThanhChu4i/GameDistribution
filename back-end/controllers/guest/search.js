@@ -27,7 +27,6 @@ const searchGames = async (req, res) => {
             ]
         }).select(' _id game_name imagePath  id_user') // Limit returned fields if needed
           .populate('id_user', 'company');
-          console.log(games);
         res.json({ games });
     } catch (error) {
         console.error("Error searching games:", error);
