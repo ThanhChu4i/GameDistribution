@@ -1,5 +1,5 @@
 // controllers/adminController.js
-const { Game, User, GameHistory } = require('../collection/collection');
+const { Game, User, GameHistory } = require('../../collection/collection');
 
 // Hàm tổng hợp số liệu
 const getAdminStats = async (req, res) => {

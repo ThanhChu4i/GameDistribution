@@ -1,7 +1,7 @@
 // loginController.js
 const express = require('express');
 const jwt = require('jsonwebtoken');
-const { User } = require('../collection/collection'); // Import model User
+const { User } = require('../../collection/collection'); // Import model User
 const bcrypt = require("bcrypt");
 
 // Xử lý đăng nhập người dùng

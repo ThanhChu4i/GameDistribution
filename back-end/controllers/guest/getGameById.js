@@ -1,4 +1,4 @@
-const { Game } = require('../collection/collection'); // Import model Game
+const { Game } = require('../../collection/collection'); // Import model Game
 const path = require('path');
 
 const getGameById = async (req, res) => {

@@ -1,4 +1,4 @@
-const { Game, User } = require('../collection/collection');
+const { Game, User } = require('../../collection/collection');
 
 // Controller function for searching games based on searchTerm
 const searchGames = async (req, res) => {

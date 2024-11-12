@@ -1,4 +1,4 @@
-const { GameHistory } = require('../collection/collection');
+const { GameHistory } = require('../../collection/collection');
 
 // Hàm lưu lịch sử chơi game mới
 const gameHistory = async (req, res) => {

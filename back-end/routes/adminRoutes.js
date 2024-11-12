@@ -1,8 +1,8 @@
 // routes/adminRoutes.js
 const express = require('express');
 const router = express.Router();
-const {getAdminStats} = require('../controllers/adminController');
-const {getUser, updateUser, deleteUser, getGames, updateGame, deleteGame} = require('../controllers/adminSetting.js');
+const {getAdminStats} = require('../controllers/admin/adminController');
+const {getUser, updateUser, deleteUser, getGames, updateGame, deleteGame} = require('../controllers/admin/adminSetting.js');
 const authenlicateAdmin = require ('../middleware/authenticateAdmin/authenticateAdmin.js');
 // Route để lấy tất cả các số liệu cho admin
  router.get('/stats', authenlicateAdmin, getAdminStats);

@@ -1,8 +1,8 @@
 const express = require('express');
-const {getGamesWithUser, updateGame, deleteGame} =require('../controllers/userSettinggame');
+const {getGamesWithUser, updateGame, deleteGame} =require('../controllers/developer/userSettinggame');
 const authenticateDevPub = require('../middleware/authenticateDevPub/authenticateDevPub');
-const {getGamesWithUserInfo } = require('../controllers/getGames');
-const { uploadGameImage } = require('../controllers/uploadgame');
+const {getGamesWithUserInfo } = require('../controllers/developer/getGameWithUserInfo');
+const { uploadGameImage } = require('../controllers/developer/uploadgame');
 const router = express.Router();
 
 // roure đổi mật khẩu

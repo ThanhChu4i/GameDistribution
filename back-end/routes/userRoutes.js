@@ -1,10 +1,10 @@
 const express = require('express');
-const userController = require('../controllers/userController');
-const {gameHistory} = require ('../controllers/gameHistory');
-const {getRecentGameHistory} = require ('../controllers/yourHistory');
+const userController = require('../controllers/user/userController');
+const {gameHistory} = require ('../controllers/user/gameHistory');
+const {getRecentGameHistory} = require ('../controllers/user/yourHistory');
 const auth = require('../middleware/authenticateUser/auth');
-const {getOldComment, newComment} = require('../controllers/comment');
-const {getLikeStatus, toggleLike} = require("../controllers/likeController");
+const {getOldComment, newComment} = require('../controllers/user/comment');
+const {getLikeStatus, toggleLike} = require("../controllers/user/likeController");
 const router = express.Router();
 
 //router.use(auth);

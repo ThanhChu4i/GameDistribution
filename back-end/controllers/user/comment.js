@@ -1,6 +1,6 @@
 // commentRoutes.js
 const express = require('express');
-const {Comment} = require('../collection/collection'); // Adjust path as needed
+const {Comment} = require('../../collection/collection'); // Adjust path as needed
 
 // Get comments for a specific game
 const getOldComment = async (req, res) => {

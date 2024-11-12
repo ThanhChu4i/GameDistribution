@@ -1,4 +1,4 @@
-const { GameHistory } = require('../collection/collection');
+const { GameHistory } = require('../../collection/collection');
 
 // Function to get the 5 most recent unique game histories with uploader's company info
 const getRecentGameHistory = async (req, res) => {

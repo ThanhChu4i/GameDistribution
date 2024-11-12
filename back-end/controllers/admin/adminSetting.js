@@ -1,5 +1,5 @@
 const express = require('express');
-const {User, Game } = require('../collection/collection'); // Assuming you have a User model
+const {User, Game } = require('../../collection/collection'); // Assuming you have a User model
 
 // Get all users
   const getUser =  async (req, res) => {

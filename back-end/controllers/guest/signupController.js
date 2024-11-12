@@ -1,4 +1,4 @@
-const { User } = require('../collection/collection'); // Import model User
+const { User } = require('../../collection/collection'); // Import model User
 const bcrypt = require("bcrypt");
 
 // Xử lý đăng ký người dùng

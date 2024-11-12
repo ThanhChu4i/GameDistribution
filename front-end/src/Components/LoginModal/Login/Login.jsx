@@ -36,7 +36,7 @@ const LoginPopup = ({ onRequestClose }) => {
       setIsLoading(true);
       try {
         // Gửi dữ liệu đăng nhập đến máy chủ
-        const res = await axios.post('http://localhost:8081/login', values);
+        const res = await axios.post('http://localhost:8081/api/login', values);
         // Lưu token vào cookie
         const token = res.data.token;
         //const expiresIn = values.remember_me ? 30 : 1; // 30 ngày nếu "Nhớ tôi", 1 ngày nếu không

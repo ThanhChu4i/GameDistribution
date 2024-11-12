@@ -1,6 +1,6 @@
 const express = require('express');
 const path = require('path');
-const { Game} = require('../collection/collection');
+const { Game} = require('../../collection/collection');
 
 const getGamesWithUser = async (req, res) => {
     try {

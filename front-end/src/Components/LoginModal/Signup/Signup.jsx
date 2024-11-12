@@ -47,7 +47,7 @@ const SignupPopup = ({ onRequestClose }) => {
         setIsLoading(true);
         // Gửi dữ liệu đến server
         axios
-          .post('http://localhost:8081/signup', values)
+          .post('http://localhost:8081/api/signup', values)
           .then((res) => {
             console.log(res);
             setSubmitSuccess('Registration successful!');

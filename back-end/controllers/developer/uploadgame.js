@@ -1,4 +1,4 @@
-const { Game } = require('../collection/collection'); // Nhập mô hình Game
+const { Game } = require('../../collection/collection'); // Nhập mô hình Game
 const multer = require('multer');
 const path = require('path');
 const fs = require('fs');

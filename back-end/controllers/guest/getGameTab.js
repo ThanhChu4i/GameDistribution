@@ -1,4 +1,4 @@
-const { Game } = require('../collection/collection');
+const { Game } = require('../../collection/collection');
 const path = require('path');
 
 // Hàm lấy dữ liệu game theo tab, chia đều các game vào các tab

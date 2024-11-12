@@ -1,4 +1,4 @@
-const { User } = require('../collection/collection'); // Import model User  
+const { User } = require('../../collection/collection'); // Import model User  
 const bcrypt = require('bcrypt'); // Thư viện mã hóa mật khẩu
 // Lấy danh sách người dùng
 exports.getUsers = async (req, res) => {

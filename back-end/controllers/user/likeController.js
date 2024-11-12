@@ -1,4 +1,4 @@
-const { LikeTab } = require('../collection/collection');
+const { LikeTab } = require('../../collection/collection');
 const mongoose = require('mongoose');
 
 const getLikeStatus = async (req, res) => {
