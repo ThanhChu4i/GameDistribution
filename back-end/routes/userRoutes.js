@@ -5,6 +5,7 @@ const {getRecentGameHistory} = require ('../controllers/user/yourHistory');
 const auth = require('../middleware/authenticateUser/auth');
 const {getOldComment, newComment} = require('../controllers/user/comment');
 const {getLikeStatus, toggleLike} = require("../controllers/user/likeController");
+const {uploadUserAvatar} = require("../controllers/user/uploadAvatar");
 const router = express.Router();
 
 //router.use(auth);
@@ -20,4 +21,5 @@ router.get('/comment/:gameId', getOldComment);
 router.post('/comment', auth , newComment);
 router.get('/likeStatus', auth, getLikeStatus);
 router.post('/toggleLike', auth, toggleLike);
+router.post('/userData/updateavatar/', auth, uploadUserAvatar);
 module.exports = router;
