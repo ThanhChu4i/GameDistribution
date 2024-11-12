@@ -10,8 +10,6 @@ const EditUser = ({ onEdit }) => {
   const [error, setError] = useState(null);
   const [isEditing, setIsEditing] = useState(true);
   const [formData, setFormData] = useState({});
-  const [avatar, setAvatar] = useState(null); // Tạo state cho avatar
-  const [preview, setPreview] = useState(null); // Tạo state cho preview avatar
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -26,7 +24,6 @@ const EditUser = ({ onEdit }) => {
 
         setUser(response.data);
         setFormData(response.data);
-        setPreview(response.data.avatar); // Hiển thị avatar hiện tại
       } catch (err) {
         console.error('Error fetching user data:', err);
         setError('Failed to fetch user data. Please try again later.');
@@ -47,14 +44,6 @@ const EditUser = ({ onEdit }) => {
     setFormData({ ...formData, [name]: value });
   };
 
-  const handleAvatarChange = (e) => {
-    const file = e.target.files[0];
-    if (file) {
-      setAvatar(file);
-      setPreview(URL.createObjectURL(file)); // Tạo preview cho ảnh mới
-    }
-  };
-
   const handleSave = async () => {
     try {
       const token = Cookies.get('token');
@@ -66,8 +55,6 @@ const EditUser = ({ onEdit }) => {
       data.append('last_name', formData.last_name);
       data.append('country', formData.country);
       data.append('company', formData.company);
-      if (avatar) data.append('avatar', avatar); // Thêm avatar vào form data nếu có
-
       const response = await axios.put('http://localhost:8081/user/updateUser', data, {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -92,10 +79,6 @@ const EditUser = ({ onEdit }) => {
       {isEditing ? (
         <div className="user-info">
           <h2>Edit User Details</h2>
-          <div className="avatar-section">
-            <img src={preview} alt="Avatar preview" className="avatar-preview" />
-            <input type="file" name="avatar" accept="image/*" onChange={handleAvatarChange} />
-          </div>
           <label>
             Email:
             <input type="email" name="email" value={formData.email} onChange={handleInputChange} />

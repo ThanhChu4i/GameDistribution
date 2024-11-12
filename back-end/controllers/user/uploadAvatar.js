@@ -24,9 +24,13 @@ const avatarFileFilter = (req, file, cb) => {
     }
 };
 
-// Thiết lập multer
+// Thiết lập multer với giới hạn kích thước file
 const avatarStorage = multer.memoryStorage();
-const uploadAvatar = multer({ storage: avatarStorage, fileFilter: avatarFileFilter }).single('avatar');
+const uploadAvatar = multer({
+  storage: avatarStorage,
+  fileFilter: avatarFileFilter,
+  limits: { fileSize: 5 * 1024 * 1024 }  // Giới hạn file 5MB
+}).single('avatar');
 
 // Hàm xử lý upload avatar
 const uploadUserAvatar = async (req, res) => {
