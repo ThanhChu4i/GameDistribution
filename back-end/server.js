@@ -8,7 +8,7 @@ const authenticateAdmin = require('./middleware/authenticateAdmin/authenticateAd
 const userRoutes = require('./routes/userRoutes.js');
 const adminRoutes = require('./routes/adminRoutes.js');
 const devRoutes = require ('./routes/devRoutes.js');
-const routes = require('./routes/routes.js');
+const guestRoutes = require('./routes/guestRoutes.js');
 // Middleware
 app.use(cors({
     origin: 'http://localhost:3000', // Địa chỉ frontend của bạn
@@ -22,7 +22,7 @@ app.get('/admin', authenticateAdmin, (req, res) => {
 });
 app.use('/storage', express.static('storage')); // Để phục vụ file upload
 // Sử dụng routes
-app.use('/api',routes);
+app.use('/api',guestRoutes);
 app.use('/admin',adminRoutes);
 app.use('/api',devRoutes);
 app.use('/me', require('./routes/userRoutes.js'));
