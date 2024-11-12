@@ -46,7 +46,7 @@ const LikeButton = () => {
 
     return (
         <button onClick={handleLikeToggle} style={{ background: 'none', border: 'none', cursor: 'pointer' }}>
-            <img src={liked ? Like : noLike} alt="Like button" width={24} height={24} />
+            <img src={liked ? Like : noLike} alt="Like button" width={40} height={40} />
         </button>
     );
 };
