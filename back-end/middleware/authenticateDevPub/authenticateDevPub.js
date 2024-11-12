@@ -9,8 +9,7 @@ const authenticateDevPub = (req, res, next) => {
         if (!(user.isDeveloper || user.isPublisher)) {
             return res.status(403).json({ message: 'Access denied: Developer or Publisher only.' }); // Người dùng không phải admin
         }
-        req.user = user;
-        console.log(user); // Lưu thông tin người dùng vào req.user để sử dụng trong các middleware tiếp theo
+        req.user = user; // Lưu thông tin người dùng vào req.user để sử dụng trong các middleware tiếp theo
         next(); // Gọi middleware tiếp theo
     });
 };

@@ -1,7 +1,7 @@
 require('dotenv').config();
 const express = require("express");
 const cors = require("cors");
-const db = require('./controllers/connectdb.js');  // Make sure the database connection is imported
+const db = require('./config/connectdb.js');  // Make sure the database connection is imported
 const app = express();
 // Import controllers
 const authenticateAdmin = require('./middleware/authenticateAdmin/authenticateAdmin.js');
