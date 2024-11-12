@@ -12,31 +12,45 @@ const AvatarUpload = ({ currentAvatar, onAvatarChange }) => {
     if (file) {
       setAvatar(file);
       setPreview(URL.createObjectURL(file));
+      setError(null); // Clear any previous error
     }
   };
 
   const handleSaveAvatar = async () => {
-    if (!avatar) return;
+    if (!avatar) {
+      setError('Vui lòng chọn một ảnh để tải lên.');
+      return;
+    }
+    
     try {
       const token = Cookies.get('token');
       const data = new FormData();
       data.append('avatar', avatar);
-
-      const response = await axios.post('http://localhost:8081/user/userData/updateavatar', data, {
+  
+      const response = await axios.put('http://localhost:8081/user/userData/updateavatar', data, {
         headers: {
           Authorization: `Bearer ${token}`,
           'Content-Type': 'multipart/form-data'
         },
       });
-
-      // Thông báo và cập nhật ảnh mới
-      onAvatarChange(response.data.avatarPath);
-      alert('Avatar updated successfully!');
+  
+      // Thêm console.log để kiểm tra phản hồi từ server
+      console.log("Response from server:", response);
+  
+      if (response.status === 200) {
+        onAvatarChange(response.data.avatarPath);
+        setPreview(response.data.avatarPath);
+        setError(null);
+        alert('Avatar updated successfully!');
+      } else {
+        setError('Failed to upload avatar. Please try again later.');
+      }
     } catch (err) {
       console.error('Error uploading avatar:', err);
-      setError('Failed to upload avatar. Please try again later.');
+      setError(err.response?.data?.error || 'Failed to upload avatar. Please try again later.');
     }
   };
+  
 
   return (
     <div className="avatar-section">

@@ -43,7 +43,7 @@ const uploadUserAvatar = async (req, res) => {
 
         try {
             const compressedAvatarBuffer = await sharp(req.file.buffer)
-                .resize(512, 512) // Kích thước ảnh avatar
+                .resize(512, 512)
                 .toFormat('jpeg', { quality: 80 })
                 .toBuffer();
 
@@ -56,7 +56,8 @@ const uploadUserAvatar = async (req, res) => {
 
             await User.findByIdAndUpdate(req.user._id, { avatarPath: publicAvatarPath });
 
-            res.json({ message: 'Avatar uploaded successfully!', avatarPath: publicAvatarPath });
+            console.log("Avatar uploaded and database updated successfully.");
+            res.status(200).json({ message: 'Avatar uploaded successfully!', avatarPath: publicAvatarPath });
         } catch (error) {
             console.error("Database Error: ", error);
             res.status(500).json({ error: 'Lỗi khi lưu vào cơ sở dữ liệu.' });
