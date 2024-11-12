@@ -16,7 +16,7 @@ const DeleteUser = ({ userId, onDelete }) => {
         if (!token) {
           throw new Error('No token found');
         }
-        const response = await axios.get('http://localhost:8081/me', {
+        const response = await axios.get('http://localhost:8081/user', {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -38,7 +38,7 @@ const DeleteUser = ({ userId, onDelete }) => {
   const handleDelete = async () => {
     try {
       const token = Cookies.get('token');
-      await axios.delete(`http://localhost:8081/users/${userId}`, {
+      await axios.delete(`http://localhost:8081/user/${userId}`, {
         headers: {
           Authorization: `Bearer ${token}`, // Add token to delete request
         },

@@ -17,7 +17,7 @@ const ViewUser = ({ onEdit }) => {
         if (!token) {
           throw new Error('No token found');
         }
-        const response = await axios.get('http://localhost:8081/me', {
+        const response = await axios.get('http://localhost:8081/user/userData', {
           headers: {
             Authorization: `Bearer ${token}`,
           },

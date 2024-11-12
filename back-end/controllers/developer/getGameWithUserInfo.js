@@ -1,5 +1,5 @@
 const { Game } = require('../../collection/collection');
-
+const path = require ('path');
 const getGamesWithUserInfo = async (req, res) => {
     try {
         // Lấy id_user từ token đã được giải mã

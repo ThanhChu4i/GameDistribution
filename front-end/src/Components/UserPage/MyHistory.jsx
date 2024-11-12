@@ -12,7 +12,7 @@ const MyGameHistory = () => {
             try {
                 const token = Cookies.get('token');
                 const response = await axios.get(
-                    'http://localhost:8081/api/gameHistory/History',
+                    'http://localhost:8081/user/gameHistory/History',
                     {
                         headers: {
                             Authorization: `Bearer ${token}`,

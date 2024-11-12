@@ -9,9 +9,9 @@ const router = express.Router();
 
 //router.use(auth);
 // Route lấy danh sách người dùng
-router.get('/', auth, userController.getUsers);
+router.get('/userData', auth, userController.getUsers);
 // Route cập nhật thông tin người dùng
-router.put('/', auth, userController.updateUser);
+router.put('/updateUser', auth, userController.updateUser);
 // roure đổi mật khẩu
 router.post('/change-password', auth, userController.changePassword);
 router.post('/gameHistory',auth, gameHistory);

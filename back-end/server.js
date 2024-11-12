@@ -15,7 +15,7 @@ app.use(cors({
     credentials: true // Để gửi cookie
 }));
 app.use(express.json());  // To handle JSON requests
-app.use('/api', userRoutes);
+app.use('/user', userRoutes);
 // Routes  
 app.get('/admin', authenticateAdmin, (req, res) => {
     res.json({ message: 'Welcome to the admin panel!', user: req.user });
@@ -24,8 +24,7 @@ app.use('/storage', express.static('storage')); // Để phục vụ file upload
 // Sử dụng routes
 app.use('/api',guestRoutes);
 app.use('/admin',adminRoutes);
-app.use('/api',devRoutes);
-app.use('/me', require('./routes/userRoutes.js'));
+app.use('/dev',devRoutes);
 // Listen on port 8081
 app.listen(8081, () => {
     console.log("Server listening on port 8081");

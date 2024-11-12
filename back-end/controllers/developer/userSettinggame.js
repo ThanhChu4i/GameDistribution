@@ -29,7 +29,7 @@ const getGamesWithUser = async (req, res) => {
       const updateGame = async (req, res) => {
     try {
       const { id } = req.params;
-      const updatedGame = await User.findByIdAndUpdate(id, req.body, { new: true });
+      const updatedGame = await Game.findByIdAndUpdate(id, req.body, { new: true });
       if (!updatedGame) return res.status(404).json({ message: 'User not found' });
       res.json(updatedGame);
     } catch (err) {

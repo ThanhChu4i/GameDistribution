@@ -85,7 +85,7 @@ const GameUpload = () => {
 
         setLoading(true);
         try {
-            const response = await axios.post('http://localhost:8081/api/games/upload', formData, {
+            const response = await axios.post('http://localhost:8081/dev/games/upload', formData, {
                 headers: {
                     Authorization: `Bearer ${token}`,
                 },

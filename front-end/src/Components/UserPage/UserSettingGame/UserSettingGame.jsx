@@ -16,7 +16,7 @@ const UserSettinggame = () => {
         if (!token) {
           throw new Error('No token found');
         }
-        const response = await axios.get('http://localhost:8081/me/mygame', {
+        const response = await axios.get('http://localhost:8081/dev/mygame', {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -37,7 +37,7 @@ const UserSettinggame = () => {
 
   const handleEditGame = async (gameId, updatedData) => {
     try {
-      const response = await axios.put(`http://localhost:8081/me/updategame/${gameId}`, updatedData, {
+      const response = await axios.put(`http://localhost:8081/dev/updategame/${gameId}`, updatedData, {
         headers: {
           Authorization: `Bearer ${Cookies.get('token')}`,
         },
@@ -52,7 +52,7 @@ const UserSettinggame = () => {
 
   const handleDeleteGame = async (gameId) => {
     try {
-      await axios.delete(`http://localhost:8081/me/deletegame/${gameId}`, {
+      await axios.delete(`http://localhost:8081/dev/deletegame/${gameId}`, {
         headers: {
           Authorization: `Bearer ${Cookies.get('token')}`,
         },

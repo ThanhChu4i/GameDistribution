@@ -20,7 +20,7 @@ const EditUser = ({ onEdit }) => {
           throw new Error('No token found');
         }
 
-        const response = await axios.get('http://localhost:8081/me', {
+        const response = await axios.get('http://localhost:8081/user/userData', {
           headers: {
             Authorization: `Bearer ${token}`
           }
@@ -54,7 +54,7 @@ const EditUser = ({ onEdit }) => {
   const handleSave = async () => {
     try {
       const token = Cookies.get('token');
-      const response = await axios.put('http://localhost:8081/me', formData, {
+      const response = await axios.put('http://localhost:8081/user/updateUser', formData, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
