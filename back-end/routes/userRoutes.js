@@ -21,5 +21,5 @@ router.get('/comment/:gameId', getOldComment);
 router.post('/comment', auth , newComment);
 router.get('/likeStatus', auth, getLikeStatus);
 router.post('/toggleLike', auth, toggleLike);
-router.post('/userData/updateavatar', auth, uploadUserAvatar);
+router.put('/userData/updateavatar', auth, uploadUserAvatar);
 module.exports = router;
