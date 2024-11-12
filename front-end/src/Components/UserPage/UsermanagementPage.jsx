@@ -4,6 +4,7 @@ import ViewUser from './ViewUser/ViewUser';
 import EditUser from './EditUser/EditUser';
 import DeleteUser from './DeleteUser';
 import MyGameHistory from './MyHistory';
+import AvatarUpload from './AvatarUpload/AvatarUpload';
 const UserManagementPage = () => {
   const [editingUser, setEditingUser] = useState(null);
 
@@ -18,6 +19,7 @@ const UserManagementPage = () => {
 
   return (
     <div className="UserManagementPage">
+      <AvatarUpload/>
       {!editingUser ? (
         <>
           <ViewUser onEdit={setEditingUser} />

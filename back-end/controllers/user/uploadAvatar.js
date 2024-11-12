@@ -2,7 +2,7 @@ const multer = require('multer');
 const path = require('path');
 const fs = require('fs');
 const sharp = require('sharp');
-const { User } = require('../../collection/collection'); // Mô hình User
+const { User } = require('../../collection/collection');
 
 const storagePathAvatars = path.resolve(__dirname, '../../../front-end/public/avatars');
 
@@ -37,13 +37,11 @@ const uploadUserAvatar = async (req, res) => {
             return res.status(400).json({ error: err.message });
         }
 
-        const { avatar } = req.file;
-        if (!avatar) {
+        if (!req.file) {
             return res.status(400).json({ error: 'Yêu cầu tải lên ảnh đại diện.' });
         }
 
         try {
-            // Xử lý nén ảnh
             const compressedAvatarBuffer = await sharp(req.file.buffer)
                 .resize(512, 512) // Kích thước ảnh avatar
                 .toFormat('jpeg', { quality: 80 })
@@ -52,13 +50,10 @@ const uploadUserAvatar = async (req, res) => {
             const avatarFilename = `${req.user._id}_${Date.now()}${path.extname(req.file.originalname)}`;
             const avatarPath = path.join(storagePathAvatars, avatarFilename);
 
-            // Lưu avatar vào thư mục
             fs.writeFileSync(avatarPath, compressedAvatarBuffer);
 
-            // Đường dẫn công khai
             const publicAvatarPath = `/avatars/${avatarFilename}`;
 
-            // Cập nhật vào cơ sở dữ liệu (User collection)
             await User.findByIdAndUpdate(req.user._id, { avatarPath: publicAvatarPath });
 
             res.json({ message: 'Avatar uploaded successfully!', avatarPath: publicAvatarPath });

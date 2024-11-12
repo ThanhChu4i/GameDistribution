@@ -29,8 +29,7 @@ const getRecentGameHistory = async (req, res) => {
             }
             if (recentGames.length === 5) break;
         }
-        
-        console.log(recentGames);
+    
 
         if (recentGames.length === 0) {
             return res.status(404).json({ message: 'No game history found for this user.' });
