@@ -52,7 +52,7 @@ const AvatarUpload = ({ currentAvatar, onAvatarChange }) => {
         setError('Failed to upload avatar. Please try again later.');
       }
     } catch (err) {
-      setError(err.response?.data?.error || 'Có lỗi xảy ra khi upload file.');
+      setError(err.response?.data?.error);
       console.error('Upload error:', err);
     } 
   };

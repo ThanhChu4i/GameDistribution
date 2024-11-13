@@ -2,24 +2,24 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Cookies from 'js-cookie';
 import { useNavigate, Link } from 'react-router-dom';
-import './UserSettingGame.css'
+import './UserSettingGame.css';
+
 const UserSettinggame = () => {
   const [games, setGames] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [editingGameId, setEditingGameId] = useState(null);
+  const [updatedData, setUpdatedData] = useState({ game_name: '', game_description: '', instruction: '', isActive: false });
   const navigate = useNavigate();
 
   useEffect(() => {
     const fetchGameData = async () => {
       try {
         const token = Cookies.get('token');
-        if (!token) {
-          throw new Error('No token found');
-        }
+        if (!token) throw new Error('No token found');
+
         const response = await axios.get('http://localhost:8081/dev/mygame', {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
+          headers: { Authorization: `Bearer ${token}` },
         });
         setGames(response.data);
       } catch (err) {
@@ -35,29 +35,44 @@ const UserSettinggame = () => {
     fetchGameData();
   }, [navigate]);
 
-  const handleEditGame = async (gameId, updatedData) => {
+  const openEditModal = (game) => {
+    setEditingGameId(game._id);
+    setUpdatedData({
+      game_name: game.game_name,
+      game_description: game.game_description,
+      instruction: game.instruction,
+      isActive: game.isActive
+    });
+  };
+
+  const handleEditGame = async () => {
     try {
-      const response = await axios.put(`http://localhost:8081/dev/updategame/${gameId}`, updatedData, {
-        headers: {
-          Authorization: `Bearer ${Cookies.get('token')}`,
-        },
+      const response = await axios.put(`http://localhost:8081/dev/updategame/${editingGameId}`, updatedData, {
+        headers: { Authorization: `Bearer ${Cookies.get('token')}` },
       });
-      setGames((prevGames) => prevGames.map(u => u._id === gameId ? response.data : u));
+      setGames((prevGames) => prevGames.map(game => game._id === editingGameId ? response.data : game));
       alert("Game updated successfully!");
+      setEditingGameId(null); // Close modal after save
     } catch (err) {
       console.error("Error updating game:", err);
       alert("Failed to update game");
     }
   };
 
+  const handleInputChange = (e) => {
+    const { name, value, type, checked } = e.target;
+    setUpdatedData((prevData) => ({
+      ...prevData,
+      [name]: type === 'checkbox' ? checked : value,
+    }));
+  };
+
   const handleDeleteGame = async (gameId) => {
     try {
       await axios.delete(`http://localhost:8081/dev/deletegame/${gameId}`, {
-        headers: {
-          Authorization: `Bearer ${Cookies.get('token')}`,
-        },
+        headers: { Authorization: `Bearer ${Cookies.get('token')}` },
       });
-      setGames((prevGames) => prevGames.filter(u => u._id !== gameId));
+      setGames((prevGames) => prevGames.filter(game => game._id !== gameId));
       alert("Game deleted successfully!");
     } catch (err) {
       console.error("Error deleting game:", err);
@@ -70,23 +85,64 @@ const UserSettinggame = () => {
 
   return (
     <div className="admin-settings-container">
-     <Link to= '/upload'> <button className="backtouser">Back</button></Link>
+      <Link to='/upload'><button className="backtouser">Back</button></Link>
       <h1>User Settings Game</h1>
       {games.length > 0 ? (
         <div className="users-lista">
-          {games.map((u) => (
-            <div key={u._id} className="user-carda">
-              <p> {u.game_name}</p>
-              <img className = "avtgame" src = {u.imagePath} alt='none'/>
-              <div className="button-container"> {/* Thêm div này để chứa các nút */}
-        <button onClick={() => handleEditGame(u._id, { name: "New Name" })}>Edit</button>
-        <button className="delete-btn" onClick={() => handleDeleteGame(u._id)}>Delete</button>
-    </div>
+          {games.map((game) => (
+            <div key={game._id} className="user-carda">
+              <p>{game.game_name}</p>
+              <img className="avtgame" src={game.imagePath} alt='Game' />
+              <div className="button-container">
+                <button onClick={() => openEditModal(game)}>Edit</button>
+                <button className="delete-btn" onClick={() => handleDeleteGame(game._id)}>Delete</button>
+              </div>
             </div>
           ))}
         </div>
       ) : (
         <p className="no-games-message">No games found.</p>
+      )}
+      
+      {editingGameId && (
+        <div className="modal-overlay">
+          <div className="modal">
+            <h2>Edit Game</h2>
+            <label>Name</label>
+            <input
+              type="text"
+              name="game_name"
+              value={updatedData.game_name}
+              onChange={handleInputChange}
+              placeholder="Game Name"
+            />
+            <label>Description</label>
+            <input
+              type="text"
+              name="game_description"
+              value={updatedData.game_description}
+              onChange={handleInputChange}
+              placeholder="Description"
+            />
+            <label>Instruction</label>
+            <input
+              type="text"
+              name="instruction"
+              value={updatedData.instruction}
+              onChange={handleInputChange}
+              placeholder="Instruction"
+            />
+            <label>Active</label>
+            <input
+              type="checkbox"
+              name="isActive"
+              checked={updatedData.isActive}
+              onChange={handleInputChange}
+            />
+            <button className="save-button" onClick={handleEditGame}>Save</button>
+            <button className="cancel-button" onClick={() => setEditingGameId(null)}>Cancel</button>
+          </div>
+        </div>
       )}
     </div>
   );
