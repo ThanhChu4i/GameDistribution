@@ -1,23 +1,23 @@
-// loginController.js
 const express = require('express');
 const jwt = require('jsonwebtoken');
-const { User } = require('../../collection/collection'); // Import model User
+const { User } = require('../../collection/collection'); // Import User model
 const bcrypt = require("bcrypt");
+const path = require("path"); // Import path for handling file paths
 
-// Xử lý đăng nhập người dùng
+// Handle user login
 const loginUser = async (req, res) => {
     const { email, password } = req.body;
 
-    // Kiểm tra xem email và password có được cung cấp không
+    // Check if email and password are provided
     if (!email || !password) {
         return res.status(400).json({ message: "Please fill in all information." });
     }
 
     try {
-        // Tìm người dùng theo email
+        // Find user by email
         const user = await User.findOne({ email });
 
-        // Kiểm tra xem người dùng có tồn tại không
+        // Check if user exists
         if (!user) {
             return res.status(401).json({ message: "Email or password is incorrect." });
         }
@@ -26,29 +26,31 @@ const loginUser = async (req, res) => {
             return res.status(401).json({ message: "Account locked" });
         }
 
-        // Kiểm tra mật khẩu
+        // Verify password
         const match = await bcrypt.compare(password, user.password);
         if (!match) {
             return res.status(401).json({ message: "Email or password is incorrect." });
         }
 
-        // Tạo JWT sau khi đăng nhập thành công
+        // Create JWT after successful login
         const token = jwt.sign(
             { _id: user._id, email: user.email, isAdmin: user.admin, isPublisher: user.publisher, isDeveloper: user.developer },
             process.env.JWT_SECRET,
             { expiresIn: '2h' }
         );
 
-        // Phân loại người dùng theo quyền hạn
-        let isAdmin = user.admin;
-        let isDevPub = user.developer || user.publisher;
+        // Set avatar to custom or default path
+        const avatar = user.avatarPath ? user.avatarPath : '/avatars/avatar_default.webp';
+        const isAdmin = user.admin;
+        const isDevPub = user.developer || user.publisher;
 
-        // Trả về phản hồi tùy theo quyền hạn
+        // Respond based on user role
         return res.status(200).json({
             message: "Login successful!",
             token,
             isAdmin,
-            isDevPub
+            isDevPub,
+            avatar
         });
 
     } catch (err) {

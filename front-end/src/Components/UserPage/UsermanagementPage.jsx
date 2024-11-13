@@ -5,6 +5,7 @@ import EditUser from './EditUser/EditUser';
 import DeleteUser from './DeleteUser';
 import MyGameHistory from './MyHistory';
 import AvatarUpload from './AvatarUpload/AvatarUpload';
+import './UserManagementPage.css';
 const UserManagementPage = () => {
   const [editingUser, setEditingUser] = useState(null);
 
@@ -19,8 +20,9 @@ const UserManagementPage = () => {
 
   return (
     <div className="UserManagementPage">
-      <AvatarUpload/>
-      {!editingUser ? (
+      <div className='UserInforandAvatar'>
+      <div className='AvatarUpload'><AvatarUpload/></div>
+      <div className= 'ViewUser'>{!editingUser ? (
         <>
           <ViewUser onEdit={setEditingUser} />
           {editingUser && <DeleteUser userId={editingUser._id} onDelete={handleDeleteUser} />}
@@ -31,7 +33,9 @@ const UserManagementPage = () => {
           onCancel={() => setEditingUser(null)}
           onUpdate={handleUpdateUser}
         />
-      )}
+      )}</div>
+      </div>
+      
       <MyGameHistory/>
     </div>
   );

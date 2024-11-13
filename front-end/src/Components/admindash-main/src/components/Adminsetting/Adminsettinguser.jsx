@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Cookies from 'js-cookie';
 import { useNavigate } from 'react-router-dom';
+import avatardefault from '../../../../Assets/avatar_default.webp'
 import './Adminsetting.css';
 import { Link } from "react-router-dom";
 
@@ -35,7 +36,7 @@ const AdminSettinguser = () => {
         setError('Failed to fetch user data');
         if (err.response && (err.response.status === 401 || err.response.status === 403)) {
           navigate('/404/Notfound');
-      }
+        }
       } finally {
         setLoading(false);
       }
@@ -119,10 +120,15 @@ const AdminSettinguser = () => {
       <h1>Admin Settings User</h1>
       {users.length > 0 ? (
         <div className="userd">
-             <h2>Users want to Developer</h2>
+          <h2>Users want to Developer</h2>
           <div className="users-list">
             {wtdevUsers.map((u) => (
               <div key={u._id} className="user-card">
+                <img
+                    src={u.avatarPath || avatardefault}  // Use custom avatar or default
+                    alt="User Avatar"
+                    className="user-avatar"
+                  />
                 <p>First name: {u.first_name}</p>
                 <p>Last name: {u.last_name}</p>
                 <p>Email: {u.email}</p>
@@ -138,10 +144,15 @@ const AdminSettinguser = () => {
               </div>
             ))}
           </div>
-             <h2>Users want to Publisher</h2>
+          <h2>Users want to Publisher</h2>
           <div className="users-list">
             {wtpubUsers.map((u) => (
               <div key={u._id} className="user-card">
+                <img
+                    src={u.avatarPath || avatardefault}  // Use custom avatar or default
+                    alt="User Avatar"
+                    className="user-avatar"
+                  />
                 <p>First name: {u.first_name}</p>
                 <p>Last name: {u.last_name}</p>
                 <p>Email: {u.email}</p>
@@ -161,6 +172,11 @@ const AdminSettinguser = () => {
           <div className="users-list">
             {activeUsers.map((u) => (
               <div key={u._id} className="user-card">
+                <img
+                    src={u.avatarPath || avatardefault}  // Use custom avatar or default
+                    alt="User Avatar"
+                    className="user-avatar"
+                  />
                 <p>First name: {u.first_name}</p>
                 <p>Last name: {u.last_name}</p>
                 <p>Email: {u.email}</p>
@@ -180,6 +196,11 @@ const AdminSettinguser = () => {
           <div className="users-list">
             {lockedUsers.map((u) => (
               <div key={u._id} className="user-card">
+                  <img
+                    src={u.avatarPath || avatardefault}  // Use custom avatar or default
+                    alt="User Avatar"
+                    className="user-avatar"
+                  />
                 <p>First name: {u.first_name}</p>
                 <p>Last name: {u.last_name}</p>
                 <p>Email: {u.email}</p>

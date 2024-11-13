@@ -1,7 +1,17 @@
 .UserManagementPage {
     padding: 20px;
   }
-  
+.UserInforandAvatar {
+  display: flex;
+  justify-content: center; 
+  align-items: center;
+}
+.AvatarUpload { 
+  margin: 100px;
+}
+.ViewUser {
+  margin: 100px;
+}
   table {
     width: 100%;
     border-collapse: collapse;
@@ -30,4 +40,28 @@
     padding: 5px;
     margin-left: 10px;
   }
-  
+  .avatar-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    margin-top: 20px;
+}
+
+.avatar-preview {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid #ddd;
+}
+
+.success-message {
+    color: green;
+    font-size: 0.9rem;
+}
+
+.error-message {
+    color: red;
+    font-size: 0.9rem;
+}

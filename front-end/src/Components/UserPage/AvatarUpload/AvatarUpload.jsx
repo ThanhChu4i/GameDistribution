@@ -1,12 +1,20 @@
-import React, { useState } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import axios from 'axios';
 import Cookies from 'js-cookie';
 
 const AvatarUpload = ({ currentAvatar, onAvatarChange }) => {
+  const  avatarUser = Cookies.get('avatar'); // Access avatarUser from context
   const [avatar, setAvatar] = useState(null);
-  const [preview, setPreview] = useState(currentAvatar);
+  const [preview, setPreview] = useState(currentAvatar || avatarUser); // Initialize preview with currentAvatar or avatarUser
   const [error, setError] = useState(null);
   const [successMessage, setSuccessMessage] = useState(null); // To display success message
+
+  // Update preview when avatarUser changes
+  useEffect(() => {
+    if (avatarUser) {
+      setPreview(avatarUser);
+    }
+  }, [avatarUser]);
 
   const handleAvatarChange = (e) => {
     const file = e.target.files[0];
@@ -22,13 +30,12 @@ const AvatarUpload = ({ currentAvatar, onAvatarChange }) => {
       setError('Vui lòng chọn một ảnh để tải lên.');
       return;
     }
-    
+
     try {
       const token = Cookies.get('token');
       const data = new FormData();
       data.append('avatar', avatar);
-  
-      // Adjusting the method (POST or PUT)
+
       const response = await axios.put('http://localhost:8081/user/userData/updateavatar', data, {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -36,9 +43,6 @@ const AvatarUpload = ({ currentAvatar, onAvatarChange }) => {
         },
       });
 
-      // Console log to check response
-      console.log("Response from server:", response);
-  
       if (response.status === 200) {
         onAvatarChange(response.data.avatarPath);
         setPreview(response.data.avatarPath);
@@ -47,15 +51,17 @@ const AvatarUpload = ({ currentAvatar, onAvatarChange }) => {
       } else {
         setError('Failed to upload avatar. Please try again later.');
       }
-    }  catch (err) {
-        setError(err.response?.data?.error || 'Có lỗi xảy ra khi upload file.');
-        console.error(error);
+    } catch (err) {
+      setError(err.response?.data?.error || 'Có lỗi xảy ra khi upload file.');
+      console.error('Upload error:', err);
     } 
   };
 
   return (
     <div className="avatar-section">
-      <img src={preview} alt="Avatar preview" className="avatar-preview" />
+      <h2>Avatar</h2>
+      <img src={preview} alt="Avatar-preview" className="avatar-preview" />
+      Change Avatar
       <input type="file" accept="image/*" onChange={handleAvatarChange} />
       <button onClick={handleSaveAvatar}>Upload Avatar</button>
       

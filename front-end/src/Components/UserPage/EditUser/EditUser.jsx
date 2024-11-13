@@ -107,7 +107,6 @@ const EditUser = ({ onEdit }) => {
       ) : (
         <div className="user-info">
           <h2>User Details</h2>
-          <img src={user.avatar} alt="Avatar" className="avatar-display" />
           <p><strong>Email:</strong> {user.email}</p>
           <p><strong>First Name:</strong> {user.first_name || 'Not provided'}</p>
           <p><strong>Last Name:</strong> {user.last_name || 'Not provided'}</p>

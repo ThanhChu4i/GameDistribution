@@ -22,4 +22,5 @@ router.post('/comment', auth , newComment);
 router.get('/likeStatus', auth, getLikeStatus);
 router.post('/toggleLike', auth, toggleLike);
 router.put('/userData/updateavatar', auth, uploadUserAvatar);
+
 module.exports = router;
