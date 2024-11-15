@@ -36,7 +36,7 @@ export default function CommentSection() {
         try {
             const token = Cookies.get('token');
             await axios.post(
-                'http://localhost:8081/me/comment',
+                'http://localhost:8081/user/comment',
                 { id_game: id, comment: newComment },
                 { headers: { Authorization: `Bearer ${token}` } }
             );
