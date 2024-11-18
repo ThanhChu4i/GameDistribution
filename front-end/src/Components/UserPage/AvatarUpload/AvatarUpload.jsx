@@ -3,73 +3,87 @@ import axios from 'axios';
 import Cookies from 'js-cookie';
 
 const AvatarUpload = ({ currentAvatar, onAvatarChange }) => {
-  const  avatarUser = Cookies.get('avatar'); // Access avatarUser from context
-  const [avatar, setAvatar] = useState(null);
-  const [preview, setPreview] = useState(currentAvatar || avatarUser); // Initialize preview with currentAvatar or avatarUser
-  const [error, setError] = useState(null);
-  const [successMessage, setSuccessMessage] = useState(null); // To display success message
+    const avatarUser = Cookies.get('avatar'); // Access avatar from cookies
+    const [avatar, setAvatar] = useState(null);
+    const [preview, setPreview] = useState(currentAvatar || avatarUser); // Initialize preview
+    const [error, setError] = useState(null);
+    const [successMessage, setSuccessMessage] = useState(null);
 
-  // Update preview when avatarUser changes
-  useEffect(() => {
-    if (avatarUser) {
-      setPreview(avatarUser);
-    }
-  }, [avatarUser]);
+    useEffect(() => {
+        if (avatarUser) {
+            setPreview(avatarUser);
+        }
+    }, [avatarUser]);
 
-  const handleAvatarChange = (e) => {
-    const file = e.target.files[0];
-    if (file) {
-      setAvatar(file);
-      setPreview(URL.createObjectURL(file));
-      setError(null); // Clear any previous error
-    }
-  };
+    const handleAvatarChange = (e) => {
+        const file = e.target.files[0];
+        if (file) {
+            // Check file size before setting it
+            if (file.size > 5 * 1024 * 1024) {
+                setError('File size must not exceed 5MB.');
+                return;
+            }
 
-  const handleSaveAvatar = async () => {
-    if (!avatar) {
-      setError('Vui lòng chọn một ảnh để tải lên.');
-      return;
-    }
+            setAvatar(file);
+            setPreview(URL.createObjectURL(file));
+            setError(null);
+        }
+    };
 
-    try {
-      const token = Cookies.get('token');
-      const data = new FormData();
-      data.append('avatar', avatar);
+    const handleSaveAvatar = async () => {
+        if (!avatar) {
+            setError('Please select an image to upload.');
+            return;
+        }
 
-      const response = await axios.put('http://localhost:8081/user/userData/updateavatar', data, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-          'Content-Type': 'multipart/form-data'
-        },
-      });
+        try {
+            const token = Cookies.get('token');
+            const data = new FormData();
+            data.append('avatar', avatar);
 
-      if (response.status === 200) {
-        onAvatarChange(response.data.avatarPath);
-        setPreview(response.data.avatarPath);
-        setError(null);
-        setSuccessMessage('Avatar updated successfully!');  // Display success message
-      } else {
-        setError('Failed to upload avatar. Please try again later.');
-      }
-    } catch (err) {
-      setError(err.response?.data?.error);
-      console.error('Upload error:', err);
-    } 
-  };
+            const response = await axios.put(
+                'http://localhost:8081/user/userData/updateavatar',
+                data,
+                {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                        'Content-Type': 'multipart/form-data'
+                    },
+                }
+            );
 
-  return (
-    <div className="avatar-section">
-      <h2>Avatar</h2>
-      <img src={preview} alt="Avatar-preview" className="avatar-preview" />
-      Change Avatar
-      <input type="file" accept="image/*" onChange={handleAvatarChange} />
-      <button onClick={handleSaveAvatar}>Upload Avatar</button>
-      
-      {/* Success and error messages */}
-      {successMessage && <p className="success-message">{successMessage}</p>}
-      {error && <p className="error-message">{error}</p>}
-    </div>
-  );
+            if (response.status === 200) {
+                onAvatarChange(response.data.avatarPath); // Update parent component
+                setPreview(response.data.avatarPath); // Update preview
+                setError(null);
+                setSuccessMessage('Avatar uploaded successfully!');
+            } else {
+                setError('Failed to upload avatar. Please try again.');
+            }
+        } catch (err) {
+            console.log(err);
+            setError(err.response?.data?.error || 'An error occurred while uploading the avatar.');
+            console.error('Upload error:', err);
+        }
+    };
+
+    return (
+        <div className="avatar-section">
+            <h2>Avatar</h2>
+            <img
+                src={preview}
+                alt="Avatar-preview"
+                className="avatar-preview"
+                onError={(e) => (e.target.src = '/default-avatar.jpg')} // Fallback to default avatar
+            />
+            <input type="file" accept="image/*" onChange={handleAvatarChange} />
+            <button onClick={handleSaveAvatar}>Upload Avatar</button>
+
+            {/* Success and error messages */}
+            {successMessage && <p className="success-message">{successMessage}</p>}
+            {error && <p className="error-message">{error}</p>}
+        </div>
+    );
 };
 
 export default AvatarUpload;

@@ -27,22 +27,22 @@ const avatarFileFilter = (req, file, cb) => {
 // Configure multer with file size limit and memory storage
 const avatarStorage = multer.memoryStorage();
 const uploadAvatar = multer({
-  storage: avatarStorage,
-  fileFilter: avatarFileFilter,
-  limits: { fileSize: 5 * 1024 * 1024 }  // 5MB limit
+    storage: avatarStorage,
+    fileFilter: avatarFileFilter,
+    limits: { fileSize: 5 * 1024 * 1024 } // 5MB limit
 }).single('avatar');
 
 // Avatar upload handler function
 const uploadUserAvatar = async (req, res) => {
     uploadAvatar(req, res, async (err) => {
         if (err instanceof multer.MulterError) {
-            return res.status(400).json({ error: 'Error uploading file.' });
+            return res.status(400).json({ error: 'File upload error. Maximum size is 5MB.' });
         } else if (err) {
             return res.status(400).json({ error: err.message });
         }
 
         if (!req.file) {
-            return res.status(400).json({ error: 'Please upload an avatar.' });
+            return res.status(400).json({ error: 'Please upload a valid image.' });
         }
 
         try {
@@ -52,8 +52,8 @@ const uploadUserAvatar = async (req, res) => {
                 .toFormat('jpeg', { quality: 80 })
                 .toBuffer();
 
-            // Set avatar filename and path
-            const avatarFilename = `${req.user._id}_${Date.now()}${path.extname(req.file.originalname)}`;
+            // Generate avatar filename
+            const avatarFilename = `${req.user._id}_${Date.now()}.jpeg`;
             const avatarPath = path.join(storagePathAvatars, avatarFilename);
 
             // Save compressed avatar to file system
@@ -63,13 +63,20 @@ const uploadUserAvatar = async (req, res) => {
             const publicAvatarPath = `/avatars/${avatarFilename}`;
 
             // Update user record with new avatar path
-            await User.findByIdAndUpdate(req.user._id, { avatarPath: publicAvatarPath });
+            const user = await User.findByIdAndUpdate(
+                req.user._id,
+                { avatarPath: publicAvatarPath },
+                { new: true }
+            );
 
-            console.log("Avatar uploaded and database updated successfully.");
+            if (!user) {
+                throw new Error('User not found.');
+            }
+
             res.status(200).json({ message: 'Avatar uploaded successfully!', avatarPath: publicAvatarPath });
         } catch (error) {
-            console.error("Database Error: ", error);
-            res.status(500).json({ error: 'Error saving to database.' });
+            console.error('Error updating avatar:', error);
+            res.status(500).json({ error: 'An error occurred while saving the avatar.' });
         }
     });
 };
