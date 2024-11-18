@@ -63,7 +63,7 @@ const Support = () => {
 
 
                 <div className="form-group-for-Support">
-                  <button className="submit-btn-for-support" type="submit">Send</button>
+                  <button className="submit-btn-for-support" >Send</button>
                 </div>
               </div>
             </div>
