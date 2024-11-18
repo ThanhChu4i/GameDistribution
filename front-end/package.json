@@ -41,8 +41,8 @@
   },
   "scripts": {
     "start": "PORT=3000 react-scripts start",
-    "build": "react-scripts build",
     "test": "react-scripts test",
+    "build": "react-scripts build && javascript-obfuscator build/static/js --output build/static/js",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
@@ -62,5 +62,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "javascript-obfuscator": "^4.1.1"
   }
 }
