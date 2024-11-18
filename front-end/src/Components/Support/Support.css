@@ -1,0 +1,145 @@
+/* General styles */
+.Support-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  font-family: Arial, sans-serif;
+  background-color: #f9f9f9;
+}
+
+.Support-form {
+  background-color: white;
+  width: 80%;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.Support-form-title h1 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+/* Form container */
+.form-container {
+  display: flex;
+  width: 100%;
+  background-color: #ffffff;
+}
+.container-form {
+  display: flex;
+  width: 100%;
+  background-color: #ffffff;
+}
+/* Left and Right groups */
+.left-form-group,
+.right-form-group {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 50%;
+  height: 100%;
+}
+
+.form-group label {
+  font-weight: bold;
+  margin-bottom: 8px;
+  display: block;
+}
+
+.form-group input,
+.form-group textarea {
+  width: 90%;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 40px;
+  font-size: 14px;
+}
+
+textarea {
+  resize: none;
+  height: auto;
+}
+
+.categories {
+  display:flex;
+  flex-wrap: wrap; 
+  width: 100%;
+  height: 200px;
+  background-color: #f9f9f9;
+}
+
+.category {
+  padding: 10px 15px;
+  border: none;
+  background-color: #8c52ff;
+  color: white;
+  cursor: pointer;
+  width: 50px;
+  font-size: 14px;
+}
+
+.category:hover {
+  background-color: #702ac8;
+}
+
+/* File upload */
+.file-upload input[type="file"] {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+/* FAQ section */
+.faq {
+  margin-top: 20px;
+}
+
+.faq a {
+  color: #8c52ff;
+  text-decoration: none;
+}
+
+.faq a:hover {
+  text-decoration: underline;
+}
+
+/* Submit button */
+.submit-btn {
+  padding: 10px 15px;
+  background-color: #8c52ff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.submit-btn:hover {
+  background-color: #702ac8;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .form-container {
+    flex-direction: column;
+  }
+}
+.form-group-left {
+  width: 100%;
+}
+.form-group-left label {
+  width: 100%;
+}
+.form-group-left textarea,
+.form-group-left input {
+  width: 100%;
+  height: 300px;
+  padding: 20px;
+  border-radius: 30px;
+}
