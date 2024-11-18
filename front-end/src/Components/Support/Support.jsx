@@ -28,7 +28,7 @@ const Support = () => {
                 <input type="email" id="email" placeholder="email@gmail.com" required />
               </div>
 
-              <div className="form-group">
+              <div className="form-group-button-support">
                 <label>Please choose a category for your inquiry</label>
                 <div className="categories">
                   <button className='category'>NEW PUBLISHER</button>
@@ -62,8 +62,8 @@ const Support = () => {
 
 
 
-                <div className="form-group">
-                  <button type="submit" className="submit-btn">Send</button>
+                <div className="form-group-for-Support">
+                  <button className="submit-btn-for-support" type="submit">Send</button>
                 </div>
               </div>
             </div>
