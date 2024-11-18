@@ -20,8 +20,8 @@ export const AuthContextProvider = ({ children }) => {
 
   const login = (token, avatar) => {
     // Lưu token và avatar vào cookie khi đăng nhập
-    Cookies.set('token', token, { expires: 2 });
-    Cookies.set('avatar', avatar, { expires: 2 });
+    Cookies.set('token', token, { expires: 2 / 24 });
+    Cookies.set('avatar', avatar, { expires: 2 / 24 });
     setAvatarUser(avatar); // Cập nhật avatar trong state
     setIsLoggedIn(true); // Cập nhật trạng thái đăng nhập
   };
@@ -37,7 +37,7 @@ export const AuthContextProvider = ({ children }) => {
 
   const onAvatarChange = (newAvatar) => {
     // Cập nhật avatar mới vào cookie và state
-    Cookies.set('avatar', newAvatar, { expires: 2 });
+    Cookies.set('avatar', newAvatar, { expires: 2 / 24});
     setAvatarUser(newAvatar);
   };
 
