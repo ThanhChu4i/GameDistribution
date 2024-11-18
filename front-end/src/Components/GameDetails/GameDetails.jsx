@@ -110,14 +110,14 @@ const GameDetails = () => {
                     <h3>Embed</h3>
                     <div className='embed-sec'>
                     <textarea readOnly value={`   http://localhost:3000/games/${id}`} />
-                    <button onClick={() => handleCopyEmbed(`http://localhost:3000/games/${id}`)}>Copy</button>
+                    <button onClick={() => handleCopyEmbed(`http://localhost:3000/games/${id}`)}><strong>Copy</strong></button>
                     </div>  
                 </div>
                 <div className="embed-section">
                     <h3>Example URL</h3>
                     <div className='embed-sec'>
                     <textarea readOnly value={`   http://localhost:8081/games/${id}`} />
-                    <button onClick={() => handleCopyEmbed(`http://localhost:8081/games/${id}`)}>Copy</button>
+                    <button onClick={() => handleCopyEmbed(`http://localhost:8081/games/${id}`)}><strong>Copy</strong></button>
                     </div>
                 </div>
                 <Comment/>
