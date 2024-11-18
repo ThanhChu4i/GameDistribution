@@ -113,15 +113,32 @@
   font-size: 16px;
 }
 
-.embed-section textarea {
-  width: 100%;
+.embed-section
+{
+  display: grid;
+}
+.embed-section h3 {
+  font-size: 30px;
+  color: #6200ea;
+  display: flex;
+}
+.embed-sec {
+  display: flex;
+}
+.embed-sec textarea {
+  width: 80%;
   height: 50px;
   border: 1px solid #ddd;
-  border-radius: 5px;
+  border-radius: 25px;
   resize: none;
   padding: 5px;
+  display: flex;
 }
-
+.embed-section button {
+  height: 50px;
+  border-radius: 25px;
+  width: 75px;
+}
 .similar-games{
   margin-bottom: 20px;
   border-radius: 15px;
