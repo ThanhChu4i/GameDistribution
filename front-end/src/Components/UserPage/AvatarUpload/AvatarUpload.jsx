@@ -1,9 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
+import { AuthContext } from '../../AuthContext/AuthContext'; // Import AuthContext
 import axios from 'axios';
 import Cookies from 'js-cookie';
 
-const AvatarUpload = ({ currentAvatar, onAvatarChange }) => {
-    const avatarUser = Cookies.get('avatar'); // Access avatar from cookies
+const AvatarUpload = ({ currentAvatar }) => {
+    const { avatarUser, onAvatarChange } = useContext(AuthContext); // Correctly use useContext inside the component
+
     const [avatar, setAvatar] = useState(null);
     const [preview, setPreview] = useState(currentAvatar || avatarUser); // Initialize preview
     const [error, setError] = useState(null);
@@ -53,7 +55,7 @@ const AvatarUpload = ({ currentAvatar, onAvatarChange }) => {
             );
 
             if (response.status === 200) {
-                onAvatarChange(response.data.avatarPath); // Update parent component
+                onAvatarChange(response.data.avatarPath); // Update avatar in context and cookie
                 setPreview(response.data.avatarPath); // Update preview
                 setError(null);
                 setSuccessMessage('Avatar uploaded successfully!');
