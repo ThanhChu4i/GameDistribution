@@ -11,12 +11,12 @@ const Footer = () => {
                     <img src={logo} alt="Logo" className="footer-logo" />
                     
                 </div>
-                <div className="mid-section">
+                <div className="mid-sectionn">
                 <img src={location} alt="Logo" className="location-logo" />
                     <a href='https://maps.app.goo.gl/4cWBFyxXYX1U2pJw9' target="_blank" rel="noopener noreferrer">
                     9 Đ. Phạm Văn Đồng, Mai Dịch, Cầu Giấy, Hà Nội, Việt Nam
 </a></div>
-                <div className="right-section">
+                <div className="right-sectionn">
                     <p>Follow us</p>
                     <a href="https://www.linkedin.com" target="_blank" rel="noopener noreferrer">
                         <img src={linkin} alt="LinkedIn" className="social-icon" />
@@ -24,7 +24,7 @@ const Footer = () => {
                 </div>
             </div>
             <div className="footer-bottom">
-                <p>Azerion Copyright 2017 - 2023 | <a href="/Privacy">Privacy policy</a> - <a href="#">Platform Privacy policy</a> - <a href="#">Terms & conditions</a></p>
+                <p>Azerion Copyright 2017 - 2023 | <a href="https://static.gamedistribution.com/policy/privacy-enduser.html">Privacy policy</a> - <a href="https://static.gamedistribution.com/policy/privacy-platform.html">Platform Privacy policy</a> - <a href="https://static.gamedistribution.com/terms/both.html">Terms & conditions</a></p>
             </div>
         </footer>
     );
