@@ -47,46 +47,46 @@ function Search() {
     };
 
     return (
-        <div className='search-container'>        
-         <div className='search-container-real'>
-         {searchVisible && (
-                <input
-                    className='Searchtext'
-                    type="text"
-                    placeholder="Search"
-                    value={searchTerm}
-                    onChange={(e) => setSearchTerm(e.target.value)}
-                />
-            )}
-            
-             <button onClick={toggleSearchBar} className='search-button'>
-                <SearchIcon />
-            </button>
+        <div className='search-container'>
+            <div className='search-container-real'>
+                {searchVisible && (
+                    <input
+                        className='Searchtext'
+                        type="text"
+                        placeholder="Search"
+                        value={searchTerm}
+                        onChange={(e) => setSearchTerm(e.target.value)}
+                    />
+                )}
 
-            {isOpen && (
-                <div className="popup-overlay" onClick={closePopup}>
-                    <div className="popup-content" onClick={(e) => e.stopPropagation()}>
-                        {loading ? (
-                            <p>Loading...</p>
-                        ) : results.length > 0 ? (
-                            results.map((game, index) => (
-                                <div className='search' key={index}>
-                                    <Link className='link' to={`/Games/${game._id}`}>
-                                        {game.imagePath && <img className='searchimg' src={game.imagePath} alt={game.game_name} />}
-                                        <div className='searchinfo'>
-                                            <strong>{game.game_name}</strong>
-                                            <p>{game.id_user?.company || 'Unknown Company'}</p>
-                                        </div>
-                                    </Link>
-                                </div>
-                            ))
-                        ) : (
-                            <p>No results found.</p>
-                        )}
+                <button onClick={toggleSearchBar} className='search-button'>
+                    <SearchIcon />
+                </button>
+
+                {isOpen && (
+                    <div className="popup-overlay" onClick={closePopup}>
+                        <div className="popup-content" onClick={(e) => e.stopPropagation()}>
+                            {loading ? (
+                                <p>Loading...</p>
+                            ) : results.length > 0 ? (
+                                results.map((game, index) => (
+                                    <div className='search' key={index}>
+                                        <Link className='link' to={`/Games/${game._id}`}>
+                                            {game.imagePath && <img className='searchimg' src={game.imagePath} alt={game.game_name} />}
+                                            <div className='searchinfo'>
+                                                <strong>{game.game_name}</strong>
+                                                <p>{game.id_user?.company || 'Unknown Company'}</p>
+                                            </div>
+                                        </Link>
+                                    </div>
+                                ))
+                            ) : (
+                                <p>No results found.</p>
+                            )}
+                        </div>
                     </div>
-                </div>
-            )}
-         </div>
+                )}
+            </div>
         </div>
     );
 }
