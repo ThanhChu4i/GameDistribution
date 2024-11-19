@@ -97,7 +97,7 @@ const TabComponent = () => {
             </div>
             <div className="tab-content">
                 {activeTab >= 0 && (
-                    <div className="game-listt">
+                    <div className="game-listtd">
                         <div className="games-gridd">
                             {loading && <p>Loading games...</p>}
                             {error && <p>Error loading games: {error}</p>}

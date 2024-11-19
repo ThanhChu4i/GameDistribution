@@ -66,7 +66,6 @@ align-items: center;
     border: none;
     border-radius: 30px;
     cursor: pointer;
-    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
   }
   .top-game-list {
     width: 100%;
@@ -99,15 +98,14 @@ align-items: center;
     padding: 50px;
   }
   .game-cardi {
-    background-color: white;
+    background-color: #f0f0f0;
     padding: 15px;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 123, 255, 0.3); /* Viền sáng mặc định */
+    border-radius: 15px;
     width: 250px;
     height: 250px;
   }
   .game-cardi:hover {
-    box-shadow: 0 6px 12px rgba(0, 123, 255, 0.6); /* Viền sáng hơn khi hover */
+   border: 5px solid #d036ffe1;
 }
   .namegame {
     margin: 10px 0;

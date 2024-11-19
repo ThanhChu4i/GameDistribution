@@ -1,10 +1,16 @@
 .tab-container {
+    padding-top: 50px;
     width: 100%;
     margin: 20px auto;
     background-color: #f0f0f0;
     display: grid;
     justify-content: center;
-    
+    padding-bottom: 50px;
+}
+.tabandprogess {
+margin-right: 70px;    
+justify-content: center;
+align-items: center;
 }
 .butt {
     background-color: white;
@@ -51,14 +57,10 @@
 }
 
 .tab-content {
-    width: 1500px;
+    width: 1800px;
     justify-content: center;
-    text-align: center;
     font-size: 18px;
-    padding: 20px;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    background-color: #f9f9f9;
+    background-color: #f0f0f0;
 }
 /* Thêm vào TabComponent.css */
 
@@ -75,26 +77,27 @@
     background-color: #007bff; /* Màu của thanh tiến trình */
     transition: width 1s linear; /* Hiệu ứng chuyển động mượt mà */
 }
-.game-listt {
+.game-listtd {
+    width: 1800px;
     display: flex;
-    border: 5px blue;
+    justify-content: center;
   }
   .games-gridd {
     display: flex;
+    width: 100%;
     justify-content: center;
     flex-wrap: wrap;
     grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); /* Tạo lưới cho các game */
     gap: 20px; /* Khoảng cách giữa các game */
     flex-grow: 1; /* Lưới game sẽ mở rộng ra khi có thêm không gian */
-    padding: 50px;
     transition: 0.3s;
   }
   .game-cardd {
-    background-color: white;
-    padding: 15px;
-    border-radius: 8px;
+    background-color: #f0f0f0;
+    padding: 20px;
+    border-radius: 20px;
     text-align: center;
-    width: 300px;
+    width: 400px;
     height: 300px;
     box-shadow: 0 4px 8px rgba(0, 123, 255, 0.3); /* Viền sáng mặc định */
     transition: box-shadow 0.3s ease; /* Hiệu ứng mượt khi hover */

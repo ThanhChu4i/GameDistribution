@@ -60,10 +60,8 @@ const Support = () => {
                   <input type="file" id="file-upload" />
                 </div>
 
-
-
                 <div className="form-group-for-Support">
-                  <button className="submit-btn-for-support" >Send</button>
+                  <button type="submit" className="submit-btn-for-support" >Send</button>
                 </div>
               </div>
             </div>

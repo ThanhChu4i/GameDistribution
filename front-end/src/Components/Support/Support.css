@@ -91,9 +91,10 @@ textarea {
 /* File upload */
 .file-upload input[type="file"] {
   padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
+  border: 2px solid #8c52ff;
+  border-radius: 25px;
   font-size: 14px;
+  color: #8c52ff;
   cursor: pointer;
 }
 
