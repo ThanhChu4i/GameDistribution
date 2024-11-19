@@ -35,8 +35,8 @@ function App() {
           <Route path="/Admin" element={<AdminPage/>} />
           <Route path="/profile" element={<UserManagementPage/>} />
           <Route path="/Games/:id" element={<GameDetails/>} />
-          <Route path="Upload" element={<GameUploadPage/>} />
-          <Route path="change-password" element={<ChangePassword/>} />
+          <Route path="/Upload" element={<GameUploadPage/>} />
+          <Route path="/change-password" element={<ChangePassword/>} />
           <Route path='/Admin/Setting/User' element={<Adminsettinguser/>} />
           <Route path='/Admin/Setting/Game' element={<AdminSettinggame/>} />
           <Route path='/User/Setting/Game' element= {<UserSettinggame/>} />
