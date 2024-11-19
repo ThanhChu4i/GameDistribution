@@ -45,29 +45,29 @@ const Support = () => {
                   <a href="#">For Developers - For Publishers</a>
                 </div>
               </div>
+            </div>
+            <div className='right-form-group'>
+              <div className="form-group-left">
+                <label htmlFor="inquiry">Please tell us more about your inquiry</label>
+                <textarea
+                  id="inquiry"
+                  placeholder="Please also include your Developer or Publisher name. If your question concerns a specific game, please add the game name and GameID as well."
+                  required
+                ></textarea>
               </div>
-              <div className='right-form-group'>
-                <div className="form-group-left">
-                  <label htmlFor="inquiry">Please tell us more about your inquiry</label>
-                  <textarea
-                    id="inquiry"
-                    placeholder="Please also include your Developer or Publisher name. If your question concerns a specific game, please add the game name and GameID as well."
-                    required
-                  ></textarea>
-                </div>
 
-                <div className="form-group file-upload">
-                  <input type="file" id="file-upload" />
-                </div>
+              <div className="form-group file-upload">
+                <input type="file" id="file-upload" />
+              </div>
 
-                <div className="form-group-for-Support">
-                  <button className="submit-btn-for-support" >Send</button>
-                </div>
+              <div className="form-group-for-Support">
+                <button className="submit-btn-for-support" >Send</button>
               </div>
             </div>
           </div>
         </div>
       </div>
+    </div>
   );
 };
 

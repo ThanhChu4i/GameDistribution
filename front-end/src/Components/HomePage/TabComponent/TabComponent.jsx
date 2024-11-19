@@ -77,23 +77,23 @@ const TabComponent = () => {
                     <Link to="/Games"><strong>Exclusive Games</strong></Link>
                 </nav>
                 <div className='tabandprogess'>
-                <div className="butt">
-                    <button className="tab-buttonn" onClick={handlePrevTab}>Prev</button>
-                    {[...Array(totalTabs)].map((_, index) => (
-                        <button
-                            key={index}
-                            className={`tab-buttone ${activeTab === index ? 'active' : ''}`}
-                            onClick={() => handleTabClick(index)}
-                        >
-                            {index + 1}
-                        </button>
-                    ))}
-                    <button className="tab-buttonn" onClick={handleNextTab}>Next</button>
+                    <div className="butt">
+                        <button className="tab-buttonn" onClick={handlePrevTab}>Prev</button>
+                        {[...Array(totalTabs)].map((_, index) => (
+                            <button
+                                key={index}
+                                className={`tab-buttone ${activeTab === index ? 'active' : ''}`}
+                                onClick={() => handleTabClick(index)}
+                            >
+                                {index + 1}
+                            </button>
+                        ))}
+                        <button className="tab-buttonn" onClick={handleNextTab}>Next</button>
+                    </div>
+                    <div className="progress-bar-container">
+                        <div className="progress-bar" style={{ width: `${progress}%` }}></div>
+                    </div>
                 </div>
-                <div className="progress-bar-container">
-                <div className="progress-bar" style={{ width: `${progress}%` }}></div>
-            </div>
-            </div>
             </div>
             <div className="tab-content">
                 {activeTab >= 0 && (
@@ -104,13 +104,13 @@ const TabComponent = () => {
                             {!loading && gamesData[activeTab] && gamesData[activeTab].length === 0 && <p>No games found.</p>}
                             {!loading && gamesData[activeTab] && gamesData[activeTab].map((game) => (
                                 <div key={game._id} className="game-cardd">
-                                <Link to={`/Games/${game._id}`}>
-                                {game.imagePath && <img src={game.imagePath} alt={game.game_name} />}
-                                    <h4>{game.game_name}</h4>
-                                </Link>
-                                <p>{game.company}</p>
-                            </div>
-                            
+                                    <Link to={`/Games/${game._id}`}>
+                                        {game.imagePath && <img src={game.imagePath} alt={game.game_name} />}
+                                        <h4>{game.game_name}</h4>
+                                    </Link>
+                                    <p>{game.company}</p>
+                                </div>
+
                             ))}
                         </div>
                     </div>
