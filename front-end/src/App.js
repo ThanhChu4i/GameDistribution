@@ -29,18 +29,18 @@ function App() {
         <Header openLoginModal={() => setIsLoginModalOpen(true)} /> {/* Pass function để mở modal */}
         <Routes>
           <Route path="/" element={<HomePage />} />
-          <Route path="/Games" element={<Games />} />
-          <Route path="/Support" element={<Support />} />
-          <Route path="/News" element={<News />} />
-          <Route path="/Admin" element={<AdminPage/>} />
+          <Route path="/games" element={<Games />} />
+          <Route path="/support" element={<Support />} />
+          <Route path="/news" element={<News />} />
+          <Route path="/admin" element={<AdminPage/>} />
           <Route path="/profile" element={<UserManagementPage/>} />
-          <Route path="/Games/:id" element={<GameDetails/>} />
-          <Route path="/Upload" element={<GameUploadPage/>} />
+          <Route path="/games/:id" element={<GameDetails/>} />
+          <Route path="/upload" element={<GameUploadPage/>} />
           <Route path="/change-password" element={<ChangePassword/>} />
-          <Route path='/Admin/Setting/User' element={<Adminsettinguser/>} />
-          <Route path='/Admin/Setting/Game' element={<AdminSettinggame/>} />
-          <Route path='/User/Setting/Game' element= {<UserSettinggame/>} />
-          <Route path='/404/Notfound'  element= {<NotFound404/>} />
+          <Route path='/admin/setting/user' element={<Adminsettinguser/>} />
+          <Route path='/admin/setting/game' element={<AdminSettinggame/>} />
+          <Route path='/user/setting/game' element= {<UserSettinggame/>} />
+          <Route path='/404/notfound'  element= {<NotFound404/>} />
         </Routes>
         <LoginRegisterModal
           isOpen={isLoginModalOpen} // Truyền state vào modal
