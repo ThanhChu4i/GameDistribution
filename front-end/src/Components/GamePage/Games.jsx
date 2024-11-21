@@ -1,6 +1,6 @@
 import React from 'react';
 import './Games.css';
-import BodyGamePage from './BodyGamePage/BodyGamePage.jsx';
+import BodyGamePage from './BodyGamePage/BodyGamePage';
 import imagf from './image/dc0d7b34d1e049df813ffa167a7fcc66-512x384.jpeg'
 const Games = () => {
   return (
