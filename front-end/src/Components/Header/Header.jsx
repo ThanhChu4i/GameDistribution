@@ -14,6 +14,8 @@ const Header = ({ openLoginModal }) => {
     setShowDropdown(!showDropdown);
   };
   const avatarUser = Cookies.get('avatar');
+  const isAdmin = Cookies.get('isAdmin');
+  const isDevPub = Cookies.get('isDevPub');
   const handleLogout = () => {
     logout(); // Handle logout
     setShowDropdown(false); // Close dropdown
@@ -80,8 +82,9 @@ const Header = ({ openLoginModal }) => {
             />
             {showDropdown && (
               <div className="user-dropdown">
+               {isAdmin &&( <button className='btnbtn'><Link to="/admin">Admin Setting</Link></button>)}
                 <button className='btnbtn'><Link to="/profile">Account Setting</Link></button>
-                <button className='btnbtn'><Link to="/Upload">Upload Game</Link></button>
+              { isDevPub && ( <button className='btnbtn'><Link to="/Upload">Upload Game</Link></button> ) }
                 <button className='btnbtn'><Link to="/change-password">Password Setting</Link></button>
                 <button className='btnbtn' onClick={handleLogout}>Log out</button>
               </div>

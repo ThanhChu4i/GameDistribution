@@ -92,6 +92,9 @@ const AdminSettingGame = () => {
       setDeleteGameId(null);
     } catch (err) {
       console.error("Error deleting game:", err);
+      if (err.response && (err.response.status === 401 || err.response.status === 403)) {
+        navigate('/404/Notfound');
+      }
       alert("Failed to delete game");
     }
   };
