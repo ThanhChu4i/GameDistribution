@@ -2,22 +2,20 @@ import React, { useContext, useState } from 'react';
 import './Header.css';  
 import { Link } from "react-router-dom";
 import logo from '../Assets/Logo_XGame-011.png';
-import defaultAvatar from '../Assets/avatar_default.webp'; // Path to default avatar image
-import { AuthContext } from '../AuthContext/AuthContext'; // Import AuthContext
+import defaultAvatar from '../Assets/avatar_default.webp'; // Default avatar image
+import { AuthContext } from '../AuthContext/AuthContext'; // AuthContext
 import Search from '../Search/Search';
-import Cookies from 'js-cookie';
 
 const Header = ({ openLoginModal }) => {
-  const { isLoggedIn, logout } = useContext(AuthContext); // Get login state and logout function
-  const [showDropdown, setShowDropdown] = useState(false); // State for user dropdown
+  const { isLoggedIn, logout, isAdmin, isDevPub, avatarUser } = useContext(AuthContext); // Context values
+  const [showDropdown, setShowDropdown] = useState(false); // Dropdown visibility state
+
   const toggleDropdown = () => {
     setShowDropdown(!showDropdown);
   };
-  const avatarUser = Cookies.get('avatar');
-  const isAdmin = Cookies.get('isAdmin');
-  const isDevPub = Cookies.get('isDevPub');
+
   const handleLogout = () => {
-    logout(); // Handle logout
+    logout(); // Logout handler
     setShowDropdown(false); // Close dropdown
   };
 
@@ -28,70 +26,93 @@ const Header = ({ openLoginModal }) => {
           <img src={logo} alt="Logo" style={{ height: '50px' }} />
         </Link>
       </div>
-      <div className='Linksd'>
+      <div className="Linksd">
         <nav className="nav-linkss">
           <Link to="/Games">Games</Link>
           <div className="dropdownn">
             <Link>For Business</Link>
             <div className="dropdown-contentn">
               <div className="for-Publishers">
-                <button className='btn'>Partnerships     
-                  <p>Discover GameDistribution's partnership models</p> 
-                </button> 
-                <button className='btn'>Direct Game Integration 
+                <button className="btn">
+                  Partnerships
+                  <p>Discover GameDistribution's partnership models</p>
+                </button>
+                <button className="btn">
+                  Direct Game Integration
                   <p>Experience the simple efficiency of Direct Game Integration</p>
-                </button> 
-                <button className='btn'>White Label Gaming Solution 
+                </button>
+                <button className="btn">
+                  White Label Gaming Solution
                   <p>Made-to-measure gaming solutions to boost your business</p>
-                </button> 
-                <button className='btn'>FAQ
+                </button>
+                <button className="btn">
+                  FAQ
                   <p>All your questions answered - Browse our Publisher FAQ Guide</p>
-                </button> 
+                </button>
               </div>
-              <div className='for-Developers'>
-                <button className='btn'>Partnerships
+              <div className="for-Developers">
+                <button className="btn">
+                  Partnerships
                   <p>Find out how GD helps game developers expand their reach</p>
-                </button> 
-                <button className='btn'>Quality Guidelines
+                </button>
+                <button className="btn">
+                  Quality Guidelines
                   <p>Follow our guidelines to publish your games quickly and efficiently</p>
-                </button>          
-                <button className='btn'>Dev Panel
+                </button>
+                <button className="btn">
+                  Dev Panel
                   <p>Head to our Developer Dashboard to manage your games</p>
-                </button>     
-                <button className='btn'>FAQ 
+                </button>
+                <button className="btn">
+                  FAQ
                   <p>All your questions answered - Browse our Developer FAQ Guide</p>
-                </button>        
+                </button>
               </div>
             </div>
           </div>
-
           <Link to="/News">News</Link>
           <Link to="/Support">Support</Link>
         </nav>
       </div>
-      <div className="header-actions">       
+      <div className="header-actions">
         <Search />
-        
+
         {isLoggedIn ? (
           <div className="user-section">
             <img
-              src={avatarUser || defaultAvatar}  // Use custom avatar or default
+              src={avatarUser || defaultAvatar} // Use user avatar or default
               alt="User Avatar"
               className="user-avatar"
               onClick={toggleDropdown}
             />
             {showDropdown && (
               <div className="user-dropdown">
-               {isAdmin &&( <button className='btnbtn'><Link to="/admin">Admin Setting</Link></button>)}
-                <button className='btnbtn'><Link to="/profile">Account Setting</Link></button>
-              { isDevPub && ( <button className='btnbtn'><Link to="/Upload">Upload Game</Link></button> ) }
-                <button className='btnbtn'><Link to="/change-password">Password Setting</Link></button>
-                <button className='btnbtn' onClick={handleLogout}>Log out</button>
+                {isAdmin && (
+                  <button className="btnbtn">
+                    <Link to="/admin">Admin Setting</Link>
+                  </button>
+                )}
+                <button className="btnbtn">
+                  <Link to="/profile">Account Setting</Link>
+                </button>
+                {isDevPub && (
+                  <button className="btnbtn">
+                    <Link to="/Upload">Upload Game</Link>
+                  </button>
+                )}
+                <button className="btnbtn">
+                  <Link to="/change-password">Password Setting</Link>
+                </button>
+                <button className="btnbtn" onClick={handleLogout}>
+                  Log out
+                </button>
               </div>
             )}
           </div>
         ) : (
-          <button onClick={openLoginModal} className="login-button">Login/Register</button>
+          <button onClick={openLoginModal} className="login-button">
+            Login/Register
+          </button>
         )}
       </div>
     </header>

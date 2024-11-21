@@ -6,51 +6,71 @@ export const AuthContext = createContext();
 
 export const AuthContextProvider = ({ children }) => {
   const [isLoggedIn, setIsLoggedIn] = useState(() => {
-    // Kiểm tra cookie khi khởi tạo để xác định trạng thái đăng nhập
     const token = Cookies.get('token');
-    return token ? true : false;
+    return !!token; // Xác định trạng thái đăng nhập
   });
-  
   const [avatarUser, setAvatarUser] = useState(() => {
-    // Lấy avatar từ cookie khi khởi tạo
-    return Cookies.get('avatar') || null;
+    return Cookies.get('avatar') || null; // Lấy avatar từ cookie
+  });
+  const [isAdmin, setIsAdmin] = useState(() => {
+    return Cookies.get('isAdmin') === 'true'; // Ép kiểu từ cookie về boolean
+  });
+  const [isDevPub, setIsDevPub] = useState(() => {
+    return Cookies.get('isDevPub') === 'true'; // Ép kiểu từ cookie về boolean
   });
 
-  const navigate = useNavigate(); // Khởi tạo useNavigate
+  const navigate = useNavigate();
 
   const login = (token, avatar, isAdmin, isDevPub) => {
-    // Lưu token và avatar vào cookie khi đăng nhập
     Cookies.set('token', token, { expires: 2 / 24 });
     Cookies.set('avatar', avatar, { expires: 2 / 24 });
-    Cookies.set('isAdmin', isAdmin, { expires: 2 / 24 });
-    Cookies.set('isDevPub', isDevPub, { expires: 2 / 24 });
-    setAvatarUser(avatar); // Cập nhật avatar trong state
-    setIsLoggedIn(true); // Cập nhật trạng thái đăng nhập
+    Cookies.set('isAdmin', isAdmin ? 'true' : 'false', { expires: 2 / 24 });
+    Cookies.set('isDevPub', isDevPub ? 'true' : 'false', { expires: 2 / 24 });
+
+    setAvatarUser(avatar);
+    setIsAdmin(!!isAdmin); // Cập nhật state
+    setIsDevPub(!!isDevPub);
+    setIsLoggedIn(true);
   };
 
   const logout = () => {
-    // Xóa cookie token và avatar khi đăng xuất
     Cookies.remove('token');
     Cookies.remove('avatar');
+    Cookies.remove('isAdmin');
+    Cookies.remove('isDevPub');
+
     setIsLoggedIn(false);
-    setAvatarUser(null); // Cập nhật trạng thái đăng xuất
+    setAvatarUser(null);
+    setIsAdmin(false);
+    setIsDevPub(false);
+
     navigate('/'); // Điều hướng về trang chính sau khi đăng xuất
   };
 
   const onAvatarChange = (newAvatar) => {
-    // Cập nhật avatar mới vào cookie và state
-    Cookies.set('avatar', newAvatar, { expires: 2 / 24});
-    setAvatarUser(newAvatar);
+    Cookies.set('avatar', newAvatar, { expires: 2 / 24 });
+    setAvatarUser(newAvatar); // Cập nhật avatar trong state
   };
 
   useEffect(() => {
-    // Kiểm tra lại trạng thái đăng nhập nếu cookie thay đổi
     const token = Cookies.get('token');
-    setIsLoggedIn(!!token); // Cập nhật trạng thái nếu token tồn tại
+    setIsLoggedIn(!!token); // Xác định trạng thái đăng nhập từ token
+    setIsAdmin(Cookies.get('isAdmin') === 'true'); // Cập nhật trạng thái Admin
+    setIsDevPub(Cookies.get('isDevPub') === 'true'); // Cập nhật trạng thái Dev/Pub
   }, []);
 
   return (
-    <AuthContext.Provider value={{ avatarUser, isLoggedIn, login, logout, onAvatarChange }}>
+    <AuthContext.Provider
+      value={{
+        avatarUser,
+        isLoggedIn,
+        isAdmin,
+        isDevPub,
+        login,
+        logout,
+        onAvatarChange,
+      }}
+    >
       {children}
     </AuthContext.Provider>
   );
