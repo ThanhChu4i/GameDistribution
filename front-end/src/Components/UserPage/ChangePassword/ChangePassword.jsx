@@ -26,7 +26,7 @@ const ChangePassword = () => {
 
     try {
       const response = await axios.post(
-        'http://localhost:8081/user/change-password',
+        `${process.env.SERVER_HOST}/user/change-password`,
         { oldPassword, newPassword },
         {
           headers: {

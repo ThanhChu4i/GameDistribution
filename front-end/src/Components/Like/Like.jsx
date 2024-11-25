@@ -34,7 +34,7 @@ const LikeButton = () => {
         try {
             const token = Cookies.get('token');
             await axios.post(
-                'http://localhost:8081/user/toggleLike',
+                `${process.env.SERVER_HOST}/user/toggleLike`,
                 { id, liked: !liked },
                 { headers: { Authorization: `Bearer ${token}` } }
             );

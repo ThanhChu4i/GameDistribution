@@ -75,7 +75,7 @@ function BodyGamePage() {
         // Thêm từ khóa tìm kiếm vào params
         if (searchQuery) params.search = searchQuery;
 
-        const response = await axios.get('http://localhost:8081/api/games', { params });
+        const response = await axios.get(`${process.env.SERVER_HOST}/api/games`, { params });
         setGames(response.data);
         console.log(response.data);
       } catch (err) {

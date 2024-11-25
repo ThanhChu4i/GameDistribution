@@ -21,7 +21,7 @@ export default function CommentSection() {
     useEffect(() => {
         const fetchComments = async () => {
             try {
-                const response = await axios.get(`http://localhost:8081/user/comment/${id}`);
+                const response = await axios.get(`${process.env.SERVER_HOST}/user/comment/${id}`);
                 setOldComments(response.data);
             } catch (error) {
                 console.error('Error fetching comments:', error);

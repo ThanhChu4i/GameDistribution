@@ -44,7 +44,7 @@ const AvatarUpload = ({ currentAvatar }) => {
             data.append('avatar', avatar);
 
             const response = await axios.put(
-                'http://localhost:8081/user/userData/updateavatar',
+                `${process.env.SERVER_HOST}/user/userData/updateavatar`,
                 data,
                 {
                     headers: {

@@ -36,7 +36,7 @@ const LoginPopup = ({ onRequestClose }) => {
       setIsLoading(true);
       try {
         // Gửi dữ liệu đăng nhập đến máy chủ
-        const res = await axios.post('http://localhost:8081/api/login', values);
+        const res = await axios.post(`${process.env.SERVER_HOST}/api/login`, values);
         // Lưu token vào cookie
         const token = res.data.token;
         const avatar = res.data.avatar;
