@@ -3,7 +3,6 @@ import axios from 'axios';
 import Cookies from 'js-cookie';
 import { useNavigate } from 'react-router-dom';
 import './ViewUser.css';
-
 const ViewUser = ({ onEdit }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
