@@ -1,0 +1,19 @@
+version: "3.8"
+services:
+  client:
+    build:
+      context: ./front-end
+      dockerfile: Dockerfile
+    ports:
+      - "3000:80"  # Map port 3000 (host) to 80 (container)
+    depends_on:
+      - server  # Khởi động server trước
+
+  server:
+    build:
+      context: ./back-end
+      dockerfile: Dockerfile
+    ports:
+      - "8081:8081"  # Map port 5000 (host) to 5000 (container)
+    environment:
+      - NODE_ENV=production
