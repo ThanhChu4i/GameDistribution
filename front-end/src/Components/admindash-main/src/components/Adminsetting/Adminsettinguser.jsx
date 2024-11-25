@@ -125,7 +125,7 @@ const AdminSettinguser = () => {
             {wtdevUsers.map((u) => (
               <div key={u._id} className="user-card">
                 <img
-                    src={u.avatarPath || avatardefault}  // Use custom avatar or default
+                    src={`${process.env.REACT_APP_API_URL}${u.avatarPath}` || u.avatarPath}  // Use custom avatar or default
                     alt="User Avatar"
                     className="user-avatar"
                   />
@@ -149,7 +149,7 @@ const AdminSettinguser = () => {
             {wtpubUsers.map((u) => (
               <div key={u._id} className="user-card">
                 <img
-                    src={u.avatarPath || avatardefault}  // Use custom avatar or default
+                    src={`${process.env.REACT_APP_API_URL}${u.avatarPath}`|| u.avatarPath}  // Use custom avatar or default
                     alt="User Avatar"
                     className="user-avatar"
                   />
@@ -173,7 +173,7 @@ const AdminSettinguser = () => {
             {activeUsers.map((u) => (
               <div key={u._id} className="user-card">
                 <img
-                    src={u.avatarPath || avatardefault}  // Use custom avatar or default
+                    src={`${process.env.REACT_APP_API_URL}${u.avatarPath}`|| u.avatarPath}  // Use custom avatar or default
                     alt="User Avatar"
                     className="user-avatar"
                   />
@@ -197,7 +197,7 @@ const AdminSettinguser = () => {
             {lockedUsers.map((u) => (
               <div key={u._id} className="user-card">
                   <img
-                    src={u.avatarPath || avatardefault}  // Use custom avatar or default
+                    src={`${process.env.REACT_APP_API_URL}${u.avatarPath}`|| u.avatarPath}  // Use custom avatar or default
                     alt="User Avatar"
                     className="user-avatar"
                   />

@@ -10,7 +10,7 @@ export const AuthContextProvider = ({ children }) => {
     return !!token; // Xác định trạng thái đăng nhập
   });
   const [avatarUser, setAvatarUser] = useState(() => {
-    return Cookies.get('avatar') || null; // Lấy avatar từ cookie
+    return `${process.env.REACT_APP_API_URL}${Cookies.get('avatar')}` || null; // Lấy avatar từ cookie
   });
   const [isAdmin, setIsAdmin] = useState(() => {
     return Cookies.get('isAdmin') === 'true'; // Ép kiểu từ cookie về boolean

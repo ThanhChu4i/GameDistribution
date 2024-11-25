@@ -6,6 +6,7 @@ const auth = require('../middleware/authenticateUser/auth');
 const {getOldComment, newComment} = require('../controllers/user/comment');
 const {getLikeStatus, toggleLike} = require("../controllers/user/likeController");
 const {uploadUserAvatar} = require("../controllers/user/uploadAvatar");
+const { getUserAvatar } = require('../controllers/user/getUserAvatar');
 const router = express.Router();
 
 //router.use(auth);
@@ -22,5 +23,6 @@ router.post('/comment', auth , newComment);
 router.get('/likeStatus', auth, getLikeStatus);
 router.post('/toggleLike', auth, toggleLike);
 router.put('/userData/updateavatar', auth, uploadUserAvatar);
+router.get('/avatars', getUserAvatar);
 
 module.exports = router;

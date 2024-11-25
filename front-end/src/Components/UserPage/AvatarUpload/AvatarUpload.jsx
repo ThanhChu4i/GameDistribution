@@ -1,13 +1,13 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { AuthContext } from '../../AuthContext/AuthContext'; // Import AuthContext
+import { AuthContext } from '../../AuthContext/AuthContext';
 import axios from 'axios';
 import Cookies from 'js-cookie';
 
 const AvatarUpload = ({ currentAvatar }) => {
-    const { avatarUser, onAvatarChange } = useContext(AuthContext); // Correctly use useContext inside the component
+    const { avatarUser, onAvatarChange } = useContext(AuthContext);
 
     const [avatar, setAvatar] = useState(null);
-    const [preview, setPreview] = useState(currentAvatar || avatarUser); // Initialize preview
+    const [preview, setPreview] = useState(currentAvatar || avatarUser);
     const [error, setError] = useState(null);
     const [successMessage, setSuccessMessage] = useState(null);
 
@@ -20,7 +20,6 @@ const AvatarUpload = ({ currentAvatar }) => {
     const handleAvatarChange = (e) => {
         const file = e.target.files[0];
         if (file) {
-            // Check file size before setting it
             if (file.size > 5 * 1024 * 1024) {
                 setError('File size must not exceed 5MB.');
                 return;
@@ -49,23 +48,22 @@ const AvatarUpload = ({ currentAvatar }) => {
                 {
                     headers: {
                         Authorization: `Bearer ${token}`,
-                        'Content-Type': 'multipart/form-data'
+                        'Content-Type': 'multipart/form-data',
                     },
                 }
             );
 
             if (response.status === 200) {
-                onAvatarChange(response.data.avatarPath); // Update avatar in context and cookie
-                setPreview(response.data.avatarPath); // Update preview
+                const avatarPath = `${process.env.REACT_APP_API_URL}${response.data.avatarPath}`; // Thêm URL đầy đủ
+                onAvatarChange(avatarPath); // Cập nhật avatar trong context
+                setPreview(avatarPath);
                 setError(null);
                 setSuccessMessage('Avatar uploaded successfully!');
             } else {
                 setError('Failed to upload avatar. Please try again.');
             }
         } catch (err) {
-            console.log(err);
             setError(err.response?.data?.error || 'An error occurred while uploading the avatar.');
-            console.error('Upload error:', err);
         }
     };
 
@@ -76,12 +74,11 @@ const AvatarUpload = ({ currentAvatar }) => {
                 src={preview}
                 alt="Avatar-preview"
                 className="avatar-preview"
-                onError={(e) => (e.target.src = '/default-avatar.jpg')} // Fallback to default avatar
+                onError={(e) => (e.target.src = '/default-avatar.jpg')}
             />
             <input type="file" accept="image/*" onChange={handleAvatarChange} />
             <button onClick={handleSaveAvatar}>Upload Avatar</button>
 
-            {/* Success and error messages */}
             {successMessage && <p className="success-message">{successMessage}</p>}
             {error && <p className="error-message">{error}</p>}
         </div>
