@@ -80,7 +80,7 @@ const Header = ({ openLoginModal }) => {
         {isLoggedIn ? (
           <div className="user-section">
             <img
-              src={avatarUser || defaultAvatar} // Use user avatar or default
+              src={ avatarUser || defaultAvatar} // Use user avatar or default
               alt="User Avatar"
               className="user-avatar"
               onClick={toggleDropdown}
