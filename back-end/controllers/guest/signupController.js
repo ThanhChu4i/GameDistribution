@@ -1,5 +1,5 @@
 const { User } = require('../../collection/collection'); // Import model User
-const bcrypt = require("bcrypt");
+const bcrypt = require("bcryptjs");
 
 // Xử lý đăng ký người dùng
 const signupUser = async (req, res) => {

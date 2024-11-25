@@ -20,15 +20,5 @@ services:
       - FRONTEND_URL=http://localhost:3000
     volumes:
       - ./back-end:/app # Để hỗ trợ live development
-    restart: always
+    restart: always  
 
-  # database:
-  #   image: mongo:5.0
-  #   container_name: mongo_container
-  #   ports:
-  #     - "27017:27017"
-  #   volumes:
-  #     - mongo_data:/data/db
-
-# volumes:
-#   mongo_data:
