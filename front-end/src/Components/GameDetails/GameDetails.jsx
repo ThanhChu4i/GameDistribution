@@ -18,7 +18,7 @@ const GameDetails = () => {
         try {
             const gameHistory = { gameId: id };
             const token = Cookies.get('token');
-            await axios.post(`${process.env.SERVER_HOST}/api/gameHistory`, gameHistory, {
+            await axios.post(`${process.env.REACT_APP_API_URL}/api/gameHistory`, gameHistory, {
                 headers: { Authorization: `Bearer ${token}` },
             });
             console.log('Game history saved successfully');
@@ -47,7 +47,7 @@ const GameDetails = () => {
         const fetchGameDetails = async () => {
             setLoading(true);
             try {
-                const response = await axios.get(`${process.env.SERVER_HOST}:8081/api/games/${id}`);
+                const response = await axios.get(`${process.env.REACT_APP_API_URL}/api/games/${id}`);
                 setGame(response.data.game);
                 setSimilarGames(response.data.similarGames || []);
             } catch (err) {
@@ -116,8 +116,8 @@ const GameDetails = () => {
                 <div className="embed-section">
                     <h3>Example URL</h3>
                     <div className='embed-sec'>
-                    <textarea readOnly value={`   ${process.env.SERVER_HOST}/games/${id}`} />
-                    <button onClick={() => handleCopyEmbed(`${process.env.SERVER_HOST}/games/${id}`)}><strong>Copy</strong></button>
+                    <textarea readOnly value={`${process.env.REACT_APP_API_URL}/games/${id}`} />
+                    <button onClick={() => handleCopyEmbed(`${process.env.REACT_APP_API_URL}/games/${id}`)}><strong>Copy</strong></button>
                     </div>
                 </div>
                 <Comment/>

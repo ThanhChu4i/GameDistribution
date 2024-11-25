@@ -26,7 +26,7 @@ const Dashboard = () => {
           if (!token) {
             throw new Error('No token found');
           }
-          const response = await axios.get('http://localhost:8081/admin/stats', {
+          const response = await axios.get(`${process.env.REACT_APP_API_URL}/admin/stats`, {
             headers: {
               Authorization: `Bearer ${token}`,
             },

@@ -14,7 +14,7 @@ const Yourgames = () => {
         const fetchGames = async () => {
             setLoading(true);
             try {
-                const response = await axios.get(`${process.env.SERVER_HOST}/dev/yourgames`, {
+                const response = await axios.get(`${process.env.REACT_APP_API_URL}/dev/yourgames`, {
                     headers: { Authorization: `Bearer ${token}` },
                 });
                 setGames(response.data);

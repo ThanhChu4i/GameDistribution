@@ -85,7 +85,7 @@ const GameUpload = () => {
 
         setLoading(true);
         try {
-            const response = await axios.post(`${process.env.SERVER_HOST}/dev/games/upload`, formData, {
+            const response = await axios.post(`${process.env.REACT_APP_API_URL}/dev/games/upload`, formData, {
                 headers: {
                     Authorization: `Bearer ${token}`,
                 },

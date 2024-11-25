@@ -18,7 +18,7 @@ const UserSettinggame = () => {
         const token = Cookies.get('token');
         if (!token) throw new Error('No token found');
 
-        const response = await axios.get(`${process.env.SERVER_HOST}/dev/mygame`, {
+        const response = await axios.get(`${process.env.REACT_APP_API_URL}/dev/mygame`, {
           headers: { Authorization: `Bearer ${token}` },
         });
         setGames(response.data);
@@ -47,7 +47,7 @@ const UserSettinggame = () => {
 
   const handleEditGame = async () => {
     try {
-      const response = await axios.put(`${process.env.SERVER_HOST}/dev/updategame/${editingGameId}`, updatedData, {
+      const response = await axios.put(`${process.env.REACT_APP_API_URL}/dev/updategame/${editingGameId}`, updatedData, {
         headers: { Authorization: `Bearer ${Cookies.get('token')}` },
       });
       setGames((prevGames) => prevGames.map(game => game._id === editingGameId ? response.data : game));
@@ -69,7 +69,7 @@ const UserSettinggame = () => {
 
   const handleDeleteGame = async (gameId) => {
     try {
-      await axios.delete(`${process.env.SERVER_HOST}/dev/deletegame/${gameId}`, {
+      await axios.delete(`${process.env.REACT_APP_API_URL}/dev/deletegame/${gameId}`, {
         headers: { Authorization: `Bearer ${Cookies.get('token')}` },
       });
       setGames((prevGames) => prevGames.filter(game => game._id !== gameId));

@@ -18,7 +18,7 @@ const EditUser = ({ onEdit }) => {
         const token = Cookies.get('token');
         if (!token) throw new Error('No token found');
 
-        const response = await axios.get(`${process.env.SERVER_HOST}/user/userData`, {
+        const response = await axios.get(`${process.env.REACT_APP_API_URL}/user/userData`, {
           headers: { Authorization: `Bearer ${token}` }
         });
 
@@ -55,7 +55,7 @@ const EditUser = ({ onEdit }) => {
       data.append('last_name', formData.last_name);
       data.append('country', formData.country);
       data.append('company', formData.company);
-      const response = await axios.put(`${process.env.SERVER_HOST}/user/updateUser`, data, {
+      const response = await axios.put(`${process.env.REACT_APP_API_URL}/user/updateUser`, data, {
         headers: {
           Authorization: `Bearer ${token}`,
           'Content-Type': 'multipart/form-data'

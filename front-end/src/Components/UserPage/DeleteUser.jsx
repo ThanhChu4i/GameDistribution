@@ -38,7 +38,7 @@ const DeleteUser = ({ userId, onDelete }) => {
   const handleDelete = async () => {
     try {
       const token = Cookies.get('token');
-      await axios.delete(`http://localhost:8081/user/${userId}`, {
+      await axios.delete(`${process.env.REACT_APP_API_URL}user/${userId}`, {
         headers: {
           Authorization: `Bearer ${token}`, // Add token to delete request
         },

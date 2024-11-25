@@ -24,7 +24,7 @@ const AdminSettingGame = () => {
         if (!token) {
           throw new Error('No token found');
         }
-        const response = await axios.get('http://localhost:8081/admin/settinggame', {
+        const response = await axios.get(`${process.env.REACT_APP_API_URL}/admin/settinggame`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -65,7 +65,7 @@ const AdminSettingGame = () => {
   };
   const handleEditGame = async () => {
     try {
-      const response = await axios.put(`http://localhost:8081/admin/updategame/${editingGameId}`, updatedData, {
+      const response = await axios.put(`${process.env.REACT_APP_API_URL}/admin/updategame/${editingGameId}`, updatedData, {
         headers: {
           Authorization: `Bearer ${Cookies.get('token')}`,
         },
@@ -81,7 +81,7 @@ const AdminSettingGame = () => {
 
   const handleDeleteGame = async () => {
     try {
-      await axios.delete(`http://localhost:8081/admin/settinggame/${deleteGameId}`, {
+      await axios.delete(`${process.env.REACT_APP_API_URL}/admin/settinggame/${deleteGameId}`, {
         headers: {
           Authorization: `Bearer ${Cookies.get('token')}`,
         },

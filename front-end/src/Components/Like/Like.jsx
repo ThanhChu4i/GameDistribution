@@ -15,7 +15,7 @@ const LikeButton = () => {
             if (id) {
                 try {
                     const token = Cookies.get('token');
-                    const response = await axios.get('http://localhost:8081/user/likeStatus', { 
+                    const response = await axios.get(`${process.env.REACT_APP_API_URL}/user/likeStatus`, { 
                         params: { id },
                         headers: { Authorization: `Bearer ${token}` }
                     });
@@ -34,7 +34,7 @@ const LikeButton = () => {
         try {
             const token = Cookies.get('token');
             await axios.post(
-                `${process.env.SERVER_HOST}/user/toggleLike`,
+                `${process.env.REACT_APP_API_URL}/user/toggleLike`,
                 { id, liked: !liked },
                 { headers: { Authorization: `Bearer ${token}` } }
             );

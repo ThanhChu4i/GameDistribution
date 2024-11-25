@@ -47,7 +47,7 @@ const SignupPopup = ({ onRequestClose }) => {
         setIsLoading(true);
         // Gửi dữ liệu đến server
         axios
-          .post(`${process.env.SERVER_HOST}/api/signup`, values)
+          .post(`${process.env.REACT_APP_API_URL}/api/signup`, values)
           .then((res) => {
             console.log(res);
             setSubmitSuccess('Registration successful!');

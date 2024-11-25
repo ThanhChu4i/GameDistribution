@@ -16,7 +16,7 @@ function Search() {
             const fetchData = async () => {
                 setLoading(true);
                 try {
-                    const response = await axios.get(`${process.env.SERVER_HOST}/api/search-games`, {
+                    const response = await axios.get(`${process.env.REACT_APP_API_URL}/api/search-games`, {
                         params: { searchTerm }
                     });
                     setResults(response.data.games || []);
