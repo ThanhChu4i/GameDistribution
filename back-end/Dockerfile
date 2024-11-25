@@ -4,16 +4,14 @@ FROM node:18-alpine
 # Đặt thư mục làm việc
 WORKDIR /app
 
-# Sao chép package.json và package-lock.json
+# Copy file package.json và cài đặt dependencies
 COPY package.json package-lock.json ./
-
-# Cài đặt các phụ thuộc bằng npm
 RUN npm install
 
-# Sao chép mã nguồn vào container
+# Copy mã nguồn vào container
 COPY . .
 
-# Mở cổng 8081
+# Expose cổng mà server sẽ lắng nghe
 EXPOSE 8081
 
 # Khởi chạy server

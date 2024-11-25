@@ -1,27 +1,21 @@
-# Sử dụng Node.js làm base image
-FROM node:18-alpine
+# Sử dụng image node để build ứng dụng React
+FROM node:18-alpine AS build
 
-# Đặt thư mục làm việc
+# Thư mục làm việc bên trong container
 WORKDIR /app
 
-# Sao chép package.json và package-lock.json
+# Copy file package.json và cài đặt dependencies
 COPY package.json package-lock.json ./
-
-# Cài đặt các phụ thuộc bằng npm
 RUN npm install
 
-# Sao chép mã nguồn vào container
+# Copy mã nguồn vào container và build
 COPY . .
-
-# Build ứng dụng frontend
 RUN npm run build
 
-# Sử dụng nginx để phục vụ ứng dụng
-FROM nginx:stable-alpine
-COPY --from=0 /app/build /usr/share/nginx/html
+# Sử dụng Nginx để phục vụ các tệp tĩnh
+FROM nginx:1.23-alpine
+COPY --from=build /app/build /usr/share/nginx/html
 
-# Mở cổng 80
+# Expose cổng 80 để chạy ứng dụng
 EXPOSE 80
-
-# Khởi chạy nginx
 CMD ["nginx", "-g", "daemon off;"]

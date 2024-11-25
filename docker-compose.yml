@@ -5,15 +5,30 @@ services:
       context: ./front-end
       dockerfile: Dockerfile
     ports:
-      - "3000:80"  # Map port 3000 (host) to 80 (container)
+      - "3000:80" # Map cổng 3000 (host) sang 80 (container)
     depends_on:
-      - server  # Khởi động server trước
+      - server
 
   server:
     build:
       context: ./back-end
       dockerfile: Dockerfile
     ports:
-      - "8081:8081"  # Map port 5000 (host) to 5000 (container)
+      - "8081:8081" # Map cổng 8081
     environment:
       - NODE_ENV=production
+      - FRONTEND_URL=http://localhost:3000
+    volumes:
+      - ./back-end:/app # Để hỗ trợ live development
+    restart: always
+
+  # database:
+  #   image: mongo:5.0
+  #   container_name: mongo_container
+  #   ports:
+  #     - "27017:27017"
+  #   volumes:
+  #     - mongo_data:/data/db
+
+# volumes:
+#   mongo_data:
