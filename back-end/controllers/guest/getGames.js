@@ -2,21 +2,6 @@ const { Game } = require('../../collection/collection'); // Đường dẫn tớ
 const path = require('path');
 const fs = require('fs');
 
-const getGameImage = (req, res) => {
-    const imageName = req.params.imageName;
-    const imagePath = path.join(__dirname, '../../storage', imageName);
-
-    // Kiểm tra xem file có tồn tại không
-    fs.access(imagePath, fs.constants.F_OK, (err) => {
-        if (err) {
-            console.error('Image not found:', imageName);
-            return res.status(404).json({ error: 'Image not found' });
-        }
-        // Gửi file ảnh nếu tồn tại
-        res.sendFile(imagePath);
-    });
-};
-
 // Tìm kiếm game theo bộ lọc và populate thông tin user
 const getGames = async (req, res) => {
     try {
@@ -66,4 +51,4 @@ const getGames = async (req, res) => {
 };
 
 
-module.exports = { getGames, getGameImage};
+module.exports = { getGames};
