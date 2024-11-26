@@ -20,10 +20,10 @@ app.use(express.json());  // Middleware to parse JSON requests
 app.get('/admin', authenticateAdmin, (req, res) => {
     res.json({ message: 'Welcome to the admin panel!', user: req.user });
 });
-
-app.use('/storage', express.static('storage')); // Serve files from 'storage' directory
+ // Serve files from 'storage' directory
 app.use('/avatars', express.static(path.resolve(__dirname, 'public', 'avatars'))); // Serve avatar images from 'public/avatars'
-
+app.use('/images', express.static(path.resolve(__dirname, 'public', 'images'))); 
+app.use('/games', express.static(path.resolve(__dirname, 'public', 'games'))); 
 // All other routes
 app.use('/', allRoutes);
 

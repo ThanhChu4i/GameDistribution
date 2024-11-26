@@ -5,8 +5,8 @@ const fs = require('fs');
 const sharp = require('sharp');
 const unzipper = require('unzipper');
 
-const storagePathImages = path.resolve(__dirname, '../../../front-end/public/images');
-const storagePathZip = path.resolve(__dirname, '../../../front-end/public/games');
+const storagePathImages = path.resolve(__dirname, '../../public/images');
+const storagePathZip = path.resolve(__dirname, '../../public/games');
 
 
 
@@ -76,8 +76,8 @@ const uploadGameImage = async (req, res) => {
                 .pipe(unzipper.Extract({ path: gameFolder }))
                 .on('close', async () => {
                     // Đường dẫn công khai
-                    const publicImagePath = `/images/${imageFilename}`;
-                    const publicGamePath = `/games/${path.basename(gameFolder)}/${zipFile[0].originalname.replace('.zip', '')}/index.html`;
+                    const publicImagePath = `http://localhost:8081/images/${imageFilename}`;
+                    const publicGamePath = `http://localhost:8081/games/${path.basename(gameFolder)}/${zipFile[0].originalname.replace('.zip', '')}/index.html`;
         const id_user = req.user._id;
         console.log(id_user);
                     // Lưu vào cơ sở dữ liệu
