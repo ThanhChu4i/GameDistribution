@@ -20,7 +20,6 @@ export const AuthContextProvider = ({ children }) => {
   });
 
   const navigate = useNavigate();
-
   const login = (token, avatar, isAdmin, isDevPub) => {
     Cookies.set('token', token, { expires: 2 / 24 });
     Cookies.set('avatar', `${process.env.REACT_APP_API_URL}${avatar}`, { expires: 2 / 24 });
