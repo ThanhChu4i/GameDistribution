@@ -77,8 +77,8 @@ const uploadGameImage = async (req, res) => {
                 .on('close', async () => {
                     console.log('next');
                     // Public path URLs for image and game
-                    const publicImagePath = `http://localhost:8081/images/${imageFilename}`;
-                    const publicGamePath = `http://localhost:8081/games/${path.basename(gameFolder)}/${zipFile[0].originalname.replace('.zip', '')}/index.html`;
+                    const publicImagePath = `http://45.77.32.24:8081/images/${imageFilename}`;
+                    const publicGamePath = `http://45.77.32.24:8081/games/${path.basename(gameFolder)}/${zipFile[0].originalname.replace('.zip', '')}/index.html`;
                     const id_user = req.user._id;
                     console.log(`User ID: ${id_user}`);
 
