@@ -15,6 +15,7 @@ RUN npm run build
 # Sử dụng Nginx để phục vụ các tệp tĩnh
 FROM nginx:1.23-alpine
 COPY --from=build /app/build /usr/share/nginx/html
+COPY default.conf /etc/nginx/conf.d/
 
 # Expose cổng 80 để chạy ứng dụng
 EXPOSE 80
