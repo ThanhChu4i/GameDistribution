@@ -3,3 +3,6 @@ front-end/node_modules/
 front-end/public/games/
 front-end/public/images/
 front-end/public/avatars/
+back-end/public/games/
+back-end/public/images/
+back-end/public/avatars/

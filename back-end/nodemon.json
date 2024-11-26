@@ -1,0 +1,4 @@
+{
+    "watch": ["server", "collection", "config", "middleware", "routes", "controllers"],
+    "ignore": ["public"] 
+}
