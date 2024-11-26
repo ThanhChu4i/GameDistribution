@@ -76,7 +76,7 @@ const AvatarUpload = ({ currentAvatar }) => {
                 src={preview}
                 alt="Avatar-preview"
                 className="avatar-preview"
-                onError={(e) => (e.target.src = '/default-avatar.jpg')} // Fallback to default avatar
+                onError={(e) => (e.target.src = '../../Assets/avatar_default.webp')} // Fallback to default avatar
             />
             <input type="file" accept="image/*" onChange={handleAvatarChange} />
             <button onClick={handleSaveAvatar}>Upload Avatar</button>

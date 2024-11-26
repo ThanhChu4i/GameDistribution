@@ -4,14 +4,15 @@ const fs = require('fs');
 const sharp = require('sharp');
 const { User } = require('../../collection/collection');
 
-const storagePathAvatars = path.resolve(__dirname, '../../../front-end/public/avatars');
+// Đảm bảo đường dẫn tới thư mục avatars trong volume shared
+const storagePathAvatars = path.resolve('/app/shared/avatars'); // Đúng vị trí thư mục trong container
 
-// Create directory if it doesn't exist
+// Tạo thư mục nếu chưa tồn tại
 if (!fs.existsSync(storagePathAvatars)) {
     fs.mkdirSync(storagePathAvatars, { recursive: true });
 }
 
-// File type validation for avatar uploads
+// Kiểm tra loại tệp tải lên cho ảnh đại diện
 const avatarFileFilter = (req, file, cb) => {
     const fileTypes = /jpeg|jpg|png/;
     const extname = fileTypes.test(path.extname(file.originalname).toLowerCase());
@@ -24,15 +25,15 @@ const avatarFileFilter = (req, file, cb) => {
     }
 };
 
-// Configure multer with file size limit and memory storage
+// Cấu hình multer với bộ nhớ lưu trữ và giới hạn kích thước tệp
 const avatarStorage = multer.memoryStorage();
 const uploadAvatar = multer({
     storage: avatarStorage,
     fileFilter: avatarFileFilter,
-    limits: { fileSize: 5 * 1024 * 1024 } // 5MB limit
+    limits: { fileSize: 5 * 1024 * 1024 } // Giới hạn 5MB
 }).single('avatar');
 
-// Avatar upload handler function
+// Hàm xử lý tải lên avatar
 const uploadUserAvatar = async (req, res) => {
     uploadAvatar(req, res, async (err) => {
         if (err instanceof multer.MulterError) {
@@ -46,23 +47,23 @@ const uploadUserAvatar = async (req, res) => {
         }
 
         try {
-            // Compress and resize avatar
+            // Nén và thay đổi kích thước ảnh
             const compressedAvatarBuffer = await sharp(req.file.buffer)
                 .resize(512, 512)
                 .toFormat('jpeg', { quality: 80 })
                 .toBuffer();
 
-            // Generate avatar filename
+            // Tạo tên tệp avatar
             const avatarFilename = `${req.user._id}_${Date.now()}.jpeg`;
             const avatarPath = path.join(storagePathAvatars, avatarFilename);
 
-            // Save compressed avatar to file system
+            // Lưu avatar đã nén vào hệ thống tệp
             fs.writeFileSync(avatarPath, compressedAvatarBuffer);
 
-            // Define public path for frontend access
+            // Định nghĩa đường dẫn công khai để client có thể truy cập
             const publicAvatarPath = `/avatars/${avatarFilename}`;
 
-            // Update user record with new avatar path
+            // Cập nhật đường dẫn avatar trong bản ghi người dùng
             const user = await User.findByIdAndUpdate(
                 req.user._id,
                 { avatarPath: publicAvatarPath },

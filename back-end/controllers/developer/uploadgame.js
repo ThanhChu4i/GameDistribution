@@ -5,8 +5,8 @@ const fs = require('fs');
 const sharp = require('sharp');
 const unzipper = require('unzipper');
 
-const storagePathImages = path.resolve(__dirname, '../../../front-end/public/images');
-const storagePathZip = path.resolve(__dirname, '../../../front-end/public/games');
+const storagePathImages = path.resolve(__dirname, '../../publics/images');
+const storagePathZip = path.resolve(__dirname, '../../publics/games');
 
 
 
