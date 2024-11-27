@@ -14,9 +14,14 @@ COPY . .
 RUN npm run build
 
 # Sử dụng Nginx để phục vụ các tệp tĩnh
-FROM nginx:1.23-alpine
+FROM nginx:alpine
+
+# Sao chép file build của React vào thư mục phục vụ của Nginx
 COPY --from=build /app/build /usr/share/nginx/html
-COPY default.conf /etc/nginx/conf.d/project4.conf
+
+
+# Copy file cấu hình nginx tùy chỉnh (nếu có)
+COPY nginx.conf /etc/nginx/conf.d/default.conf
 # Expose cổng 80 để chạy ứng dụng
 EXPOSE 80
 CMD ["nginx", "-g", "daemon off;"]
