@@ -40,7 +40,7 @@ const getGames = async (req, res) => {
         const formattedGames = games.map(game => ({
             ...game._doc, // Copy all fields of the game
             company: game.id_user ? game.id_user.company : null, // Get company from user
-            imageUrl: game.imagePath ? `http://localhost:8081/api/games/image/${path.basename(game.imagePath)}` : null
+            imageUrl: game.imagePath ? `http://${process.env.REACT_APP_API_URL}/api/games/image/${path.basename(game.imagePath)}` : null
         }));
 
         return res.status(200).json(formattedGames);

@@ -17,7 +17,7 @@ services:
       - "8081:8081" # Map cổng 8081
     environment:
       - NODE_ENV=production
-      - FRONTEND_URL=http://localhost:3000
+      - FRONTEND_URL=http://45.77.32.24:3000
     volumes:
       - ./back-end:/app # Để hỗ trợ live development
     restart: always  

@@ -109,8 +109,8 @@ const GameDetails = () => {
                 <div className="embed-section">
                     <h3>Embed</h3>
                     <div className='embed-sec'>
-                    <textarea readOnly value={`   http://localhost:3000/games/${id}`} />
-                    <button onClick={() => handleCopyEmbed(`http://localhost:3000/games/${id}`)}><strong>Copy</strong></button>
+                    <textarea readOnly value={`${process.env.CLIENT_URL}/games/${id}`} />
+                    <button onClick={() => handleCopyEmbed(`${process.env.CLIENT_URL}/games/${id}`)}><strong>Copy</strong></button>
                     </div>  
                 </div>
                 <div className="embed-section">

@@ -16,7 +16,7 @@ const DeleteUser = ({ userId, onDelete }) => {
         if (!token) {
           throw new Error('No token found');
         }
-        const response = await axios.get('http://localhost:8081/user', {
+        const response = await axios.get('http://${process.env.REACT_APP_API_URL}/user', {
           headers: {
             Authorization: `Bearer ${token}`,
           },

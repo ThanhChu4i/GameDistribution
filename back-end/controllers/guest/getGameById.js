@@ -17,7 +17,7 @@ const getGameById = async (req, res) => {
         const formattedGame = {
             ...game._doc,
             company: game.id_user ? game.id_user.company : null,
-            imageUrl: game.imagePath ? `http://localhost:8081/api/games/image/${path.basename(game.imagePath)}` : null
+            imageUrl: game.imagePath ? `http://${process.env.REACT_APP_API_URL}/api/games/image/${path.basename(game.imagePath)}` : null
         };
 
         // Find similar games based on genres, excluding the current game
@@ -27,7 +27,7 @@ const getGameById = async (req, res) => {
         const formattedSimilarGames = similarGames.map(similarGame => ({
             ...similarGame._doc,
             company: similarGame.id_user ? similarGame.id_user.company : null,
-            imageUrl: similarGame.imagePath ? `http://localhost:8081/api/games/image/${path.basename(similarGame.imagePath)}` : null
+            imageUrl: similarGame.imagePath ? `http://${process.env.REACT_APP_API_URL}/api/games/image/${path.basename(similarGame.imagePath)}` : null
         }));
 
         // Send both game and formatted similar games in response
