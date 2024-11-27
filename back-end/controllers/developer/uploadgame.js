@@ -77,8 +77,8 @@ const uploadGameImage = async (req, res) => {
                 .on('close', async () => {
                     console.log('next');
                     // Public path URLs for image and game
-                    const publicImagePath = `http://${process.env.REACT_APP_API_URL}/images/${imageFilename}`;
-                    const publicGamePath = `http://${process.env.REACT_APP_API_URL}/games/${path.basename(gameFolder)}/${zipFile[0].originalname.replace('.zip', '')}/index.html`;
+                    const publicImagePath = `${process.env.REACT_APP_API_URL}/images/${imageFilename}`;
+                    const publicGamePath = `${process.env.REACT_APP_API_URL}/games/${path.basename(gameFolder)}/${zipFile[0].originalname.replace('.zip', '')}/index.html`;
                     const id_user = req.user._id;
                     console.log(`User ID: ${id_user}`);
 
