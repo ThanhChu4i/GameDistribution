@@ -2,3 +2,5 @@ db: mysql root: thanh1234
 aws 
 Thanhct2108
 chutienthanh314@gmail.com
+docker save -o ./server.tar b29a27657afb
+scp ./server.tar thanhct@45.77.32.24:/var/www/project4/GameDistribution
