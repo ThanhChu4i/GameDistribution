@@ -6,6 +6,7 @@ WORKDIR /app
 
 # Copy file package.json và cài đặt dependencies
 COPY package.json package-lock.json ./
+
 RUN npm install
 
 # Copy mã nguồn vào container và build
@@ -15,7 +16,7 @@ RUN npm run build
 # Sử dụng Nginx để phục vụ các tệp tĩnh
 FROM nginx:1.23-alpine
 COPY --from=build /app/build /usr/share/nginx/html
-
+COPY default.conf /etc/nginx/conf.d/project4.conf
 # Expose cổng 80 để chạy ứng dụng
 EXPOSE 80
 CMD ["nginx", "-g", "daemon off;"]
