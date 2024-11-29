@@ -11,8 +11,10 @@ const allRoutes = require('./routes/allRoutes.js');
 
 // Middleware
 app.use(cors({
-    origin: [`http://fe4.backendintern.online`, `http://45.77.32.24:3000`,`https://fe4.backendintern.online`, `https://45.77.32.24:3000`], // Frontend URL
-    credentials: true // Enable sending cookies
+    origin: [`https://fe4.backendintern.online`, `https://45.77.32.24:3000`], // Frontend URL
+    credentials: true, // Enable sending cookies,
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization']
 }));
 app.use(express.json());  // Middleware to parse JSON requests
 
