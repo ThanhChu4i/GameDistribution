@@ -14,7 +14,6 @@ const getGamesWithUserInfo = async (req, res) => {
         const formattedGames = games.map(game => ({
             ...game._doc, // Sao chép tất cả các trường của game
             company: game.id_user ? game.id_user.company : null, // Lấy company từ user
-            imageUrl: game.imagePath ? `http://${process.env.REACT_APP_API_URL}/api/games/image/${path.basename(game.imagePath)}` : null
         }));
         return res.status(200).json(formattedGames);
     } catch (err) {

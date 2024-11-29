@@ -18,7 +18,7 @@ function AdminPage() {
     const fetchAdminData = async () => {
       try {
         const token = Cookies.get('token'); // Lấy token từ cookie
-        await axios.get(`http://${process.env.REACT_APP_API_URL}/admin`, {
+        await axios.get(`${process.env.REACT_APP_API_URL}/admin`, {
           headers: {
             Authorization: `Bearer ${token}` // Đính kèm token vào header
           }
