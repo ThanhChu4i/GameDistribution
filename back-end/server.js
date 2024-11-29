@@ -11,7 +11,7 @@ const allRoutes = require('./routes/allRoutes.js');
 
 // Middleware
 app.use(cors({
-    origin: [`https://fe4.backendintern.online`, `https://45.77.32.24:3000`,`http://fe4.backendintern.online`, `http://45.77.32.24:3000`], // Frontend URL
+    origin: [`https://fe4.backendintern.online`, `https://45.77.32.24:3000`,`http://fe4.backendintern.online`, `http://45.77.32.24:3000`,`http://locahost:3000`], // Frontend URL
     credentials: true, // Enable sending cookies,
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
     allowedHeaders: ['Content-Type', 'Authorization']
