@@ -40,7 +40,7 @@
     "yup": "^1.4.0"
   },
   "scripts": {
-    "start": "PORT=3000 react-scripts start",
+   "start": "cross-env PORT=3000 react-scripts start",
     "test": "react-scripts test",
     "build": "react-scripts build && javascript-obfuscator build/static/js --output build/static/js",
     "eject": "react-scripts eject"
