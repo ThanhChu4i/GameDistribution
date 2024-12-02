@@ -53,7 +53,7 @@ const AdminSettingGame = () => {
 
   const startEditingGame = (game) => {
     setEditingGameId(game._id);
-    setUpdatedData({ game_name: game.game_name, game_description: game.game_description, instruction: game.instruction, isActive: game.isActive });
+    setUpdatedData({ game_name: game.game_name, game_description: game.game_description,game_imagePath: game.imagePath, game_Path: game.gamePath, instruction: game.instruction, isActive: game.isActive });
   };
 
   const handleInputChange = (e) => {
@@ -165,6 +165,22 @@ const AdminSettingGame = () => {
               type="text"
               name="instruction"
               value={updatedData.instruction}
+              onChange={handleInputChange}
+              placeholder="Instruction"
+            />
+            <label>Image Path</label>
+            <input
+              type="text"
+              name="imagePath"
+              value={updatedData.imagePath}
+              onChange={handleInputChange}
+              placeholder="Instruction"
+            />
+            <label>Instruction</label>
+            <input
+              type="text"
+              name="instruction"
+              value={updatedData.gamePath}
               onChange={handleInputChange}
               placeholder="Instruction"
             />
