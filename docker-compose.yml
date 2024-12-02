@@ -1,18 +1,18 @@
 version: "3.8"
 services:
-  client:
+  frontend-app:  # Đổi tên từ 'client' thành 'frontend-app'
     build:
       context: ./front-end
       dockerfile: Dockerfile
     ports:
       - "3000:80"  # Map cổng 3000 của host sang cổng 80 của container
     depends_on:
-      - server
+      - backend-app  # Cập nhật tên dịch vụ phụ thuộc
     volumes:
       - ./front-end/publics:/app/publics # Gắn thư mục public riêng cho frontend
       - shared:/app/shared # Gắn volume chung vào frontend
 
-  server:
+  backend-app:  # Đổi tên từ 'server' thành 'backend-app'
     build:
       context: ./back-end
       dockerfile: Dockerfile
@@ -27,4 +27,4 @@ services:
     restart: always
 
 volumes:
-  shared:  # Đảm bảo t
+  shared:  # Volume dùng chung giữa frontend và backend
