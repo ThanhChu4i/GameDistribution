@@ -1,6 +1,6 @@
 version: "3.8"
 services:
-  client:
+  Thanh's_client:
     build:
       context: ./front-end
       dockerfile: Dockerfile
@@ -12,7 +12,7 @@ services:
       - ./front-end/publics:/app/publics # Gắn thư mục public riêng cho frontend
       - shared:/app/shared # Gắn volume chung vào frontend
 
-  server:
+  Thanh's_server:
     build:
       context: ./back-end
       dockerfile: Dockerfile
