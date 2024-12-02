@@ -7,46 +7,53 @@
     justify-content: center;
     padding-bottom: 50px;
 }
+
 .tabandprogess {
-margin-right: 70px;    
-justify-content: center;
-align-items: center;
+    margin-right: 20px; /* Giảm khoảng cách khi ở màn hình nhỏ */
+    justify-content: center;
+    align-items: center;
 }
+
 .butt {
     background-color: white;
     border-radius: 20px;
     border: 5px solid white;
+    display: flex;
+    flex-wrap: wrap; /* Hỗ trợ responsive */
+    gap: 10px; /* Khoảng cách giữa các nút */
+    justify-content: center; /* Canh giữa các nút */
 }
+
 .tab-header {
     display: flex;
-    margin-bottom: 0px;
+    flex-wrap: wrap; /* Đảm bảo không bị tràn khi màn hình nhỏ */
+    margin-bottom: 20px;
     justify-content: space-between;
+    align-items: center; /* Canh giữa dọc */
+    gap: 10px; /* Khoảng cách giữa các phần tử */
 }
+
 .nav-links {
-    padding-left: 20px;
+    padding-left: 10px; /* Điều chỉnh khi thu nhỏ */
 }
-.nav-links  a { 
+
+.nav-links a {
     text-decoration: none;
 }
-.tab-buttone {
-    padding: 10px 20px;
-    margin: 0px;
+
+.tab-buttone,
+.tab-buttonn {
+    padding: 10px 15px;
+    margin: 5px;
     border: none;
     background-color: #ffffff;
     color: #000000;
     cursor: pointer;
     transition: background-color 0.3s ease;
     border-radius: 20px;
+    font-size: 14px;
 }
-.tab-buttonn{
-    padding: 10px 20px;
-    margin: 0px;
-    border: none;
-    background-color: #007bff;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-    border-radius: 20px;
-}
+
 .tab-buttone.active {
     background-color: #007bff;
     color: white;
@@ -57,71 +64,95 @@ align-items: center;
 }
 
 .tab-content {
-    width: 1800px;
+    width: 100%;
+    max-width: 1200px;
     justify-content: center;
     font-size: 18px;
     background-color: #f0f0f0;
+    padding: 20px;
 }
-/* Thêm vào TabComponent.css */
 
 .progress-bar-container {
-    width: 237px;
-    background-color: #ffffff; /* Màu nền của thanh tiến trình */
-    height: 2px; /* Độ cao của thanh */
-    float: right;
-    margin-right: 70px;
+    width: 100%;
+    max-width: 200px; /* Giới hạn chiều rộng */
+    background-color: #ffffff;
+    height: 4px; /* Tăng chiều cao để dễ thấy hơn */
+    margin: auto;
 }
 
 .progress-bar {
     height: 100%;
-    background-color: #007bff; /* Màu của thanh tiến trình */
-    transition: width 1s linear; /* Hiệu ứng chuyển động mượt mà */
+    background-color: #007bff;
+    transition: width 1s linear;
 }
+
 .game-listtd {
-    width: 1800px;
-    display: flex;
-    justify-content: center;
-  }
-  .games-gridd {
-    display: flex;
     width: 100%;
+    display: flex;
     justify-content: center;
-    flex-wrap: wrap;
-    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); /* Tạo lưới cho các game */
-    gap: 20px; /* Khoảng cách giữa các game */
-    flex-grow: 1; /* Lưới game sẽ mở rộng ra khi có thêm không gian */
-    transition: 0.3s;
-  }
-  .game-cardd {
+}
+
+.games-gridd {
+    display: grid; /* Thay đổi thành lưới để hỗ trợ responsive tốt hơn */
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); /* Tự động thay đổi số cột */
+    gap: 20px;
+    justify-content: center;
+}
+
+.game-cardd {
     background-color: #f0f0f0;
     padding: 20px;
     border-radius: 20px;
     text-align: center;
-    width: 400px;
-    height: 300px;
-    box-shadow: 0 4px 8px rgba(0, 123, 255, 0.3); /* Viền sáng mặc định */
-    transition: box-shadow 0.3s ease; /* Hiệu ứng mượt khi hover */
+    width: 100%; /* Tự động co giãn */
+    max-width: 400px; /* Giới hạn chiều rộng tối đa */
+    height: auto;
+    box-shadow: 0 4px 8px rgba(0, 123, 255, 0.3);
+    transition: box-shadow 0.3s ease;
 }
 
-.game-cardd:hover {
-    box-shadow: 0 6px 12px rgba(0, 123, 255, 0.6); /* Viền sáng hơn khi hover */
-}
-.game-cardd a {
-  text-decoration: none;
-  color: inherit;
-}
-  .game-cardd h4 {
-    margin: 10px;
-    font-size: 1.2em;
-  }
-  
-  .game-cardd p {
-    color: gray;
-  }
-  
-  .game-cardd img {
+.game-cardd img {
     width: 100%;
-    height: 75%;
+    height: auto;
     border-radius: 8px;
-  }
-  
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .tab-header {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .games-gridd {
+        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); /* Giảm kích thước thẻ */
+    }
+
+    .game-cardd {
+        max-width: 300px; /* Điều chỉnh kích thước tối đa */
+    }
+}
+
+@media (max-width: 480px) {
+    .tab-container {
+        padding: 10px;
+    }
+
+    .tab-buttone,
+    .tab-buttonn {
+        font-size: 12px; /* Giảm kích thước chữ */
+        padding: 8px 10px;
+    }
+
+    .games-gridd {
+        grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); /* Cột nhỏ hơn cho di động */
+    }
+
+    .game-cardd {
+        max-width: 250px;
+    }
+
+    .progress-bar-container {
+        max-width: 150px;
+    }
+}

@@ -1,179 +1,144 @@
-/* Header.css */
-
+/* Header container */
 .header {
-    display: flex; /* Sử dụng flexbox để bố trí các phần tử */
-    justify-content: space-between;
-    align-items: center; /* Căn giữa theo chiều dọc */
-    background-color: #fefffe;
-    padding: 10px 20px; /* Thêm padding cho header */
-    color: rgb(0, 0, 0); /* Màu chữ trắng */
-    height: 75px;
-
-}
-
-.logo {
-    font-size: 24px; /* Kích thước logo */
-    font-weight: bold; /* Chữ đậm */
-}
-.Linksd {
-  justify-content: center;
+  display: flex;
+  justify-content: space-between;
   align-items: center;
+  padding: 10px 20px;
+  background-color: #f8f9fa;
+  flex-wrap: wrap;
 }
+
+/* Logo */
+.logo img {
+  height: 50px;
+  transition: height 0.3s ease;
+}
+
+@media screen and (max-width: 768px) {
+  .logo img {
+    height: 40px;
+  }
+}
+
+/* Navigation links */
 .nav-linkss {
-  justify-content: center;
+  display: flex;
+  gap: 20px;
   align-items: center;
-    margin: 10px;
-    display: flex; /* Sử dụng flexbox cho nav */
-    gap: 20px; /* Khoảng cách giữa các liên kết */
-    color: rgb(0, 0, 0); 
 }
 
 .nav-linkss a {
-    color: rgb(0, 0, 0); /* Màu chữ cho các liên kết */
-    text-decoration: none; /* Bỏ gạch chân */
-    transition: color 0.3s; /* Hiệu ứng chuyển màu */
+  text-decoration: none;
+  color: #333;
+  font-size: 16px;
+  transition: color 0.3s ease;
 }
 
 .nav-linkss a:hover {
-    color: #001aff;; /* Màu khi hover */
+  color: #007bff;
 }
 
-.header-actions {
-    display: flex;
-    justify-content:flex-end;
-    gap: 10px; /* Khoảng cách giữa các nút */
-    height: 50px;
-}
-.search-header {
-    display: flex;
-    justify-content: flex-end;
-    margin-right: 10px;
-}
-
-.login-button {
-    background-color: #3b21cc;; /* Màu nền cho nút */
-    color: white;
-    border: none;
-    font-size: medium;
-    border-radius: 15px;
-    height: 50px;
-    cursor: pointer;
-    transition: background-color 0.3s; /* Hiệu ứng chuyển màu nền */
-}
-
-.search-button:hover {
-    background-color: #f0f0f0; /* Màu khi hover */
-}
-
-.search-container {
-    display: flex;
-    position: relative;
-    justify-content: flex-end;
-    margin-top: 5px; /* Tạo khoảng cách giữa nav và search */
-    height: 40px;
-    background-color: white;
-}
-
-.search-input {
-    padding: 10px;
-    border: 1 px;
-}
-
-.user-avatar {
-    height: 50px;
-    width: 50px;
-    border-radius: 50%;
-    cursor: pointer;
-    border: 2px solid #001aff;
-  }
-  
-  .user-dropdown {
-    position: absolute;
-    right: 0;
-    top: 65px;
-    background-color: white;
-    border: 1px solid #ddd;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    padding: 10px;
-    width: 150px;
-    z-index: 100;
-  }
-  
-  .user-dropdown a, .user-dropdown button {
-    display: block;
+@media screen and (max-width: 768px) {
+  .nav-linkss {
+    flex-direction: column;
+    gap: 10px;
     width: 100%;
-    padding: 8px;
-    text-align: left;
-    background: none;
-    border: none;
-    cursor: pointer;
   }
-  
-  .user-dropdown a:hover, .user-dropdown button:hover {
-    background-color: #f5f5f5;
+}
+
+/* Header actions (Search, User section) */
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+@media screen and (max-width: 768px) {
+  .header-actions {
+    justify-content: space-between;
+    width: 100%;
   }
-  /* Dropdown container */
+}
+
+/* User Avatar */
+.user-avatar {
+  height: 40px;
+  width: 40px;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.user-avatar:hover {
+  transform: scale(1.1);
+}
+
+@media screen and (max-width: 768px) {
+  .user-avatar {
+    height: 35px;
+    width: 35px;
+  }
+}
+
+/* Dropdown menu */
+.user-dropdown {
+  position: absolute;
+  right: 10px;
+  top: 60px;
+  background-color: #fff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.user-dropdown button {
+  background-color: transparent;
+  border: none;
+  text-align: left;
+  padding: 5px 10px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.user-dropdown button:hover {
+  background-color: #f1f1f1;
+}
+
+/* Dropdown in small screens */
+@media screen and (max-width: 768px) {
+  .user-dropdown {
+    position: static;
+    width: 100%;
+  }
+}
+
+/* Dropdown for business menu */
 .dropdownn {
-    position: relative;
-    display: inline-block;
-  }
-  
-  /* Nút custom cho For Business */
-  .custom-buttonn {
-    background-color: #ffffff;
-    color: rgb(0, 0, 0);
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 16px;
-  }
-  
-  /* Nội dung dropdown, mặc định sẽ ẩn */
+  position: relative;
+}
+
+.dropdown-contentn {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background-color: #fff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
+  padding: 10px;
+  display: none;
+  flex-direction: column;
+}
+
+.dropdownn:hover .dropdown-contentn {
+  display: flex;
+}
+
+@media screen and (max-width: 768px) {
   .dropdown-contentn {
-    display: none;
-    position: absolute;
-    background-color: white;
-    min-width: 500px;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.1);
-    z-index: 1;
-    top: 100%; /* Hiển thị phía dưới button */
-    left: 0;
-    right: 0;
+    position: static;
+    width: 100%;
   }
-  
-  /* Link trong dropdown */
-  .dropdown-contentn a {
-    color: black;
-    padding: 12px 16px;
-    text-decoration: none;
-    display: block;
-  }
-  
-  /* Hiển thị dropdown khi hover */
-  .dropdownn:hover .dropdown-contentn {
-    display: flex;
-  }
-  
-  /* Thay đổi màu nền khi hover vào link trong dropdown */
-  .dropdown-contentn a:hover {
-    background-color: #ffffff;
-  }
-    
-  .btn {
-    background-color: white;
-    border: none;
-    color: blue;
-    font-size: large;
-    transition: background-color 0.3s;
-  }
-  .btn p {
-    color: #000;
-    font-size: medium;
-  }
-  .btnbtn {
-    font-size: medium ;
-    color: #001aff;
-  }
-  .btn :hover {
-    background-color: rgba(0, 0, 0, 0.1);;
-  }
+}
