@@ -1,6 +1,6 @@
 import React, { useContext, useState } from 'react';
 import './Header.css';  
-import { Link } from "react-router-dom";
+import { Link } from 'react-router-dom';
 import logo from '../Assets/Logo_XGame-011.png';
 import defaultAvatar from '../Assets/avatar_default.webp'; // Default avatar image
 import { AuthContext } from '../AuthContext/AuthContext'; // AuthContext
@@ -23,14 +23,14 @@ const Header = ({ openLoginModal }) => {
     <header className="header">
       <div className="logo">
         <Link to="/">
-          <img src={logo} alt="Logo" style={{ height: '50px' }} />
+          <img src={logo} alt="Logo" />
         </Link>
       </div>
       <div className="Linksd">
         <nav className="nav-linkss">
           <Link to="/Games">Games</Link>
           <div className="dropdownn">
-            <Link>For Business</Link>
+            <span className="menu-link">For Business</span>
             <div className="dropdown-contentn">
               <div className="for-Publishers">
                 <button className="btn">
@@ -76,11 +76,10 @@ const Header = ({ openLoginModal }) => {
       </div>
       <div className="header-actions">
         <Search />
-
         {isLoggedIn ? (
           <div className="user-section">
             <img
-              src={ avatarUser || defaultAvatar} // Use user avatar or default
+              src={avatarUser || defaultAvatar} // Use user avatar or default
               alt="User Avatar"
               className="user-avatar"
               onClick={toggleDropdown}

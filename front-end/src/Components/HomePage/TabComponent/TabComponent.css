@@ -1,4 +1,4 @@
-.tab-container {
+/* .tab-container {
     padding-top: 50px;
     width: 100%;
     margin: 20px auto;
@@ -6,7 +6,7 @@
     display: grid;
     justify-content: center;
     padding-bottom: 50px;
-}
+} */
 
 .tabandprogess {
     margin-right: 20px; /* Giảm khoảng cách khi ở màn hình nhỏ */
@@ -65,7 +65,7 @@
 
 .tab-content {
     width: 100%;
-    max-width: 1200px;
+    max-width: 1920px;
     justify-content: center;
     font-size: 18px;
     background-color: #f0f0f0;
@@ -86,73 +86,64 @@
     transition: width 1s linear;
 }
 
-.game-listtd {
+.tab-container {
+    padding-top: 50px;
     width: 100%;
+    max-width: 1920px;
+    margin: 0; /* Loại bỏ khoảng cách */
+    background-color: #f0f0f0;
     display: flex;
+    flex-direction: column;
+    align-items: stretch; /* Mở rộng toàn bộ chiều rộng */
+    padding-bottom: 50px;
     justify-content: center;
 }
 
+.tab-header {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0 10px; /* Giảm khoảng cách bên */
+    gap: 10px;
+}
+
 .games-gridd {
-    display: grid; /* Thay đổi thành lưới để hỗ trợ responsive tốt hơn */
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); /* Tự động thay đổi số cột */
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); /* Tự động điều chỉnh cột */
     gap: 20px;
+    width: 100%; /* Chiếm toàn bộ chiều rộng */
+    padding: 0 10px; /* Giữ khoảng cách nhỏ ở hai bên */
     justify-content: center;
+    align-items: center;
 }
 
 .game-cardd {
     background-color: #f0f0f0;
-    padding: 20px;
-    border-radius: 20px;
+    padding: 15px;
+    border-radius: 10px;
     text-align: center;
-    width: 100%; /* Tự động co giãn */
-    max-width: 400px; /* Giới hạn chiều rộng tối đa */
-    height: auto;
-    box-shadow: 0 4px 8px rgba(0, 123, 255, 0.3);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     transition: box-shadow 0.3s ease;
+    width: 100%; /* Đảm bảo thẻ co giãn linh hoạt */
+    justify-content: center ;
 }
 
 .game-cardd img {
     width: 100%;
     height: auto;
-    border-radius: 8px;
+    border-radius: 5px;
 }
 
 /* Responsive adjustments */
 @media (max-width: 768px) {
-    .tab-header {
-        flex-direction: column;
-        align-items: center;
-    }
-
     .games-gridd {
-        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); /* Giảm kích thước thẻ */
-    }
-
-    .game-cardd {
-        max-width: 300px; /* Điều chỉnh kích thước tối đa */
+        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
     }
 }
 
 @media (max-width: 480px) {
-    .tab-container {
-        padding: 10px;
-    }
-
-    .tab-buttone,
-    .tab-buttonn {
-        font-size: 12px; /* Giảm kích thước chữ */
-        padding: 8px 10px;
-    }
-
     .games-gridd {
-        grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); /* Cột nhỏ hơn cho di động */
-    }
-
-    .game-cardd {
-        max-width: 250px;
-    }
-
-    .progress-bar-container {
-        max-width: 150px;
+        grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
     }
 }

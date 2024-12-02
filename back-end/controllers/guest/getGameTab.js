@@ -4,7 +4,7 @@ const path = require('path');
 // Hàm lấy dữ liệu game theo tab, chia đều các game vào các tab
 const getGamesByTab = async (tabNumber) => {
     const totalTabs = 5; // Giả sử có tổng cộng 5 tab
-    const gamesPerPage = 8;
+    const gamesPerPage = 12;
     const offset = (tabNumber - 1) * gamesPerPage;
 
     if (tabNumber < 1 || tabNumber > totalTabs) {
