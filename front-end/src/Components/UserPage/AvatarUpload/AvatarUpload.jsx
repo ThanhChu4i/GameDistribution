@@ -54,7 +54,7 @@ const AvatarUpload = ({ currentAvatar }) => {
             );
 
             if (response.status === 200) {
-                const avatarPath = `${process.env.REACT_APP_API_URL}${response.data.avatarPath}`; // Thêm URL đầy đủ
+                const avatarPath = `${response.data.avatarPath}`; // Thêm URL đầy đủ
                 onAvatarChange(avatarPath); // Cập nhật avatar trong context
                 setPreview(avatarPath);
                 setError(null);

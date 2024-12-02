@@ -60,7 +60,7 @@ const uploadUserAvatar = async (req, res) => {
             fs.writeFileSync(avatarPath, compressedAvatarBuffer);
 
             // Tạo đường dẫn public cho frontend truy cập
-            const publicAvatarPath = `/avatars/${avatarFilename}`;
+            const publicAvatarPath = `${process.env.REACT_APP_API_URL}/avatars/${avatarFilename}`;
 
             // Cập nhật đường dẫn avatar trong database
             const user = await User.findByIdAndUpdate(
