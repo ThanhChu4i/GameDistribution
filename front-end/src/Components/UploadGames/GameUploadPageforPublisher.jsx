@@ -1,14 +1,14 @@
-import GameUpload from "./GameUpload/GameUpload";
 import Yourgames from "./Yourgame";
 import React from 'react';
 import './GameUploadPage.css';
-const GameUploadPage = () => {
+import GameUploadforPublisher from "./GameUpload/GameUploadforPublisher";
+const GameUploadPageforPublisher = () => {
     return(
        <div className = 'GameUploadPage'>
-        <GameUpload/>
+        <GameUploadforPublisher/>
         <Yourgames/>
        </div>
     )
     
 }
-export default GameUploadPage;
+export default GameUploadPageforPublisher;

@@ -3,6 +3,10 @@ import axios from "axios";
 import Cookies from 'js-cookie';
 import { useNavigate } from 'react-router-dom';
 import { Link } from "react-router-dom";
+import Tabs from '@mui/material/Tabs';
+import Tab from '@mui/material/Tab';
+import Box from '@mui/material/Box';
+import PropTypes from 'prop-types'
 import './AdminsettingGame.css';
 
 const AdminSettingGame = () => {
@@ -15,8 +19,12 @@ const AdminSettingGame = () => {
   const [showDeleteModal, setShowDeleteModal] = useState(false); // New state for delete modal
   const [deleteGameId, setDeleteGameId] = useState(null);
   const [updatedData, setUpdatedData] = useState({ game_name: '', game_description: '', instruction: '', isActive: false });
+  const [value, setValue] = React.useState(0)
   const navigate = useNavigate();
 
+  const handleChange = (event, newValue) => {
+    setValue(newValue);
+  };
   useEffect(() => {
     const fetchGameData = async () => {
       try {
@@ -35,14 +43,14 @@ const AdminSettingGame = () => {
         setError('Failed to fetch user data');
         if (err.response && (err.response.status === 401 || err.response.status === 403)) {
           navigate('/404/Notfound');
-      }
+        }
       } finally {
         setLoading(false);
       }
     };
     fetchGameData();
   }, [navigate]);
-  
+
   useEffect(() => {
     const active = games.filter(game => game.isActive);
     const locked = games.filter(game => !game.isActive);
@@ -106,36 +114,68 @@ const AdminSettingGame = () => {
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p>{error}</p>;
+  function CustomTabPanel(props) {
+    const { children, value, index, ...other } = props;
 
+    return (
+      <div
+        role="tabpanel"
+        hidden={value !== index}
+        id={`simple-tabpanel-${index}`}
+        aria-labelledby={`simple-tab-${index}`}
+        {...other}
+      >
+        {value === index && <Box sx={{ p: 3 }}>{children}</Box>}
+      </div>
+    );
+  }
+
+  CustomTabPanel.propTypes = {
+    children: PropTypes.node,
+    index: PropTypes.number.isRequired,
+    value: PropTypes.number.isRequired,
+  };
+
+  function a11yProps(index) {
+    return {
+      id: `simple-tab-${index}`,
+      'aria-controls': `simple-tabpanel-${index}`,
+    };
+  }
   return (
     <div className="admin-settings-container">
-      <button className="backtoadmin"><Link to = "/Admin">Back</Link></button>
-      <h1>Admin Settings Game</h1>
       {games.length > 0 ? (
-        <div className= "full-listtf">
-          <h2>Game Active</h2>
-          <div className="game-listtf">
-            {activeGames.map((game) => (
-              <div key={game._id} className="game-cardtf">
-                <p>{game.game_name}</p>
-                <img className="game-avatar" src={game.imagePath} alt="Game" />
-                <button className="edit-button" onClick={() => startEditingGame(game)}>Edit</button>
-                <button className="delete-button" onClick={() => confirmDeleteGame(game._id)}>Delete</button>
-              </div>
-            ))}
-          </div>
-          <h2>Game Locked</h2>
-          <div className="game-listtf">
-            {lockedGames.map((game) => (
-              <div key={game._id} className="game-cardtf">
-                <p>{game.game_name}</p>
-                <img className="game-avatar" src={game.imagePath} alt="Game" />
-                <button className="edit-button" onClick={() => startEditingGame(game)}>Edit</button>
-                <button className="delete-button" onClick={() => confirmDeleteGame(game._id)}>Delete</button>
-              </div>
-            ))}
-          </div>
-        </div>
+        <Box sx={{  }}><Box sx={{  borderBottom: 1, borderColor: 'divider' }}>
+          <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
+            <Tab label="Game Active" {...a11yProps(0)} />
+            <Tab label="Game Locked" {...a11yProps(1)} />
+          </Tabs>
+        </Box>
+          <CustomTabPanel sx={{ maxHeight: "700px"}} value={value} index={0}>
+            <div className="game-listtf">
+              {activeGames.map((game) => (
+                <div key={game._id} className="game-cardtf">
+                  <p>{game.game_name}</p>
+                  <img className="game-avatar" src={game.imagePath} alt="Game" />
+                  <button className="edit-button" onClick={() => startEditingGame(game)}>Edit</button>
+                  <button className="delete-button" onClick={() => confirmDeleteGame(game._id)}>Delete</button>
+                </div>
+              ))}
+            </div>
+          </CustomTabPanel>
+          <CustomTabPanel sx={{ maxHeight: "700px"}} value={value} index={2}>
+            <div className="game-listtf">
+              {lockedGames.map((game) => (
+                <div key={game._id} className="game-cardtf">
+                  <p>{game.game_name}</p>
+                  <img className="game-avatar" src={game.imagePath} alt="Game" />
+                  <button className="edit-button" onClick={() => startEditingGame(game)}>Edit</button>
+                  <button className="delete-button" onClick={() => confirmDeleteGame(game._id)}>Delete</button>
+                </div>
+              ))}
+            </div>
+          </CustomTabPanel>
+        </Box>
       ) : (
         <p className="no-games-message">No games found.</p>
       )}

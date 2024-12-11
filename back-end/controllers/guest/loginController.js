@@ -61,16 +61,15 @@ const loginUser = async (req, res) => {
         console.log('Avatar path:', avatar);
 
         const isAdmin = user.admin;
-        const isDevPub = user.developer || user.publisher;
-
-        console.log('Login successful:', { isAdmin, isDevPub });
-
+        const developer = user.developer
+        const publisher =  user.publisher;
         // Respond based on user role
         return res.status(200).json({
             message: "Login successful!",
             token,
             isAdmin,
-            isDevPub,
+            developer,
+            publisher,
             avatar,
         });
 

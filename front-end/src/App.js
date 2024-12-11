@@ -14,10 +14,10 @@ import Footer from './Components/Footer/Footer.jsx';
 import AdminPage from './Components/admindash-main/src/AdminPage.jsx';
 import UserManagementPage from './Components/UserPage/UsermanagementPage.jsx';
 import GameDetails from './Components/GameDetails/GameDetails.jsx';
-import GameUploadPage from './Components/UploadGames/GameUploadPage.jsx';
+import GameUploadPageforDeveloper from './Components/UploadGames/GameUploadPageforDeveloper.jsx';
+import GameUploadPageforPublisher from './Components/UploadGames/GameUploadPageforPublisher.jsx';
 import ChangePassword from './Components/UserPage/ChangePassword/ChangePassword.jsx';
-import Adminsettinguser from './Components/admindash-main/src/components/Adminsetting/Adminsettinguser.jsx';
-import AdminSettinggame from './Components/admindash-main/src/components/Adminsetting/Adminsettinggame.jsx';
+import Adminsetting from './Components/admindash-main/src/components/Adminsetting/Adminsetting.jsx';
 import UserSettinggame from './Components/UserPage/UserSettingGame/UserSettingGame.jsx';
 import NotFound404 from './Components/404notfound/NotFound404.jsx'; 
 function App() {
@@ -35,10 +35,10 @@ function App() {
           <Route path="/admin" element={<AdminPage/>} />
           <Route path="/profile" element={<UserManagementPage/>} />
           <Route path="/games/:id" element={<GameDetails/>} />
-          <Route path="/upload" element={<GameUploadPage/>} />
+          <Route path="/upload-Dev" element={<GameUploadPageforDeveloper/>} />
+          <Route path="/upload-Pub" element={<GameUploadPageforPublisher/>} />
           <Route path="/change-password" element={<ChangePassword/>} />
-          <Route path='/admin/setting/user' element={<Adminsettinguser/>} />
-          <Route path='/admin/setting/game' element={<AdminSettinggame/>} />
+          <Route path="/admin/setting" element = {<Adminsetting/>} />
           <Route path='/user/setting/game' element= {<UserSettinggame/>} />
           <Route path='/404/notfound'  element= {<NotFound404/>} />
         </Routes>

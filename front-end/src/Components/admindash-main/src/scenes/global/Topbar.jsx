@@ -5,16 +5,16 @@ import LightModeOutlinedIcon from "@mui/icons-material/LightModeOutlined";
 import DarkModeOutlinedIcon from "@mui/icons-material/DarkModeOutlined";
 import NotificationsOutlinedIcon from "@mui/icons-material/NotificationsOutlined";
 import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
-import Setting from "../Setting";
+import { useNavigate } from "react-router-dom";
 
 const Topbar = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
   const colorMode = useContext(ColorModeContext);
-  const [isSettingOpen, setIsSettingOpen] = useState(false);
+  const navigate = useNavigate(); // Khởi tạo navigate
 
   const toggleSetting = () => {
-    setIsSettingOpen((prev) => !prev);
+    navigate("/admin/setting"); // Chuyển hướng đến /setting
   };
 
   return (
@@ -42,24 +42,10 @@ const Topbar = () => {
         <IconButton onClick={toggleSetting}>
           <SettingsOutlinedIcon />
         </IconButton>
-        {/* Conditionally render Setting component below the button */}
-        {isSettingOpen && (
-          <Box
-            position="absolute"
-            top="40px" // Adjust to control the space below the icon
-            right="0px"
-            bgcolor="background.paper"
-            boxShadow={3}
-            borderRadius="5px"
-            p={2}
-            zIndex={10}
-          >
-            <Setting />
-          </Box>
-        )}
       </Box>
     </Box>
   );
 };
+
 
 export default Topbar;

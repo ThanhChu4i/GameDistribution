@@ -2,7 +2,10 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Cookies from 'js-cookie';
 import { useNavigate } from 'react-router-dom';
-import avatardefault from '../../../../Assets/avatar_default.webp'
+import Tabs from '@mui/material/Tabs';
+import Tab from '@mui/material/Tab';
+import Box from '@mui/material/Box';
+import PropTypes from 'prop-types'
 import './Adminsetting.css';
 import { Link } from "react-router-dom";
 
@@ -15,9 +18,14 @@ const AdminSettinguser = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [editUser, setEditUser] = useState(null);
-  const [deleteUserId, setDeleteUserId] = useState(null); // State for delete confirmation
+  const [deleteUserId, setDeleteUserId] = useState(null);
+  const [value, setValue] = React.useState(0);// State for delete confirmation
   const navigate = useNavigate();
 
+
+  const handleChange = (event, newValue) => {
+    setValue(newValue);
+  };
   useEffect(() => {
     const fetchUserData = async () => {
       try {
@@ -113,110 +121,149 @@ const AdminSettinguser = () => {
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p>{error}</p>;
+  function CustomTabPanel(props) {
+    const { children, value, index, ...other } = props;
+
+    return (
+      <div
+        role="tabpanel"
+        hidden={value !== index}
+        id={`simple-tabpanel-${index}`}
+        aria-labelledby={`simple-tab-${index}`}
+        {...other}
+      >
+        {value === index && <Box sx={{ p: 3 }}>{children}</Box>}
+      </div>
+    );
+  }
+
+  CustomTabPanel.propTypes = {
+    children: PropTypes.node,
+    index: PropTypes.number.isRequired,
+    value: PropTypes.number.isRequired,
+  };
+
+  function a11yProps(index) {
+    return {
+      id: `simple-tab-${index}`,
+      'aria-controls': `simple-tabpanel-${index}`,
+    };
+  }
 
   return (
     <div className="admin-settings-container">
-      <button className="backtoadmin"><Link to="/Admin">Back</Link></button>
-      <h1>Admin Settings User</h1>
       {users.length > 0 ? (
-        <div className="userd">
-          <h2>Users want to Developer</h2>
-          <div className="users-list">
-            {wtdevUsers.map((u) => (
-              <div key={u._id} className="user-card">
-                <img
+        <Box sx={{ width: '100%' }}>
+          <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
+            <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
+              <Tab label="Users want to Developer" {...a11yProps(0)} />
+              <Tab label="Users want to Publisher" {...a11yProps(1)} />
+              <Tab label="Users Active" {...a11yProps(2)} />
+              <Tab label="Users Locked" {...a11yProps(3)} />
+            </Tabs>
+          </Box>
+          <CustomTabPanel value={value} index={0}>
+            <div className="users-list">
+              {wtdevUsers.map((u) => (
+                <div key={u._id} className="user-card">
+                  <img
                     src={`${process.env.REACT_APP_API_URL}${u.avatarPath}` || u.avatarPath}  // Use custom avatar or default
                     alt="User Avatar"
                     className="user-avatar"
                   />
-                <p>First name: {u.first_name}</p>
-                <p>Last name: {u.last_name}</p>
-                <p>Email: {u.email}</p>
-                <p>Country: {u.country}</p>
-                <p>Company: {u.company}</p>
-                <p>Created_at: {u.created_in}</p>
-                <p>Update_at: {u.update_in}</p>
-                <p>Developer? : {u.developer ? "Yes" : "No"} </p>
-                <p>Publisher? : {u.publisher ? "Yes" : "No"} </p>
-                <p>Active? : {u.isActive ? "Yes" : "No"} </p>
-                <button onClick={() => openEditModal(u)}>Edit</button>
-                <button className="delete-btn" onClick={() => openDeleteModal(u._id)}>Delete</button>
-              </div>
-            ))}
-          </div>
-          <h2>Users want to Publisher</h2>
-          <div className="users-list">
-            {wtpubUsers.map((u) => (
-              <div key={u._id} className="user-card">
-                <img
-                    src={`${process.env.REACT_APP_API_URL}${u.avatarPath}`|| u.avatarPath}  // Use custom avatar or default
-                    alt="User Avatar"
-                    className="user-avatar"
-                  />
-                <p>First name: {u.first_name}</p>
-                <p>Last name: {u.last_name}</p>
-                <p>Email: {u.email}</p>
-                <p>Country: {u.country}</p>
-                <p>Company: {u.company}</p>
-                <p>Created_at: {u.created_in}</p>
-                <p>Update_at: {u.update_in}</p>
-                <p>Developer? : {u.developer ? "Yes" : "No"} </p>
-                <p>Publisher? : {u.publisher ? "Yes" : "No"} </p>
-                <p>Active? : {u.isActive ? "Yes" : "No"} </p>
-                <button onClick={() => openEditModal(u)}>Edit</button>
-                <button className="delete-btn" onClick={() => openDeleteModal(u._id)}>Delete</button>
-              </div>
-            ))}
-          </div>
-          <h2>Users Active</h2>
-          <div className="users-list">
-            {activeUsers.map((u) => (
-              <div key={u._id} className="user-card">
-                <img
-                    src={`${process.env.REACT_APP_API_URL}${u.avatarPath}`|| u.avatarPath}  // Use custom avatar or default
-                    alt="User Avatar"
-                    className="user-avatar"
-                  />
-                <p>First name: {u.first_name}</p>
-                <p>Last name: {u.last_name}</p>
-                <p>Email: {u.email}</p>
-                <p>Country: {u.country}</p>
-                <p>Company: {u.company}</p>
-                <p>Created_at: {u.created_in}</p>
-                <p>Update_at: {u.update_in}</p>
-                <p>Developer? : {u.developer ? "Yes" : "No"} </p>
-                <p>Publisher? : {u.publisher ? "Yes" : "No"} </p>
-                <p>Active? : {u.isActive ? "Yes" : "No"} </p>
-                <button onClick={() => openEditModal(u)}>Edit</button>
-                <button className="delete-btn" onClick={() => openDeleteModal(u._id)}>Delete</button>
-              </div>
-            ))}
-          </div>
-          <h2>Users Locked</h2>
-          <div className="users-list">
-            {lockedUsers.map((u) => (
-              <div key={u._id} className="user-card">
+                  <p>First name: {u.first_name}</p>
+                  <p>Last name: {u.last_name}</p>
+                  <p>Email: {u.email}</p>
+                  <p>Country: {u.country}</p>
+                  <p>Company: {u.company}</p>
+                  <p>Created_at: {u.created_in}</p>
+                  <p>Update_at: {u.update_in}</p>
+                  <p>Developer? : {u.developer ? "Yes" : "No"} </p>
+                  <p>Publisher? : {u.publisher ? "Yes" : "No"} </p>
+                  <p>Active? : {u.isActive ? "Yes" : "No"} </p>
+                  <button onClick={() => openEditModal(u)}>Edit</button>
+                  <button className="delete-btn" onClick={() => openDeleteModal(u._id)}>Delete</button>
+                </div>
+              ))}
+            </div>
+          </CustomTabPanel>
+          <CustomTabPanel value={value} index={1}>
+            <div className="users-list">
+              {wtpubUsers.map((u) => (
+                <div key={u._id} className="user-card">
                   <img
-                    src={`${process.env.REACT_APP_API_URL}${u.avatarPath}`|| u.avatarPath}  // Use custom avatar or default
+                    src={`${process.env.REACT_APP_API_URL}${u.avatarPath}` || u.avatarPath}  // Use custom avatar or default
                     alt="User Avatar"
                     className="user-avatar"
                   />
-                <p>First name: {u.first_name}</p>
-                <p>Last name: {u.last_name}</p>
-                <p>Email: {u.email}</p>
-                <p>Country: {u.country}</p>
-                <p>Company: {u.company}</p>
-                <p>Created_at: {u.created_in}</p>
-                <p>Update_at: {u.update_in}</p>
-                <p>Developer? : {u.developer ? "Yes" : "No"} </p>
-                <p>Publisher? : {u.publisher ? "Yes" : "No"} </p>
-                <p>Active? : {u.isActive ? "Yes" : "No"} </p>
-                <button onClick={() => openEditModal(u)}>Edit</button>
-                <button className="delete-btn" onClick={() => openDeleteModal(u._id)}>Delete</button>
-              </div>
-            ))}
-          </div>
-        </div>
+                  <p>First name: {u.first_name}</p>
+                  <p>Last name: {u.last_name}</p>
+                  <p>Email: {u.email}</p>
+                  <p>Country: {u.country}</p>
+                  <p>Company: {u.company}</p>
+                  <p>Created_at: {u.created_in}</p>
+                  <p>Update_at: {u.update_in}</p>
+                  <p>Developer? : {u.developer ? "Yes" : "No"} </p>
+                  <p>Publisher? : {u.publisher ? "Yes" : "No"} </p>
+                  <p>Active? : {u.isActive ? "Yes" : "No"} </p>
+                  <button onClick={() => openEditModal(u)}>Edit</button>
+                  <button className="delete-btn" onClick={() => openDeleteModal(u._id)}>Delete</button>
+                </div>
+              ))}
+            </div>
+          </CustomTabPanel>
+          <CustomTabPanel value={value} index={2}>
+            <div className="users-list">
+              {activeUsers.map((u) => (
+                <div key={u._id} className="user-card">
+                  <img
+                    src={`${process.env.REACT_APP_API_URL}${u.avatarPath}` || u.avatarPath}  // Use custom avatar or default
+                    alt="User Avatar"
+                    className="user-avatar"
+                  />
+                  <p>First name: {u.first_name}</p>
+                  <p>Last name: {u.last_name}</p>
+                  <p>Email: {u.email}</p>
+                  <p>Country: {u.country}</p>
+                  <p>Company: {u.company}</p>
+                  <p>Created_at: {u.created_in}</p>
+                  <p>Update_at: {u.update_in}</p>
+                  <p>Developer? : {u.developer ? "Yes" : "No"} </p>
+                  <p>Publisher? : {u.publisher ? "Yes" : "No"} </p>
+                  <p>Active? : {u.isActive ? "Yes" : "No"} </p>
+                  <button onClick={() => openEditModal(u)}>Edit</button>
+                  <button className="delete-btn" onClick={() => openDeleteModal(u._id)}>Delete</button>
+                </div>
+              ))}
+            </div>
+          </CustomTabPanel>
+          <CustomTabPanel value={value} index={3}>
+            <div className="users-list">
+              {lockedUsers.map((u) => (
+                <div key={u._id} className="user-card">
+                  <img
+                    src={`${process.env.REACT_APP_API_URL}${u.avatarPath}` || u.avatarPath}  // Use custom avatar or default
+                    alt="User Avatar"
+                    className="user-avatar"
+                  />
+                  <p>First name: {u.first_name}</p>
+                  <p>Last name: {u.last_name}</p>
+                  <p>Email: {u.email}</p>
+                  <p>Country: {u.country}</p>
+                  <p>Company: {u.company}</p>
+                  <p>Created_at: {u.created_in}</p>
+                  <p>Update_at: {u.update_in}</p>
+                  <p>Developer? : {u.developer ? "Yes" : "No"} </p>
+                  <p>Publisher? : {u.publisher ? "Yes" : "No"} </p>
+                  <p>Active? : {u.isActive ? "Yes" : "No"} </p>
+                  <button onClick={() => openEditModal(u)}>Edit</button>
+                  <button className="delete-btn" onClick={() => openDeleteModal(u._id)}>Delete</button>
+                </div>
+              ))}
+            </div>
+          </CustomTabPanel>
+        </Box>
+
       ) : (
         <p className="no-users-message">No users found.</p>
       )}

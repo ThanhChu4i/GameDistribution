@@ -41,9 +41,11 @@ const LoginPopup = ({ onRequestClose }) => {
         const token = res.data.token;
         const avatar = res.data.avatar;
         const isAdmin= res.data.isAdmin;
-        const isDevPub= res.data.isDevPub;
+        const developer = res.data.developer;
+        const publisher = res.data.publisher;
+        console.log(token, avatar, isAdmin, developer, publisher);
         //const expiresIn = values.remember_me ? 30 : 1; // 30 ngày nếu "Nhớ tôi", 1 ngày nếu không
-        login(token, avatar,isAdmin,isDevPub);
+        login(token, avatar, isAdmin, developer, publisher);
 
         // Điều hướng
         if (res.data.isAdmin) {
