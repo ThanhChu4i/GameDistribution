@@ -4,7 +4,7 @@ import axios from 'axios';
 import Cookies from 'js-cookie';
 import { Link } from 'react-router-dom';
 
-const Yourgames = () => {
+const YourgamesforDev = () => {
     const [games, setGames] = useState([]);
     const [error, setError] = useState('');
     const [loading, setLoading] = useState(false);
@@ -32,7 +32,7 @@ const Yourgames = () => {
         <div className='Your_Game'>
             <div className='titles'><strong>Your Games</strong></div>
             <div className="action-buttons">
-            <button className ='save-button'><Link to='/User/Setting/Game'>Edit</Link></button>
+            <button className ='save-button'><Link to='/publisher-setting'>Edit</Link></button>
             </div>
             <div className="games-gridq">
                 {loading && <p>Loading games...</p>}
@@ -52,4 +52,4 @@ const Yourgames = () => {
     );
 };
 
-export default Yourgames;
+export default YourgamesforDev;

@@ -34,7 +34,7 @@ const storage = multer.memoryStorage();
 const upload = multer({ storage, fileFilter }).fields([{ name: 'image' }, { name: 'zipFile' }]);
 
 // Upload handler for image and zip file
-const uploadGameImage = async (req, res) => {
+const uploadGameforDev = async (req, res) => {
     upload(req, res, async (err) => {
         if (err instanceof multer.MulterError) {
             console.error('Multer Error:', err);
@@ -120,7 +120,67 @@ const uploadGameImage = async (req, res) => {
         }
     });
 };
+const uploadGameforPub = async (req, res) => {
+    upload(req, res, async (err) => {
+        if (err instanceof multer.MulterError) {
+            console.error('Multer Error:', err);
+            return res.status(400).json({ error: 'Error while uploading file.' });
+        } else if (err) {
+            console.error('Upload Error:', err);
+            return res.status(400).json({ error: err.message });
+        }
+
+        // Get the uploaded files
+        const { image } = req.files;
+        if (!image) {
+            return res.status(400).json({ error: 'Image is required.' });
+        }
+
+        try {
+
+            const compressedImageBuffer = await sharp(image[0].buffer)
+                .resize(1024)
+                .toFormat('jpeg', { quality: 80 })
+                .toBuffer();
+
+            const imageFilename = Date.now() + path.extname(image[0].originalname);
+            const imagePath = path.join(storagePathImages, imageFilename);
+            const id_user = req.user._id;
+            console.log(`User ID: ${id_user}`);
+
+            // Generate the image path (e.g., store it in a public folder)
+            fs.writeFileSync(imagePath, compressedImageBuffer);
+            console.log(`Image saved to: ${imagePath}`);
+            const publicImagePath = `${process.env.REACT_APP_API_URL}/images/${imageFilename}`;
+            // Save game data into the database, using gamePath and imagePath directly
+            const game = new Game({
+                id_user: id_user,
+                game_name: req.body.name,
+                no_blood: req.body.no_blood,
+                ingame_purchases: req.body.ingame_purchases,
+                child_friendly: req.body.child_friendly,
+                game_description: req.body.description,
+                instruction: req.body.instruction,
+                imagePath:publicImagePath, // Store image path
+                gamePath: req.body.gamePath, // Directly use the gamePath from the request
+                language: req.body.languages,
+                player: req.body.players,
+                genres: req.body.genres
+            });
+
+            await game.save();
+            console.log('Game data saved to the database.');
+
+            res.json({
+                message: 'File uploaded and game data saved successfully!',
+            });
+        } catch (error) {
+            console.error('Database Error:', error);
+            res.status(500).json({ error: 'Error saving to database.' });
+        }
+    });
+};
 
 module.exports = {
-    uploadGameImage,
+    uploadGameforDev, uploadGameforPub
 };

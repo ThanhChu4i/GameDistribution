@@ -18,7 +18,8 @@ import GameUploadPageforDeveloper from './Components/UploadGames/GameUploadPagef
 import GameUploadPageforPublisher from './Components/UploadGames/GameUploadPageforPublisher.jsx';
 import ChangePassword from './Components/UserPage/ChangePassword/ChangePassword.jsx';
 import Adminsetting from './Components/admindash-main/src/components/Adminsetting/Adminsetting.jsx';
-import UserSettinggame from './Components/UserPage/UserSettingGame/UserSettingGame.jsx';
+import UserSettinggameforDev from './Components/UserPage/UserSettingGame/UserSettingGameforDev.jsx';
+import UserSettinggameforPub from './Components/UserPage/UserSettingGame/UserSettingGameforPub.jsx';
 import NotFound404 from './Components/404notfound/NotFound404.jsx'; 
 function App() {
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false); // State để quản lý modal login
@@ -39,7 +40,8 @@ function App() {
           <Route path="/upload-Pub" element={<GameUploadPageforPublisher/>} />
           <Route path="/change-password" element={<ChangePassword/>} />
           <Route path="/admin/setting" element = {<Adminsetting/>} />
-          <Route path='/user/setting/game' element= {<UserSettinggame/>} />
+          <Route path='/developer-setting' element= {<UserSettinggameforDev/>} />
+          <Route path='/publisher-setting' element= {<UserSettinggameforPub/>} />
           <Route path='/404/notfound'  element= {<NotFound404/>} />
         </Routes>
         <LoginRegisterModal

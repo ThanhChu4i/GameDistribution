@@ -6,7 +6,7 @@ import './GameUpload.css';
 const GameUploadforPublisher = () => {
     const [gameName, setGameName] = useState('');
     const [imageFile, setImageFile] = useState(null);
-    const [zipFile, setZipFile] = useState(null);
+    const [gamePath, setGamePath] = useState('');
     const [no_blood, setNo_blood] = useState(false);
     const [description, setDescription] = useState('');
     const [instruction, setInstruction] = useState('');
@@ -46,15 +46,6 @@ const GameUploadforPublisher = () => {
         }));
     };
 
-    const handleZipFileChange = (e) => {
-        const file = e.target.files[0];
-        if (file && file.type === 'application/zip') {
-            setZipFile(file);
-            setError('');
-        } else {
-            setError('Chỉ chấp nhận file .zip cho dữ liệu game!');
-        }
-    };
 
     const handleFilterChange = (e) => {
         const { name, value } = e.target;
@@ -65,14 +56,14 @@ const GameUploadforPublisher = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        if (!gameName || !imageFile || !zipFile) {
+        if (!gameName || !imageFile || !gamePath) {
             setError('Vui lòng điền đầy đủ thông tin và tải lên cả ảnh và file .zip!');
             return;
         }
 
         const formData = new FormData();
         formData.append('image', imageFile);
-        formData.append('zipFile', zipFile);
+        formData.append('gamePath', gamePath);
         formData.append('name', gameName);
         formData.append('no_blood', no_blood);
         formData.append('description', description);
@@ -85,7 +76,7 @@ const GameUploadforPublisher = () => {
 
         setLoading(true);
         try {
-            const response = await axios.post(`${process.env.REACT_APP_API_URL}/dev/games/upload`, formData, {
+            const response = await axios.post(`${process.env.REACT_APP_API_URL}/dev/games/upload-pub`, formData, {
                 headers: {
                     Authorization: `Bearer ${token}`,
                 },
@@ -95,7 +86,7 @@ const GameUploadforPublisher = () => {
             setError('');
             setGameName('');
             setImageFile(null);
-            setZipFile(null);
+            setGamePath(null);
             setNo_blood(false);
             setDescription('');
             setInstruction('');
@@ -111,7 +102,7 @@ const GameUploadforPublisher = () => {
 
     return (
         <div className="game-upload-container">
-            <h2>Upload Game</h2>
+            <h2>Upload Game for Publisher</h2>
             {error && <p className="error-message">{error}</p>}
             {successMessage && <p className="success-message">{successMessage}</p>}
             <form onSubmit={handleSubmit}>
@@ -246,11 +237,11 @@ const GameUploadforPublisher = () => {
                     </div>
                 </div>
                 <div className="form-group">
-                    <label>Chọn file .zip cho dữ liệu game:</label>
+                    <label>Nhập đường dẫn game:</label>
                     <input
-                        type="file"
-                        accept=".zip"
-                        onChange={handleZipFileChange}
+                        type="text"
+                        value={gamePath}
+                        onChange={(e) => setGamePath(e.target.value)}
                         required
                     />
                 </div>

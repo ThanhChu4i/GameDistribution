@@ -4,7 +4,7 @@ import Cookies from 'js-cookie';
 import { useNavigate, Link } from 'react-router-dom';
 import './UserSettingGame.css';
 
-const UserSettinggame = () => {
+const UserSettinggameforDev = () => {
   const [games, setGames] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -85,8 +85,8 @@ const UserSettinggame = () => {
 
   return (
     <div className="admin-settings-container">
-      <Link to='/upload'><button className="backtouser">Back</button></Link>
-      <h1>User Settings Game</h1>
+      <Link to='/upload-Dev'><button className="backtouser">Back</button></Link>
+      <h1>Developer Settings Game</h1>
       {games.length > 0 ? (
         <div className="users-lista">
           {games.map((game) => (
@@ -148,4 +148,4 @@ const UserSettinggame = () => {
   );
 };
 
-export default UserSettinggame;
+export default UserSettinggameforDev;

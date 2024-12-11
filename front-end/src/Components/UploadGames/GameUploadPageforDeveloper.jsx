@@ -1,12 +1,12 @@
 import GameUploadforDeveloper from "./GameUpload/GameUploadforDeveloper";
-import Yourgames from "./Yourgame";
+import YourgamesforDev from "./YourgameforDev";
 import React from 'react';
 import './GameUploadPage.css';
 const GameUploadPageforDeveloper = () => {
     return(
        <div className = 'GameUploadPage'>
         <GameUploadforDeveloper/>
-        <Yourgames/>
+        <YourgamesforDev/>
        </div>
     )
     

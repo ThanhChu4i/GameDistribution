@@ -85,7 +85,7 @@ const GameUpload = () => {
 
         setLoading(true);
         try {
-            const response = await axios.post(`${process.env.REACT_APP_API_URL}/dev/games/upload`, formData, {
+            const response = await axios.post(`${process.env.REACT_APP_API_URL}/dev/games/upload-dev`, formData, {
                 headers: {
                     Authorization: `Bearer ${token}`,
                 },
@@ -111,7 +111,7 @@ const GameUpload = () => {
 
     return (
         <div className="game-upload-container">
-            <h2>Upload Game</h2>
+            <h2>Upload Game for Developer</h2>
             {error && <p className="error-message">{error}</p>}
             {successMessage && <p className="success-message">{successMessage}</p>}
             <form onSubmit={handleSubmit}>
