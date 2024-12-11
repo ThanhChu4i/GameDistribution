@@ -26,6 +26,7 @@
     "browser-image-compression": "^2.0.2",
     "dotenv": "^16.4.5",
     "formik": "^2.4.6",
+    "front-end": "file:",
     "js-cookie": "^3.0.5",
     "path": "^0.12.7",
     "ps": "^1.0.0",
@@ -40,7 +41,7 @@
     "yup": "^1.4.0"
   },
   "scripts": {
-   "start": "cross-env PORT=3000 react-scripts start",
+    "start": "cross-env PORT=3000 react-scripts start",
     "test": "react-scripts test",
     "build": "react-scripts build && javascript-obfuscator build/static/js --output build/static/js",
     "eject": "react-scripts eject"

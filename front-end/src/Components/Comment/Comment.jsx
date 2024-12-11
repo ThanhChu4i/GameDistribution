@@ -10,7 +10,6 @@ import FormLabel from '@mui/joy/FormLabel';
 import Textarea from '@mui/joy/Textarea';
 import Typography from '@mui/joy/Typography';
 import Card from '@mui/joy/Card';
-
 export default function CommentSection() {
     const { id } = useParams();
     const avatar = Cookies.get('avatar');  // Avatar of the current user
