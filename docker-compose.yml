@@ -24,7 +24,5 @@ services:
     environment:
       - NODE_ENV=production
       - FRONTEND_URL=http://localhost:3000
-    restart: always
-
 volumes:
   shared:  # Volume dùng chung giữa frontend và backend
