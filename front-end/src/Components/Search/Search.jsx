@@ -42,16 +42,16 @@ function Search() {
 
     const toggleSearchBar = () => {
         setSearchVisible(!searchVisible);
-        setSearchTerm(''); // Clear search term when closing
-        setIsOpen(false);   // Close popup when search bar is hidden
+        setSearchTerm(''); 
+        setIsOpen(false);
     };
 
     return (
         <div className='search-container'>
-            <div className='search-container-real'>
+            <div className={`search-container-real ${!searchVisible ? 'hidden' : ''}`}>
                 {searchVisible && (
                     <input
-                        className='Searchtext'
+                        className={`Searchtext ${!searchVisible ? 'hidden' : ''}`}
                         type="text"
                         placeholder="Search"
                         value={searchTerm}
@@ -91,4 +91,3 @@ function Search() {
 }
 
 export default Search;
-

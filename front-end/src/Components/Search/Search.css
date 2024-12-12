@@ -1,10 +1,10 @@
-/* CSS styles */
-
 /* Container for the search input and button */
 .search-container {
-    display: grid;
+    display: flex;
+    justify-content: flex-end;
+    position: relative; /* Đặt position relative để các phần tử con có thể dùng position absolute */
     width: 300px;
-    flex-direction: row-reverse;
+    z-index: 1000;
 }
 
 /* Inner container for the search input and button */
@@ -13,8 +13,19 @@
     display: flex;
     align-items: center;
     background-color: #ffffff;
-    border-radius: 50px;
-    padding: 5px;
+    border-radius: 15px;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 100%; 
+    transition: all 0.3s ease;
+    position: relative; /* Đặt relative để popup-content sử dụng position absolute */
+}
+
+/* Khi search không hiển thị, thu nhỏ lại */
+.search-container-real.hidden {
+    width: 50px; /* Chỉ hiển thị nút search */
+    transition: all 0.3s ease;
 }
 
 /* Search input field */
@@ -26,14 +37,20 @@
     background-color: transparent;
     flex: 1;
     color: #333;
+    display: block;
+    transition: all 0.3s ease;
+}
+
+.Searchtext.hidden {
+    display: none;
 }
 
 /* Search button with icon */
 .search-button {
+   
     background: none;
     border: none;
     cursor: pointer;
-    padding: 7px;
     color: #333;
     display: flex;
     align-items: center;
@@ -45,30 +62,27 @@
     background: none;
 }
 
-/* Popup overlay styling */
-.popup-overlay {
-    display: grid;
-    top: 100%;
-    left: 0;
-    right: 0;
-    display: flex;
-    z-index: 1000;
-}
-
 /* Popup content styling */
 .popup-content {
+    position: absolute;
+    top: 100%; /* Đặt ngay dưới search bar */
+    left: 0;
+    width: 100%; /* Đặt chiều rộng bằng thanh tìm kiếm */
     background: #fff;
-    padding: 20px;
-    width: 100%;
-    max-width: 300px;
-    max-height: 300px;
-    overflow-y: auto;
+    padding: 10px;
+    z-index: 1000;
+    max-height: 300px; /* Giới hạn chiều cao cho kết quả */
+    overflow-y: auto; /* Cuộn dọc khi có quá nhiều kết quả */
     border-radius: 10px;
-    margin-top: 1px;
+    border: 1px solid #ccc; /* Thêm border để tách biệt kết quả tìm kiếm */
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .search {
     display: flex;
+    align-items: center;
+    padding: 10px;
+    cursor: pointer;
 }
 
 .search:hover {
@@ -82,14 +96,16 @@
     border-radius: 5px;
 }
 
-/* Search result info */
 .searchinfo {
     flex: 1;
     color: #333;
+    margin-left: 10px;
 }
 
 /* Links in search results */
 .link {
     text-decoration: none;
     color: inherit;
+    display: flex;
+    align-items: center;
 }
