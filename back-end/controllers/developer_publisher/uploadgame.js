@@ -4,14 +4,11 @@ const path = require('path');
 const fs = require('fs');
 const sharp = require('sharp');
 const unzipper = require('unzipper');
+const axios = require('axios'); // Thêm axios 
 
-const storagePathImages = path.resolve(__dirname, '../../public/images');
 const storagePathZip = path.resolve(__dirname, '../../public/games');
 
 // Ensure the directories exist
-if (!fs.existsSync(storagePathImages)) {
-    fs.mkdirSync(storagePathImages, { recursive: true });
-}
 if (!fs.existsSync(storagePathZip)) {
     fs.mkdirSync(storagePathZip, { recursive: true });
 }
@@ -32,6 +29,32 @@ const fileFilter = (req, file, cb) => {
 // Multer setup with memory storage
 const storage = multer.memoryStorage();
 const upload = multer({ storage, fileFilter }).fields([{ name: 'image' }, { name: 'zipFile' }]);
+
+// API key for imgbb
+const IMGBB_API_KEY = 'a5bc4430caba355a9dcc9585f45b114f';
+
+// Helper function to upload image to imgbb
+async function uploadToImgbb(imageBuffer) {
+    try {
+        const base64Image = imageBuffer.toString('base64');
+        
+        const formData = new FormData();
+        formData.append('image', base64Image);
+        
+        const response = await axios.post(
+            `https://api.imgbb.com/1/upload?expiration=600&key=${IMGBB_API_KEY}`, 
+            formData, 
+            { headers: { 'Content-Type': 'multipart/form-data' } }
+        );
+        
+        console.log("Response IMGBB:", response);
+        return response.data.data.url;
+    } catch (error) {
+        console.error('Error uploading to imgbb:', error);
+        throw new Error('Failed to upload image to imgbb.');
+    }
+}
+
 
 // Upload handler for image and zip file
 const uploadGameforDev = async (req, res) => {
@@ -56,12 +79,8 @@ const uploadGameforDev = async (req, res) => {
                 .toFormat('jpeg', { quality: 80 })
                 .toBuffer();
 
-            const imageFilename = Date.now() + path.extname(image[0].originalname);
-            const imagePath = path.join(storagePathImages, imageFilename);
-
-            // Save the compressed image
-            fs.writeFileSync(imagePath, compressedImageBuffer);
-            console.log(`Image saved to: ${imagePath}`);
+            // Upload image to imgbb
+            const publicImagePath = await uploadToImgbb(compressedImageBuffer);
 
             // Save the zip file
             const zipFilename = Date.now() + path.extname(zipFile[0].originalname);
@@ -75,14 +94,9 @@ const uploadGameforDev = async (req, res) => {
             fs.createReadStream(zipFilePath)
                 .pipe(unzipper.Extract({ path: gameFolder }))
                 .on('close', async () => {
-                    console.log('next');
-                    // Public path URLs for image and game
-                    const publicImagePath = `${process.env.REACT_APP_API_URL}/images/${imageFilename}`;
                     const publicGamePath = `${process.env.REACT_APP_API_URL}/games/${path.basename(gameFolder)}/${zipFile[0].originalname.replace('.zip', '')}/index.html`;
                     const id_user = req.user._id;
-                    console.log(`User ID: ${id_user}`);
 
-                    // Save game data into the database
                     const game = new Game({
                         id_user: id_user,
                         game_name: req.body.name,
@@ -99,60 +113,41 @@ const uploadGameforDev = async (req, res) => {
                     });
 
                     await game.save();
-                    console.log('Game data saved to the database.');
-
-                    // Clean up: delete the zip file after extraction
                     fs.unlinkSync(zipFilePath);
-                    res.json({
-                        message: 'File uploaded and extracted successfully!',
-                        imagePath: publicImagePath,
-                        gamePath: publicGamePath
-                    });
+                    res.json({ message: 'File uploaded and extracted successfully!', imagePath: publicImagePath, gamePath: publicGamePath });
                 })
                 .on('error', (err) => {
-                    console.error('Unzip Error:', err);
-                    fs.unlinkSync(zipFilePath); // Clean up the zip file in case of error
+                    fs.unlinkSync(zipFilePath);
                     res.status(500).json({ error: 'Error extracting .zip file.' });
                 });
         } catch (error) {
-            console.error('Database Error:', error);
             res.status(500).json({ error: 'Error saving to database.' });
         }
     });
 };
+
 const uploadGameforPub = async (req, res) => {
     upload(req, res, async (err) => {
         if (err instanceof multer.MulterError) {
-            console.error('Multer Error:', err);
             return res.status(400).json({ error: 'Error while uploading file.' });
         } else if (err) {
-            console.error('Upload Error:', err);
             return res.status(400).json({ error: err.message });
         }
 
-        // Get the uploaded files
         const { image } = req.files;
         if (!image) {
             return res.status(400).json({ error: 'Image is required.' });
         }
 
         try {
-
             const compressedImageBuffer = await sharp(image[0].buffer)
                 .resize(1024)
                 .toFormat('jpeg', { quality: 80 })
                 .toBuffer();
 
-            const imageFilename = Date.now() + path.extname(image[0].originalname);
-            const imagePath = path.join(storagePathImages, imageFilename);
+            const publicImagePath = await uploadToImgbb(compressedImageBuffer);
             const id_user = req.user._id;
-            console.log(`User ID: ${id_user}`);
 
-            // Generate the image path (e.g., store it in a public folder)
-            fs.writeFileSync(imagePath, compressedImageBuffer);
-            console.log(`Image saved to: ${imagePath}`);
-            const publicImagePath = `${process.env.REACT_APP_API_URL}/images/${imageFilename}`;
-            // Save game data into the database, using gamePath and imagePath directly
             const game = new Game({
                 id_user: id_user,
                 game_name: req.body.name,
@@ -161,26 +156,19 @@ const uploadGameforPub = async (req, res) => {
                 child_friendly: req.body.child_friendly,
                 game_description: req.body.description,
                 instruction: req.body.instruction,
-                imagePath:publicImagePath, // Store image path
-                gamePath: req.body.gamePath, // Directly use the gamePath from the request
+                imagePath: publicImagePath,
+                gamePath: req.body.gamePath,
                 language: req.body.languages,
                 player: req.body.players,
                 genres: req.body.genres
             });
 
             await game.save();
-            console.log('Game data saved to the database.');
-
-            res.json({
-                message: 'File uploaded and game data saved successfully!',
-            });
+            res.json({ message: 'File uploaded and game data saved successfully!', imagePath: publicImagePath });
         } catch (error) {
-            console.error('Database Error:', error);
             res.status(500).json({ error: 'Error saving to database.' });
         }
     });
 };
 
-module.exports = {
-    uploadGameforDev, uploadGameforPub
-};
+module.exports = { uploadGameforDev, uploadGameforPub };
