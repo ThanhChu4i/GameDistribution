@@ -58,9 +58,11 @@ const AvatarUpload = ({ currentAvatar }) => {
                 onAvatarChange(avatarPath); // Cập nhật avatar trong context
                 setPreview(avatarPath);
                 setError(null);
+                alert('Avatar uploaded successfully!');
                 setSuccessMessage('Avatar uploaded successfully!');
             } else {
                 setError('Failed to upload avatar. Please try again.');
+                alert('Failed to upload avatar. Please try again.');
             }
         } catch (err) {
             setError(err.response?.data?.error || 'An error occurred while uploading the avatar.');

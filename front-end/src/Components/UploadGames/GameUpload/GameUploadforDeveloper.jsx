@@ -91,7 +91,8 @@ const GameUpload = () => {
                 },
             });
 
-            setSuccessMessage('Tải lên thành công!');
+            setSuccessMessage('Upload successfully!');
+            alert('Upload successfully!');
             setError('');
             setGameName('');
             setImageFile(null);
@@ -102,7 +103,8 @@ const GameUpload = () => {
             setChild_friendly(false);
             setIngame_purchases(false);
         } catch (error) {
-            setError(error.response?.data?.error || 'Có lỗi xảy ra khi upload file.');
+            alert('An error occurred when uploading a file.');
+            setError(error.response?.data?.error || 'An error occurred when uploading a file.');
             console.error(error);
         } finally {
             setLoading(false);
@@ -149,7 +151,7 @@ const GameUpload = () => {
                     />
                 </div>
                 <div className="form-group">
-                    <label>Chọn Ảnh:</label>
+                    <label>Select a photo:</label>
                     <input
                         type="file"
                         accept="image/*"
