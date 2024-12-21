@@ -101,7 +101,7 @@ const EditUser = ({ onEdit }) => {
           </label>
           <div className="action-buttons">
             <button className="save-button" onClick={handleSave}>Save</button>
-            <button className="cancel-button" onClick={() => setIsEditing(false)}>Hủy</button>
+            <button className="cancel-button" onClick={() => setIsEditing(false)}>Cancel</button>
           </div>
         </div>
       ) : (
